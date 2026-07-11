@@ -9,7 +9,7 @@ const QuizLoader = (() => {
 
   const ROOT = appRoot().replace(/quiz\/js\/?$/, '');
   const BASE = `${ROOT}quiz/data/`;
-  let cache = { sections: null, video: null, supplemental: {} };
+  let cache = { sections: null, video: null, supplemental: {}, allQuestions: null };
 
   async function loadSections() {
     if (cache.sections) return cache.sections;
@@ -34,7 +34,7 @@ const QuizLoader = (() => {
     return cache.supplemental[file];
   }
 
-  function videoForModule(module, videoQuestions, config) {
+  function videoForModule(module, videoQuestions) {
     if (module.id === 'SA-VIDEO') return videoQuestions;
     return videoQuestions.filter(
       (q) => q.moduleTags && q.moduleTags.includes(module.id)
@@ -51,35 +51,29 @@ const QuizLoader = (() => {
     }
 
     const video = await loadVideoQuestions();
-    const fromVideo = videoForModule(mod, video, config);
+    const fromVideo = videoForModule(mod, video);
     const supplemental = mod.dataFile
       ? await loadSupplemental(mod.dataFile)
       : [];
     return [...fromVideo, ...supplemental];
   }
 
-  async function getExamQuestions(presetId) {
+  async function getAllQuestions() {
+    if (cache.allQuestions) return cache.allQuestions;
     const config = await loadSections();
-    const preset = config.examPresets.find((p) => p.id === presetId);
-    if (!preset) return [];
-
     const seen = new Set();
     const all = [];
-    for (const moduleId of preset.modules) {
-      const qs = await getModuleQuestions(moduleId);
+    for (const mod of config.modules) {
+      const qs = await getModuleQuestions(mod.id);
       for (const q of qs) {
         if (!seen.has(q.id)) {
           seen.add(q.id);
-          all.push(q);
+          all.push({ ...q, module: q.module || mod.id });
         }
       }
     }
-    return shuffle(all).slice(0, preset.questionCount || all.length);
-  }
-
-  async function getSegmentQuestions(segmentId) {
-    const video = await loadVideoQuestions();
-    return video.filter((q) => q.segment === segmentId);
+    cache.allQuestions = all;
+    return all;
   }
 
   function shuffle(arr) {
@@ -94,8 +88,7 @@ const QuizLoader = (() => {
   return {
     loadSections,
     getModuleQuestions,
-    getExamQuestions,
-    getSegmentQuestions,
+    getAllQuestions,
     shuffle,
   };
 })();

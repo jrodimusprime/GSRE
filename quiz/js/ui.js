@@ -1,28 +1,60 @@
 const QuizUI = (() => {
   const el = (id) => document.getElementById(id);
 
-  function showScreen(name) {
-    document.querySelectorAll('.screen').forEach((s) => {
-      s.classList.toggle('hidden', s.dataset.screen !== name);
-    });
+  function renderScoreBar() {
+    const stats = QuizStorage.getOverallStats();
+    const avgEl = el('avg-score');
+    const detailEl = el('score-detail');
+    if (!stats.total) {
+      avgEl.textContent = '—';
+      avgEl.classList.remove('has-score');
+      detailEl.textContent = 'No questions answered yet';
+      return;
+    }
+    avgEl.textContent = `${stats.pct}%`;
+    avgEl.classList.add('has-score');
+    detailEl.textContent = `${stats.correct} / ${stats.total} correct`;
   }
 
-  function renderModules(modules, counts) {
-    const grid = el('module-grid');
-    grid.innerHTML = modules
+  function renderModuleFilters(modules, enabled) {
+    const chips = el('module-chips');
+    chips.innerHTML = modules
       .map(
         (m) => `
-      <button class="module-card" data-module="${m.id}">
-        <h3>${m.title}</h3>
-        <p class="count">${counts[m.id] || m.questionCount} questions</p>
-        ${m.sourceUrl ? `<a href="${m.sourceUrl}" target="_blank" rel="noopener" class="source-link" onclick="event.stopPropagation()">Watch source video</a>` : ''}
-      </button>`
+      <label class="module-chip${enabled.has(m.id) ? ' active' : ''}">
+        <input type="checkbox" data-module="${m.id}"${enabled.has(m.id) ? ' checked' : ''}>
+        <span class="chip-id">${m.id}</span>
+        <span class="chip-title">${m.title}</span>
+      </label>`
       )
       .join('');
   }
 
-  function renderQuestion(q, shuffledOpts, meta) {
-    el('quiz-meta').textContent = meta;
+  function renderSectionStats(modules, enabled) {
+    const stats = QuizStorage.getModuleStats();
+    const grid = el('stats-grid');
+    grid.innerHTML = modules
+      .map((m) => {
+        const ms = stats[m.id] || { correct: 0, total: 0 };
+        const pct = ms.total ? Math.round((ms.correct / ms.total) * 100) : null;
+        const inactive = !enabled.has(m.id);
+        const barWidth = pct != null ? pct : 0;
+        return `
+      <div class="stat-card${inactive ? ' inactive' : ''}${pct != null ? ' has-data' : ''}">
+        <div class="stat-header">
+          <span class="stat-id">${m.id}</span>
+          <span class="stat-pct">${pct != null ? `${pct}%` : '—'}</span>
+        </div>
+        <p class="stat-title">${m.title}</p>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:${barWidth}%"></div></div>
+        <p class="stat-detail">${ms.total ? `${ms.correct} / ${ms.total} correct` : 'Not attempted'}</p>
+      </div>`;
+      })
+      .join('');
+  }
+
+  function renderQuestion(q, shuffledOpts, moduleTitle) {
+    el('quiz-meta').textContent = moduleTitle || q.module;
     el('question-text').textContent = q.question;
     const optsEl = el('options');
     optsEl.innerHTML = shuffledOpts
@@ -39,6 +71,16 @@ const QuizUI = (() => {
       : q.source
         ? `<span class="source-ref">Source: ${q.source}</span>`
         : '';
+    el('next-btn').classList.add('hidden');
+  }
+
+  function showEmptyPool() {
+    el('quiz-meta').textContent = '';
+    el('question-text').textContent = 'Select at least one section below to start quizzing.';
+    el('options').innerHTML = '';
+    el('video-link').innerHTML = '';
+    el('explanation').classList.add('hidden');
+    el('next-btn').classList.add('hidden');
   }
 
   function showFeedback(correct, explanation) {
@@ -50,33 +92,19 @@ const QuizUI = (() => {
     document.querySelectorAll('.option-btn').forEach((b) => (b.disabled = true));
   }
 
-  function renderResults(results) {
-    showScreen('results');
-    el('results-summary').innerHTML = `
-      <h2>Results</h2>
-      <p class="score">${results.score} / ${results.total} (${results.pct}%)</p>`;
-  }
-
-  function updateTimer(ms) {
-    const t = el('timer');
-    if (ms == null) {
-      t.classList.add('hidden');
-      return;
-    }
-    t.classList.remove('hidden');
-    const sec = Math.ceil(ms / 1000);
-    const m = Math.floor(sec / 60);
-    const s = sec % 60;
-    t.textContent = `${m}:${String(s).padStart(2, '0')}`;
-    if (sec <= 60) t.classList.add('urgent');
+  function refresh(modules, enabled) {
+    renderScoreBar();
+    renderModuleFilters(modules, enabled);
+    renderSectionStats(modules, enabled);
   }
 
   return {
-    showScreen,
-    renderModules,
+    renderScoreBar,
+    renderModuleFilters,
+    renderSectionStats,
     renderQuestion,
+    showEmptyPool,
     showFeedback,
-    renderResults,
-    updateTimer,
+    refresh,
   };
 })();

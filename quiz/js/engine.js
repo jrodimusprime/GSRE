@@ -1,96 +1,72 @@
 const QuizEngine = (() => {
-  let questions = [];
-  let index = 0;
-  let score = 0;
-  let mode = 'study';
-  let examEndTime = null;
+  let allQuestions = [];
+  let enabledModules = new Set();
+  let currentQuestion = null;
   let shuffledOptions = [];
+  let lastQuestionId = null;
 
-  function init(qs, opts = {}) {
-    questions = QuizLoader.shuffle([...qs]);
-    index = 0;
-    score = 0;
-    mode = opts.mode || 'study';
-    examEndTime = opts.minutes
-      ? Date.now() + opts.minutes * 60 * 1000
-      : null;
-    prepareOptions();
+  function init(questions, enabled) {
+    allQuestions = questions;
+    enabledModules = new Set(enabled);
+    currentQuestion = null;
+    lastQuestionId = null;
+    shuffledOptions = [];
   }
 
-  function prepareOptions() {
-    shuffledOptions = questions.map((q) => {
-      const opts = q.options.map((text, i) => ({ text, originalIndex: i }));
-      return QuizLoader.shuffle(opts);
-    });
+  function setEnabledModules(enabled) {
+    enabledModules = new Set(enabled);
+  }
+
+  function activePool() {
+    return allQuestions.filter((q) => enabledModules.has(q.module));
+  }
+
+  function shuffleOptions(q) {
+    const opts = q.options.map((text, i) => ({ text, originalIndex: i }));
+    return QuizLoader.shuffle(opts);
+  }
+
+  function pickRandom() {
+    const pool = activePool();
+    if (!pool.length) {
+      currentQuestion = null;
+      shuffledOptions = [];
+      return null;
+    }
+    let candidates = pool;
+    if (pool.length > 1 && lastQuestionId) {
+      candidates = pool.filter((q) => q.id !== lastQuestionId);
+    }
+    const idx = Math.floor(Math.random() * candidates.length);
+    currentQuestion = candidates[idx];
+    lastQuestionId = currentQuestion.id;
+    shuffledOptions = shuffleOptions(currentQuestion);
+    return currentQuestion;
   }
 
   function current() {
-    return questions[index] || null;
+    return currentQuestion;
   }
 
   function currentShuffledOptions() {
-    return shuffledOptions[index] || [];
-  }
-
-  function total() {
-    return questions.length;
-  }
-
-  function progress() {
-    return { index, total: questions.length, score, mode };
+    return shuffledOptions;
   }
 
   function submit(selectedOriginalIndex) {
-    const q = current();
+    const q = currentQuestion;
     if (!q) return null;
     const correct = selectedOriginalIndex === q.correctIndex;
-    if (correct) score++;
-    if (mode === 'study') QuizStorage.recordAnswer(q.id, correct);
-    const result = { correct, explanation: q.explanation, question: q };
-    index++;
-    return result;
-  }
-
-  function examSubmit(selectedOriginalIndex) {
-    const q = current();
-    if (!q) return null;
-    const correct = selectedOriginalIndex === q.correctIndex;
-    if (correct) score++;
-    const result = { correct, question: q };
-    index++;
-    return result;
-  }
-
-  function isDone() {
-    return index >= questions.length;
-  }
-
-  function timeRemaining() {
-    if (!examEndTime) return null;
-    return Math.max(0, examEndTime - Date.now());
-  }
-
-  function results() {
-    return {
-      score,
-      total: questions.length,
-      pct: questions.length
-        ? Math.round((score / questions.length) * 100)
-        : 0,
-      questions,
-    };
+    QuizStorage.recordAnswer(q.id, correct, q.module);
+    return { correct, explanation: q.explanation, question: q };
   }
 
   return {
     init,
+    setEnabledModules,
+    activePool,
+    pickRandom,
     current,
     currentShuffledOptions,
-    total,
-    progress,
     submit,
-    examSubmit,
-    isDone,
-    timeRemaining,
-    results,
   };
 })();

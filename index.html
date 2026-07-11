@@ -13,42 +13,21 @@
 </head>
 <body class="dark">
   <header>
-    <h1>Google SRE SWE Interview Prep</h1>
-    <p class="subtitle">Systems Architecture &amp; Googleyness / Leadership</p>
+    <div class="header-top">
+      <div>
+        <h1>Google SRE SWE Interview Prep</h1>
+        <p class="subtitle">Systems Architecture &amp; Googleyness / Leadership</p>
+      </div>
+      <div id="score-bar" class="score-bar">
+        <span class="score-label">Average score</span>
+        <span id="avg-score" class="avg-score">—</span>
+        <span id="score-detail" class="score-detail">No questions answered yet</span>
+      </div>
+    </div>
   </header>
 
   <main>
-    <section class="screen" data-screen="home">
-      <h2>Study by module</h2>
-      <div id="module-grid" class="module-grid"></div>
-
-      <h2>Official video — segment drill</h2>
-      <p class="hint">Prepare for Your Google Interview: Systems Architecture</p>
-      <select id="segment-select">
-        <option value="">Pick a segment…</option>
-        <option value="SA-V0">SA-V0: Setup &amp; constraints (4)</option>
-        <option value="SA-V1">SA-V1: Communication (6)</option>
-        <option value="SA-V2">SA-V2: Designing to scale (10)</option>
-        <option value="SA-V3">SA-V3: Concrete &amp; quantitative (8)</option>
-        <option value="SA-V4">SA-V4: Trade-offs (6)</option>
-        <option value="SA-V5">SA-V5: Best practices (6)</option>
-      </select>
-
-      <h2>Exam presets</h2>
-      <div id="exam-presets" class="preset-row">
-        <button class="preset-btn" data-preset="systems-architecture-60">Systems Architecture (60 min)</button>
-        <button class="preset-btn" data-preset="leadership-45">Googleyness &amp; Leadership (45 min)</button>
-        <button class="preset-btn" data-preset="full-258">Full bank (258 Q)</button>
-      </div>
-
-    </section>
-
-    <section class="screen hidden" data-screen="quiz">
-      <div class="quiz-header">
-        <h2 id="quiz-title"></h2>
-        <span id="timer" class="timer hidden"></span>
-        <button id="quit-btn" class="btn-secondary">Quit</button>
-      </div>
+    <section id="quiz-area" class="quiz-area">
       <p id="quiz-meta" class="meta"></p>
       <div id="question-text" class="question"></div>
       <div id="options" class="options"></div>
@@ -57,9 +36,15 @@
       <button id="next-btn" class="btn-primary hidden">Next question</button>
     </section>
 
-    <section class="screen hidden" data-screen="results">
-      <div id="results-summary"></div>
-      <button class="btn-primary" onclick="location.reload()">Back to home</button>
+    <section id="module-filters" class="module-filters">
+      <h2>In scope</h2>
+      <p class="hint">Untick sections to exclude them from the random question pool.</p>
+      <div id="module-chips" class="module-chips"></div>
+    </section>
+
+    <section id="section-stats" class="section-stats">
+      <h2>Performance by section</h2>
+      <div id="stats-grid" class="stats-grid"></div>
     </section>
   </main>
 
