@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "id": "A1-001",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "foundational",
+      "tags": ["hiring", "evaluation-attributes", "gca"],
+      "source": "Google How We Hire; How We Hire video (zhUgaKb0s5A)",
+      "question": "Google evaluates candidates on four attributes throughout the hiring process. Which set is correct?",
+      "options": [
+        "General cognitive ability, role-related knowledge, leadership, and Googleyness",
+        "Coding speed, GPA, years of experience, and referral count",
+        "Algorithm memorization, system design, whiteboard artistry, and resume length",
+        "Only technical skills; leadership and culture are assessed after hire"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google's official How We Hire materials and video define four evaluation dimensions: GCA (problem-solving and learning ability), role-related knowledge, leadership (including emergent leadership), and Googleyness. All interview rounds feed evidence into these attributes."
+    },
+    {
+      "id": "A1-002",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "foundational",
+      "tags": ["hiring", "process", "pipeline"],
+      "source": "Google How We Hire; recruiter email",
+      "question": "Which sequence best represents Google's typical hiring pipeline after initial application?",
+      "options": [
+        "Recruiter screen → phone/video interviews → onsite loop → hiring committee → team matching",
+        "Onsite first → take-home exam only → automatic offer with no committee",
+        "Single 15-minute call → immediate team assignment without interviews",
+        "Committee decision before any interviews occur"
+      ],
+      "correctIndex": 0,
+      "explanation": "Official How We Hire describes recruiter conversation, remote/phone screens, onsite (or virtual onsite) interviews, then a hiring committee that reviews packet feedback holistically, followed by team matching for accepted candidates — not instant placement."
+    },
+    {
+      "id": "A1-003",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "interview",
+      "tags": ["hiring", "sre-swe", "sre-se", "track"],
+      "source": "Interview prep hub SRE path; recruiter email",
+      "question": "You are interviewing for SRE Software Engineering (SRE-SWE). How does this track differ from SRE Systems Engineering (SRE-SE)?",
+      "options": [
+        "SRE-SWE emphasizes software development, automation, and coding alongside systems design; SRE-SE leans more toward Linux/systems administration depth",
+        "SRE-SWE requires no coding; SRE-SE is a pure algorithm interview loop",
+        "The tracks are identical; the label is only for HR reporting",
+        "SRE-SE candidates skip the Systems Architecture round entirely"
+      ],
+      "correctIndex": 0,
+      "explanation": "The interview prep path distinguishes SRE-SWE (software engineering focus per recruiter email) from SRE-SE (heavier Linux/ops loop). SRE-SWE still includes coding and 60-min Systems Architecture — not a pure ops track."
+    },
+    {
+      "id": "A1-004",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "interview",
+      "tags": ["hiring", "systems-architecture", "no-coding"],
+      "source": "Recruiter email; Systems Architecture video",
+      "question": "The recruiter email describes the 60-minute Systems Architecture interview. Which statement is accurate?",
+      "options": [
+        "It is not a coding interview; interfaces, APIs, and pseudocode payloads are acceptable",
+        "You must implement production-ready code in your language of choice on a laptop",
+        "Only LeetCode medium problems are asked in this round",
+        "No diagrams or estimates are allowed; verbal answers only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Both the recruiter email and official Systems Architecture video (Gg318hR5JY0) state explicitly: no coding in this round. Defining APIs, data payloads at pseudocode level, whiteboard diagrams, and numeric estimates are in scope and encouraged."
+    },
+    {
+      "id": "A1-005",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "foundational",
+      "tags": ["hiring", "googleyness", "interview-style"],
+      "source": "How We Hire video; Google careers",
+      "question": "Google interviews are described as conversations rather than interrogations. What does this imply for candidates?",
+      "options": [
+        "Ask clarifying questions, think aloud, and engage collaboratively with the interviewer's hints",
+        "Remain silent until you have a perfect final answer, then deliver it in one monologue",
+        "Avoid asking questions because it shows weakness",
+        "Debate the interviewer aggressively to demonstrate confidence"
+      ],
+      "correctIndex": 0,
+      "explanation": "Official prep materials frame interviews as collaborative conversations. Process visibility — clarifying ambiguity, explaining reasoning, incorporating feedback — is scored alongside outcomes, especially in Systems Architecture and Googleyness rounds."
+    },
+    {
+      "id": "A1-006",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "interview",
+      "tags": ["hiring", "committee", "packet"],
+      "source": "Google How We Hire; USENIX hiring SRE paper",
+      "question": "What does the hiring committee review when deciding on a candidate?",
+      "options": [
+        "Written feedback from all interviewers across attributes — not a single interviewer's vote",
+        "Only the candidate's resume and university ranking",
+        "The average coding score from one round, ignoring other feedback",
+        "Social media presence and number of GitHub stars"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google's committee model synthesizes structured interviewer feedback against the four attributes. No single interview dominates; the packet includes multiple data points. USENIX hiring paper notes SRE bar includes both coding and systems engineering depth."
+    },
+    {
+      "id": "A1-007",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "interview",
+      "tags": ["hiring", "team-matching", "timing"],
+      "source": "Google How We Hire",
+      "question": "After a candidate receives a hiring committee approval, team matching typically:",
+      "options": [
+        "Pairs the candidate with teams based on mutual interest, skills, and organizational needs — not instant random assignment",
+        "Automatically places them on the team with the most open headcount regardless of fit",
+        "Never occurs; all engineers are undifferentiated pool resources",
+        "Happens before any interviews to save time"
+      ],
+      "correctIndex": 0,
+      "explanation": "How We Hire describes team matching as a distinct phase after hire decision where candidates and teams explore fit. It can take additional time post-offer and is separate from passing the interview loop."
+    },
+    {
+      "id": "A1-008",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "deep-dive",
+      "tags": ["hiring", "sre-role", "usenix"],
+      "source": "USENIX hiring SRE paper; SRE book introduction",
+      "question": "According to Google's SRE hiring philosophy, SRE candidates are expected to demonstrate:",
+      "options": [
+        "Both strong software engineering skills and systems engineering intuition — a higher combined bar than typical ops or pure SWE roles alone",
+        "Only shell scripting proficiency without coding ability",
+        "Only competitive programming rankings without operational thinking",
+        "Willingness to work unlimited manual toil without automation"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE book intro and USENIX hiring paper emphasize SRE competes for candidates who excel at coding AND systems engineering — the hiring pool is intentionally narrow. SRE-SWE loops reflect this dual expectation."
+    },
+    {
+      "id": "A1-009",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "foundational",
+      "tags": ["hiring", "leadership", "emergent-leadership"],
+      "source": "How We Hire video; leadership prep video",
+      "question": "Google assesses 'leadership' in technical interviews even for non-manager roles. What does emergent leadership mean in this context?",
+      "options": [
+        "Stepping up to drive impact when needed and stepping back to let others lead when appropriate",
+        "Having 'Manager' in your current job title for at least five years",
+        "Always being the loudest voice in every meeting",
+        "Leadership is not evaluated for individual contributor SRE candidates"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google's leadership dimension includes emergent leadership — influence, initiative, and collaboration without formal authority. Leadership prep video covers stepping in/stepping out. ICs are expected to demonstrate this through examples, not titles."
+    },
+    {
+      "id": "A1-010",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "interview",
+      "tags": ["hiring", "interviewer-matching", "strengths"],
+      "source": "How We Hire; recruiter email",
+      "question": "Why might Google match specific interviewers to a candidate's stated strengths or background?",
+      "options": [
+        "To assess role-related knowledge fairly and allow the candidate to demonstrate depth in relevant areas",
+        "To ensure every candidate receives identical questions regardless of role",
+        "To trick candidates with interviewers from unrelated domains only",
+        "Interviewer assignment is purely random with no role consideration"
+      ],
+      "correctIndex": 0,
+      "explanation": "Interview-as-conversation includes aligning interviewers with role relevance where possible, so role-related knowledge is evaluated by someone who can engage deeply — while still covering all four attributes across the loop."
+    },
+    {
+      "id": "A1-011",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "interview",
+      "tags": ["hiring", "gca", "problem-solving"],
+      "source": "How We Hire video",
+      "question": "General Cognitive Ability (GCA) in Google's hiring model primarily assesses:",
+      "options": [
+        "How you approach novel problems, learn, and adapt — not memorized trivia",
+        "Whether you memorized all Google product launch dates",
+        "Speed of typing during the interview",
+        "Ability to recite textbook definitions without applying them"
+      ],
+      "correctIndex": 0,
+      "explanation": "GCA measures learning ability and structured problem-solving on unfamiliar problems — aligned with Systems Architecture's deliberately underspecified prompts. Raw memorization without reasoning scores poorly across Google's attributes."
+    },
+    {
+      "id": "A1-012",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "deep-dive",
+      "tags": ["hiring", "sre-swe", "interview-rounds"],
+      "source": "Recruiter email; interview prep hub",
+      "question": "For an SRE-SWE loop per the recruiter email, which interview pairing is explicitly listed?",
+      "options": [
+        "60-minute Systems Architecture plus 45-minute Googleyness & Leadership",
+        "Only a 4-hour continuous coding contest with no behavioral component",
+        "Systems Architecture replaces all coding rounds for SRE candidates",
+        "Googleyness is optional and not scored for engineering roles"
+      ],
+      "correctIndex": 0,
+      "explanation": "The recruiter email explicitly schedules 60-min Systems Architecture and 45-min Googleyness & Leadership for this candidate's SRE-SWE path — alongside other rounds (coding, etc.) in the full loop. Both named rounds are scored and prep-worthy."
+    }
+  ]
+}

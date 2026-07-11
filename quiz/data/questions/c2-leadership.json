@@ -1,0 +1,259 @@
+{
+  "questions": [
+    {
+      "id": "C2-001",
+      "module": "C2",
+      "difficulty": "foundational",
+      "tags": ["leadership", "communication", "interview-format"],
+      "source": "2Cr3-et4xkI — Preparing for your leadership interview",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "According to Google's leadership interview prep video, what is the primary purpose of the leadership round?",
+      "options": [
+        "To understand how you influence, communicate, and deliver results through others—not to test management title or headcount",
+        "To verify how many direct reports you have managed for at least five years",
+        "To assess your ability to recite Google's org chart and executive names",
+        "To replace the technical interview with a personality assessment"
+      ],
+      "correctIndex": 0,
+      "explanation": "The official leadership video emphasizes that leadership at Google is about behaviors and impact, not formal management experience. Interviewers probe how you work with teams, navigate ambiguity, and drive outcomes."
+    },
+    {
+      "id": "C2-002",
+      "module": "C2",
+      "difficulty": "interview",
+      "tags": ["leadership", "communication-style", "behavioral"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "The leadership video advises candidates on communication style during behavioral answers. Which approach is strongest?",
+      "options": [
+        "Structured, concise stories with clear context, your specific actions, and measurable outcomes—while leaving room for follow-up questions",
+        "Monologues that cover every project you have ever worked on so nothing is left out",
+        "Minimal detail so the interviewer must pull every fact out through dozens of follow-ups",
+        "Highly technical jargon with no explanation because interviewers should already know your domain"
+      ],
+      "correctIndex": 0,
+      "explanation": "Strong communication in leadership interviews means clarity and structure (often STAR/STAR-L), focusing on your contributions, and engaging collaboratively—not filibustering or being so terse that impact is invisible."
+    },
+    {
+      "id": "C2-003",
+      "module": "C2",
+      "difficulty": "interview",
+      "tags": ["leadership", "ambiguity", "navigating-complexity"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "When asked about navigating ambiguity, which story element does the leadership video imply interviewers weight most heavily?",
+      "options": [
+        "How you made progress despite incomplete information, aligned stakeholders, and adjusted as facts emerged",
+        "How you avoided all decisions until leadership provided a complete specification",
+        "How you followed the original plan exactly even when new data contradicted it",
+        "How ambiguity proved that planning is useless so improvisation without communication is best"
+      ],
+      "correctIndex": 0,
+      "explanation": "Leadership in ambiguous situations requires judgment, communication, and adaptability. Waiting forever or rigidly ignoring new information are weak signals for Google's leadership dimension."
+    },
+    {
+      "id": "C2-004",
+      "module": "C2",
+      "difficulty": "foundational",
+      "tags": ["leadership", "teamwork", "influence"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "Google's leadership prep describes influence without authority as a core teamwork signal. Which example best demonstrates it?",
+      "options": [
+        "You convinced a partner team to adopt a reliability practice by showing data on incidents and offering to share implementation work",
+        "You used your skip-level manager to override a peer team's decision without discussing it with them",
+        "You refused to collaborate until you were promoted to manage the other team",
+        "You implemented changes in another team's codebase secretly because it was faster"
+      ],
+      "correctIndex": 0,
+      "explanation": "Influence without authority relies on trust, evidence, and collaboration—not escalation as a first move or unilateral action. This is especially relevant for SREs working with product engineering teams."
+    },
+    {
+      "id": "C2-005",
+      "module": "C2",
+      "difficulty": "interview",
+      "tags": ["leadership", "vision", "execution"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "The leadership video distinguishes vision from execution. Which answer best balances both when describing a project you led?",
+      "options": [
+        "You explain the long-term goal you aligned the team on and the concrete milestones, trade-offs, and metrics that tracked progress",
+        "You describe only a inspiring mission statement without any details of how work got done",
+        "You list daily task tickets without connecting them to any broader goal",
+        "You claim vision is only for executives so individual contributors should never discuss direction"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google leadership assesses whether you can connect direction to delivery—setting or understanding goals and driving tangible progress—not pure rhetoric or pure task execution in isolation."
+    },
+    {
+      "id": "C2-006",
+      "module": "C2",
+      "difficulty": "interview",
+      "tags": ["leadership", "delivering-results", "metrics"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "When demonstrating 'delivering results,' the leadership video encourages candidates to:",
+      "options": [
+        "Quantify impact where possible—latency reduced, incidents prevented, revenue protected, time saved—and clarify your personal contribution",
+        "Speak only in general terms like 'things got better' without specifics",
+        "Attribute all team outcomes to 'we' with no indication of your role",
+        "Focus exclusively on effort hours worked rather than outcomes achieved"
+      ],
+      "correctIndex": 0,
+      "explanation": "Delivering results means evidence of impact. Interviewers expect measurable outcomes and clarity about what you personally drove, while still acknowledging team context appropriately."
+    },
+    {
+      "id": "C2-007",
+      "module": "C2",
+      "difficulty": "foundational",
+      "tags": ["leadership", "growth-from-failure", "behavioral"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "The leadership prep video states that growth from failure is important for strong answers. What should a failure story include?",
+      "options": [
+        "A honest description of what went wrong, your role, what you learned, and how you changed behavior afterward",
+        "A failure that was entirely someone else's fault with no reflection on your part",
+        "A hidden failure reframed as a success to avoid looking bad",
+        "A statement that you have never failed because you always execute perfectly"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google leadership interviewers expect authentic failure stories with learning and changed behavior. Claiming perfection or blame-shifting misses the growth dimension the video highlights."
+    },
+    {
+      "id": "C2-008",
+      "module": "C2",
+      "difficulty": "interview",
+      "tags": ["leadership", "emergent-leadership", "step-in-step-back"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "Which scenario best matches emergent leadership as described in Google's leadership interview guidance?",
+      "options": [
+        "During a critical outage you coordinate communication and mitigation until the designated incident commander arrives, then shift to a supporting role",
+        "You permanently assign yourself as incident commander for every outage on every service",
+        "You wait silently during crises so you do not appear to be leading",
+        "You lead by directing all technical decisions even when subject-matter experts are present"
+      ],
+      "correctIndex": 0,
+      "explanation": "Emergent leadership means stepping up when the situation needs it and yielding when someone better suited takes over—situational influence rather than permanent command."
+    },
+    {
+      "id": "C2-009",
+      "module": "C2",
+      "difficulty": "interview",
+      "tags": ["leadership", "teamwork", "conflict"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "You disagree with a teammate about a technical approach during a high-stakes project. The leadership video would favor an answer showing:",
+      "options": [
+        "You listened to their reasoning, shared data and constraints, sought a principled decision, and committed to the outcome even if your idea was not chosen",
+        "You escalated to VP level immediately to win the argument",
+        "You agreed in the meeting but undermined the decision afterward",
+        "You avoided the conversation and implemented your preferred approach alone"
+      ],
+      "correctIndex": 0,
+      "explanation": "Leadership teamwork includes healthy debate, evidence-based decisions, and disagree-and-commit behavior—not politics, sabotage, or avoidance."
+    },
+    {
+      "id": "C2-010",
+      "module": "C2",
+      "difficulty": "deep-dive",
+      "tags": ["leadership", "communication", "follow-ups"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "Interviewers in the leadership round often ask deep follow-ups like 'What would you do differently?' What is the best way to handle these?",
+      "options": [
+        "Offer specific, thoughtful changes you would make—showing reflection without undermining your overall competence",
+        "Say you would do everything exactly the same because admitting change implies weakness",
+        "Blame external factors exclusively so nothing reflects on your judgment",
+        "Decline to answer because the question is a trap"
+      ],
+      "correctIndex": 0,
+      "explanation": "Follow-ups test growth and self-awareness. Strong candidates reflect honestly and describe concrete improvements; rigid perfectionism or blame deflection are negative leadership signals."
+    },
+    {
+      "id": "C2-011",
+      "module": "C2",
+      "difficulty": "interview",
+      "tags": ["leadership", "ambiguity", "prioritization"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "Your team receives three urgent, conflicting requests from different stakeholders with no clear priority. What leadership behavior does the prep video emphasize?",
+      "options": [
+        "Clarify impact and constraints with stakeholders, propose a transparent prioritization framework, and communicate trade-offs",
+        "Work on all three simultaneously without telling anyone you are overloaded",
+        "Pick the loudest stakeholder's request and ignore the others silently",
+        "Wait until executives resolve the conflict without providing any input or data"
+      ],
+      "correctIndex": 0,
+      "explanation": "Navigating ambiguity and delivering results often means driving clarity—gathering information, making or facilitating prioritization decisions, and communicating openly."
+    },
+    {
+      "id": "C2-012",
+      "module": "C2",
+      "difficulty": "foundational",
+      "tags": ["leadership", "experience-questions", "process-questions"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "The leadership video describes two broad question types: experience-based and process/judgment-based. 'Tell me about a time you led a project under a tight deadline' is primarily:",
+      "options": [
+        "An experience-based question requiring a specific past example with STAR structure",
+        "A process question requiring a hypothetical framework with no personal story",
+        "A technical coding question about algorithmic complexity",
+        "A trivia question about Google's founding date"
+      ],
+      "correctIndex": 0,
+      "explanation": "Experience questions ask for concrete past behavior ('Tell me about a time…'). Process questions ask how you would handle a situation. Recognizing the type helps you structure the answer appropriately."
+    },
+    {
+      "id": "C2-013",
+      "module": "C2",
+      "difficulty": "interview",
+      "tags": ["leadership", "delivering-results", "scope"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "A strong 'delivering results' story for an SRE candidate might focus on:",
+      "options": [
+        "Reducing MTTR by 40% through runbook improvements and automation you built after recurring incidents",
+        "Installing a monitoring agent once without measuring any change in reliability",
+        "Attending every team meeting for a year without shipping improvements",
+        "Describing your company's stock price growth as your personal accomplishment"
+      ],
+      "correctIndex": 0,
+      "explanation": "Results stories should tie your actions to measurable reliability or efficiency outcomes. Vague activity or unrelated company metrics do not demonstrate personal leadership impact."
+    },
+    {
+      "id": "C2-014",
+      "module": "C2",
+      "difficulty": "interview",
+      "tags": ["leadership", "growth-from-failure", "feedback"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "You led a rollout that caused a minor production incident. Which answer best satisfies the leadership video's growth-from-failure expectation?",
+      "options": [
+        "You owned your decision, participated in a blameless postmortem, shipped fixes and guardrails, and changed your rollout checklist based on learnings",
+        "You explained the incident was unavoidable and made no process changes",
+        "You omitted the incident from your interview because failures should never be discussed",
+        "You named the junior engineer who triggered the alert as the sole cause"
+      ],
+      "correctIndex": 0,
+      "explanation": "Growth from failure requires ownership, learning, and systemic improvement—aligned with blameless culture—not minimization, hiding, or scapegoating."
+    },
+    {
+      "id": "C2-015",
+      "module": "C2",
+      "difficulty": "deep-dive",
+      "tags": ["leadership", "vision", "team-development"],
+      "source": "2Cr3-et4xkI",
+      "videoUrl": "https://www.youtube.com/watch?v=2Cr3-et4xkI",
+      "question": "The leadership interview assesses whether you help teams grow—not only whether you personally deliver. Which answer element best demonstrates this?",
+      "options": [
+        "You mentored teammates, delegated meaningful work, and described how others became more capable because of your leadership",
+        "You kept all critical tasks yourself so quality would not suffer",
+        "You measured success only by your individual promotion timeline",
+        "You avoided teaching others because knowledge hoarding protects your role"
+      ],
+      "correctIndex": 0,
+      "explanation": "Leadership at Google includes multiplying team capability—mentorship, delegation, and developing others—not zero-sum knowledge guarding or solo heroics."
+    }
+  ]
+}

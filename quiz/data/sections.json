@@ -1,0 +1,68 @@
+{
+  "modules": [
+    {
+      "id": "SA-VIDEO",
+      "title": "Official: Systems Architecture Interview Prep",
+      "sourceUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0",
+      "questionCount": 40,
+      "dataFile": "questions/sa-video.json",
+      "segments": [
+        { "id": "SA-V0", "label": "Setup & constraints", "count": 4 },
+        { "id": "SA-V1", "label": "Communication", "count": 6 },
+        { "id": "SA-V2", "label": "Designing to scale", "count": 10 },
+        { "id": "SA-V3", "label": "Concrete & quantitative", "count": 8 },
+        { "id": "SA-V4", "label": "Trade-offs & compromises", "count": 6 },
+        { "id": "SA-V5", "label": "Best practices", "count": 6 }
+      ],
+      "priority": 1,
+      "buildOrder": 1
+    },
+    { "id": "B1", "title": "Interview format & communication", "questionCount": 15, "dataFile": "questions/b1-format.json", "videoSegments": ["SA-V0", "SA-V1", "SA-V5"], "videoCount": 10, "buildOrder": 2 },
+    { "id": "B2", "title": "Requirements & decomposition", "questionCount": 15, "dataFile": "questions/b2-clarify.json", "videoSegments": ["SA-V1", "SA-V2"], "videoCount": 4, "buildOrder": 3 },
+    { "id": "B3", "title": "Scalable architecture building blocks", "questionCount": 20, "dataFile": "questions/b3-building-blocks.json", "buildOrder": 4 },
+    { "id": "B4", "title": "Distributed systems fundamentals", "questionCount": 18, "dataFile": "questions/b4-distributed.json", "buildOrder": 5 },
+    { "id": "B5", "title": "Resource estimation & NALSD", "questionCount": 18, "dataFile": "questions/b5-nalsd.json", "videoSegments": ["SA-V3"], "videoCount": 8, "buildOrder": 6 },
+    { "id": "B6", "title": "Trade-offs & design decisions", "questionCount": 16, "dataFile": "questions/b6-tradeoffs.json", "videoSegments": ["SA-V4"], "videoCount": 6, "buildOrder": 7 },
+    { "id": "B7", "title": "Failure modes & recovery", "questionCount": 18, "dataFile": "questions/b7-failures.json", "videoSegments": ["SA-V4"], "videoCount": 4, "buildOrder": 8 },
+    { "id": "B8", "title": "APIs & canonical patterns", "questionCount": 20, "dataFile": "questions/b8-patterns.json", "buildOrder": 9 },
+    { "id": "A1", "title": "Hiring process", "questionCount": 12, "dataFile": "questions/a1-hiring.json", "buildOrder": 10 },
+    { "id": "A2", "title": "SRE principles", "questionCount": 13, "dataFile": "questions/a2-sre-principles.json", "buildOrder": 11 },
+    { "id": "C1", "title": "Googleyness", "questionCount": 15, "dataFile": "questions/c1-googleyness.json", "buildOrder": 12 },
+    { "id": "C2", "title": "Leadership dimensions", "questionCount": 15, "dataFile": "questions/c2-leadership.json", "buildOrder": 13 },
+    { "id": "C3", "title": "STAR / STAR-L", "questionCount": 15, "dataFile": "questions/c3-star.json", "buildOrder": 14 },
+    { "id": "C4", "title": "SRE behavioral scenarios", "questionCount": 15, "dataFile": "questions/c4-sre-behavioral.json", "buildOrder": 15 },
+    { "id": "D1", "title": "What would you do first?", "questionCount": 15, "dataFile": "questions/d1-scenarios.json", "buildOrder": 16 },
+    { "id": "D2", "title": "Identify the flaw", "questionCount": 10, "dataFile": "questions/d2-flaws.json", "buildOrder": 17 }
+  ],
+  "examPresets": [
+    {
+      "id": "systems-architecture-60",
+      "label": "Systems Architecture mock (60 min)",
+      "modules": ["SA-VIDEO", "B1", "B2", "B3", "B5", "B6", "B7"],
+      "questionCount": 60,
+      "minutes": 60
+    },
+    {
+      "id": "leadership-45",
+      "label": "Googleyness & Leadership mock (45 min)",
+      "modules": ["C1", "C2", "C3", "C4"],
+      "questionCount": 45,
+      "minutes": 45
+    },
+    {
+      "id": "full-258",
+      "label": "Full bank (258 Q)",
+      "modules": ["SA-VIDEO", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "A1", "A2", "C1", "C2", "C3", "C4", "D1", "D2"],
+      "questionCount": 258,
+      "minutes": 0
+    }
+  ],
+  "videoSegmentModuleTags": {
+    "SA-V0": ["B1"],
+    "SA-V1": ["B1", "B2"],
+    "SA-V2": ["B2"],
+    "SA-V3": ["B5"],
+    "SA-V4": ["B6", "B7"],
+    "SA-V5": ["B1"]
+  }
+}

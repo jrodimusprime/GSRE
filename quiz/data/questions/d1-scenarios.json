@@ -1,0 +1,244 @@
+{
+  "questions": [
+    {
+      "id": "D1-001",
+      "module": "D1",
+      "difficulty": "foundational",
+      "tags": ["scenarios", "clarify", "requirements"],
+      "source": "Systems Architecture video Gg318hR5JY0 / email rubric",
+      "question": "Your interviewer says: 'Design a URL shortener.' You have 60 minutes total and the first ~20 minutes should cover requirements and an initial solution. What should you do FIRST?",
+      "options": [
+        "Ask clarifying questions about scale, read/write ratio, TTL, custom aliases, and latency requirements",
+        "Immediately draw database shards and pick consistent hashing",
+        "Estimate storage for 10 years of URLs before understanding functional requirements",
+        "Deep-dive into the collision resolution algorithm for base-62 encoding"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google's Systems Architecture prep explicitly recommends spending early time on requirements. Underspecified prompts are intentional—clarifying scope, scale, and constraints precedes architecture and math."
+    },
+    {
+      "id": "D1-002",
+      "module": "D1",
+      "difficulty": "interview",
+      "tags": ["scenarios", "high-level", "decomposition"],
+      "source": "Email rubric / NALSD",
+      "question": "After clarifying requirements for a photo-sharing service, the interviewer nods and waits. You have confirmed 500M DAU and global users. What is the best NEXT step?",
+      "options": [
+        "Sketch a high-level architecture (clients, API, storage, CDN, metadata DB) and walk through the upload and read paths",
+        "Jump directly into B-tree page sizes for the metadata database",
+        "Calculate exact disk IOPS for five years without presenting any components",
+        "Discuss your employment history to build rapport"
+      ],
+      "correctIndex": 0,
+      "explanation": "After requirements, decompose at high level—major components and data flows—before deep-diving individual pieces. This matches Google's evaluate-communication-then-scale interview flow."
+    },
+    {
+      "id": "D1-003",
+      "module": "D1",
+      "difficulty": "interview",
+      "tags": ["scenarios", "estimation", "quantitative"],
+      "source": "Systems Architecture video SA-V3",
+      "question": "You have a high-level design for a Twitter-like feed reader. The interviewer asks: 'How many read requests per second at peak?' You have user counts and average reads per day. What should you do FIRST?",
+      "options": [
+        "Show explicit back-of-envelope math with stated assumptions and sanity-check the order of magnitude",
+        "Say 'a lot' and move on to sharding strategy",
+        "Refuse to estimate because exact numbers are unknowable",
+        "Memorize industry benchmarks and cite them without connecting to this problem's assumptions"
+      ],
+      "correctIndex": 0,
+      "explanation": "The official video emphasizes concrete, quantitative estimates with justified assumptions. Order-of-magnitude reasoning proves you understand scale—not vague hand-waving."
+    },
+    {
+      "id": "D1-004",
+      "module": "D1",
+      "difficulty": "interview",
+      "tags": ["scenarios", "deep-dive", "bottleneck"],
+      "source": "Systems Architecture video SA-V2",
+      "question": "Your high-level design for a rate limiter includes API servers, a Redis cluster, and a config service. The interviewer says: 'Let's focus on the hot path for enforcing limits.' What is the best NEXT step?",
+      "options": [
+        "Deep-dive that component: algorithm choice (token bucket vs sliding window), Redis key design, and failure behavior",
+        "Restart from requirements as if no design exists yet",
+        "Estimate total datacenter power consumption",
+        "Switch to designing a completely different system"
+      ],
+      "correctIndex": 0,
+      "explanation": "Interviewers often zoom into one component after the high-level pass. Follow their lead—deep-dive the requested area with APIs, data structures, and trade-offs."
+    },
+    {
+      "id": "D1-005",
+      "module": "D1",
+      "difficulty": "interview",
+      "tags": ["scenarios", "trade-offs", "storage"],
+      "source": "Systems Architecture video SA-V4",
+      "question": "You propose storing thumbnails on SSD and full images on HDD for a image host. The interviewer asks about trade-offs. What should you do FIRST?",
+      "options": [
+        "Explicitly compare latency, cost, and durability implications for each tier and when you would reconsider the split",
+        "Insist SSD-only is always correct with no exceptions",
+        "Avoid discussing downsides because trade-offs show weakness",
+        "Change the topic to DNS configuration"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google interviewers score trade-off articulation heavily. Lay out costs and benefits of your choices (flash vs disk, sync vs async replication) rather than defending one answer as universally optimal."
+    },
+    {
+      "id": "D1-006",
+      "module": "D1",
+      "difficulty": "foundational",
+      "tags": ["scenarios", "clarify", "scope"],
+      "source": "Email rubric — clarify the problem",
+      "question": "Prompt: 'Design Google Drive.' Which clarifying question is MOST important before estimating storage?",
+      "options": [
+        "What types of files and typical sizes, and whether strong consistency is required for metadata vs blobs",
+        "What color the UI buttons should be",
+        "Which programming language the team prefers internally",
+        "How many employees work at Google"
+      ],
+      "correctIndex": 0,
+      "explanation": "Clarifications should probe functional scope, consistency needs, and access patterns—inputs that drive architecture and estimates. UI colors and trivia do not shape the system design."
+    },
+    {
+      "id": "D1-007",
+      "module": "D1",
+      "difficulty": "interview",
+      "tags": ["scenarios", "failure-modes", "recovery"],
+      "source": "Email rubric / SA-V4",
+      "question": "You finish a high-level design for a distributed cache. The interviewer asks: 'What happens when a cache node dies?' What is the best FIRST response?",
+      "options": [
+        "Explain detection (health checks), user impact, failover/replication behavior, and how the system returns to steady state",
+        "Say caches never fail so it is not worth discussing",
+        "Immediately redesign the entire system from scratch",
+        "Estimate network bandwidth only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Failure response is a core evaluation criterion. Address detect → mitigate → recover for the component in question before expanding scope."
+    },
+    {
+      "id": "D1-008",
+      "module": "D1",
+      "difficulty": "interview",
+      "tags": ["scenarios", "estimation", "latency"],
+      "source": "Systems Architecture video SA-V3",
+      "question": "Your design spans US and Europe users. The interviewer asks about read latency for European users if the primary database is US-only. What should you do FIRST?",
+      "options": [
+        "Reason about cross-continental RTT (~100ms+) and propose mitigation (regional replicas, CDN, caching) with trade-offs",
+        "Assume all reads are local memory speed (~100ns)",
+        "Ignore geography because networks are fast enough now",
+        "Answer only with 'use a faster programming language'"
+      ],
+      "correctIndex": 0,
+      "explanation": "The official video highlights relative latencies—memory vs LAN vs cross-continent RTT. Geographic distance is a first-class design constraint requiring explicit mitigation."
+    },
+    {
+      "id": "D1-009",
+      "module": "D1",
+      "difficulty": "deep-dive",
+      "tags": ["scenarios", "clarify", "prioritization"],
+      "source": "NALSD / Systems Architecture prep",
+      "question": "Twenty minutes remain. You have clarified requirements and drawn a high-level diagram for a metrics pipeline, but have not estimated throughput. The interviewer is silent. What is the best NEXT move?",
+      "options": [
+        "Proactively provide a rough QPS/events-per-second estimate and identify the likely bottleneck component",
+        "Start writing pseudocode for a sorting algorithm",
+        "Ask to restart the interview with a different question",
+        "Deep-dive TLS cipher selection for API gateways"
+      ],
+      "correctIndex": 0,
+      "explanation": "With time remaining, strong candidates drive the interview forward—quantitative scale and bottleneck identification—rather than stalling or diving into irrelevant trivia."
+    },
+    {
+      "id": "D1-010",
+      "module": "D1",
+      "difficulty": "interview",
+      "tags": ["scenarios", "high-level", "api-design"],
+      "source": "Email rubric — APIs OK, no coding",
+      "question": "Design a notification system. After requirements, which high-level element should you establish BEFORE discussing SMS provider APIs in detail?",
+      "options": [
+        "Core flow: event ingestion → routing/dedup → channel workers (push/email/SMS) → delivery tracking",
+        "Exact JSON field ordering for every possible notification payload",
+        "Implementation of a specific mobile push SDK in Java",
+        "Your preferred IDE plugins for diagram drawing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Start with component boundaries and data flow. The email rubric allows API/payload discussion but not full implementation—architecture first, then interface sketches."
+    },
+    {
+      "id": "D1-011",
+      "module": "D1",
+      "difficulty": "interview",
+      "tags": ["scenarios", "trade-offs", "consistency"],
+      "source": "AOSA / distributed systems fundamentals",
+      "question": "For a collaborative document editor, the interviewer asks whether you need strong consistency. What is the best FIRST step?",
+      "options": [
+        "Clarify consistency requirements per operation (title rename vs real-time cursor vs comment feed) before picking CP vs AP patterns",
+        "Immediately choose Paxos for everything without discussing user-visible behavior",
+        "Pick eventual consistency for all operations without analysis because it scales better",
+        "Avoid the question and discuss only hardware rack layouts"
+      ],
+      "correctIndex": 0,
+      "explanation": "Consistency trade-offs depend on operation semantics. Clarify what users must see and when—then choose replication and coordination models accordingly."
+    },
+    {
+      "id": "D1-012",
+      "module": "D1",
+      "difficulty": "foundational",
+      "tags": ["scenarios", "communication", "iteration"],
+      "source": "Systems Architecture video SA-V5",
+      "question": "You present a first-pass design and the interviewer says: 'That won't work for global writes.' What should you do FIRST?",
+      "options": [
+        "Acknowledge the gap, ask a clarifying question if needed, and iterate on the design with explicit improvements",
+        "Defend the original design without changes because changing minds looks weak",
+        "Ask to end the interview early",
+        "Ignore the feedback and continue with your script"
+      ],
+      "correctIndex": 0,
+      "explanation": "The prep video encourages improving on your first answer and treating the interview as collaborative problem-solving—not performing a rehearsed monologue."
+    },
+    {
+      "id": "D1-013",
+      "module": "D1",
+      "difficulty": "interview",
+      "tags": ["scenarios", "deep-dive", "sharding"],
+      "source": "Systems Architecture video SA-V2",
+      "question": "You are designing a web crawler at planet scale. Requirements are clear. The interviewer asks how you partition the URL frontier. What type of response is expected FIRST?",
+      "options": [
+        "Deep-dive sharding/partitioning strategy for the frontier queue with worker coordination and deduplication",
+        "A history of web crawling since 1994",
+        "Clarifying questions about requirements you already confirmed",
+        "Only a high-level box diagram with no partitioning discussion"
+      ],
+      "correctIndex": 0,
+      "explanation": "When the interviewer targets a specific scaling challenge (frontier partitioning, dedup, politeness), answer that deep-dive directly—the video explicitly mentions sharding large datasets across workers."
+    },
+    {
+      "id": "D1-014",
+      "module": "D1",
+      "difficulty": "interview",
+      "tags": ["scenarios", "observability", "failure-modes"],
+      "source": "Email rubric — detect if system is working",
+      "question": "Near the end of a metrics aggregation design, you have not mentioned monitoring. The interviewer has not asked yet. What should you proactively do?",
+      "options": [
+        "Describe how you know the pipeline is healthy: lag metrics, dropped events, alerting on SLOs, and debug hooks",
+        "Assume monitoring is implied and say nothing",
+        "State that monitoring is operations' job, not design",
+        "Add monitoring only if explicitly asked—never volunteer"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google expects candidates to address how the system detects problems at scale. Observability is part of coherent design, not an optional afterthought."
+    },
+    {
+      "id": "D1-015",
+      "module": "D1",
+      "difficulty": "deep-dive",
+      "tags": ["scenarios", "estimation", "storage", "trade-offs"],
+      "source": "NALSD / SA-V3",
+      "question": "Design a logging system. You know 100K servers each emit 1 MB/minute of logs retained 30 days. Before choosing object storage vs HDFS vs a time-series DB, what should you do FIRST?",
+      "options": [
+        "Compute total storage and ingest rate, then discuss retention, query patterns, and cost/latency trade-offs driving storage choice",
+        "Pick Elasticsearch immediately because it is popular",
+        "Design the log line regex parser in detail",
+        "Skip math because cloud storage is infinite"
+      ],
+      "correctIndex": 0,
+      "explanation": "Quantitative sizing (ingest QPS, total TB) informs architecture choices. Estimate first, then map requirements to storage/compute patterns with explicit trade-offs."
+    }
+  ]
+}

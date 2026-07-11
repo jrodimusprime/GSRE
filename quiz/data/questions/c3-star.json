@@ -1,0 +1,244 @@
+{
+  "questions": [
+    {
+      "id": "C3-001",
+      "module": "C3",
+      "difficulty": "foundational",
+      "tags": ["star", "star-l", "structure"],
+      "source": "Leadership video / Googleyness STAR prep",
+      "question": "What does the STAR method stand for in behavioral interview answers?",
+      "options": [
+        "Situation, Task, Action, Result",
+        "Strategy, Timeline, Analysis, Review",
+        "Scope, Team, Agenda, Report",
+        "Summary, Test, Automate, Release"
+      ],
+      "correctIndex": 0,
+      "explanation": "STAR is the standard behavioral structure: set the Situation, clarify your Task, describe your Actions, and state the Result. Google interview prep builds on this framework extensively."
+    },
+    {
+      "id": "C3-002",
+      "module": "C3",
+      "difficulty": "foundational",
+      "tags": ["star-l", "learnings", "growth"],
+      "source": "Google leadership / STAR-L guidance",
+      "question": "STAR-L extends STAR by adding 'Learnings' at the end. When is STAR-L especially valuable?",
+      "options": [
+        "When answering failure, conflict, or feedback questions where reflection and changed behavior matter",
+        "When answering trivia questions about company history",
+        "Only when the interviewer explicitly forbids discussing results",
+        "When you have no measurable outcome to share"
+      ],
+      "correctIndex": 0,
+      "explanation": "Learnings show growth—critical for Google's leadership and Googleyness rounds. Failure and feedback stories are stronger when you articulate what you would do differently and how you actually changed."
+    },
+    {
+      "id": "C3-003",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["star", "experience-questions", "structure"],
+      "source": "Leadership video 2Cr3-et4xkI",
+      "question": "For the question 'Tell me about a time you resolved a conflict with a teammate,' which opening is strongest?",
+      "options": [
+        "Briefly set context (team, stakes), then move quickly to your specific actions and the outcome",
+        "Begin with your entire career history so the interviewer understands your background",
+        "Start with 'I'm not sure I have an example' and wait for the interviewer to move on",
+        "Describe the conflict in emotional detail for five minutes before mentioning any resolution"
+      ],
+      "correctIndex": 0,
+      "explanation": "Experience questions need concise Situation/Task framing—enough context to understand stakes, then emphasis on Actions and Results. Long preambles or avoiding the question waste limited interview time."
+    },
+    {
+      "id": "C3-004",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["process-questions", "hypothetical", "structure"],
+      "source": "Leadership video / Google interview prep",
+      "question": "For a process question like 'How would you handle a disagreement about technical direction?', the best structure is:",
+      "options": [
+        "Outline your step-by-step approach (listen, gather data, align on goals, decide, commit) optionally anchored by a brief real example",
+        "Refuse to answer hypotheticals and insist on only past-tense stories",
+        "Give a one-word answer: 'Collaborate'",
+        "Describe what your manager should do instead of what you would do"
+      ],
+      "correctIndex": 0,
+      "explanation": "Process/judgment questions test how you think and behave in novel situations. A clear framework plus optional real-world anchor beats vague platitudes or deflecting to others."
+    },
+    {
+      "id": "C3-005",
+      "module": "C3",
+      "difficulty": "foundational",
+      "tags": ["behavioral-categories", "story-bank"],
+      "source": "Google behavioral prep",
+      "question": "Google prep commonly recommends maintaining a story bank of 6–8 versatile stories. Why that number range?",
+      "options": [
+        "Most behavioral questions map to recurring themes (conflict, failure, leadership, ambiguity) so a small set of deep stories can be adapted with different emphasis",
+        "Interviewers are required to ask exactly eight questions per round",
+        "Google's applicant tracking system rejects candidates with fewer than six stories",
+        "Six to eight stories is the maximum working memory of an interviewer"
+      ],
+      "correctIndex": 0,
+      "explanation": "A compact story bank of well-prepared, multi-dimensional examples covers conflict, failure, feedback, impact, and initiative questions—you reframe the same story for different prompts rather than memorizing dozens."
+    },
+    {
+      "id": "C3-006",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["measurable-results", "impact"],
+      "source": "Leadership video / STAR prep",
+      "question": "Which 'Result' statement is strongest in a STAR answer for an SRE behavioral question?",
+      "options": [
+        "P99 latency dropped from 800ms to 320ms and related pages dropped 60% over the next quarter after my caching change",
+        "The system got faster and users were happier",
+        "I worked really hard and the team appreciated my effort",
+        "The project launched on time"
+      ],
+      "correctIndex": 0,
+      "explanation": "Measurable, specific results (latency, error rates, incident counts, time saved) make your impact credible. Vague or effort-only results are weak in Google behavioral interviews."
+    },
+    {
+      "id": "C3-007",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["i-vs-we", "ownership", "pronouns"],
+      "source": "Google interview coaching",
+      "question": "When describing team projects in STAR answers, Google guidance on 'I' vs 'we' suggests:",
+      "options": [
+        "Use 'we' for shared context but clearly use 'I' for your specific decisions, actions, and contributions",
+        "Always say 'we' exclusively so you appear humble and never say 'I'",
+        "Always say 'I' for everything including work you did not personally do",
+        "Avoid pronouns entirely and speak only in passive voice"
+      ],
+      "correctIndex": 0,
+      "explanation": "Interviewers need to assess your individual contribution. Overusing 'we' hides your role; overusing 'I' can misrepresent team work. Balance team context with clear personal ownership."
+    },
+    {
+      "id": "C3-008",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["behavioral-categories", "failure"],
+      "source": "Leadership video",
+      "question": "Which behavioral category does 'Tell me about a time you missed a deadline or made a significant mistake' primarily test?",
+      "options": [
+        "Failure and growth—ownership, learning, and changed behavior",
+        "Conflict resolution between two executives",
+        "Technical system design at planet scale",
+        "Your favorite programming language syntax"
+      ],
+      "correctIndex": 0,
+      "explanation": "Failure questions assess honesty, accountability, and learning (STAR-L). They are not trick questions—strong candidates share real mistakes with concrete improvements."
+    },
+    {
+      "id": "C3-009",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["behavioral-categories", "feedback"],
+      "source": "Googleyness prep",
+      "question": "For 'Tell me about a time you received difficult feedback,' what should the Action section emphasize?",
+      "options": [
+        "How you listened, validated or investigated the feedback, and changed specific behaviors—not just that you felt bad",
+        "How you proved the feedback giver was incompetent",
+        "How you ignored the feedback because your results spoke for themselves",
+        "How you requested a transfer to avoid that manager"
+      ],
+      "correctIndex": 0,
+      "explanation": "Feedback stories should show humility and behavior change. Defensiveness, dismissal, or avoidance are negative Googleyness signals."
+    },
+    {
+      "id": "C3-010",
+      "module": "C3",
+      "difficulty": "foundational",
+      "tags": ["timing", "two-minute-discipline"],
+      "source": "Google interview prep",
+      "question": "Why do coaches recommend keeping initial STAR answers to roughly two minutes?",
+      "options": [
+        "It leaves time for follow-up questions where interviewers probe depth, judgment, and authenticity",
+        "Google interviews have a strict two-minute timer that cuts off all answers",
+        "Interviewers cannot listen longer than two minutes for medical reasons",
+        "Shorter answers always score higher regardless of content"
+      ],
+      "correctIndex": 0,
+      "explanation": "Concise initial answers respect interview time and invite follow-ups—these probes often reveal more than a ten-minute monologue. Depth emerges in dialogue, not filibustering."
+    },
+    {
+      "id": "C3-011",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["behavioral-categories", "conflict"],
+      "source": "Leadership / STAR prep",
+      "question": "A conflict story for 'How would you handle a disagreement with a teammate about technical direction?' should NOT:",
+      "options": [
+        "Frame the teammate as incompetent or malicious without evidence of your attempts to understand their view",
+        "Show that you listened and used data or principles to reach a decision",
+        "Demonstrate disagree-and-commit if someone else's approach was chosen",
+        "Include the project context so stakes are clear"
+      ],
+      "correctIndex": 0,
+      "explanation": "Conflict answers should show professionalism and empathy. Villain narratives and personal attacks are red flags; focus on process, evidence, and commitment to team outcomes."
+    },
+    {
+      "id": "C3-012",
+      "module": "C3",
+      "difficulty": "deep-dive",
+      "tags": ["story-bank", "mapping", "initiative"],
+      "source": "Google behavioral prep",
+      "question": "You have one strong story about automating a toil-heavy on-call task. Which additional questions can it likely cover with reframing?",
+      "options": [
+        "Initiative, impact/delivering results, ambiguity (scoping the problem), and possibly failure (if the first automation attempt had issues)",
+        "Only questions about your favorite Google product",
+        "Only questions about childhood education",
+        "No other questions—it can answer exactly one prompt ever"
+      ],
+      "correctIndex": 0,
+      "explanation": "Versatile stories span multiple dimensions. A toil-reduction story can demonstrate initiative, measurable impact, scoping under ambiguity, and learning from a failed first attempt—classic story-bank efficiency."
+    },
+    {
+      "id": "C3-013",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["experience-vs-process", "question-types"],
+      "source": "Leadership video 2Cr3-et4xkI",
+      "question": "'How do you prioritize when everything is urgent?' is best treated as:",
+      "options": [
+        "A process/judgment question—describe your framework, optionally illustrated with a brief example",
+        "An experience question that requires a story starting with 'Situation: Everything was urgent…' and nothing else",
+        "A question you should redirect to system design instead",
+        "A question where listing buzzwords without structure is sufficient"
+      ],
+      "correctIndex": 0,
+      "explanation": "Hypothetical prioritization questions test your decision-making approach. A clear framework (impact, urgency, stakeholders, risk) with optional proof from experience is the strongest pattern."
+    },
+    {
+      "id": "C3-014",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["star-l", "failure", "learnings"],
+      "source": "STAR-L guidance",
+      "question": "In a STAR-L failure answer, which Learning statement is strongest?",
+      "options": [
+        "I now run pre-mortems before risky rollouts and require automated rollback checks—after a bad deploy taught me gaps in our process",
+        "I learned that failure happens and moved on without changing anything",
+        "I learned my teammates cannot be trusted",
+        "I learned interviews want failure stories so I always pick one"
+      ],
+      "correctIndex": 0,
+      "explanation": "Learnings must be specific and tied to behavior or process changes you actually adopted. Generic platitudes or blaming others fail the growth test."
+    },
+    {
+      "id": "C3-015",
+      "module": "C3",
+      "difficulty": "deep-dive",
+      "tags": ["behavioral-categories", "impact", "ambiguity"],
+      "source": "Google leadership prep",
+      "question": "An interviewer asks a compound question: 'Tell me about a time you had to deliver results despite ambiguous requirements.' The best approach is:",
+      "options": [
+        "Choose a story hitting both ambiguity (unclear requirements) and results (measurable outcome), structured in STAR-L with emphasis on how you drove clarity and delivery",
+        "Answer only the ambiguity half and ignore results because compound questions are optional",
+        "Answer only the results half because ambiguity does not matter",
+        "Ask to skip the question because it covers two topics"
+      ],
+      "correctIndex": 0,
+      "explanation": "Compound prompts are common—pick a story that genuinely addresses all parts. Multi-dimensional story-bank entries let you cover ambiguity plus results without forcing a poor fit."
+    }
+  ]
+}

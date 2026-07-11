@@ -1,0 +1,244 @@
+{
+  "questions": [
+    {
+      "id": "C4-001",
+      "module": "C4",
+      "difficulty": "foundational",
+      "tags": ["sre-behavioral", "incident-command", "mitigation-first"],
+      "source": "SRE book / Effective Troubleshooting",
+      "question": "During a major production incident, Google's SRE culture emphasizes mitigation-first response. What does that mean in practice?",
+      "options": [
+        "Restore user-visible service quickly—even via temporary fixes—then investigate root cause after impact is contained",
+        "Complete a full root-cause analysis before making any production changes",
+        "Wait for the executive on-call to approve every kubectl command",
+        "Focus on identifying which engineer to blame so the same mistake is not repeated"
+      ],
+      "correctIndex": 0,
+      "explanation": "Mitigation-first means stopping user pain as the priority: roll back, drain traffic, fail over—then diagnose. Root-cause work follows stabilization, aligning with Google's incident response norms."
+    },
+    {
+      "id": "C4-002",
+      "module": "C4",
+      "difficulty": "interview",
+      "tags": ["sre-behavioral", "incident-command", "communication"],
+      "source": "SRE book / incident management practices",
+      "question": "You are incident commander for a Sev-1 outage. Which behavior best demonstrates strong incident leadership?",
+      "options": [
+        "Maintain a clear status channel, assign owners for mitigation vs investigation, and provide regular updates to stakeholders",
+        "Personally debug every subsystem simultaneously without coordinating others",
+        "Keep all information in a private chat until the incident is fully resolved",
+        "Cancel the incident bridge once you have a theory, even before verifying recovery"
+      ],
+      "correctIndex": 0,
+      "explanation": "Incident command is about coordination, communication, and clear roles—not solo heroics. Structured updates and parallel workstreams are core SRE behavioral signals."
+    },
+    {
+      "id": "C4-003",
+      "module": "C4",
+      "difficulty": "foundational",
+      "tags": ["sre-behavioral", "blameless-postmortem"],
+      "source": "SRE book Introduction",
+      "question": "What is the primary goal of a blameless postmortem in Google SRE culture?",
+      "options": [
+        "Understand systemic causes and improve reliability—not assign personal blame for honest mistakes",
+        "Create a permanent record of which engineer caused the outage for performance reviews",
+        "Eliminate all future incidents by firing responsible parties",
+        "Replace the need for monitoring because postmortems document everything"
+      ],
+      "correctIndex": 0,
+      "explanation": "Blameless postmortems focus on learning and systemic fixes—guardrails, automation, better tests—because punishing individuals hides failures and reduces reporting."
+    },
+    {
+      "id": "C4-004",
+      "module": "C4",
+      "difficulty": "interview",
+      "tags": ["sre-behavioral", "postmortem", "action-items"],
+      "source": "SRE book / workbook",
+      "question": "In a postmortem interview story, which element strongest demonstrates SRE maturity?",
+      "options": [
+        "You drove actionable follow-ups (automation, alerts, runbooks) with owners and tracked them to completion",
+        "You wrote a detailed timeline but no action items because the outage was rare",
+        "You concluded human error was the root cause and stopped the analysis there",
+        "You skipped the postmortem because the service recovered quickly"
+      ],
+      "correctIndex": 0,
+      "explanation": "Strong SRE stories show postmortems producing durable improvements—error budgets, automation, design changes—not stopping at 'human error' or treating recovery as sufficient."
+    },
+    {
+      "id": "C4-005",
+      "module": "C4",
+      "difficulty": "interview",
+      "tags": ["sre-behavioral", "on-call", "ownership"],
+      "source": "SRE book / hiring SRE USENIX",
+      "question": "Which on-call story best fits Google's SRE behavioral expectations?",
+      "options": [
+        "You reduced alert noise by fixing flaky monitors, documented triage steps, and improved handoff notes for the next rotation",
+        "You ignored pages outside business hours because they were not in your job description",
+        "You disabled alerts that fired too often without fixing underlying issues",
+        "You escalated every page immediately without attempting triage"
+      ],
+      "correctIndex": 0,
+      "explanation": "On-call ownership includes sustainable operations—meaningful alerts, runbooks, and handoffs—not alert suppression or refusing responsibility during rotations."
+    },
+    {
+      "id": "C4-006",
+      "module": "C4",
+      "difficulty": "interview",
+      "tags": ["sre-behavioral", "error-budget", "feature-velocity"],
+      "source": "SRE book Introduction / error budgets",
+      "question": "A product team wants to launch a risky feature while your service's error budget is nearly exhausted. How should an SRE frame the conversation?",
+      "options": [
+        "Share SLO/error budget data, explain reliability risk to users, and collaborate on launch guards, canarying, or deferral",
+        "Block all launches indefinitely without discussion because SRE always says no",
+        "Approve silently to preserve team relationships even if users will be impacted",
+        "Launch anyway and fix reliability issues only if executives complain"
+      ],
+      "correctIndex": 0,
+      "explanation": "Error budgets exist to balance velocity and reliability with data-driven conversation. SRE influence comes from shared metrics and collaborative risk management—not reflexive blocking or silent approval."
+    },
+    {
+      "id": "C4-007",
+      "module": "C4",
+      "difficulty": "foundational",
+      "tags": ["sre-behavioral", "error-budget", "slo"],
+      "source": "SRE book",
+      "question": "When pushing back on feature velocity using error budgets, the most persuasive argument is:",
+      "options": [
+        "User-facing SLO breaches and remaining budget directly tie unreliability to business and user impact",
+        "SRE personal preference for slower releases",
+        "A generic claim that all change is bad",
+        "Fear that any launch will cause you more on-call pages"
+      ],
+      "correctIndex": 0,
+      "explanation": "Error budget discussions should be objective—SLOs, burn rate, user impact—not personal convenience. This is how SREs influence product teams without authority."
+    },
+    {
+      "id": "C4-008",
+      "module": "C4",
+      "difficulty": "interview",
+      "tags": ["sre-behavioral", "cross-team", "slo-adoption"],
+      "source": "SRE workbook / NALSD culture",
+      "question": "A development team resists adopting SLOs, calling them bureaucratic. What cross-team influence approach is strongest?",
+      "options": [
+        "Start with their pain points (alert fatigue, unclear priorities), show how SLOs reduce thrash, and pilot on one service with their input",
+        "Mandate SLOs top-down without explanation or pilot",
+        "Abandon SLO advocacy because resistance means they are a bad team",
+        "Publicly criticize the team in a large email thread"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE cross-team influence works through empathy, small pilots, and demonstrating value—not mandates or public shaming. Meet teams where their problems are."
+    },
+    {
+      "id": "C4-009",
+      "module": "C4",
+      "difficulty": "interview",
+      "tags": ["sre-behavioral", "toil", "automation"],
+      "source": "SRE book / USENIX hiring SRE",
+      "question": "Which story best demonstrates classic Google SRE impact beyond firefighting?",
+      "options": [
+        "You identified repetitive manual work, automated it, and freed N hours per week while improving consistency",
+        "You heroically stayed up 72 hours manually restarting servers every week",
+        "You added more people to on-call instead of fixing recurring toil",
+        "You documented manual steps in a wiki but made no engineering improvements"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE value includes eliminating toil through engineering—automation, self-healing, better tooling—not celebrating manual labor or scaling humans to match repetitive work."
+    },
+    {
+      "id": "C4-010",
+      "module": "C4",
+      "difficulty": "foundational",
+      "tags": ["sre-behavioral", "why-google", "motivation"],
+      "source": "Google SRE interview prep",
+      "question": "A strong 'Why Google?' answer for an SRE candidate should emphasize:",
+      "options": [
+        "Specific alignment with Google's scale, SRE principles (SLOs, automation, blameless culture), and problems you want to work on—not generic prestige alone",
+        "Primarily stock compensation and free food",
+        "That Google is an easy place to work with no challenging problems",
+        "That you want any job at a FAANG company and Google was first to respond"
+      ],
+      "correctIndex": 0,
+      "explanation": "Motivation answers should connect your values and skills to Google's SRE mission and scale. Generic prestige or benefits-only answers signal weak preparation and fit."
+    },
+    {
+      "id": "C4-011",
+      "module": "C4",
+      "difficulty": "interview",
+      "tags": ["sre-behavioral", "why-sre", "career-fit"],
+      "source": "SRE book / hiring guidance",
+      "question": "When asked 'Why SRE instead of pure software engineering?', a compelling answer includes:",
+      "options": [
+        "You enjoy balancing reliability and feature work, operating production systems, and using software to solve ops problems at scale",
+        "You could not pass coding interviews so SRE is easier",
+        "SRE means you never have to write code",
+        "You prefer on-call pages to all other forms of engineering work"
+      ],
+      "correctIndex": 0,
+      "explanation": "Why SRE should reflect genuine fit: production ownership, automation mindset, and comfort with reliability trade-offs—not misconceptions that SRE avoids coding or is a fallback role."
+    },
+    {
+      "id": "C4-012",
+      "module": "C4",
+      "difficulty": "interview",
+      "tags": ["sre-behavioral", "global-teams", "diversity"],
+      "source": "Google careers / SRE culture",
+      "question": "You join a globally distributed SRE rotation spanning US and EU teams. Which behavior best demonstrates readiness?",
+      "options": [
+        "You improve handoff docs, overlap hours thoughtfully, and ensure incident context transfers across time zones",
+        "You insist all incidents wait until your local morning regardless of user impact",
+        "You avoid working with remote offices because communication is too hard",
+        "You take all Sev-1 pages yourself so EU teammates never learn the system"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google SRE operates globally. Strong candidates show follow-the-sun collaboration, documentation, and fair handoffs—not timezone chauvinism or knowledge hoarding."
+    },
+    {
+      "id": "C4-013",
+      "module": "C4",
+      "difficulty": "deep-dive",
+      "tags": ["sre-behavioral", "mitigation-first", "root-cause"],
+      "source": "Effective Troubleshooting / SRE book",
+      "question": "After mitigating an incident, an interviewer asks when you would pursue root-cause analysis versus closing the incident. The best answer reflects:",
+      "options": [
+        "Root-cause work proceeds once users are safe, often in parallel with monitoring; closure requires confidence in mitigation plus a plan for durable fixes",
+        "Root cause must wait weeks until all feature launches finish",
+        "Incidents close immediately after mitigation with no follow-up ever",
+        "Root cause means finding one engineer to retrain"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE incident practice separates stabilization from diagnosis. Post-incident, blameless RCA and action items prevent recurrence—without delaying mitigation during the outage."
+    },
+    {
+      "id": "C4-014",
+      "module": "C4",
+      "difficulty": "interview",
+      "tags": ["sre-behavioral", "capacity", "proactive"],
+      "source": "SRE book Introduction",
+      "question": "Which proactive reliability story aligns well with Google SRE behavioral interviews?",
+      "options": [
+        "You forecast capacity needs from traffic growth, prevented an outage by scaling ahead of a launch, and documented the planning process",
+        "You waited for an outage before buying any additional capacity",
+        "You disabled autoscaling to reduce cloud costs without analyzing SLO impact",
+        "You told product to stop all launches permanently to avoid capacity work"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE includes proactive capacity and planning—not only reactive firefighting. Stories showing prediction, prevention, and structured planning demonstrate role fit."
+    },
+    {
+      "id": "C4-015",
+      "module": "C4",
+      "difficulty": "deep-dive",
+      "tags": ["sre-behavioral", "error-budget", "leadership"],
+      "source": "SRE book / workbook",
+      "question": "Your team's error budget policy says launches pause when budget is exhausted, but a PM argues an exception for a major marketing event. The strongest SRE leadership response is:",
+      "options": [
+        "Quantify risk, explore mitigations (canary, feature flags, extra staffing), document any accepted risk with stakeholders, and define explicit rollback triggers",
+        "Ignore the policy because marketing revenue always overrides reliability",
+        "Refuse to engage in discussion—policy is absolute with no exceptions ever",
+        "Agree verbally to launch with no documentation so SRE is not liable"
+      ],
+      "correctIndex": 0,
+      "explanation": "Error budgets enable informed trade-offs, not mindless gates. SRE leadership means transparent risk discussion, mitigations, and documented decisions—especially for high-visibility events."
+    }
+  ]
+}

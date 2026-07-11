@@ -1,0 +1,292 @@
+{
+  "questions": [
+    {
+      "id": "B4-001",
+      "module": "B4",
+      "difficulty": "foundational",
+      "tags": ["CAP", "partition-tolerance", "distributed-systems"],
+      "source": "AOSA distsys",
+      "question": "In the CAP theorem framing used in distributed systems interviews, why is partition tolerance (P) treated as non-negotiable at scale?",
+      "options": [
+        "Network partitions will happen in real deployments, so the design must continue operating despite split connectivity",
+        "Partition tolerance means all nodes share one physical rack",
+        "P requires sacrificing availability in every normal operating mode",
+        "P only applies to single-datacenter LANs, not the public Internet"
+      ],
+      "correctIndex": 0,
+      "explanation": "At scale, networks fail partially; systems must handle partitions. The practical trade-off is between consistency (C) and availability (A) while partitioned—not whether partitions occur."
+    },
+    {
+      "id": "B4-002",
+      "module": "B4",
+      "difficulty": "interview",
+      "tags": ["CAP", "consistency", "availability"],
+      "source": "AOSA distsys",
+      "question": "During a network partition, a system that rejects writes on minority partitions to prevent divergence prioritizes:",
+      "options": [
+        "Consistency over availability for those partitions",
+        "Availability over consistency for all clients globally",
+        "Durability over latency only, with no consistency implications",
+        "Manageability over cost exclusively"
+      ],
+      "correctIndex": 0,
+      "explanation": "Choosing not to serve ambiguous writes during a split favors consistency (avoiding conflicting states) at the cost of availability on unreachable segments—classic CP behavior."
+    },
+    {
+      "id": "B4-003",
+      "module": "B4",
+      "difficulty": "interview",
+      "tags": ["consistent-hashing", "partitioning", "DHT"],
+      "source": "AOSA distsys",
+      "question": "Consistent hashing is preferred over naive modulo hashing (key % N) when scaling a cluster because:",
+      "options": [
+        "Adding or removing nodes remaps only a fraction of keys instead of nearly all keys",
+        "It guarantees strong consistency on every read",
+        "It eliminates the need for replication entirely",
+        "It forces all keys into alphabetical order on one server"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA uses consistent hashing for caches and shards: modulo redistribution reshuffles most keys when N changes; consistent hashing bounds remapping—foundational to DHT-style lookup."
+    },
+    {
+      "id": "B4-004",
+      "module": "B4",
+      "difficulty": "deep-dive",
+      "tags": ["DHT", "decentralized", "lookup"],
+      "source": "AOSA distsys",
+      "question": "A Distributed Hash Table (DHT) at the architectural level provides:",
+      "options": [
+        "Decentralized key-to-node lookup so clients can find which peer stores a key without a central directory",
+        "A single SQL primary that stores all metadata",
+        "Lossless compression of multi-terabyte logs",
+        "Automatic strong serializability for financial transactions"
+      ],
+      "correctIndex": 0,
+      "explanation": "DHTs combine consistent hashing with peer routing so responsibility for keys is distributed; lookups traverse O(log N) hops rather than one global catalog."
+    },
+    {
+      "id": "B4-005",
+      "module": "B4",
+      "difficulty": "foundational",
+      "tags": ["replication", "leader-follower", "writes"],
+      "source": "AOSA distsys",
+      "question": "In leader-follower (primary-replica) replication, writes typically:",
+      "options": [
+        "Go to the leader, which replicates to followers for read scaling and failover",
+        "Are applied independently on every replica with no coordination",
+        "Are forbidden; only reads are allowed",
+        "Must be routed through a CDN edge cache"
+      ],
+      "correctIndex": 0,
+      "explanation": "Leader-follower centralizes writes on one node (ordering, conflict avoidance) while followers serve reads or standby for promotion—common in databases and log pipelines."
+    },
+    {
+      "id": "B4-006",
+      "module": "B4",
+      "difficulty": "interview",
+      "tags": ["replication", "multi-leader", "conflicts"],
+      "source": "AOSA distsys",
+      "question": "Multi-leader (multi-primary) replication is often chosen for multi-datacenter writes but introduces:",
+      "options": [
+        "Write conflicts that require detection and resolution across leaders",
+        "Impossibility of any reads from followers",
+        "Mandatory synchronous cross-region quorum on every SELECT",
+        "Elimination of network partitions by design"
+      ],
+      "correctIndex": 0,
+      "explanation": "Multiple writable leaders reduce cross-region write latency but concurrent updates to the same record can conflict—needing LWW, versioning, or application merge rules."
+    },
+    {
+      "id": "B4-007",
+      "module": "B4",
+      "difficulty": "deep-dive",
+      "tags": ["replication", "leaderless", "quorum"],
+      "source": "AOSA distsys",
+      "question": "In leaderless replication (e.g., Dynamo-style), a read quorum of R and write quorum of W over N replicas can provide strong-ish behavior when:",
+      "options": [
+        "R + W > N so reads and writes overlap on enough replicas",
+        "R = 1 and W = 1 regardless of N",
+        "N = 1 and replicas are disabled",
+        "All reads bypass replicas and hit object storage only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Quorum intersection (R + W > N) increases chance reads see latest write; tunable R/W trades latency, availability, and staleness."
+    },
+    {
+      "id": "B4-008",
+      "module": "B4",
+      "difficulty": "interview",
+      "tags": ["partitioning", "hash", "hot-partitions"],
+      "source": "AOSA distsys",
+      "question": "Hash partitioning by user_id spreads load evenly when access is uniform but can still create hot partitions when:",
+      "options": [
+        "A few keys receive disproportionate traffic (celebrity users, viral content)",
+        "All keys are UUIDs with no semantic meaning",
+        "Replicas outnumber primaries",
+        "The hash function uses consistent hashing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Hashing balances skewed key distributions in expectation, not in every workload—extreme popularity concentrates load on one partition regardless of hash quality."
+    },
+    {
+      "id": "B4-009",
+      "module": "B4",
+      "difficulty": "interview",
+      "tags": ["partitioning", "range", "hot-partitions"],
+      "source": "AOSA distsys",
+      "question": "Range partitioning (e.g., by timestamp or key range) simplifies range queries but often causes hot partitions because:",
+      "options": [
+        "Recent or 'latest' keys cluster on the tail partition receiving most writes/reads",
+        "Range partitions cannot be replicated",
+        "Hash functions are illegal with sorted keys",
+        "Load balancers cannot route to range shards"
+      ],
+      "correctIndex": 0,
+      "explanation": "Time-series and 'newest first' access patterns hammer the high-end range shard—motivating sub-splitting, salting, or hybrid partitioning strategies."
+    },
+    {
+      "id": "B4-010",
+      "module": "B4",
+      "difficulty": "interview",
+      "tags": ["hot-partitions", "mitigation", "partitioning"],
+      "source": "AOSA distsys",
+      "question": "Which mitigation best addresses a hot partition caused by one extremely popular entity?",
+      "options": [
+        "Split or replicate that key's traffic across multiple shards (e.g., salted sub-keys)",
+        "Disable caching for that key only",
+        "Move all partitions to a single larger machine",
+        "Switch from replication to batch MapReduce for all reads"
+      ],
+      "correctIndex": 0,
+      "explanation": "When hashing isn't enough, architects fan out hot keys (replica reads, sub-shards, dedicated cache tier) so one partition isn't the sole bottleneck."
+    },
+    {
+      "id": "B4-011",
+      "module": "B4",
+      "difficulty": "interview",
+      "tags": ["eventual-consistency", "user-experience"],
+      "source": "AOSA distsys",
+      "question": "Eventual consistency is often acceptable for social media 'like' counts but problematic for bank balances because:",
+      "options": [
+        "Users notice incorrect financial balances immediately; stale likes are tolerable briefly",
+        "Likes require synchronous disk fsync on every continent",
+        "Bank balances are always served from CDN edge caches",
+        "Eventual consistency only applies to message queues, not databases"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA notes writes may propagate slowly (eventual consistency); product requirements dictate tolerance—financial correctness needs stronger guarantees than approximate counters."
+    },
+    {
+      "id": "B4-012",
+      "module": "B4",
+      "difficulty": "foundational",
+      "tags": ["strong-consistency", "latency", "coordination"],
+      "source": "AOSA distsys",
+      "question": "Strong consistency across replicas typically costs more latency because:",
+      "options": [
+        "Reads or writes must coordinate with multiple nodes (quorum/leader acknowledgment) before replying",
+        "Strong consistency disables all indexes",
+        "Clients must poll a message queue for every read",
+        "Data must be stored only on spinning disks"
+      ],
+      "correctIndex": 0,
+      "explanation": "Linearizable or serializable behavior requires synchronization—extra RTTs, leader election, or quorum—trading speed for a single coherent view."
+    },
+    {
+      "id": "B4-013",
+      "module": "B4",
+      "difficulty": "interview",
+      "tags": ["idempotency", "retries", "at-least-once"],
+      "source": "AOSA distsys",
+      "question": "Idempotent operations are critical in distributed systems with retries because:",
+      "options": [
+        "Duplicate delivery of the same request does not change state beyond the first successful application",
+        "They guarantee zero network partitions",
+        "They remove the need for any persistent storage",
+        "They force exactly-once delivery at the transport layer"
+      ],
+      "correctIndex": 0,
+      "explanation": "At-least-once delivery plus timeouts means clients retry; idempotent handlers (or dedup keys) prevent double-charging, double-insert, or duplicate side effects."
+    },
+    {
+      "id": "B4-014",
+      "module": "B4",
+      "difficulty": "deep-dive",
+      "tags": ["delivery-semantics", "exactly-once", "idempotency"],
+      "source": "AOSA distsys",
+      "question": "Exactly-once processing semantics in practice are usually achieved by combining:",
+      "options": [
+        "At-least-once delivery plus idempotent consumers and deduplication or transactional offsets",
+        "UDP without acknowledgments",
+        "A single global mutex for all microservices",
+        "Disabling all client retries and timeouts"
+      ],
+      "correctIndex": 0,
+      "explanation": "True exactly-once end-to-end is hard; systems approximate it with durable logs, idempotent writes, and dedup—conceptual interview answer, not magic network guarantees."
+    },
+    {
+      "id": "B4-015",
+      "module": "B4",
+      "difficulty": "foundational",
+      "tags": ["MapReduce", "batch-processing", "architecture"],
+      "source": "AOSA distsys",
+      "question": "In the MapReduce pattern, the map phase at the architectural level:",
+      "options": [
+        "Processes input records in parallel on workers, emitting intermediate key-value pairs",
+        "Combines all reducer outputs into the final dashboard UI",
+        "Joins click and query logs in real time with sub-second latency",
+        "Elects a single leader for all database writes"
+      ],
+      "correctIndex": 0,
+      "explanation": "Map workers apply a function per record in parallel; output is shuffled/sorted by key before reducers aggregate—batch-oriented horizontal scale (NALSD AdWords iteration)."
+    },
+    {
+      "id": "B4-016",
+      "module": "B4",
+      "difficulty": "interview",
+      "tags": ["MapReduce", "shuffle", "data-locality"],
+      "source": "AOSA distsys",
+      "question": "The shuffle phase between map and reduce exists primarily to:",
+      "options": [
+        "Group all intermediate values by key so each reducer receives the complete set for its keys",
+        "Encrypt data at rest on HDFS",
+        "Replace the need for consistent hashing in caches",
+        "Serve interactive OLTP queries under 10 ms"
+      ],
+      "correctIndex": 0,
+      "explanation": "Shuffle transfers and sorts mapper output by key—often the expensive network step—so reducers can compute aggregates (counts, sums, joins) per key."
+    },
+    {
+      "id": "B4-017",
+      "module": "B4",
+      "difficulty": "deep-dive",
+      "tags": ["MapReduce", "streaming", "limitations"],
+      "source": "AOSA distsys",
+      "question": "NALSD rejects small-batch MapReduce for AdWords CTR freshness because:",
+      "options": [
+        "Non-overlapping batches can place a query in one batch and its click in another, preventing joins",
+        "MapReduce cannot run on more than one machine",
+        "MapReduce always provides sub-second dashboard latency",
+        "Click logs cannot be stored on disk"
+      ],
+      "correctIndex": 0,
+      "explanation": "MapReduce excels at large self-contained batches; arbitrary log-arrival ordering breaks join correctness when batches are tiny and non-overlapping—motivating streaming LogJoiner design."
+    },
+    {
+      "id": "B4-018",
+      "module": "B4",
+      "difficulty": "interview",
+      "tags": ["graphs", "distributed-traversal", "architecture"],
+      "source": "AOSA distsys",
+      "question": "At the architectural level, breadth-first graph traversal on a partitioned graph most often:",
+      "options": [
+        "Passes messages between workers holding adjacent partitions each superstep/layer",
+        "Loads the entire graph into one machine's L1 cache",
+        "Uses only a CDN without an origin store",
+        "Requires O(1) storage regardless of edge count"
+      ],
+      "correctIndex": 0,
+      "explanation": "Distributed BFS (Pregel/Giraph-style thinking): each round exchanges frontier vertices across partition boundaries—communication per layer dominates, matching email graph pipeline topics."
+    }
+  ]
+}

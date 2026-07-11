@@ -1,0 +1,164 @@
+{
+  "questions": [
+    {
+      "id": "D2-001",
+      "module": "D2",
+      "difficulty": "interview",
+      "tags": ["flaws", "spof", "availability"],
+      "source": "AOSA distsys / failure modes",
+      "question": "Architecture: A single load balancer terminates TLS and forwards to 50 stateless app servers. All app servers connect to one primary MySQL instance (no replicas). What is the most critical flaw?",
+      "options": [
+        "The database is a single point of failure—its outage takes down the entire service despite scaled app tier",
+        "Stateless app servers cannot handle HTTP requests",
+        "TLS termination on a load balancer is always invalid",
+        "Fifty app servers is too many for any workload"
+      ],
+      "correctIndex": 0,
+      "explanation": "Scaling the app tier does not help if all state lives in one DB with no failover. The SPOF dominates availability. LB TLS termination and server count are distractors."
+    },
+    {
+      "id": "D2-002",
+      "module": "D2",
+      "difficulty": "interview",
+      "tags": ["flaws", "bottleneck", "hot-partition"],
+      "source": "AOSA / sharding patterns",
+      "question": "Architecture: A social feed service shards posts by user_id across 100 databases. Celebrity users with millions of followers have all fan-out reads hitting their home shard. What flaw will appear first at scale?",
+      "options": [
+        "Hot partition / skewed shard bottleneck on high-follower users despite uniform sharding by user_id",
+        "Too many databases—100 shards is always excessive",
+        "Sharding by user_id prevents any reads from working",
+        "Fan-out reads cannot exist in social networks"
+      ],
+      "correctIndex": 0,
+      "explanation": "Uniform hash/user sharding does not solve hot keys. Celebrity traffic concentrates on one shard, causing latency spikes—a classic bottleneck distractors ignore."
+    },
+    {
+      "id": "D2-003",
+      "module": "D2",
+      "difficulty": "interview",
+      "tags": ["flaws", "consistency", "cache"],
+      "source": "AOSA cache patterns / DDIA concepts",
+      "question": "Architecture: Writes update the database synchronously but cache invalidation is async via a queue with multi-second lag. Reads always go to cache first. What user-visible bug is most likely?",
+      "options": [
+        "Stale reads—clients see outdated data for seconds after a successful write",
+        "Lost writes because caches cannot store strings",
+        "Duplicate primary keys in the database",
+        "TLS handshake failures between cache and clients"
+      ],
+      "correctIndex": 0,
+      "explanation": "Read-through cache with delayed invalidation creates a consistency window where users read old values after updates. This is a classic cache coherency flaw."
+    },
+    {
+      "id": "D2-004",
+      "module": "D2",
+      "difficulty": "foundational",
+      "tags": ["flaws", "observability", "monitoring"],
+      "source": "Effective Troubleshooting / email rubric",
+      "question": "Architecture: A payment pipeline with 12 microservices, each logging locally to disk. No centralized metrics, tracing, or SLO dashboards. On-call relies on customer complaints. What critical flaw is missing?",
+      "options": [
+        "Observability—you cannot detect degradation or localize failures before users report them",
+        "Too many microservices—12 is always wrong",
+        "Local disk logs are illegal in distributed systems",
+        "Payments cannot be implemented with microservices"
+      ],
+      "correctIndex": 0,
+      "explanation": "Without metrics, tracing, or alerting, operators lack detection—violating Google's 'how do we know the system is working' criterion. Service count alone is not inherently fatal."
+    },
+    {
+      "id": "D2-005",
+      "module": "D2",
+      "difficulty": "interview",
+      "tags": ["flaws", "spof", "dns"],
+      "source": "AOSA / robustness",
+      "question": "Architecture: Global service uses one DNS A record pointing to a single anycast IP in one region. No health checks or failover DNS. The region suffers a network partition. What happens?",
+      "options": [
+        "Total outage for users worldwide until manual DNS change—regional SPOF at the routing layer",
+        "Automatic failover to other regions because anycast always heals partitions",
+        "Only users in that region are affected; DNS geo-routes automatically without configuration",
+        "Clients retry until the partition heals with no user impact"
+      ],
+      "correctIndex": 0,
+      "explanation": "Single-region DNS with no failover creates a global SPOF. Anycast does not magically solve partition without multi-region deployment and health-checked routing."
+    },
+    {
+      "id": "D2-006",
+      "module": "D2",
+      "difficulty": "interview",
+      "tags": ["flaws", "bottleneck", "sync-processing"],
+      "source": "NALSD / scalable patterns",
+      "question": "Architecture: Video uploads go to API servers that synchronously transcode 4K video before returning HTTP 200. Average transcode takes 8 minutes. Traffic is growing 10×. What bottleneck breaks first?",
+      "options": [
+        "Synchronous long-running work ties up API workers and destroys throughput/latency under load",
+        "HTTP cannot transfer video files",
+        "4K transcoding is impossible on servers",
+        "Growing traffic automatically speeds up transcoding"
+      ],
+      "correctIndex": 0,
+      "explanation": "Blocking API threads on minutes-long work creates a severe bottleneck. The fix is async job queues and polling/webhooks—not faster CPUs alone."
+    },
+    {
+      "id": "D2-007",
+      "module": "D2",
+      "difficulty": "deep-dive",
+      "tags": ["flaws", "consistency", "leader-election"],
+      "source": "Distributed systems fundamentals",
+      "question": "Architecture: Two datacenters each run a cron job nightly to aggregate billing. Both read the same DB and write totals without coordination or idempotency keys. Clock skew can cause both to run 'simultaneously.' What bug appears?",
+      "options": [
+        "Double-counting or conflicting writes—lack of distributed coordination/idempotency causes inconsistent aggregates",
+        "Billing systems cannot use cron jobs",
+        "Clock skew prevents databases from starting",
+        "Aggregates become more accurate when duplicated"
+      ],
+      "correctIndex": 0,
+      "explanation": "Uncoordinated duplicate workers produce consistency bugs (double processing). Needs leader election, distributed locks, or idempotent write semantics."
+    },
+    {
+      "id": "D2-008",
+      "module": "D2",
+      "difficulty": "interview",
+      "tags": ["flaws", "bottleneck", "database"],
+      "source": "AOSA / resource estimation",
+      "question": "Architecture: A read-heavy product catalog serves 500K QPS from a single PostgreSQL primary with no read replicas and no cache. All queries are simple primary-key lookups. What fails first?",
+      "options": [
+        "The database becomes the throughput bottleneck—500K QPS exceeds practical single-node read capacity",
+        "Primary-key lookups are illegal in PostgreSQL",
+        "Read-heavy workloads require graph databases only",
+        "500K QPS is trivial for any laptop running Postgres"
+      ],
+      "correctIndex": 0,
+      "explanation": "Even simple queries at hundreds of thousands of QPS overwhelm one DB node. Caching and read replicas address read scaling—a missing layer here."
+    },
+    {
+      "id": "D2-009",
+      "module": "D2",
+      "difficulty": "foundational",
+      "tags": ["flaws", "observability", "backpressure"],
+      "source": "Effective Troubleshooting / SRE practices",
+      "question": "Architecture: An event bus ingests spikes to 1M events/sec. Consumers lag silently with no queue depth metrics, consumer lag alerts, or dead-letter queues. Producers have unlimited retry with no backoff. What combined flaw is most dangerous?",
+      "options": [
+        "Missing observability plus retry storms—operators cannot see backlog growth and retries amplify overload",
+        "Event buses cannot handle more than 1000 events/sec by definition",
+        "Dead-letter queues are only for email systems",
+        "Producers should never retry failed sends"
+      ],
+      "correctIndex": 0,
+      "explanation": "Invisible consumer lag plus aggressive retries creates cascading failure (retry storm). Observability (lag metrics, DLQ) and backpressure are essential—not optional polish."
+    },
+    {
+      "id": "D2-010",
+      "module": "D2",
+      "difficulty": "interview",
+      "tags": ["flaws", "consistency", "replication"],
+      "source": "AOSA / replication lag",
+      "question": "Architecture: User profile updates write to the primary DB in us-east. Reads immediately after write go to async replicas in us-west with up to 30s replication lag. The app routes reads to nearest replica for latency. What user-visible flaw occurs?",
+      "options": [
+        "Read-your-writes violation—users in us-west may not see their update for up to 30 seconds",
+        "Async replication is impossible across regions",
+        "Nearest-replica routing always guarantees strong consistency",
+        "Profile updates cannot be stored in relational databases"
+      ],
+      "correctIndex": 0,
+      "explanation": "Geo-routed reads from lagging async replicas break read-your-writes consistency after updates. Fixes include sticky routing to primary post-write or synchronous/quorum reads for recent writes."
+    }
+  ]
+}

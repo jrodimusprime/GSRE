@@ -1,0 +1,180 @@
+{
+  "questions": [
+    {
+      "id": "B2-001",
+      "module": "B2",
+      "difficulty": "interview",
+      "tags": ["clarification", "underspecified", "requirements"],
+      "source": "recruiter-email-rubric",
+      "question": "An interviewer says: 'Design a notification system for our product.' Before drawing any boxes, which question is MOST valuable to ask?",
+      "options": [
+        "What are the expected scale, latency targets, and delivery guarantees (at-least-once vs exactly-once)?",
+        "Which programming language should the notification worker use internally?",
+        "Should we use a red or blue color scheme in the admin dashboard?",
+        "What is the Big-O complexity of sorting user IDs alphabetically?"
+      ],
+      "correctIndex": 0,
+      "explanation": "The email rubric prioritizes clarifying underspecified problems—especially scale, latency, and reliability constraints—before architecture. Language choice, UI colors, and micro-algorithm trivia do not unblock a meaningful v1 design."
+    },
+    {
+      "id": "B2-002",
+      "module": "B2",
+      "difficulty": "interview",
+      "tags": ["functional-requirements", "non-functional", "requirements"],
+      "source": "NALSD",
+      "question": "A candidate lists: 'Users must receive email within 5 seconds; system must support 10M daily active users; admins can configure templates.' Which classification is CORRECT?",
+      "options": [
+        "The 5-second delivery and 10M DAU are non-functional; template configuration is functional",
+        "All three are functional requirements because they mention user-facing features",
+        "All three are non-functional because they involve numbers",
+        "Template configuration is non-functional; latency and scale are functional"
+      ],
+      "correctIndex": 0,
+      "explanation": "NALSD and standard requirements engineering distinguish functional requirements (what the system does—configure templates) from non-functional requirements (quality attributes—latency, scale, availability). Numeric values do not automatically make a requirement non-functional; the nature of the constraint does."
+    },
+    {
+      "id": "B2-003",
+      "module": "B2",
+      "difficulty": "interview",
+      "tags": ["clarification", "read-write-ratio", "scale"],
+      "source": "recruiter-email-rubric",
+      "question": "When clarifying requirements for a read-heavy social feed, which follow-up question most directly informs your storage and caching strategy?",
+      "options": [
+        "What is the read-to-write ratio, and how fresh must feed items appear to users?",
+        "Which sorting algorithm will the mobile client use for local bookmarks?",
+        "Should engineers use tabs or spaces in the codebase?",
+        "What font size should the feed use on tablet devices?"
+      ],
+      "correctIndex": 0,
+      "explanation": "Read/write ratio and freshness (consistency/latency) directly drive caching, replication, and CDN decisions. The email rubric and AOSA both emphasize probing access patterns and consistency needs before committing to architecture."
+    },
+    {
+      "id": "B2-004",
+      "module": "B2",
+      "difficulty": "interview",
+      "tags": ["decomposition", "SOA", "services"],
+      "source": "AOSA",
+      "question": "You are decomposing a monolithic e-commerce site into services. According to SOA principles in scalable web architecture literature, what is the BEST initial split criterion?",
+      "options": [
+        "Separate bounded contexts with distinct scaling profiles and failure domains (e.g., catalog, cart, payments)",
+        "Create one microservice per database table regardless of access patterns",
+        "Split purely by programming language so each team uses a different stack",
+        "Avoid any decomposition until the monolith exceeds 1 million lines of code"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA and NALSD advocate decomposing by bounded context, scaling needs, and failure isolation—not arbitrary table-per-service splits or language politics. Waiting for an arbitrary LOC threshold delays addressing real operational boundaries."
+    },
+    {
+      "id": "B2-005",
+      "module": "B2",
+      "difficulty": "interview",
+      "tags": ["MVP", "scope", "v1-design"],
+      "source": "NALSD",
+      "question": "An interviewer asks you to design a global metrics pipeline. For a credible v1 within time limits, which scoping decision is MOST appropriate?",
+      "options": [
+        "Define an MVP that ingests, stores, and queries recent metrics with stated retention and query latency, deferring ML anomaly detection",
+        "Insist on implementing full real-time ML-based anomaly detection before any ingestion path exists",
+        "Refuse to proceed until the interviewer specifies every dashboard widget pixel-by-pixel",
+        "Design only the logo and branding for the metrics UI"
+      ],
+      "correctIndex": 0,
+      "explanation": "NALSD's requirements phase emphasizes negotiating scope and delivering a feasible v1—core ingest, store, and query—with advanced features deferred. All-or-nothing scope or UI trivia avoid the architectural exercise."
+    },
+    {
+      "id": "B2-006",
+      "module": "B2",
+      "difficulty": "interview",
+      "tags": ["constraints", "geography", "compliance"],
+      "source": "recruiter-email-rubric",
+      "question": "A prompt says: 'Design data storage for a health-records product.' Which clarifying question addresses a constraint that could fundamentally change your architecture?",
+      "options": [
+        "Are there geographic residency or compliance requirements (e.g., HIPAA, GDPR) for where data may be stored and processed?",
+        "What IDE theme does the team prefer for internal tools?",
+        "Should the API return JSON or XML for all endpoints regardless of use case?",
+        "How many spaces wide should code indentation be in the repository?"
+      ],
+      "correctIndex": 0,
+      "explanation": "Geographic and compliance constraints can mandate regional sharding, encryption, and audit architectures. The email rubric lists constraints as a first-class clarification topic; formatting preferences do not change system topology."
+    },
+    {
+      "id": "B2-007",
+      "module": "B2",
+      "difficulty": "interview",
+      "tags": ["decomposition", "read-write-split", "CQRS"],
+      "source": "AOSA",
+      "question": "A system has a write-heavy ingestion path and a read-heavy analytics path with very different latency requirements. What decomposition approach is MOST justified?",
+      "options": [
+        "Separate the write (ingest) path from the read (query/analytics) path, potentially with async propagation between them",
+        "Force all reads and writes through a single synchronous SQL transaction for simplicity",
+        "Merge both paths into one service because microservices are always worse",
+        "Eliminate the read path entirely and require users to replay raw logs locally"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA discusses read/write asymmetry and when to split paths—often via async pipelines or CQRS-like patterns—when access patterns and latency goals diverge. A single synchronous path or eliminating reads ignores the stated asymmetry."
+    },
+    {
+      "id": "B2-008",
+      "module": "B2",
+      "difficulty": "interview",
+      "tags": ["API-contract", "interfaces", "decomposition"],
+      "source": "recruiter-email-rubric",
+      "question": "After decomposing a system into components, what should you define BEFORE deep-diving into internal storage choices for each service?",
+      "options": [
+        "The API contracts and data passed between components, including key request/response fields and error semantics",
+        "The exact CPU model and rack layout for every data center worldwide",
+        "The hiring plan for three additional backend teams next quarter",
+        "The font family used in internal runbooks"
+      ],
+      "correctIndex": 0,
+      "explanation": "The email rubric highlights interfaces and APIs as central to the Systems Architecture round. Defining component contracts first enables parallel deep-dives and mirrors how Google expects candidates to decompose before optimizing internals."
+    },
+    {
+      "id": "B2-009",
+      "module": "B2",
+      "difficulty": "interview",
+      "tags": ["functional-requirements", "feature-set", "scope"],
+      "source": "recruiter-email-rubric",
+      "question": "The interviewer lists possible features: real-time sync, offline mode, full-text search, and admin audit logs. You have 40 minutes remaining. What is the BEST requirements-clarification move?",
+      "options": [
+        "Ask which features are must-haves for v1 versus nice-to-haves, and confirm priority order with the interviewer",
+        "Commit to implementing all four at full planet scale without asking questions",
+        "Decline to design anything until every feature is fully specified in a 50-page PRD",
+        "Ignore the feature list and design only the CI/CD pipeline"
+      ],
+      "correctIndex": 0,
+      "explanation": "The email rubric and NALSD both emphasize scope negotiation—identifying MVP feature sets before architecture. Blind commitment or refusing to proceed without exhaustive docs wastes the collaborative clarification phase."
+    },
+    {
+      "id": "B2-010",
+      "module": "B2",
+      "difficulty": "interview",
+      "tags": ["failure-tolerance", "non-functional", "clarification"],
+      "source": "NALSD",
+      "question": "When designing a distributed storage system, which non-functional clarification MOST affects your replication and consistency choices?",
+      "options": [
+        "What availability and durability targets apply during regional failures, and can the system tolerate stale reads?",
+        "What variable names should engineers use in the codebase?",
+        "Whether the team prefers morning or afternoon standups",
+        "The exact hex color of the status page during incidents"
+      ],
+      "correctIndex": 0,
+      "explanation": "NALSD's requirements phase treats failure tolerance, durability, and consistency (stale reads vs strong consistency) as foundational non-functional inputs that drive replication topology. Team rituals and cosmetic choices do not."
+    },
+    {
+      "id": "B2-011",
+      "module": "B2",
+      "difficulty": "interview",
+      "tags": ["decomposition", "resource-requirements", "NALSD"],
+      "source": "NALSD",
+      "question": "During the decomposition phase, NALSD recommends estimating resource requirements per component. What is the PRIMARY purpose of this step?",
+      "options": [
+        "To validate whether the proposed architecture is feasible at the stated scale before investing in resilience details",
+        "To calculate the exact salary budget for engineers on each team",
+        "To determine which open-source license the project should use",
+        "To replace all communication with the interviewer with silent calculation"
+      ],
+      "correctIndex": 0,
+      "explanation": "NALSD's workflow moves from 'is it possible?' to 'is it feasible?' by attaching rough resource estimates (QPS, storage, bandwidth) to each component. This grounds decomposition in reality—not HR budgeting, licensing, or silent work."
+    }
+  ]
+}

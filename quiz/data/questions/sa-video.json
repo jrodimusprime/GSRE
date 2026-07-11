@@ -1,0 +1,1002 @@
+{
+  "questions": [
+    {
+      "id": "SA-V0-001",
+      "module": "SA-VIDEO",
+      "segment": "SA-V0",
+      "difficulty": "interview",
+      "tags": [
+        "interview-format",
+        "no-coding"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "0:00",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=0",
+      "question": "According to Google's official Systems Architecture prep video, what should you NOT expect during this interview round?",
+      "options": [
+        "Writing and debugging production code on a laptop",
+        "Discussing how components communicate via APIs",
+        "Sketching diagrams on a whiteboard",
+        "Estimating throughput and storage requirements"
+      ],
+      "correctIndex": 0,
+      "explanation": "The video opens by stating there is no coding in the Systems Architecture interview. Candidates may discuss APIs, draw diagrams, and provide quantitative estimates\u2014but not implement code.",
+      "moduleTags": [
+        "B1"
+      ]
+    },
+    {
+      "id": "SA-V0-002",
+      "module": "SA-VIDEO",
+      "segment": "SA-V0",
+      "difficulty": "interview",
+      "tags": [
+        "time-box",
+        "requirements",
+        "v1-design"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "0:10",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=10",
+      "question": "Google recommends spending approximately how much of the Systems Architecture interview on gathering requirements and presenting an initial solution?",
+      "options": [
+        "About 20 minutes",
+        "About 5 minutes",
+        "About 45 minutes",
+        "The entire hour before any architecture discussion"
+      ],
+      "correctIndex": 0,
+      "explanation": "The official video notes significant time limits and advises using roughly the first 20 minutes to clarify requirements and present an initial high-level solution before iterating deeper.",
+      "moduleTags": [
+        "B1"
+      ]
+    },
+    {
+      "id": "SA-V0-003",
+      "module": "SA-VIDEO",
+      "segment": "SA-V0",
+      "difficulty": "interview",
+      "tags": [
+        "time-box",
+        "interview-format"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "0:20",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=20",
+      "question": "Why does the Systems Architecture prep video emphasize that time limits are 'significant'?",
+      "options": [
+        "Interviewers want to see how you prioritize, scope an MVP, and communicate under realistic constraints",
+        "Candidates who finish early automatically receive a higher level offer",
+        "Google does not allow follow-up questions once the timer starts",
+        "Time limits exist solely to prevent candidates from using the whiteboard"
+      ],
+      "correctIndex": 0,
+      "explanation": "The video stresses significant time limits because the round evaluates prioritization, scoping, and communication\u2014not exhaustive perfection. It is not about finishing early or banning clarification.",
+      "moduleTags": [
+        "B1"
+      ]
+    },
+    {
+      "id": "SA-V0-004",
+      "module": "SA-VIDEO",
+      "segment": "SA-V0",
+      "difficulty": "interview",
+      "tags": [
+        "whiteboard",
+        "estimation",
+        "diagrams"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "0:30",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=30",
+      "question": "For quantitative estimates and architecture diagrams in the Systems Architecture interview, Google expects you to use:",
+      "options": [
+        "A whiteboard (or paper) rather than relying on an IDE",
+        "A personal laptop with your preferred IDE and debugger",
+        "Only verbal description with no visual aids permitted",
+        "Pre-printed reference architecture posters brought by the candidate"
+      ],
+      "correctIndex": 0,
+      "explanation": "The SA-V0 segment describes using the whiteboard for estimates and diagrams. The round is not an IDE coding session, and visual communication on the whiteboard is expected\u2014not prohibited or replaced by memorized posters.",
+      "moduleTags": [
+        "B1"
+      ]
+    },
+    {
+      "id": "SA-V1-001",
+      "module": "SA-VIDEO",
+      "segment": "SA-V1",
+      "difficulty": "interview",
+      "tags": [
+        "communication",
+        "think-aloud"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "0:38",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=38",
+      "question": "The official prep video advises candidates to 'think out loud' during the Systems Architecture interview. What does this primarily help interviewers assess?",
+      "options": [
+        "Your reasoning process and how you approach ambiguous problems collaboratively",
+        "Your ability to recite memorized system design answers without pause",
+        "Your typing speed when implementing services on a laptop",
+        "Your knowledge of Google-internal codenames for infrastructure projects"
+      ],
+      "correctIndex": 0,
+      "explanation": "The SA-V1 segment states that interviewers evaluate communication and process\u2014not just the final diagram. Thinking aloud reveals reasoning, not memorization, typing speed, or internal trivia.",
+      "moduleTags": [
+        "B1"
+      ]
+    },
+    {
+      "id": "SA-V1-002",
+      "module": "SA-VIDEO",
+      "segment": "SA-V1",
+      "difficulty": "interview",
+      "tags": [
+        "communication",
+        "evaluation",
+        "process"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "0:50",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=50",
+      "question": "Google interviewers in the Systems Architecture round care about your process in addition to your final answer because:",
+      "options": [
+        "Real design work is iterative and collaborative; they need to see how you think, not just what you draw last",
+        "The final diagram is never reviewed\u2014only the number of boxes drawn matters",
+        "Process is scored only if you use a specific Google-approved template",
+        "They have no time to look at diagrams, so only spoken words count"
+      ],
+      "correctIndex": 0,
+      "explanation": "The video explicitly says process matters, not just the final answer. Interviewers simulate collaborative design work where reasoning and iteration are as important as the endpoint.",
+      "moduleTags": [
+        "B1"
+      ]
+    },
+    {
+      "id": "SA-V1-003",
+      "module": "SA-VIDEO",
+      "segment": "SA-V1",
+      "difficulty": "interview",
+      "tags": [
+        "underspecified",
+        "clarification"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "1:00",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=60",
+      "question": "Systems Architecture problems at Google are deliberately underspecified. What is the intended purpose of this?",
+      "options": [
+        "To test whether you ask clarifying questions and define scope before committing to architecture",
+        "To trick candidates into choosing the wrong database so interviewers can end the loop early",
+        "To ensure every candidate produces an identical canonical diagram",
+        "To avoid any discussion of scale or reliability requirements"
+      ],
+      "correctIndex": 0,
+      "explanation": "The video states problems are deliberately underspecified so interviewers can observe whether candidates clarify requirements\u2014a core communication skill\u2014not to trap them or force identical answers.",
+      "moduleTags": [
+        "B2"
+      ]
+    },
+    {
+      "id": "SA-V1-004",
+      "module": "SA-VIDEO",
+      "segment": "SA-V1",
+      "difficulty": "interview",
+      "tags": [
+        "clarification",
+        "requirements"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "1:10",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=70",
+      "question": "When faced with an underspecified design prompt, what does Google's prep video recommend as a strong first move?",
+      "options": [
+        "Ask clarifying questions about scale, constraints, and use cases before drawing architecture",
+        "Immediately present a detailed sharding scheme without confirming requirements",
+        "Wait silently until the interviewer fills in every detail without prompting",
+        "Decline to answer until given a complete 100-page specification document"
+      ],
+      "correctIndex": 0,
+      "explanation": "The SA-V1 segment highlights asking clarifying questions as essential. Jumping to architecture, staying silent, or refusing to engage miss the collaborative clarification phase the interview is designed to test.",
+      "moduleTags": [
+        "B2"
+      ]
+    },
+    {
+      "id": "SA-V1-005",
+      "module": "SA-VIDEO",
+      "segment": "SA-V1",
+      "difficulty": "interview",
+      "tags": [
+        "multiple-solutions",
+        "trade-offs"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "1:20",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=80",
+      "question": "The official video notes there are often multiple valid solutions to a Systems Architecture problem. What does this imply for candidates?",
+      "options": [
+        "You should explain trade-offs among reasonable approaches rather than hunting for one secretly 'correct' design",
+        "You will be penalized unless your diagram matches the interviewer's preferred solution exactly",
+        "You must enumerate every possible architecture before choosing one at random",
+        "Only designs used in production at Google are considered valid"
+      ],
+      "correctIndex": 0,
+      "explanation": "Multiple valid solutions means interviewers evaluate trade-off reasoning and coherence\u2014not whether you guessed a single right answer or copied an internal Google system.",
+      "moduleTags": [
+        "B2"
+      ]
+    },
+    {
+      "id": "SA-V1-006",
+      "module": "SA-VIDEO",
+      "segment": "SA-V1",
+      "difficulty": "interview",
+      "tags": [
+        "collaborative",
+        "communication"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "1:28",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=88",
+      "question": "The Systems Architecture interview is described as collaborative problem-solving. Which behavior best reflects this?",
+      "options": [
+        "Engaging the interviewer in a dialogue\u2014confirming assumptions, responding to hints, and refining the design together",
+        "Treating the session as a solo performance with no interaction until the final 5 minutes",
+        "Asking the interviewer to write the entire design while you observe silently",
+        "Insisting your first answer is perfect and refusing to incorporate feedback"
+      ],
+      "correctIndex": 0,
+      "explanation": "Collaborative problem-solving means dialogue throughout\u2014clarifying, iterating, and responding to the interviewer\u2014not monologue, delegation, or rigid adherence to a first draft.",
+      "moduleTags": [
+        "B2"
+      ]
+    },
+    {
+      "id": "SA-V2-001",
+      "module": "SA-VIDEO",
+      "segment": "SA-V2",
+      "difficulty": "interview",
+      "tags": [
+        "planet-scale",
+        "global-users"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "1:31",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=91",
+      "question": "When Google asks you to design a system for 'planet-scale' or 'global users,' they are primarily testing whether you can:",
+      "options": [
+        "Reason about worldwide distribution, capacity, and cross-region constraints\u2014not just a single-datacenter deployment",
+        "Optimize a single-server deployment for minimum memory usage only",
+        "Design exclusively for localhost development environments",
+        "Ignore latency because the internet is uniformly fast everywhere"
+      ],
+      "correctIndex": 0,
+      "explanation": "The SA-V2 segment introduces planet-scale and global users as core evaluation themes\u2014requiring geographic distribution, capacity planning, and latency awareness beyond single-machine thinking.",
+      "moduleTags": []
+    },
+    {
+      "id": "SA-V2-002",
+      "module": "SA-VIDEO",
+      "segment": "SA-V2",
+      "difficulty": "interview",
+      "tags": [
+        "reliability",
+        "efficiency",
+        "scale"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "1:42",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=102",
+      "question": "At scale, Google expects your design to address both reliability and efficient use of resources. Which approach best satisfies both goals?",
+      "options": [
+        "Eliminate single points of failure while right-sizing components and avoiding over-provisioning without redundancy",
+        "Maximize redundancy by replicating every byte of data on every machine with no regard for cost",
+        "Minimize cost by running everything on a single server with no backups",
+        "Prioritize resource efficiency by disabling all monitoring and health checks"
+      ],
+      "correctIndex": 0,
+      "explanation": "The video pairs reliability with efficient resource use\u2014redundancy and fault tolerance without wasteful over-engineering. Extreme redundancy without cost awareness or eliminating redundancy/monitoring fail both goals.",
+      "moduleTags": []
+    },
+    {
+      "id": "SA-V2-003",
+      "module": "SA-VIDEO",
+      "segment": "SA-V2",
+      "difficulty": "interview",
+      "tags": [
+        "observability",
+        "health-checks"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "1:52",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=112",
+      "question": "The prep video states you should be able to explain how you would know if your system is working. This most directly relates to:",
+      "options": [
+        "Monitoring, health checks, metrics, and alerting to detect degradation or failures",
+        "Assuming the system works unless a user sends a complaint email",
+        "Checking only at deployment time and never again during operation",
+        "Relying on interviewers to monitor your design after the session ends"
+      ],
+      "correctIndex": 0,
+      "explanation": "Knowing whether a system works requires observability\u2014metrics, health checks, and alerting. The video treats operability at scale as part of the design exercise, not post-hoc user complaints.",
+      "moduleTags": []
+    },
+    {
+      "id": "SA-V2-004",
+      "module": "SA-VIDEO",
+      "segment": "SA-V2",
+      "difficulty": "interview",
+      "tags": [
+        "bottlenecks",
+        "performance"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "2:02",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=122",
+      "question": "Identifying bottlenecks is a key skill tested in the Systems Architecture interview. Which question best demonstrates bottleneck analysis?",
+      "options": [
+        "At 1M requests/sec, will the database connection pool, network bandwidth, or single hot partition limit throughput first?",
+        "Which color should the load balancer icon be on the whiteboard?",
+        "What is the interviewer's favorite sorting algorithm for linked lists?",
+        "How many whiteboard markers are available in the room?"
+      ],
+      "correctIndex": 0,
+      "explanation": "The SA-V2 segment calls out identifying bottlenecks\u2014connecting load to limiting components like connection pools, network, or hot partitions. Cosmetic, trivia, or logistical questions do not demonstrate this skill.",
+      "moduleTags": []
+    },
+    {
+      "id": "SA-V2-005",
+      "module": "SA-VIDEO",
+      "segment": "SA-V2",
+      "difficulty": "interview",
+      "tags": [
+        "APIs",
+        "interfaces",
+        "decomposition"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "2:12",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=132",
+      "question": "Google expects candidates to define APIs between components in a scaled design. Why are explicit APIs important?",
+      "options": [
+        "They establish clear contracts for data flow, enable independent scaling, and make failure domains explicit",
+        "They replace the need for any discussion of storage or replication",
+        "They are required only for REST but never for internal RPC or message queues",
+        "They exist solely to increase the number of boxes on the whiteboard"
+      ],
+      "correctIndex": 0,
+      "explanation": "The video mentions APIs between components as a scaling primitive\u2014defining contracts and boundaries. APIs complement (not replace) storage design and apply beyond any single protocol style.",
+      "moduleTags": []
+    },
+    {
+      "id": "SA-V2-006",
+      "module": "SA-VIDEO",
+      "segment": "SA-V2",
+      "difficulty": "interview",
+      "tags": [
+        "sharding",
+        "partitioning",
+        "workers"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "2:22",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=142",
+      "question": "When a dataset is too large for a single machine, the official video suggests sharding it across worker machines. What problem does sharding primarily solve?",
+      "options": [
+        "Storage and compute capacity limits by partitioning data so each worker handles a subset",
+        "Syntax errors in the candidate's pseudocode",
+        "The need to eliminate all network communication between machines",
+        "Compliance with a requirement to use exactly one physical server"
+      ],
+      "correctIndex": 0,
+      "explanation": "Sharding/partitioning distributes a large dataset across workers to overcome single-machine storage and throughput limits. It does not eliminate networking or mandate a single server.",
+      "moduleTags": []
+    },
+    {
+      "id": "SA-V2-007",
+      "module": "SA-VIDEO",
+      "segment": "SA-V2",
+      "difficulty": "interview",
+      "tags": [
+        "worker-pools",
+        "parallelism",
+        "fastest-worker"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "2:32",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=152",
+      "question": "The video mentions patterns like a pool of machines where the fastest worker handles the next task. This pattern primarily improves:",
+      "options": [
+        "Throughput and latency for parallelizable work by utilizing multiple workers dynamically",
+        "Strong consistency by forcing all writes through a single global lock forever",
+        "Data durability by storing everything only in browser localStorage",
+        "Security by removing the need for authentication entirely"
+      ],
+      "correctIndex": 0,
+      "explanation": "Worker pools and fastest-worker patterns distribute parallelizable tasks across machines to improve throughput and reduce tail latency. They are not about global locks, client-only storage, or skipping auth.",
+      "moduleTags": []
+    },
+    {
+      "id": "SA-V2-008",
+      "module": "SA-VIDEO",
+      "segment": "SA-V2",
+      "difficulty": "interview",
+      "tags": [
+        "latency",
+        "performance"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "2:38",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=158",
+      "question": "When discussing system properties at scale, latency refers to:",
+      "options": [
+        "The time delay experienced for an individual operation or request to complete",
+        "The total number of machines in the data center regardless of response time",
+        "The annual cost of cloud storage contracts",
+        "The number of engineers assigned to the project"
+      ],
+      "correctIndex": 0,
+      "explanation": "The SA-V2 segment lists latency alongside throughput and storage as key properties. Latency is per-operation delay\u2014not machine count, cost, or team size.",
+      "moduleTags": []
+    },
+    {
+      "id": "SA-V2-009",
+      "module": "SA-VIDEO",
+      "segment": "SA-V2",
+      "difficulty": "interview",
+      "tags": [
+        "throughput",
+        "performance"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "2:43",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=163",
+      "question": "Throughput in a scaled system design context measures:",
+      "options": [
+        "How many operations or requests the system can handle per unit of time",
+        "The physical weight of server racks in the data center",
+        "The number of whiteboard diagrams drawn per interview",
+        "The chronological age of the oldest database replica"
+      ],
+      "correctIndex": 0,
+      "explanation": "Throughput is the rate of work processed (e.g., requests per second)\u2014one of the three properties (latency, throughput, storage) the video asks candidates to reason about quantitatively.",
+      "moduleTags": []
+    },
+    {
+      "id": "SA-V2-010",
+      "module": "SA-VIDEO",
+      "segment": "SA-V2",
+      "difficulty": "interview",
+      "tags": [
+        "storage",
+        "capacity"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "2:48",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=168",
+      "question": "When Google asks about storage properties of your design, they expect you to address:",
+      "options": [
+        "How much data accumulates over time, retention policies, and whether storage growth is sustainable at scale",
+        "Only the in-memory cache size with no consideration of persistent data",
+        "The storage requirements of the interviewer's laptop exclusively",
+        "Storage only if the product is a file system\u2014never for databases or logs"
+      ],
+      "correctIndex": 0,
+      "explanation": "Storage properties include growth rate, retention, and capacity planning at scale. Nearly every scaled system (logs, databases, media) has storage implications\u2014not just file systems or caches alone.",
+      "moduleTags": []
+    },
+    {
+      "id": "SA-V3-001",
+      "module": "SA-VIDEO",
+      "segment": "SA-V3",
+      "difficulty": "interview",
+      "tags": [
+        "estimation",
+        "quantitative",
+        "QPS"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "2:49",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=169",
+      "question": "The prep video emphasizes providing numeric estimates (e.g., requests per second) with justification. Why is justification important?",
+      "options": [
+        "It shows you can connect assumptions to reality and sanity-check whether the design is feasible",
+        "It allows you to skip discussing trade-offs entirely",
+        "It proves you memorized exact Google production traffic numbers",
+        "It replaces the need to discuss failure modes or replication"
+      ],
+      "correctIndex": 0,
+      "explanation": "The SA-V3 segment wants concrete, justified estimates grounded in assumptions\u2014not memorized internal stats. Estimation supports feasibility analysis and complements (not replaces) trade-offs and failure discussion.",
+      "moduleTags": [
+        "B5"
+      ]
+    },
+    {
+      "id": "SA-V3-002",
+      "module": "SA-VIDEO",
+      "segment": "SA-V3",
+      "difficulty": "interview",
+      "tags": [
+        "physics",
+        "reality",
+        "constraints"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "2:58",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=178",
+      "question": "Google expects Systems Architecture answers to respect the 'laws of physics' or physical reality. Which claim violates this principle?",
+      "options": [
+        "A design that serves 1 billion users globally with 1 ms read latency from a single disk in one datacenter for all users",
+        "A design that uses regional caches to reduce average read latency for geographically distributed users",
+        "A design that acknowledges cross-continent RTT as a lower bound on synchronous global operations",
+        "A design that shards data to parallelize I/O across many machines"
+      ],
+      "correctIndex": 0,
+      "explanation": "Physical reality includes speed-of-light latency limits and I/O bounds. Serving global users with 1 ms reads from one disk ignores geography and hardware limits; the other options acknowledge real constraints.",
+      "moduleTags": [
+        "B5"
+      ]
+    },
+    {
+      "id": "SA-V3-003",
+      "module": "SA-VIDEO",
+      "segment": "SA-V3",
+      "difficulty": "interview",
+      "tags": [
+        "latency-hierarchy",
+        "disk",
+        "memory"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "3:08",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=188",
+      "question": "According to the official video, which ordering correctly ranks typical access latency from FASTEST to SLOWEST?",
+      "options": [
+        "Memory read \u2192 Disk read \u2192 LAN round-trip \u2192 Cross-continental round-trip",
+        "Cross-continental round-trip \u2192 Memory read \u2192 Disk read \u2192 LAN round-trip",
+        "Disk read \u2192 Memory read \u2192 Cross-continental round-trip \u2192 LAN round-trip",
+        "LAN round-trip \u2192 Cross-continental round-trip \u2192 Memory read \u2192 Disk read"
+      ],
+      "correctIndex": 0,
+      "explanation": "The SA-V3 segment presents a relative cost/latency hierarchy: memory reads are fastest, then disk, then LAN RTT, then cross-continental RTT. This underpins napkin-math and caching decisions.",
+      "moduleTags": [
+        "B5"
+      ]
+    },
+    {
+      "id": "SA-V3-004",
+      "module": "SA-VIDEO",
+      "segment": "SA-V3",
+      "difficulty": "interview",
+      "tags": [
+        "latency-hierarchy",
+        "network",
+        "RTT"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "3:15",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=195",
+      "question": "Why does the prep video distinguish LAN round-trip time from cross-continental round-trip time?",
+      "options": [
+        "Geographic distance and network hops make cross-continent RTT orders of magnitude larger, affecting synchronous global designs",
+        "They are identical in latency so the distinction is purely cosmetic",
+        "LAN RTT is always slower than disk reads for every workload",
+        "Cross-continent RTT applies only to wireless Bluetooth connections"
+      ],
+      "correctIndex": 0,
+      "explanation": "The video explicitly contrasts LAN vs cross-continental RTT because global synchronous operations hit speed-of-light and routing delays\u2014often dominating latency budgets compared to local network hops.",
+      "moduleTags": [
+        "B5"
+      ]
+    },
+    {
+      "id": "SA-V3-005",
+      "module": "SA-VIDEO",
+      "segment": "SA-V3",
+      "difficulty": "interview",
+      "tags": [
+        "sharding",
+        "patterns",
+        "partitioning"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "3:22",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=202",
+      "question": "Sharding is listed in the video as an industry pattern Google expects you to know. In an interview, demonstrating sharding knowledge means you can explain:",
+      "options": [
+        "How to partition data by a key so each shard holds a disjoint subset and scales independently",
+        "How to store all data in a single process heap without any boundaries",
+        "How to encrypt passwords using bcrypt exclusively",
+        "How to reverse a linked list in O(n) time"
+      ],
+      "correctIndex": 0,
+      "explanation": "Sharding is a partitioning strategy for scale\u2014disjoint subsets by key. Password hashing and linked-list algorithms are coding interview topics, not the sharding pattern the Systems Architecture video references.",
+      "moduleTags": [
+        "B5"
+      ]
+    },
+    {
+      "id": "SA-V3-006",
+      "module": "SA-VIDEO",
+      "segment": "SA-V3",
+      "difficulty": "interview",
+      "tags": [
+        "replication",
+        "availability",
+        "consistency"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "3:28",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=208",
+      "question": "The video mentions replication types as patterns you should understand. Why might you choose asynchronous replication over synchronous replication?",
+      "options": [
+        "To reduce write latency and tolerate temporary lag between replicas, accepting possible stale reads",
+        "To guarantee zero data loss in all failure scenarios with no latency penalty",
+        "To eliminate the need for any copies of data entirely",
+        "To ensure every read always reflects the latest write globally with no coordination cost"
+      ],
+      "correctIndex": 0,
+      "explanation": "Async replication trades stronger immediate consistency for lower write latency and higher availability under partition\u2014interviewers expect you to articulate this trade-off. The other options misstate replication properties.",
+      "moduleTags": [
+        "B5"
+      ]
+    },
+    {
+      "id": "SA-V3-007",
+      "module": "SA-VIDEO",
+      "segment": "SA-V3",
+      "difficulty": "interview",
+      "tags": [
+        "WAL",
+        "durability",
+        "logging"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "3:32",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=212",
+      "question": "Write-ahead logging (WAL) is cited as a pattern Google expects you to know. What problem does WAL primarily address?",
+      "options": [
+        "Durability: ensuring committed writes survive process crashes by persisting changes to log before applying them",
+        "UI responsiveness: rendering web pages faster in the browser",
+        "Load balancing: distributing HTTP requests across servers",
+        "Compression: reducing image file sizes in a CDN"
+      ],
+      "correctIndex": 0,
+      "explanation": "WAL ensures durability by logging changes before applying them to storage so crashes can recover committed data. It is a storage durability pattern\u2014not UI, LB, or CDN optimization.",
+      "moduleTags": [
+        "B5"
+      ]
+    },
+    {
+      "id": "SA-V3-008",
+      "module": "SA-VIDEO",
+      "segment": "SA-V3",
+      "difficulty": "interview",
+      "tags": [
+        "metadata",
+        "load-distribution",
+        "data-separation"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "3:36",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=216",
+      "question": "Separating data from metadata and distributing load are patterns mentioned in the video. What is a typical benefit of separating metadata from bulk data?",
+      "options": [
+        "Metadata (indexes, routing tables) can be replicated and queried quickly while bulk data is stored cheaply at larger scale",
+        "It eliminates all need for replication or caching anywhere in the system",
+        "It forces all users to download the entire dataset on every request",
+        "It prevents you from sharding because metadata and data must always live on one machine"
+      ],
+      "correctIndex": 0,
+      "explanation": "Separating metadata from bulk data allows fast routing/index lookups on small, replicated metadata while storing large payloads efficiently\u2014a common large-system pattern the video highlights alongside load distribution.",
+      "moduleTags": [
+        "B5"
+      ]
+    },
+    {
+      "id": "SA-V4-001",
+      "module": "SA-VIDEO",
+      "segment": "SA-V4",
+      "difficulty": "interview",
+      "tags": [
+        "shortcomings",
+        "critical-analysis"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "3:38",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=218",
+      "question": "The SA-V4 segment asks candidates to identify systematic shortcomings in their designs. Which response best demonstrates this skill?",
+      "options": [
+        "Acknowledging that a single-region design cannot survive regional outages and proposing multi-region failover",
+        "Claiming the design has no weaknesses because any critique means the interviewer is wrong",
+        "Refusing to discuss weaknesses until after receiving an offer",
+        "Listing only cosmetic UI issues while ignoring data loss and availability risks"
+      ],
+      "correctIndex": 0,
+      "explanation": "Identifying systematic shortcomings means honestly analyzing failure modes and limits\u2014e.g., single-region vulnerability\u2014not denying flaws or focusing on trivia.",
+      "moduleTags": [
+        "B6"
+      ]
+    },
+    {
+      "id": "SA-V4-002",
+      "module": "SA-VIDEO",
+      "segment": "SA-V4",
+      "difficulty": "interview",
+      "tags": [
+        "failure-response",
+        "resilience"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "3:48",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=228",
+      "question": "When interviewers ask how your system responds to failures, they expect you to describe:",
+      "options": [
+        "Detection (monitoring/alerts), mitigation (retries, failover, degradation), and recovery procedures",
+        "Only happy-path behavior under zero load conditions",
+        "How to blame individual engineers in postmortems as a first step",
+        "Failure response is out of scope for Systems Architecture interviews"
+      ],
+      "correctIndex": 0,
+      "explanation": "The video explicitly covers failure response\u2014detecting problems and designing mitigation/recovery. Happy-path-only answers or claiming failure is out of scope miss a core evaluation criterion.",
+      "moduleTags": [
+        "B6"
+      ]
+    },
+    {
+      "id": "SA-V4-003",
+      "module": "SA-VIDEO",
+      "segment": "SA-V4",
+      "difficulty": "interview",
+      "tags": [
+        "trade-offs",
+        "disk",
+        "flash"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "3:55",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=235",
+      "question": "The video gives rotating disk vs flash as an example trade-off. Choosing rotating disk over flash primarily trades:",
+      "options": [
+        "Lower storage cost for higher latency and slower random I/O",
+        "Higher storage cost for lower latency in all access patterns",
+        "Better durability for worse durability",
+        "Elimination of all replication needs for mandatory synchronous global writes"
+      ],
+      "correctIndex": 0,
+      "explanation": "The SA-V4 example: disk offers cheaper storage at the cost of higher latency compared to flash/SSD. The other options invert or confuse the trade-off.",
+      "moduleTags": [
+        "B6",
+        "B7"
+      ]
+    },
+    {
+      "id": "SA-V4-004",
+      "module": "SA-VIDEO",
+      "segment": "SA-V4",
+      "difficulty": "interview",
+      "tags": [
+        "trade-offs",
+        "explicit-reasoning"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "4:02",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=242",
+      "question": "Google interviewers want trade-offs laid out explicitly. Which statement BEST demonstrates explicit trade-off reasoning?",
+      "options": [
+        "We choose async replication because it lowers write latency, accepting that readers may briefly see stale data",
+        "We choose async replication because it is always superior to every alternative in every scenario",
+        "We choose async replication because the interviewer mentioned the word 'database'",
+        "We choose async replication with no explanation because trade-offs are irrelevant"
+      ],
+      "correctIndex": 0,
+      "explanation": "Explicit trade-offs name both the benefit and the cost. Claiming universal superiority, random choice, or ignoring trade-offs fails the SA-V4 communication standard.",
+      "moduleTags": [
+        "B6",
+        "B7"
+      ]
+    },
+    {
+      "id": "SA-V4-005",
+      "module": "SA-VIDEO",
+      "segment": "SA-V4",
+      "difficulty": "interview",
+      "tags": [
+        "alternatives",
+        "commitment",
+        "iteration"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "4:08",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=248",
+      "question": "The video advises considering multiple solutions, then committing to one and iterating. What is the purpose of the 'commit' step?",
+      "options": [
+        "To drive the conversation forward with a concrete design the interviewer can probe, rather than endlessly listing options",
+        "To lock in the first idea permanently with no changes allowed afterward",
+        "To avoid any discussion of alternatives because they waste time",
+        "To copy the interviewer's solution verbatim without understanding it"
+      ],
+      "correctIndex": 0,
+      "explanation": "Considering alternatives then committing means making a reasoned choice to deepen the design\u2014not rigid permanence, avoiding alternatives entirely, or uncritical copying.",
+      "moduleTags": [
+        "B6",
+        "B7"
+      ]
+    },
+    {
+      "id": "SA-V4-006",
+      "module": "SA-VIDEO",
+      "segment": "SA-V4",
+      "difficulty": "interview",
+      "tags": [
+        "iteration",
+        "refinement"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "4:14",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=254",
+      "question": "After committing to an initial design, the SA-V4 segment expects you to iterate. A strong iteration might include:",
+      "options": [
+        "Adding replication or caching after the interviewer introduces a new failure or scale constraint",
+        "Erasing the whiteboard and restarting with an unrelated coding problem",
+        "Refusing to change anything because iteration shows weakness",
+        "Switching topics to leadership behavioral questions mid-design"
+      ],
+      "correctIndex": 0,
+      "explanation": "Iteration means refining the design when probed with new constraints\u2014adding redundancy, caching, etc. Refusing to adapt or changing interview rounds misses the iterative design process.",
+      "moduleTags": [
+        "B6",
+        "B7"
+      ]
+    },
+    {
+      "id": "SA-V5-001",
+      "module": "SA-VIDEO",
+      "segment": "SA-V5",
+      "difficulty": "interview",
+      "tags": [
+        "thought-process",
+        "communication"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "4:18",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=258",
+      "question": "The best-practices segment emphasizes explaining your thought process. This is important because interviewers score:",
+      "options": [
+        "Your problem-solving approach and communication, not only raw technical vocabulary",
+        "Only whether you use the exact same diagram as previous candidates",
+        "Whether you finish silently without asking any questions",
+        "Your ability to compile code during the session"
+      ],
+      "correctIndex": 0,
+      "explanation": "SA-V5 states that problem-solving approach is scored alongside technical ability. Silent completion, identical diagrams, or coding are not the focus of this round.",
+      "moduleTags": [
+        "B1"
+      ]
+    },
+    {
+      "id": "SA-V5-002",
+      "module": "SA-VIDEO",
+      "segment": "SA-V5",
+      "difficulty": "interview",
+      "tags": [
+        "evaluation",
+        "problem-solving"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "4:25",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=265",
+      "question": "According to the video, your problem-solving approach may be scored separately from your technical ability. Which behavior aligns with a strong problem-solving approach?",
+      "options": [
+        "Breaking the problem into requirements, estimates, components, trade-offs, and failure modes in a structured sequence",
+        "Jumping directly to a specific database brand without clarifying access patterns",
+        "Avoiding all numbers because estimation is discouraged",
+        "Waiting for the interviewer to design the entire system while you take notes passively"
+      ],
+      "correctIndex": 0,
+      "explanation": "Structured decomposition\u2014requirements, estimates, components, trade-offs, failures\u2014demonstrates problem-solving approach. Random tech choices, avoiding math, or passive note-taking do not.",
+      "moduleTags": [
+        "B1"
+      ]
+    },
+    {
+      "id": "SA-V5-003",
+      "module": "SA-VIDEO",
+      "segment": "SA-V5",
+      "difficulty": "interview",
+      "tags": [
+        "open-ended",
+        "clarification"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "4:32",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=272",
+      "question": "Systems Architecture questions are open-ended by design. What should you do when a prompt feels vague?",
+      "options": [
+        "Ask for clarification on scope, scale, and constraints rather than guessing silently",
+        "Assume the most complex possible interpretation and refuse to simplify",
+        "Answer with a single word and wait for the interview to end",
+        "Tell the interviewer the question is too open-ended and stop participating"
+      ],
+      "correctIndex": 0,
+      "explanation": "Open-ended prompts invite clarification\u2014a best practice explicitly repeated in SA-V5. Extreme assumptions, minimal answers, or disengaging fail the collaborative intent.",
+      "moduleTags": [
+        "B1"
+      ]
+    },
+    {
+      "id": "SA-V5-004",
+      "module": "SA-VIDEO",
+      "segment": "SA-V5",
+      "difficulty": "interview",
+      "tags": [
+        "iteration",
+        "improvement"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "4:38",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=278",
+      "question": "After presenting a first solution, a strong candidate should be prepared to:",
+      "options": [
+        "Improve on the initial answer when the interviewer adds constraints or points out gaps",
+        "Insist the first answer is final and cannot be changed",
+        "Apologize and end the interview if any flaw is identified",
+        "Ignore feedback because only the first 5 minutes of the interview count"
+      ],
+      "correctIndex": 0,
+      "explanation": "SA-V5 explicitly recommends improving on your first answer\u2014iteration under feedback is a positive signal, not a failure. Rigidity, quitting, or ignoring probes work against you.",
+      "moduleTags": [
+        "B1"
+      ]
+    },
+    {
+      "id": "SA-V5-005",
+      "module": "SA-VIDEO",
+      "segment": "SA-V5",
+      "difficulty": "interview",
+      "tags": [
+        "practice",
+        "whiteboard",
+        "preparation"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "4:44",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=284",
+      "question": "Google recommends practicing Systems Architecture problems on paper or a whiteboard without an IDE. This practice helps you:",
+      "options": [
+        "Build fluency in diagramming, estimation, and verbal explanation\u2014the skills actually tested in the interview",
+        "Memorize syntax for every programming language Google uses",
+        "Avoid learning any distributed systems concepts because tools replace knowledge",
+        "Prepare exclusively for coding interviews instead of architecture rounds"
+      ],
+      "correctIndex": 0,
+      "explanation": "Whiteboard practice builds the communication, diagramming, and estimation skills the round evaluates. Syntax memorization or skipping systems knowledge misses the point; this round is not a coding interview.",
+      "moduleTags": []
+    },
+    {
+      "id": "SA-V5-006",
+      "module": "SA-VIDEO",
+      "segment": "SA-V5",
+      "difficulty": "interview",
+      "tags": [
+        "clarification",
+        "best-practices"
+      ],
+      "source": "Gg318hR5JY0",
+      "videoTimestamp": "4:50",
+      "videoUrl": "https://www.youtube.com/watch?v=Gg318hR5JY0&t=290",
+      "question": "Which prep habit from the SA-V5 best-practices segment most reduces the risk of building the wrong architecture?",
+      "options": [
+        "Asking clarifying questions about requirements before committing to component boundaries",
+        "Selecting technologies alphabetically from a list to appear unbiased",
+        "Drawing as many boxes as possible without labels to show complexity",
+        "Skipping estimation because numbers are never discussed in this interview"
+      ],
+      "correctIndex": 0,
+      "explanation": "Asking clarifying questions before committing prevents wrong-architecture drift\u2014a capstone best practice in SA-V5 alongside whiteboard practice and iterative improvement. Unlabeled complexity and skipping math are anti-patterns the video warns against.",
+      "moduleTags": []
+    }
+  ]
+}

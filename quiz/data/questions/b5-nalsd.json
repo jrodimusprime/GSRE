@@ -1,0 +1,164 @@
+{
+  "questions": [
+    {
+      "id": "B5-001",
+      "module": "B5",
+      "difficulty": "interview",
+      "tags": ["napkin-math", "QPS", "resource-estimation"],
+      "source": "NALSD workbook",
+      "question": "NALSD's AdWords example assumes 500,000 search queries per second. For napkin-math capacity planning, this figure is primarily used to:",
+      "options": [
+        "Size log ingestion, storage growth, and downstream join/index throughput",
+        "Determine the number of interviewers on a hiring committee",
+        "Calculate CDN cache TTL for static images only",
+        "Set the TCP window size on every client browser"
+      ],
+      "correctIndex": 0,
+      "explanation": "Transaction-rate assumptions drive log volume (~2 KB/query), disk IOPS, RAM for indexes, and worker counts—core NALSD practice of grounding design in quantitative load."
+    },
+    {
+      "id": "B5-002",
+      "module": "B5",
+      "difficulty": "interview",
+      "tags": ["napkin-math", "storage", "bandwidth"],
+      "source": "NALSD workbook",
+      "question": "In the AdWords CTR design, query logs are estimated at ~2 KB per entry and clicks are ~2% of query volume. Rough daily query-log storage is on the order of:",
+      "options": [
+        "~80+ TB per day (500K QPS × 2 KB × 86,400 s, rounded up aggressively)",
+        "~80 MB per day because clicks dominate storage",
+        "~8 GB per day because logs compress to zero",
+        "~800 PB per day requiring immediate quantum storage"
+      ],
+      "correctIndex": 0,
+      "explanation": "NALSD multiplies QPS × entry size × seconds/day (rounding up) to expose that single-machine storage is implausible—forcing distributed redesign in the feasibility phase."
+    },
+    {
+      "id": "B5-003",
+      "module": "B5",
+      "difficulty": "foundational",
+      "tags": ["napkin-math", "bandwidth", "latency-hierarchy"],
+      "source": "NALSD workbook",
+      "question": "When estimating whether a dashboard can load in under one second, which resource check is most relevant for serving pre-aggregated CTR data from indexes in RAM?",
+      "options": [
+        "Memory read latency and index lookup throughput—not cross-continent RTT on every row",
+        "Only cross-region network RTT for every byte",
+        "Tape backup restore time for cold archives",
+        "Git clone time for the application repository"
+      ],
+      "correctIndex": 0,
+      "explanation": "Fast dashboards depend on data locality in memory/SSD with proper indexes; napkin math separates in-process lookups from disk and WAN costs in the latency hierarchy."
+    },
+    {
+      "id": "B5-004",
+      "module": "B5",
+      "difficulty": "foundational",
+      "tags": ["NALSD", "design-process", "possible"],
+      "source": "NALSD workbook",
+      "question": "In NALSD's basic design phase, the question 'Is it possible?' means:",
+      "options": [
+        "Ignoring hardware limits, what design satisfies requirements in principle (e.g., one machine with SQL indexes)?",
+        "Proving the design is already production-ready on current GCP quotas",
+        "Choosing the cheapest CDN provider before defining features",
+        "Eliminating all failure modes before writing any code"
+      ],
+      "correctIndex": 0,
+      "explanation": "NALSD starts unconstrained—can logic and algorithms meet functional needs?—before 'Can we do better?' optimizes complexity, then feasibility adds real-world limits."
+    },
+    {
+      "id": "B5-005",
+      "module": "B5",
+      "difficulty": "interview",
+      "tags": ["NALSD", "design-process", "feasible"],
+      "source": "NALSD workbook",
+      "question": "The NALSD question 'Is it feasible?' is asked after scaling requirements dramatically. It primarily tests whether:",
+      "options": [
+        "The design can meet constraints of money, hardware, bandwidth, and disk IOPS—often requiring distribution",
+        "The team has memorized every Google internal RPC",
+        "Interviewers prefer whiteboard markers over digital tools",
+        "Strong consistency is impossible and must be abandoned always"
+      ],
+      "correctIndex": 0,
+      "explanation": "Feasibility applies napkin math: ~100 TB/day and 500K QPS break single-machine assumptions, pushing toward sharded stores, MapReduce/streaming, and realistic machine counts."
+    },
+    {
+      "id": "B5-006",
+      "module": "B5",
+      "difficulty": "interview",
+      "tags": ["NALSD", "design-process", "resilient"],
+      "source": "NALSD workbook",
+      "question": "When NALSD asks 'Is it resilient?', the recommended mental test is:",
+      "options": [
+        "What happens when this component fails—and can we still meet SLOs or degrade gracefully?",
+        "Whether the design uses the newest programming language",
+        "If every server has identical CPU clock speed",
+        "Whether logs can be deleted to save disk immediately"
+      ],
+      "correctIndex": 0,
+      "explanation": "Resilience phase probes SPOFs (power, disk, network, datacenter) and failover—NALSD shows one machine fails SLOs on simple reboot; replication and reprocessing cover disasters."
+    },
+    {
+      "id": "B5-007",
+      "module": "B5",
+      "difficulty": "interview",
+      "tags": ["latency-hierarchy", "resource-estimation", "performance"],
+      "source": "NALSD workbook",
+      "question": "Which ordering correctly reflects the typical latency hierarchy emphasized in Google systems architecture prep?",
+      "options": [
+        "Memory read < SSD read < rotating disk read < cross-region network RTT",
+        "Cross-region RTT < memory read < SSD read < disk read",
+        "Disk read < memory read < LAN RTT < SSD read",
+        "All four are within 1 µs at planetary scale"
+      ],
+      "correctIndex": 0,
+      "explanation": "Interview prep and NALSD stress orders-of-magnitude: RAM/near-data is fastest; mechanical disk slower; cross-continent RTT often dominates interactive paths if round-tripped per row."
+    },
+    {
+      "id": "B5-008",
+      "module": "B5",
+      "difficulty": "interview",
+      "tags": ["SLO", "dashboard", "freshness"],
+      "source": "NALSD workbook",
+      "question": "NALSD defines AdWords dashboard SLOs including '99.9% of the time, CTR data displayed is less than 5 minutes old.' This SLO primarily drives:",
+      "options": [
+        "Streaming/join pipeline design instead of daily batch-only MapReduce",
+        "Elimination of all indexes on ad_id",
+        "Serving dashboards only from tape backups",
+        "Removing advertiser-facing APIs entirely"
+      ],
+      "correctIndex": 0,
+      "explanation": "Freshness SLOs bound end-to-end log join latency—batch MapReduce on huge windows misses 5-minute targets, motivating LogJoiner, QueryMap, ClickMap, and replication."
+    },
+    {
+      "id": "B5-009",
+      "module": "B5",
+      "difficulty": "deep-dive",
+      "tags": ["AdWords", "CTR", "data-modeling"],
+      "source": "NALSD workbook",
+      "question": "In the AdWords CTR example, click logs and query logs are kept separate (joined on query_id) because:",
+      "options": [
+        "Click URLs have size limits; query logs hold richer fields needed for many downstream metrics beyond CTR",
+        "SQL databases cannot perform joins",
+        "query_id is always NULL in production",
+        "Advertisers only care about impressions, not clicks"
+      ],
+      "correctIndex": 0,
+      "explanation": "NALSD acknowledges adding search_term to click logs might work in a toy scope, but at scale separate logs avoid URL size limits and support multiple analytics products from one query stream."
+    },
+    {
+      "id": "B5-010",
+      "module": "B5",
+      "difficulty": "interview",
+      "tags": ["error-budget", "SLO", "reliability"],
+      "source": "SRE book",
+      "question": "An error budget tied to an SLO (e.g., 99.9% dashboard freshness) is used in design iterations to:",
+      "options": [
+        "Quantify acceptable unreliability so teams balance feature velocity against resilience investments",
+        "Eliminate the need for monitoring and alerting",
+        "Guarantee zero failures forever once defined",
+        "Replace all napkin math with marketing slogans"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE book Ch. 4: error budgets convert SLOs into allowable failure—NALSD cites them when dual shard loss may briefly show stale CTR while reprocessing stays within budget."
+    }
+  ]
+}

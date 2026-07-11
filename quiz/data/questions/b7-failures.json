@@ -1,0 +1,242 @@
+{
+  "questions": [
+    {
+      "id": "B7-001",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "foundational",
+      "tags": ["failover", "redundancy", "availability"],
+      "source": "AOSA distsys redundancy; email rubric",
+      "question": "A stateless API tier sits behind a load balancer with health checks. One instance stops responding. What failover behavior should you describe for v1?",
+      "options": [
+        "The load balancer stops routing to the unhealthy instance; remaining instances absorb traffic automatically",
+        "All user requests fail until an operator manually reboots the dead instance",
+        "The load balancer continues sending traffic evenly to all instances including the failed one",
+        "Failover requires promoting a standby database replica before any API recovery"
+      ],
+      "correctIndex": 0,
+      "explanation": "For stateless tiers, automatic failover via health-checked load balancing is the baseline pattern from AOSA's redundancy discussion. Manual intervention is reserved for stateful components or complex promotion logic. Interviewers expect you to distinguish what fails over automatically vs what needs operator action."
+    },
+    {
+      "id": "B7-002",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "interview",
+      "tags": ["failover", "stateful", "manual-vs-automatic"],
+      "source": "AOSA distsys; NALSD resilience",
+      "question": "Your primary database replica fails. A synchronous standby exists in another zone. Automatic promotion could cause split-brain if the primary is merely partitioned, not dead. What trade-off should you articulate?",
+      "options": [
+        "Automatic failover reduces RTO but risks data loss or dual-writer scenarios; manual failover with fencing is safer but slower",
+        "Always promote automatically within 1 second regardless of failure type",
+        "Never use replicas; a single master eliminates failover complexity entirely",
+        "Failover decisions belong only in application code, not infrastructure"
+      ],
+      "correctIndex": 0,
+      "explanation": "Stateful failover trades recovery time against correctness. Automatic promotion helps RTO; manual promotion with quorum/fencing reduces split-brain risk. NALSD's resilience phase expects you to name failure modes (network partition vs crash) and match recovery strategy to data criticality."
+    },
+    {
+      "id": "B7-003",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "interview",
+      "tags": ["graceful-degradation", "partial-failure"],
+      "source": "Email rubric — failure recovery; AOSA distsys",
+      "question": "A product detail page aggregates inventory, reviews, and recommendations. The recommendations service is down. What graceful degradation strategy best preserves user experience?",
+      "options": [
+        "Serve the page without recommendations; show core product and inventory data with a subtle fallback",
+        "Return HTTP 503 for the entire page until recommendations recover",
+        "Block page load for 30 seconds retrying recommendations synchronously",
+        "Serve cached recommendations indefinitely even if they recommend discontinued products without indication"
+      ],
+      "correctIndex": 0,
+      "explanation": "Graceful degradation isolates non-critical dependency failures so core functionality continues. The email rubric emphasizes operating at scale where failures are normal — designing partial responses beats all-or-nothing failure. Timeouts and fallbacks on optional features are standard SRE architecture patterns."
+    },
+    {
+      "id": "B7-004",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "foundational",
+      "tags": ["circuit-breaker", "cascading-failure"],
+      "source": "AOSA distsys; effective troubleshooting",
+      "question": "Service A calls Service B, which is slow and error-prone. A's thread pool fills waiting on B, causing A to fail too. Which defense directly addresses this cascading failure pattern?",
+      "options": [
+        "Circuit breaker: stop calling B after error threshold, fail fast, and periodically probe recovery",
+        "Increase A's thread pool unbounded so it never rejects requests",
+        "Add more retries from A to B without backoff to improve success rate",
+        "Remove timeouts so calls eventually complete"
+      ],
+      "correctIndex": 0,
+      "explanation": "Cascading failures propagate load and latency upstream. Circuit breakers fail fast, preserving A's capacity and giving B time to recover — a core pattern in AOSA and troubleshooting literature. Unbounded threads and retry storms (see B7-011) worsen the cascade."
+    },
+    {
+      "id": "B7-005",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "interview",
+      "tags": ["monitoring", "observability", "sli"],
+      "source": "Systems Architecture video SA-V2; SRE book",
+      "question": "You deploy a new sharded storage layer. The official Systems Architecture video asks: 'How do we know the system is working?' What should you propose first?",
+      "options": [
+        "Define SLIs (latency, error rate, freshness) with dashboards and alerts tied to user-visible symptoms",
+        "Rely on engineers noticing user complaints on social media",
+        "Monitor only CPU utilization on individual machines",
+        "Wait for the quarterly load test to validate correctness"
+      ],
+      "correctIndex": 0,
+      "explanation": "SA-V2 explicitly includes detecting whether the system works. SLI-driven monitoring (latency, errors, throughput, saturation) connects observability to user impact — not just machine metrics. This detection layer precedes defense and recovery in a complete failure-response design."
+    },
+    {
+      "id": "B7-006",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "interview",
+      "tags": ["datacenter-failure", "multi-region", "dr"],
+      "source": "AOSA distsys; NALSD resilience",
+      "question": "An entire availability zone becomes unavailable. Your service has multi-zone deployment within one region. What failure response should you describe?",
+      "options": [
+        "Traffic shifts to healthy zones; stateful components rely on cross-zone replication already in place",
+        "All traffic must fail over to a different continent immediately with zero data loss guaranteed",
+        "Single-zone deployment is acceptable if you have nightly backups",
+        "DNS changes alone restore service without redundant capacity"
+      ],
+      "correctIndex": 0,
+      "explanation": "Zone failure is a designed-for scenario in multi-AZ architectures: redundant capacity in sibling zones absorbs traffic. Cross-region failover is a separate, costlier DR tier. Interviewers want layered resilience — zone loss handled in-region before invoking cross-region playbooks."
+    },
+    {
+      "id": "B7-007",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "deep-dive",
+      "tags": ["datacenter-failure", "regional", "rpo-rto"],
+      "source": "NALSD resilience; AOSA distsys",
+      "question": "Regional disaster destroys your primary region. RPO of 15 minutes and RTO of 1 hour are acceptable for a non-critical analytics pipeline. Which recovery design fits?",
+      "options": [
+        "Async replication to a secondary region with periodic backups; rehearsed runbook for regional failover",
+        "Synchronous dual-write to three continents on every event for zero RPO",
+        "No secondary region; restore from tape backups within 24 hours",
+        "Single-region multi-zone is sufficient because zones never fail together"
+      ],
+      "correctIndex": 0,
+      "explanation": "Recovery objectives drive architecture. 15-minute RPO tolerates async replication; 1-hour RTO does not require instant automatic global failover. Matching DR investment to business criticality — rather than defaulting to maximum redundancy — is NALSD-style resilience thinking."
+    },
+    {
+      "id": "B7-008",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "interview",
+      "tags": ["poison-message", "message-queue"],
+      "source": "AOSA distsys; effective troubleshooting",
+      "question": "A malformed message in a queue causes the consumer to crash on every redelivery, blocking the partition. What recovery pattern addresses poison messages?",
+      "options": [
+        "Dead-letter queue after N failed attempts; alert operators; fix or discard with audit trail",
+        "Retry infinitely with no backoff until the message succeeds",
+        "Delete the entire queue and lose all pending messages",
+        "Disable the consumer permanently and accumulate backlog"
+      ],
+      "correctIndex": 0,
+      "explanation": "Poison messages are a classic async failure mode: one bad payload blocks progress. Dead-letter queues isolate poison pills, preserve other traffic, and enable investigation — standard queue hygiene from distributed systems practice and troubleshooting guides."
+    },
+    {
+      "id": "B7-009",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "foundational",
+      "tags": ["thundering-herd", "cache", "stampede"],
+      "source": "AOSA distsys caching; email rubric",
+      "question": "A popular cache entry expires and thousands of concurrent requests miss cache simultaneously, overwhelming the database. Which mitigation targets the thundering herd?",
+      "options": [
+        "Request coalescing (single-flight), staggered TTL jitter, or soft expiration with background refresh",
+        "Shorten cache TTL to 1 second so data is always fresh",
+        "Remove caching entirely to simplify the architecture",
+        "Increase database CPU without changing cache behavior"
+      ],
+      "correctIndex": 0,
+      "explanation": "Thundering herd occurs when many clients simultaneously regenerate an expired hot key. Single-flight locking, TTL jitter, and proactive refresh spread or eliminate the spike. AOSA's caching chapter treats cache stampedes as an operational failure mode requiring explicit design."
+    },
+    {
+      "id": "B7-010",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "interview",
+      "tags": ["detection", "recovery", "defense"],
+      "source": "Email rubric — failure recovery; effective troubleshooting",
+      "question": "In the email rubric's failure framework, arranging activities in the most logical lifecycle order yields:",
+      "options": [
+        "Detect (know something is wrong) → Defend (limit blast radius) → Recover (restore normal operation)",
+        "Recover first, then detect root cause months later during a postmortem only",
+        "Defend by disabling all monitoring to reduce alert noise",
+        "Detection is optional if you design for zero failures"
+      ],
+      "correctIndex": 0,
+      "explanation": "The recruiter email separates detecting failure, defending against spread, and recovering operation — mirroring SRE troubleshooting practice. You cannot recover what you haven't detected; defenses (breakers, backpressure, degradation) bridge detection and full recovery."
+    },
+    {
+      "id": "B7-011",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "interview",
+      "tags": ["retry-storm", "backpressure", "cascading-failure"],
+      "source": "Effective troubleshooting; AOSA distsys",
+      "question": "Clients retry failed requests immediately with no jitter when a backend is overloaded. What failure mode does this create?",
+      "options": [
+        "Retry storm: amplified load prevents recovery and deepens the outage",
+        "Automatic healing because retries guarantee eventual success",
+        "Reduced load on the backend as clients share work equally",
+        "Improved latency through parallel retry fan-out"
+      ],
+      "correctIndex": 0,
+      "explanation": "Unbounded immediate retries turn partial degradation into full outage — a retry storm. Effective troubleshooting emphasizes exponential backoff, jitter, and retry budgets. This pairs with circuit breakers (B7-004) and thundering herd (B7-009) as related amplification failures."
+    },
+    {
+      "id": "B7-012",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "deep-dive",
+      "tags": ["backpressure", "load-shedding", "graceful-degradation"],
+      "source": "AOSA distsys; NALSD",
+      "question": "Incoming request rate exceeds sustainable capacity during a traffic spike. Which defense preserves overall system stability?",
+      "options": [
+        "Admission control and load shedding: reject or queue excess work with clear client feedback (429/503)",
+        "Accept all requests and let latency grow unbounded until clients timeout",
+        "Disable health checks so the load balancer sends more traffic to struggling nodes",
+        "Scale vertically on a single machine without horizontal limits"
+      ],
+      "correctIndex": 0,
+      "explanation": "Backpressure and load shedding are deliberate defenses when detection shows saturation. Shedding low-priority or excess load protects core paths — preferable to slow failure everywhere. NALSD's resilience iteration expects explicit overload behavior, not hope that capacity magically appears."
+    },
+    {
+      "id": "B7-013",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "foundational",
+      "tags": ["monitoring", "health-check", "load-balancer"],
+      "source": "AOSA distsys redundancy",
+      "question": "A load balancer health check pings `/health` every 5 seconds. The endpoint returns 200 even when the database dependency is down. What failure detection gap exists?",
+      "options": [
+        "Shallow health checks mask dependency failure; deep checks or synthetic probes should validate critical paths",
+        "Five seconds is too slow; sub-millisecond checks are required",
+        "Health checks should never include dependency status to avoid false positives",
+        "Returning 200 is correct because the HTTP server process is alive"
+      ],
+      "correctIndex": 0,
+      "explanation": "Liveness vs readiness distinction: a process can be 'up' but unable to serve useful traffic. AOSA emphasizes health checks that reflect real serving ability. Deep checks, dependency circuit state, or layered probes improve detection — the first step in the failure lifecycle."
+    },
+    {
+      "id": "B7-014",
+      "module": "B7",
+      "section": "B7",
+      "difficulty": "interview",
+      "tags": ["partition", "race-condition", "consistency"],
+      "source": "AOSA distsys; Systems Architecture video SA-V4",
+      "question": "During a network partition, two datacenter halves both believe they are primary and accept writes. Which failure response combination is most appropriate to discuss?",
+      "options": [
+        "Quorum-based leadership, fencing tokens on writes, and conflict resolution or merge rules for divergent data",
+        "Allow dual writes indefinitely because availability is paramount",
+        "Shut down both halves permanently until manual repair",
+        "Ignore partition scenarios because they are too rare to design for"
+      ],
+      "correctIndex": 0,
+      "explanation": "Split-brain under partition is a designed-for failure mode from SA-V4 and distributed systems literature. Quorum election, fencing, and defined conflict handling address detection and recovery — not pretending partitions won't happen. Operating at scale means failures are normal."
+    }
+  ]
+}

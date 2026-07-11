@@ -1,0 +1,324 @@
+{
+  "questions": [
+    {
+      "id": "B3-001",
+      "module": "B3",
+      "difficulty": "foundational",
+      "tags": ["design-principles", "trade-offs", "scalability"],
+      "source": "AOSA distsys",
+      "question": "In the AOSA chapter's six design principles, adding more servers to handle capacity most directly improves scalability but commonly trades off against which other principles?",
+      "options": [
+        "Manageability and cost (more machines to operate and pay for)",
+        "Availability and reliability (more servers always reduce uptime)",
+        "Performance and latency (horizontal scale always slows responses)",
+        "Security and compliance (distributed systems cannot be audited)"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA states that scaling by adding servers improves capacity but increases operational burden (manageability) and hardware/TCO (cost). The principles are often in tension—not mutually exclusive."
+    },
+    {
+      "id": "B3-002",
+      "module": "B3",
+      "difficulty": "interview",
+      "tags": ["availability", "redundancy", "failure"],
+      "source": "AOSA distsys",
+      "question": "High availability in a distributed web architecture primarily requires which combination of strategies?",
+      "options": [
+        "Redundancy for key components, rapid partial-failure recovery, and graceful degradation",
+        "Eliminating all single points of failure before launch, even at prototype scale",
+        "Maximizing strong consistency across every read path",
+        "Vertical scaling of one super-node until capacity is sufficient"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA defines availability as uptime through redundancy, fast recovery from partial failures, and graceful degradation—not perfection or a single giant machine."
+    },
+    {
+      "id": "B3-003",
+      "module": "B3",
+      "difficulty": "foundational",
+      "tags": ["reliability", "data-persistence"],
+      "source": "AOSA distsys",
+      "question": "Which statement best captures 'reliability' as defined in the scalable web architecture principles?",
+      "options": [
+        "A read returns consistent data for the same request, and updates persist for future retrieval",
+        "Every request completes in under 100 ms regardless of load",
+        "The system never loses a network packet between datacenters",
+        "All replicas agree on every write before any client receives a response"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reliability in AOSA is about dependable, consistent data: repeated reads return the same value, and stored data remains available after writes."
+    },
+    {
+      "id": "B3-004",
+      "module": "B3",
+      "difficulty": "interview",
+      "tags": ["read-write-split", "bottlenecks", "connections"],
+      "source": "AOSA distsys",
+      "question": "Why does the image-hosting example split read and write paths into separate services?",
+      "options": [
+        "Writes hold connections open longer than reads, so a combined endpoint can exhaust connection limits under upload load",
+        "Reads require strong consistency but writes do not",
+        "CDNs can only cache POST requests, not GET requests",
+        "Load balancers cannot route both HTTP methods on the same port"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA notes web servers cap simultaneous connections; long-running uploads block slots while reads can be served faster and asynchronously—splitting paths lets each scale independently."
+    },
+    {
+      "id": "B3-005",
+      "module": "B3",
+      "difficulty": "foundational",
+      "tags": ["CDN", "latency", "caching"],
+      "source": "AOSA distsys",
+      "question": "A Content Delivery Network (CDN) edge server primarily improves performance by:",
+      "options": [
+        "Storing content geographically closer to users so retrieval has lower latency",
+        "Replacing the need for origin databases entirely",
+        "Encrypting all traffic between clients and application servers",
+        "Sharding user accounts across relational tables"
+      ],
+      "correctIndex": 0,
+      "explanation": "CDNs cache content at many edge locations so users fetch from nearby servers—reducing RTT and origin load, as in the image-hosting and Facebook caching examples."
+    },
+    {
+      "id": "B3-006",
+      "module": "B3",
+      "difficulty": "interview",
+      "tags": ["load-balancer", "scaling", "health-checks"],
+      "source": "AOSA distsys",
+      "question": "What is the principal role of a load balancer in a distributed web architecture?",
+      "options": [
+        "Distribute incoming requests across a pool of nodes so capacity scales by adding nodes",
+        "Persist session shopping carts in a replicated SQL database",
+        "Compile application code before deployment to production",
+        "Guarantee exactly-once message delivery across services"
+      ],
+      "correctIndex": 0,
+      "explanation": "Load balancers route connections to backend nodes (round robin, utilization-based, etc.), enabling horizontal scale and health-based removal of bad nodes."
+    },
+    {
+      "id": "B3-007",
+      "module": "B3",
+      "difficulty": "deep-dive",
+      "tags": ["load-balancer", "sessions", "failover"],
+      "source": "AOSA distsys",
+      "question": "Sticky sessions on a load balancer help preserve per-user server state but create tension with which reliability feature?",
+      "options": [
+        "Automatic failover—if the sticky node dies, session state may be lost unless replicated elsewhere",
+        "CDN cache invalidation—sticky nodes cannot purge edge caches",
+        "Database replication—sticky sessions prevent read replicas from serving traffic",
+        "Message queue ordering—sticky sessions break FIFO guarantees"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA's shopping-cart example: routing a user to the same node preserves cart data, but failover to another node loses that local state unless externalized (services, cookies, shared store)."
+    },
+    {
+      "id": "B3-008",
+      "module": "B3",
+      "difficulty": "deep-dive",
+      "tags": ["load-balancer", "health-checks", "failure"],
+      "source": "AOSA distsys",
+      "question": "Under high load, a load balancer that removes slow or timing-out nodes can paradoxically worsen an outage because:",
+      "options": [
+        "Remaining nodes absorb more traffic and may also become overloaded, shrinking the healthy pool",
+        "Health checks always prefer the geographically farthest node",
+        "Removed nodes continue receiving DNS traffic indefinitely",
+        "Slow nodes are always the only nodes holding replicated data"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA warns that shedding slow nodes under load can cascade: fewer nodes serve more requests, metrics may show lower throughput while survivors max out—requiring careful monitoring."
+    },
+    {
+      "id": "B3-009",
+      "module": "B3",
+      "difficulty": "interview",
+      "tags": ["caching", "locality", "load-balancer"],
+      "source": "AOSA distsys",
+      "question": "If each app server hosts its own local cache but a load balancer randomly distributes requests, what problem arises?",
+      "options": [
+        "Increased cache misses because the same key may hit different uncached nodes",
+        "Caches become write-through and cannot serve reads",
+        "Global cache invalidation becomes impossible",
+        "CDN edge nodes cannot origin-fetch"
+      ],
+      "correctIndex": 0,
+      "explanation": "Random LB routing defeats per-node cache locality—the same resource may be requested from many nodes. AOSA recommends global or distributed caches to address this."
+    },
+    {
+      "id": "B3-010",
+      "module": "B3",
+      "difficulty": "interview",
+      "tags": ["caching", "consistent-hashing", "distributed-cache"],
+      "source": "AOSA distsys",
+      "question": "A distributed cache partitions data across nodes using consistent hashing so that:",
+      "options": [
+        "A request node can quickly locate which cache peer holds a given key",
+        "Every node stores a full copy of all cached data",
+        "Cache writes are always synchronous with database commits",
+        "Eviction policies are disabled to maximize hit rate"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA describes consistent hashing in distributed caches: keys map to specific nodes, enabling O(1)-style lookup of which peer to query before falling back to origin."
+    },
+    {
+      "id": "B3-011",
+      "module": "B3",
+      "difficulty": "interview",
+      "tags": ["caching", "global-cache", "spof"],
+      "source": "AOSA distsys",
+      "question": "A single global cache shared by all request nodes is effective for some workloads but risks:",
+      "options": [
+        "Becoming overwhelmed as client count and request rate grow",
+        "Violating HTTP caching headers on static assets",
+        "Preventing use of Memcached or Redis",
+        "Requiring sticky sessions on the load balancer"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA notes global caches simplify hit rates but one cache can become a bottleneck under many clients—unless specialized hardware or a fixed hot dataset limits pressure."
+    },
+    {
+      "id": "B3-012",
+      "module": "B3",
+      "difficulty": "deep-dive",
+      "tags": ["proxy", "collapsed-forwarding", "performance"],
+      "source": "AOSA distsys",
+      "question": "Collapsed forwarding in a proxy server optimizes data access by:",
+      "options": [
+        "Merging identical in-flight requests so origin storage is read only once",
+        "Compressing all responses with gzip before caching",
+        "Routing writes to the least-loaded database shard",
+        "Terminating TLS for every downstream microservice"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA's proxy section: when many nodes request the same uncached data, the proxy collapses them into one origin read—similar to deduplicating concurrent fetches."
+    },
+    {
+      "id": "B3-013",
+      "module": "B3",
+      "difficulty": "interview",
+      "tags": ["proxy", "caching", "architecture"],
+      "source": "AOSA distsys",
+      "question": "When combining a cache and a proxy, AOSA recommends placing the cache:",
+      "options": [
+        "In front of the proxy, because memory-served hits are fastest and tolerate duplicate requests",
+        "Behind the proxy, so every request pays proxy latency first",
+        "Only on the database tier, never on app servers",
+        "Exclusively at CDN edges, never in the origin datacenter"
+      ],
+      "correctIndex": 0,
+      "explanation": "The 'marathon' analogy: let the fastest layer (cache in memory) answer first; putting cache behind the proxy adds latency to every miss."
+    },
+    {
+      "id": "B3-014",
+      "module": "B3",
+      "difficulty": "foundational",
+      "tags": ["replication", "redundancy", "availability"],
+      "source": "AOSA distsys",
+      "question": "Service redundancy in the image-hosting architecture means:",
+      "options": [
+        "Multiple copies of critical components so failure of one does not halt the entire function",
+        "Running exactly one highly vertical-scaled server for simplicity",
+        "Deleting stale data from all replicas simultaneously",
+        "Routing all traffic through a single global cache"
+      ],
+      "correctIndex": 0,
+      "explanation": "Redundancy duplicates services or data paths so partial failures are survivable—paired with partitions and failure handling in the AOSA basics section."
+    },
+    {
+      "id": "B3-015",
+      "module": "B3",
+      "difficulty": "interview",
+      "tags": ["shared-nothing", "horizontal-scaling"],
+      "source": "AOSA distsys",
+      "question": "A shared-nothing architecture supports horizontal scaling because:",
+      "options": [
+        "Each node operates independently without contending for shared mutable state",
+        "All nodes share one large in-memory hash table",
+        "Every request must pass through a central coordinator lock",
+        "Databases are eliminated in favor of client-side storage"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA describes shared-nothing as nodes with independent resources—often enabled by load balancers—so adding nodes increases capacity without shared-state bottlenecks."
+    },
+    {
+      "id": "B3-016",
+      "module": "B3",
+      "difficulty": "foundational",
+      "tags": ["scaling", "vertical", "horizontal"],
+      "source": "AOSA distsys",
+      "question": "Which pairing correctly distinguishes vertical and horizontal scaling?",
+      "options": [
+        "Vertical: add CPU/RAM/disk to one machine; Horizontal: add more machines/nodes",
+        "Vertical: add more machines; Horizontal: upgrade one machine's CPU",
+        "Vertical: shard data; Horizontal: replicate data read-only",
+        "Vertical: use a CDN; Horizontal: use a message queue"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA defines vertical scaling as making one resource bigger; horizontal scaling adds nodes—ideally with partitioned/shared-nothing design to use them fully."
+    },
+    {
+      "id": "B3-017",
+      "module": "B3",
+      "difficulty": "interview",
+      "tags": ["sharding", "partitioning", "trade-offs"],
+      "source": "AOSA distsys",
+      "question": "Sharding users across independent database shards (as Flickr does) primarily limits blast radius so that:",
+      "options": [
+        "An outage on one shard affects only users on that shard, not the entire user base",
+        "Cross-shard queries become faster than single-shard queries",
+        "Write amplification is eliminated globally",
+        "CDN caches become unnecessary for image delivery"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA contrasts service-level read/write split (whole-system write outage) with user sharding (localized failures) against the cost of cross-shard operations and search."
+    },
+    {
+      "id": "B3-018",
+      "module": "B3",
+      "difficulty": "interview",
+      "tags": ["message-queues", "async", "writes"],
+      "source": "AOSA distsys",
+      "question": "Message queues help scale write-heavy workloads because they:",
+      "options": [
+        "Decouple clients from long-running work—accepting tasks quickly while workers process asynchronously",
+        "Force all database writes to complete synchronously before ACK",
+        "Replace the need for indexes on large tables",
+        "Guarantee clients receive results in FIFO order within 1 ms"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA's queue section: synchronous servers block clients when overloaded; queues acknowledge receipt and let workers drain backlog, improving availability and client throughput."
+    },
+    {
+      "id": "B3-019",
+      "module": "B3",
+      "difficulty": "interview",
+      "tags": ["spof", "failure", "redundancy"],
+      "source": "AOSA distsys",
+      "question": "Which component in a naive single-server web stack is a classic single point of failure (SPOF)?",
+      "options": [
+        "One monolithic app server that handles all reads and writes with no redundancy",
+        "A distributed cache partitioned with consistent hashing",
+        "A load-balanced pool of stateless app servers",
+        "A CDN serving immutable static assets from many edges"
+      ],
+      "correctIndex": 0,
+      "explanation": "Without redundancy, partitioning, or failover, one server failure halts the service—motivating replication, load balancing, and shared-nothing expansion in AOSA."
+    },
+    {
+      "id": "B3-020",
+      "module": "B3",
+      "difficulty": "deep-dive",
+      "tags": ["manageability", "cost", "design-principles"],
+      "source": "AOSA distsys",
+      "question": "Manageability in the six principles emphasizes operational ease. Which factor is explicitly included in the 'cost' principle beyond hardware price?",
+      "options": [
+        "Developer time to build, operational effort to run, and training required",
+        "Only monthly cloud VM invoices",
+        "Marketing spend to acquire users",
+        "Patent licensing for open-source libraries"
+      ],
+      "correctIndex": 0,
+      "explanation": "AOSA defines cost as total cost of ownership: hardware/software plus engineering, operations, and training—not sticker price alone."
+    }
+  ]
+}

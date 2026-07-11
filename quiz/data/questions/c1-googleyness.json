@@ -1,0 +1,244 @@
+{
+  "questions": [
+    {
+      "id": "C1-001",
+      "module": "C1",
+      "difficulty": "foundational",
+      "tags": ["googleyness", "ambiguity", "official-traits"],
+      "source": "Google careers / How We Hire video",
+      "question": "Google's official Googleyness guidance highlights three core traits interviewers look for. Which set matches those three?",
+      "options": [
+        "Comfort with ambiguity, collaboration, and bias to action",
+        "Technical depth, algorithm speed, and memorization of system designs",
+        "Years of management experience, MBA credentials, and executive presence",
+        "Strict adherence to process, zero risk tolerance, and consensus on every decision"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google's careers materials consistently name comfort with ambiguity, collaboration, and bias to action as the top three Googleyness traits. Interviewers infer these from your stories—not from reciting definitions."
+    },
+    {
+      "id": "C1-002",
+      "module": "C1",
+      "difficulty": "interview",
+      "tags": ["googleyness", "ambiguity", "signals"],
+      "source": "Work Rules (Laszlo Bock)",
+      "question": "An interviewer asks: 'Tell me about a time requirements changed late in a project.' Which response best signals comfort with ambiguity?",
+      "options": [
+        "You describe how you reframed goals with stakeholders, made a reasonable decision with incomplete data, and communicated trade-offs clearly",
+        "You explain that you refused to proceed until every requirement was locked in writing and signed off",
+        "You say ambiguity is uncomfortable so you always escalate immediately to your manager",
+        "You focus on how the changing requirements proved your original plan was perfect all along"
+      ],
+      "correctIndex": 0,
+      "explanation": "Strong ambiguity signals: staying productive without perfect information, collaborating to clarify what matters, and acting with judgment. Waiting for total certainty or blaming others are negative signals."
+    },
+    {
+      "id": "C1-003",
+      "module": "C1",
+      "difficulty": "interview",
+      "tags": ["googleyness", "collaboration", "teamwork"],
+      "source": "Google careers / leadership prep",
+      "question": "Which behavior best demonstrates Googleyness collaboration in a cross-functional project?",
+      "options": [
+        "Sharing credit, actively seeking input from partners, and helping unblock others even outside your lane",
+        "Completing only your assigned tickets and avoiding meetings with other teams",
+        "Winning every technical debate to establish yourself as the smartest person in the room",
+        "Documenting others' mistakes in email so leadership sees who caused delays"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google values collaborative problem-solving—listening, integrating diverse perspectives, and making the team successful. Individual heroics or credit-hoarding undermine the culture Google screens for."
+    },
+    {
+      "id": "C1-004",
+      "module": "C1",
+      "difficulty": "interview",
+      "tags": ["googleyness", "bias-to-action", "ownership"],
+      "source": "Google careers video",
+      "question": "You notice a production metric degrading slightly on a service you don't own. Nobody has assigned you the work. What best reflects bias to action with appropriate ownership?",
+      "options": [
+        "Investigate enough to understand impact, notify the owning team with useful context, and offer to help mitigate if needed",
+        "Ignore it because it is not your service and you might look like you are overstepping",
+        "Deploy a fix directly to their production system without telling anyone to show initiative",
+        "Post a vague complaint in a large mailing list blaming the owning team for poor quality"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bias to action means stepping up when something matters—not waiting for permission—while respecting boundaries. Useful investigation plus collaborative handoff beats silent inaction or reckless unilateral changes."
+    },
+    {
+      "id": "C1-005",
+      "module": "C1",
+      "difficulty": "foundational",
+      "tags": ["googleyness", "humility", "feedback"],
+      "source": "Work Rules",
+      "question": "Laszlo Bock describes 'intellectual humility' as a key hiring signal. In an interview answer, this most often appears as:",
+      "options": [
+        "Acknowledging what you did not know, how you learned, and how others' input improved the outcome",
+        "Claiming you single-handedly solved every hard problem without help",
+        "Avoiding any mention of mistakes so you appear flawless",
+        "Explaining that you only trust your own judgment because teams slow you down"
+      ],
+      "correctIndex": 0,
+      "explanation": "Intellectual humility shows up as openness to being wrong, crediting others, and describing growth. Candidates who present themselves as infallible raise red flags in Googleyness interviews."
+    },
+    {
+      "id": "C1-006",
+      "module": "C1",
+      "difficulty": "interview",
+      "tags": ["googleyness", "feedback", "growth"],
+      "source": "Work Rules / Google leadership prep",
+      "question": "You receive critical feedback that your design docs are hard to follow. What is the strongest Googleyness-aligned response?",
+      "options": [
+        "Thank the reviewer, ask for specific examples, iterate on the next doc, and check whether the improvement stuck",
+        "Argue that the feedback is wrong because senior engineers understood your doc",
+        "Stop writing design docs and rely on verbal explanations only",
+        "Ask your manager to tell the reviewer to soften their tone before you act on it"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google looks for candidates who treat feedback as data—especially uncomfortable feedback—and convert it into sustained behavior change. Defensiveness or deflection are common negative signals."
+    },
+    {
+      "id": "C1-007",
+      "module": "C1",
+      "difficulty": "interview",
+      "tags": ["googleyness", "ownership", "high-standards"],
+      "source": "Google careers / SRE culture",
+      "question": "Which example best demonstrates end-to-end ownership with high standards?",
+      "options": [
+        "You shipped a feature, monitored its production behavior, fixed a latent bug, and updated runbooks so on-call could handle it",
+        "You merged code that passed CI and considered the work finished regardless of production metrics",
+        "You built a prototype and handed it off without documentation because maintenance is someone else's job",
+        "You lowered the team's quality bar temporarily so a deadline could be met and never revisited the debt"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ownership at Google extends beyond your immediate task—you care about outcomes in production, operability, and lasting quality. 'Throw it over the wall' behaviors conflict with high standards."
+    },
+    {
+      "id": "C1-008",
+      "module": "C1",
+      "difficulty": "foundational",
+      "tags": ["googleyness", "culture-add", "culture-fit"],
+      "source": "Google hiring philosophy",
+      "question": "Google interviewers often discuss 'culture add' rather than 'culture fit.' What does culture add mean in practice?",
+      "options": [
+        "Hiring people who bring diverse perspectives and strengthen the team while sharing core values like collaboration and integrity",
+        "Hiring only candidates who think exactly like the current team to minimize conflict",
+        "Prioritizing shared hobbies and social backgrounds over skills and values",
+        "Selecting candidates who will never challenge existing team norms or processes"
+      ],
+      "correctIndex": 0,
+      "explanation": "Culture add emphasizes diversity of thought and background while maintaining shared values (Googleyness). Pure 'fit' can mean homogeneity; Google wants people who expand what the team can do."
+    },
+    {
+      "id": "C1-009",
+      "module": "C1",
+      "difficulty": "interview",
+      "tags": ["googleyness", "emergent-leadership", "collaboration"],
+      "source": "Leadership prep / Google careers",
+      "question": "Emergent leadership at Google is often described as 'step in when needed, step back when not.' Which scenario best illustrates this?",
+      "options": [
+        "You facilitate a stuck incident bridge until a clear owner emerges, then support that owner instead of staying in command",
+        "You always take command in every meeting regardless of who has context",
+        "You never speak up in group settings to avoid appearing dominant",
+        "You lead every project permanently so the team depends on you for all decisions"
+      ],
+      "correctIndex": 0,
+      "explanation": "Emergent leadership is situational influence—not a permanent title. Strong candidates know when to drive and when to enable others, avoiding both passivity and habitual commandeering."
+    },
+    {
+      "id": "C1-010",
+      "module": "C1",
+      "difficulty": "interview",
+      "tags": ["googleyness", "do-the-right-thing", "ethics"],
+      "source": "Google values / Work Rules",
+      "question": "A teammate suggests shipping a quick fix that hides a user-facing error but could misreport billing data. What response best reflects 'do the right thing'?",
+      "options": [
+        "Push back, explain the user and business risk, and propose a safer mitigation even if it takes longer",
+        "Agree because the deadline matters more than data correctness",
+        "Ship it quietly and plan to fix billing later without telling stakeholders",
+        "Report your teammate to HR immediately without discussing the concern with them first"
+      ],
+      "correctIndex": 0,
+      "explanation": "Doing the right thing means advocating for users and integrity even under pressure—usually through direct, respectful escalation and safer alternatives—not silent compromise or punitive reflexes."
+    },
+    {
+      "id": "C1-011",
+      "module": "C1",
+      "difficulty": "deep-dive",
+      "tags": ["googleyness", "negative-signals", "interview-tactics"],
+      "source": "Google interview prep community / official guidance",
+      "question": "Which pattern is most likely a negative Googleyness signal in behavioral interviews?",
+      "options": [
+        "Consistently describing conflicts where you were always right and others were the problem",
+        "Describing a failure, your specific role in it, and concrete changes you made afterward",
+        "Explaining how you adapted when priorities shifted mid-quarter",
+        "Sharing how you incorporated peer feedback into your communication style"
+      ],
+      "correctIndex": 0,
+      "explanation": "Interviewers watch for lack of humility, blame-shifting, and inability to reflect. Stories where you never contributed to a problem or never needed to change suggest poor self-awareness."
+    },
+    {
+      "id": "C1-012",
+      "module": "C1",
+      "difficulty": "foundational",
+      "tags": ["googleyness", "inference", "interview-format"],
+      "source": "Google leadership prep",
+      "question": "Googleyness is rarely assessed by asking 'Define Googleyness.' How do interviewers typically evaluate it?",
+      "options": [
+        "By listening to how you behaved in past situations across multiple behavioral questions",
+        "By a multiple-choice vocabulary test on Google mission statements",
+        "By whether you attended a Google university recruiting event",
+        "By counting how many Google products you use daily"
+      ],
+      "correctIndex": 0,
+      "explanation": "Googleyness is inferred from patterns in your stories—how you handle ambiguity, conflict, feedback, and collaboration—not from reciting slogans or demonstrating fanboy behavior."
+    },
+    {
+      "id": "C1-013",
+      "module": "C1",
+      "difficulty": "interview",
+      "tags": ["googleyness", "high-standards", "bias-to-action"],
+      "source": "Work Rules / Google engineering culture",
+      "question": "Your team is debating whether to cut testing to hit a launch date. Which stance best aligns with Googleyness high standards plus bias to action?",
+      "options": [
+        "Identify the minimum safe test coverage for launch, automate what you can quickly, and document residual risk with a follow-up plan",
+        "Block the launch indefinitely until 100% test coverage exists for every code path",
+        "Skip testing entirely because moving fast is always more important than quality",
+        "Agree to cut tests but tell leadership verbally that quality will be fine without documenting risks"
+      ],
+      "correctIndex": 0,
+      "explanation": "High standards and bias to action coexist: act decisively but don't pretend quality trade-offs disappear. Pragmatic risk framing with follow-through beats both paralysis and reckless speed."
+    },
+    {
+      "id": "C1-014",
+      "module": "C1",
+      "difficulty": "interview",
+      "tags": ["googleyness", "collaboration", "global-teams"],
+      "source": "Google careers / diversity guidance",
+      "question": "You join a globally distributed team where time zones make synchronous meetings difficult. Which approach best shows collaborative Googleyness?",
+      "options": [
+        "Write clear async updates, rotate meeting times fairly, and proactively document decisions for colleagues who cannot attend live",
+        "Schedule all meetings only in your local business hours because that is when you are most productive",
+        "Avoid collaborating with remote offices and wait for them to adapt to your schedule",
+        "Use async communication only when forced, preferring that remote teammates stay online outside their work hours"
+      ],
+      "correctIndex": 0,
+      "explanation": "Collaboration at Google-scale includes making it work across time zones and backgrounds—fairness, clarity, and inclusion in how you communicate—not optimizing only for yourself."
+    },
+    {
+      "id": "C1-015",
+      "module": "C1",
+      "difficulty": "deep-dive",
+      "tags": ["googleyness", "culture-add", "humility", "fun"],
+      "source": "Work Rules (Bock on 'enjoying fun')",
+      "question": "Work Rules notes that Google looks for people who 'enjoy fun' alongside serious work. In an interview context, this most appropriately means:",
+      "options": [
+        "You bring curiosity, playfulness in learning, and energy to hard problems without dismissing rigor or others' contributions",
+        "You tell jokes throughout the interview even when they distract from answering the question",
+        "You describe only social events and team parties without discussing meaningful work outcomes",
+        "You insist the job should never feel challenging because fun means avoiding difficult problems"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bock's 'enjoy fun' signal is about intellectual curiosity and positive engagement with challenging work—not performative humor or avoiding seriousness. Balance enthusiasm with substance."
+    }
+  ]
+}

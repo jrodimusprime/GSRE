@@ -1,0 +1,84 @@
+{
+  "questions": [
+    {
+      "id": "B1-001",
+      "module": "B1",
+      "difficulty": "interview",
+      "tags": ["interview-format", "email-rubric", "evaluation"],
+      "source": "recruiter-email-rubric",
+      "question": "According to Google's Systems Architecture interview rubric, which aspect carries the most weight when interviewers evaluate your design?",
+      "options": [
+        "Whether you can articulate trade-offs, implications, and a coherent design process",
+        "Whether your final architecture matches a known Google internal system",
+        "Whether you implement working code on the whiteboard within the time limit",
+        "Whether you choose the most exotic technology stack to demonstrate breadth"
+      ],
+      "correctIndex": 0,
+      "explanation": "The recruiter email explicitly states that trade-offs and their implications matter more than picking a single 'correct' choice, and that interviewers want a coherent design. The official prep video reinforces that process and communication are scored—not memorized diagrams or production code."
+    },
+    {
+      "id": "B1-002",
+      "module": "B1",
+      "difficulty": "interview",
+      "tags": ["interview-format", "time-box", "structure"],
+      "source": "recruiter-email-rubric",
+      "question": "You have a 60-minute Systems Architecture interview. Based on Google's guidance, how should you allocate the opening portion of the session?",
+      "options": [
+        "Spend roughly the first 20 minutes clarifying requirements and presenting an initial high-level solution",
+        "Spend the first 45 minutes on deep database schema design before discussing scale",
+        "Jump immediately into low-level implementation details to show coding fluency",
+        "Use the first half hour silently sketching without verbalizing your reasoning"
+      ],
+      "correctIndex": 0,
+      "explanation": "Both the official Systems Architecture prep video and the email rubric emphasize significant time limits, with roughly 20 minutes dedicated to gathering requirements and presenting an initial solution. Deep implementation and silent work miss what interviewers are evaluating."
+    },
+    {
+      "id": "B1-003",
+      "module": "B1",
+      "difficulty": "interview",
+      "tags": ["mock-interview", "communication", "practice"],
+      "source": "mock-interview-video",
+      "question": "When practicing for a Systems Architecture mock interview, which habit most closely mirrors what Google interviewers expect in the real round?",
+      "options": [
+        "Narrating your reasoning aloud, asking clarifying questions, and revising your design when given new constraints",
+        "Memorizing reference architectures for common products and reciting them verbatim",
+        "Optimizing for the shortest possible answer to leave time for trivia questions",
+        "Focusing exclusively on algorithmic complexity of individual functions"
+      ],
+      "correctIndex": 0,
+      "explanation": "Mock interview guidance and the official prep video both stress think-aloud communication, collaborative clarification, and iterative improvement. Memorized diagrams or algorithm trivia do not reflect the open-ended, process-oriented nature of the Systems Architecture round."
+    },
+    {
+      "id": "B1-004",
+      "module": "B1",
+      "difficulty": "interview",
+      "tags": ["interview-format", "no-coding", "interfaces"],
+      "source": "recruiter-email-rubric",
+      "question": "During the Systems Architecture interview, which of the following is explicitly acceptable according to Google's rubric?",
+      "options": [
+        "Describing API contracts, interfaces, and pseudocode for message payloads between components",
+        "Writing and debugging a complete production-ready service in your language of choice",
+        "Refusing to discuss any implementation detail until the interviewer demands code",
+        "Using an IDE on your laptop to compile and test your design live"
+      ],
+      "correctIndex": 0,
+      "explanation": "The recruiter email states this is not a coding interview but that interfaces, APIs, and pseudocode payloads are fine. Full implementation, IDE usage, or refusing to discuss component boundaries all miss the intended format."
+    },
+    {
+      "id": "B1-005",
+      "module": "B1",
+      "difficulty": "interview",
+      "tags": ["whiteboard", "practice", "preparation"],
+      "source": "Gg318hR5JY0",
+      "question": "Google's Systems Architecture prep materials recommend practicing designs on paper or a whiteboard without an IDE. What is the primary reason for this advice?",
+      "options": [
+        "The interview environment uses a whiteboard and assesses how you reason about scale, estimates, and diagrams—not IDE shortcuts",
+        "Google prohibits candidates from typing during any onsite interview round",
+        "Whiteboard practice ensures you memorize syntax for every language Google uses internally",
+        "IDEs are unavailable because Google interviews always take place in rooms without electricity"
+      ],
+      "correctIndex": 0,
+      "explanation": "The official prep video (SA-V5 segment) recommends practicing on paper or whiteboard without an IDE because the round evaluates communication, quantitative estimates, and architectural diagrams in a whiteboard setting—not coding tooling proficiency."
+    }
+  ]
+}

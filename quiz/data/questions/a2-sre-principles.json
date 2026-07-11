@@ -1,0 +1,225 @@
+{
+  "questions": [
+    {
+      "id": "A2-001",
+      "module": "A2",
+      "section": "A2",
+      "difficulty": "foundational",
+      "tags": ["sre", "sli", "slo", "sla"],
+      "source": "SRE book introduction; SRE workbook TOC",
+      "question": "In SRE vocabulary, which definition correctly distinguishes SLI, SLO, and SLA?",
+      "options": [
+        "SLI is a measured indicator; SLO is an internal target for that indicator; SLA is a contractual commitment often with consequences",
+        "SLI, SLO, and SLA are interchangeable synonyms for uptime percentage",
+        "SLA is always stricter than SLO because legal teams set higher bars",
+        "SLI is a marketing term; only SLO matters operationally"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE book and workbook establish: SLIs are quantified service aspects (latency, availability); SLOs are target ranges for SLIs; SLAs are external agreements, often looser than internal SLOs. This hierarchy drives error budgets and alerting design."
+    },
+    {
+      "id": "A2-002",
+      "module": "A2",
+      "section": "A2",
+      "difficulty": "interview",
+      "tags": ["sre", "error-budget", "velocity"],
+      "source": "SRE book introduction — error budget chapter",
+      "question": "Google's error budget model resolves tension between product development and SRE by:",
+      "options": [
+        "Allowing a defined amount of unreliability that can be 'spent' on launches and risk, aligning incentives when budget remains",
+        "Requiring 100% availability for all services except pacemakers",
+        "Eliminating SRE involvement once a service launches",
+        "Making SRE solely responsible for all outages regardless of launch decisions"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE book intro: 100% reliability is the wrong target for most services. Error budget = 1 − SLO target; teams spend it on velocity. When budget is exhausted, focus shifts to stability — a structured trade-off SRE-SWE candidates should articulate."
+    },
+    {
+      "id": "A2-003",
+      "module": "A2",
+      "section": "A2",
+      "difficulty": "foundational",
+      "tags": ["sre", "toil", "automation"],
+      "source": "SRE book — eliminating toil; workbook TOC",
+      "question": "Which activity best exemplifies SRE 'toil' that should be reduced over time?",
+      "options": [
+        "Manually restarting the same failing batch job every morning with no lasting fix",
+        "Writing automation that permanently eliminates that restart requirement",
+        "Designing a new feature's architecture for launch review",
+        "Conducting a blameless postmortem after an incident"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE defines toil as manual, repetitive, automatable work tied to running a service — not engineering that permanently improves the system. Eliminating toil frees SRE capacity for software-driven reliability improvements."
+    },
+    {
+      "id": "A2-004",
+      "module": "A2",
+      "section": "A2",
+      "difficulty": "interview",
+      "tags": ["sre", "blameless-postmortem", "culture"],
+      "source": "SRE book; recruiter email SRE blurb",
+      "question": "A blameless postmortem after a production incident primarily aims to:",
+      "options": [
+        "Understand systemic causes and prevent recurrence without punishing individuals for honest mistakes",
+        "Identify a single engineer to hold accountable for termination",
+        "Document incidents only for legal compliance with no process changes",
+        "Avoid writing anything down to protect the team from management"
+      ],
+      "correctIndex": 0,
+      "explanation": "Blameless postmortems are core SRE culture (recruiter email mentions them explicitly). Focus is systemic fixes, shared learning, and action items — not individual blame. This connects to leadership behavioral prep (growth from failure)."
+    },
+    {
+      "id": "A2-005",
+      "module": "A2",
+      "section": "A2",
+      "difficulty": "interview",
+      "tags": ["sre", "nalsd", "abstract-design"],
+      "source": "NALSD workbook chapter; SRE workbook",
+      "question": "Non-Abstract Large System Design (NALSD) differs from abstract system design interviews by emphasizing:",
+      "options": [
+        "Iterative, concrete designs with capacity planning, failure domains, and operational cost — not hand-wavy boxes",
+        "Only theoretical CAP theorem proofs without numbers",
+        "Coding complete implementations during the interview",
+        "Ignoring failure modes until after launch"
+      ],
+      "correctIndex": 0,
+      "explanation": "NALSD chapter: start with requirements, iterate through designs increasing sophistication until viable, with resource planning and failure defense. SRE-SWE path values this concrete iteration over abstract diagrams — closely aligned with the 60-min Systems Architecture rubric."
+    },
+    {
+      "id": "A2-006",
+      "module": "A2",
+      "section": "A2",
+      "difficulty": "foundational",
+      "tags": ["sre", "role", "vs-ops"],
+      "source": "SRE book introduction",
+      "question": "How does Google SRE differ from traditional operations according to the SRE book?",
+      "options": [
+        "SRE engineers use software and automation to solve operations problems and share ownership of reliability with development",
+        "SRE only responds to pages and never writes code",
+        "SRE replaces all product developers on every team",
+        "Traditional ops and SRE are identical at Google"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE book intro positions SRE as software engineers who apply engineering to operations: automation, SLO-driven decisions, shared responsibility with dev teams. The recruiter email's SRE blurb reflects availability, automation, capacity, and postmortems."
+    },
+    {
+      "id": "A2-007",
+      "module": "A2",
+      "section": "A2",
+      "difficulty": "deep-dive",
+      "tags": ["sre", "nalsd", "phases"],
+      "source": "NALSD workbook chapter",
+      "question": "NALSD iterative design phases are often summarized as moving through:",
+      "options": [
+        "Possible → better → feasible → resilient → better again (with requirements driving each iteration)",
+        "Perfect design on first attempt → no changes ever",
+        "Code first → document later → ignore requirements",
+        "Only resilience matters; feasibility can be deferred indefinitely"
+      ],
+      "correctIndex": 0,
+      "explanation": "NALSD and QUIZ-PLAN B5 reference this iteration arc: prove a sketch works, refine with numbers, validate feasibility, add resilience, then optimize. Deferring reliability early means fewer features at higher cost later — a key SRE design principle."
+    },
+    {
+      "id": "A2-008",
+      "module": "A2",
+      "section": "A2",
+      "difficulty": "interview",
+      "tags": ["sre", "slo", "alerting"],
+      "source": "SRE workbook — alerting on SLOs",
+      "question": "SRE best practice for alerting aligns with:",
+      "options": [
+        "Paging humans only when SLO-threatening symptoms occur, not on every metric fluctuation",
+        "Alerting on every CPU spike above 10% regardless of user impact",
+        "Disabling alerts during launches to avoid noise",
+        "Emailing the entire company on each minor log warning"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE workbook chapters on SLO-based alerting advocate symptom-based, SLO-aligned pages — reducing alert fatigue and tying operational response to user-visible reliability. Connects to B7 detection vs noise."
+    },
+    {
+      "id": "A2-009",
+      "module": "A2",
+      "section": "A2",
+      "difficulty": "foundational",
+      "tags": ["sre", "lifecycle", "launch"],
+      "source": "SRE book; NALSD; recruiter email",
+      "question": "Which sequence best captures the SRE engagement lifecycle for a new large service?",
+      "options": [
+        "Design review → launch readiness → operate/monitor → iterate/refine reliability",
+        "Launch without review → ignore metrics → rewrite from scratch annually",
+        "SRE joins only after three years of production pain",
+        "Development completes all code before SRE is allowed any input"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE lifecycle spans early design partnership (launch reviews), ongoing operation with SLOs, and continuous refinement — not bolt-on ops after launch. NALSD embeds reliability iteration during design, not as an afterthought."
+    },
+    {
+      "id": "A2-010",
+      "module": "A2",
+      "section": "A2",
+      "difficulty": "interview",
+      "tags": ["sre", "error-budget", "policy"],
+      "source": "SRE book introduction",
+      "question": "If a service has exhausted its error budget mid-quarter, what policy response aligns with SRE principles?",
+      "options": [
+        "Freeze risky launches and focus engineering on reliability until budget recovery",
+        "Increase launch velocity to compensate for lost time",
+        "Raise the SLO target secretly without telling stakeholders",
+        "Ignore the budget because users cannot measure downtime"
+      ],
+      "correctIndex": 0,
+      "explanation": "Error budget exhaustion triggers reliability focus — a negotiated policy between SRE and product. SRE book describes this as resolving the dev/SRE incentive conflict. Secretly moving goalposts undermines the model."
+    },
+    {
+      "id": "A2-011",
+      "module": "A2",
+      "section": "A2",
+      "difficulty": "interview",
+      "tags": ["sre", "sli", "measurement"],
+      "source": "SRE workbook — implementing SLOs",
+      "question": "Which is a well-formed SLI for a latency-sensitive API?",
+      "options": [
+        "Proportion of requests completing in under 200 ms over a rolling window",
+        "Number of engineers on the team",
+        "Total lines of code in the repository",
+        "Count of coffee cups consumed in the SRE office"
+      ],
+      "correctIndex": 0,
+      "explanation": "SLIs must be measurable, user-centric indicators — request latency percentiles, availability ratios, freshness lag. SRE workbook SLO chapters stress choosing SLIs that reflect user experience, then setting SLO targets and error budgets atop them."
+    },
+    {
+      "id": "A2-012",
+      "module": "A2",
+      "section": "A2",
+      "difficulty": "deep-dive",
+      "tags": ["sre", "reliability", "design"],
+      "source": "NALSD workbook chapter",
+      "question": "NALSD states that deferring reliability issues during design is akin to:",
+      "options": [
+        "Accepting fewer features at higher operational cost later",
+        "Getting more features faster with no long-term penalty",
+        "Eliminating the need for SRE entirely",
+        "Improving candidate performance in coding interviews"
+      ],
+      "correctIndex": 0,
+      "explanation": "NALSD opening argument: reliability is the most critical production feature. Deferring failure defense and capacity planning creates expensive retrofit work — directly relevant to Systems Architecture interviews scoring failure response and iteration."
+    },
+    {
+      "id": "A2-013",
+      "module": "A2",
+      "section": "A2",
+      "difficulty": "interview",
+      "tags": ["sre", "toil", "engineering"],
+      "source": "SRE book — eliminating toil",
+      "question": "An SRE team spends 70% of time on manual ticket-driven work with no automation roadmap. What principle says this is unsustainable?",
+      "options": [
+        "SRE work should cap toil (commonly ~50% guideline) and invest remaining capacity in engineering that reduces future toil",
+        "High toil is ideal because it proves the team is busy",
+        "Toil should increase each quarter to justify headcount",
+        "Automation is discouraged because it eliminates SRE jobs immediately"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE book's toil chapter advocates limiting manual operational load so SREs can engineer durable fixes. Unchecked toil means no time for automation, reliability projects, or design review — undermining the SRE model described in intro and USENIX hiring paper."
+    }
+  ]
+}

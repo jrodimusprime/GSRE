@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#202124">
+  <title>GSRE Interview Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Text:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="quiz/css/quiz.css">
+</head>
+<body class="dark">
+  <header>
+    <h1>Google SRE SWE Interview Prep</h1>
+    <p class="subtitle">Systems Architecture &amp; Googleyness / Leadership</p>
+  </header>
+
+  <main>
+    <section class="screen" data-screen="home">
+      <h2>Study by module</h2>
+      <div id="module-grid" class="module-grid"></div>
+
+      <h2>Official video — segment drill</h2>
+      <p class="hint">Prepare for Your Google Interview: Systems Architecture</p>
+      <select id="segment-select">
+        <option value="">Pick a segment…</option>
+        <option value="SA-V0">SA-V0: Setup &amp; constraints (4)</option>
+        <option value="SA-V1">SA-V1: Communication (6)</option>
+        <option value="SA-V2">SA-V2: Designing to scale (10)</option>
+        <option value="SA-V3">SA-V3: Concrete &amp; quantitative (8)</option>
+        <option value="SA-V4">SA-V4: Trade-offs (6)</option>
+        <option value="SA-V5">SA-V5: Best practices (6)</option>
+      </select>
+
+      <h2>Exam presets</h2>
+      <div id="exam-presets" class="preset-row">
+        <button class="preset-btn" data-preset="systems-architecture-60">Systems Architecture (60 min)</button>
+        <button class="preset-btn" data-preset="leadership-45">Googleyness &amp; Leadership (45 min)</button>
+        <button class="preset-btn" data-preset="full-258">Full bank (258 Q)</button>
+      </div>
+      <p class="hint">Run a local server: <code>python3 -m http.server 8080</code> then open <code>http://localhost:8080</code></p>
+    </section>
+
+    <section class="screen hidden" data-screen="quiz">
+      <div class="quiz-header">
+        <h2 id="quiz-title"></h2>
+        <span id="timer" class="timer hidden"></span>
+        <button id="quit-btn" class="btn-secondary">Quit</button>
+      </div>
+      <p id="quiz-meta" class="meta"></p>
+      <div id="question-text" class="question"></div>
+      <div id="options" class="options"></div>
+      <div id="video-link" class="video-link"></div>
+      <div id="explanation" class="explanation hidden"></div>
+      <button id="next-btn" class="btn-primary hidden">Next question</button>
+    </section>
+
+    <section class="screen hidden" data-screen="results">
+      <div id="results-summary"></div>
+      <button class="btn-primary" onclick="location.reload()">Back to home</button>
+    </section>
+  </main>
+
+  <script src="quiz/js/loader.js"></script>
+  <script src="quiz/js/storage.js"></script>
+  <script src="quiz/js/engine.js"></script>
+  <script src="quiz/js/ui.js"></script>
+  <script src="quiz/js/app.js"></script>
+</body>
+</html>

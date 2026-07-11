@@ -1,0 +1,344 @@
+{
+  "questions": [
+    {
+      "id": "B8-001",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "foundational",
+      "tags": ["url-shortener", "hashing", "architecture"],
+      "source": "Email sample topics; mock system design",
+      "question": "Designing a URL shortener at architectural level (not coding), what is the primary reason to use a distributed unique ID or hash for short codes instead of sequential integers?",
+      "options": [
+        "Avoid predictable/guessable URLs and enable independent ID generation across servers without a single coordination point",
+        "Sequential integers are always faster than hashes for database indexing",
+        "Hashes eliminate the need for any persistent storage layer",
+        "Short codes must be exactly 128 characters for security"
+      ],
+      "correctIndex": 0,
+      "explanation": "URL shortener interviews test architectural ID strategy: base-62 encoding of distributed IDs (Snowflake, UUID hash) avoids a global counter bottleneck and reduces enumeration attacks. Sequential IDs are simpler but expose predictability and coordination costs at scale."
+    },
+    {
+      "id": "B8-002",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "interview",
+      "tags": ["url-shortener", "read-path", "cache"],
+      "source": "AOSA distsys; email rubric",
+      "question": "A URL shortener receives 100:1 read-to-write ratio. Which v1 read-path architecture is most appropriate to discuss?",
+      "options": [
+        "Cache hot mappings in memory/CDN; async write path to durable store with redirect on cache miss",
+        "Write-through to database on every redirect with no caching to guarantee freshness",
+        "Store all mappings only in application memory on one server",
+        "Use a graph database because URLs form a linked structure"
+      ],
+      "correctIndex": 0,
+      "explanation": "Read-heavy asymmetry drives cache-first redirect paths — a canonical pattern from AOSA. Writes are rare enough to tolerate slightly slower persistence; reads need sub-10ms redirects. Architectural choice centers on cache placement and invalidation, not linked-list algorithms."
+    },
+    {
+      "id": "B8-003",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "interview",
+      "tags": ["rate-limiter", "distributed", "architecture"],
+      "source": "Email sample topics; AOSA distsys",
+      "question": "You need a distributed rate limiter enforcing 1000 requests/minute per API key across hundreds of stateless servers. Which architectural approach scales best?",
+      "options": [
+        "Centralized counter store (Redis/Memcached) with atomic increment and TTL windows, or token bucket per key",
+        "Local in-memory counters on each server with no coordination",
+        "A relational table with row-level lock on every request",
+        "Rate limiting only at the client SDK with no server enforcement"
+      ],
+      "correctIndex": 0,
+      "explanation": "Distributed rate limiting requires shared state or approximate coordination. Centralized counters with sliding/fixed windows are the standard architectural pattern. Per-server counters over-allow by N×; DB row locks don't scale to request-rate granularity."
+    },
+    {
+      "id": "B8-004",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "foundational",
+      "tags": ["rate-limiter", "placement", "architecture"],
+      "source": "AOSA distsys load balancers",
+      "question": "Where should rate limiting sit architecturally for a public API with multiple microservices behind a gateway?",
+      "options": [
+        "At the API gateway/edge before routing to backends, with optional finer-grained limits per service",
+        "Only inside each microservice with no edge enforcement",
+        "Only in the database layer after queries execute",
+        "Rate limiting is unnecessary if you use HTTPS"
+      ],
+      "correctIndex": 0,
+      "explanation": "Edge/gateway placement protects the entire fleet from abuse early, reduces wasted downstream work, and centralizes policy. Per-service limits add nuance but edge enforcement is the architectural first line — consistent with AOSA's reverse proxy and load balancer patterns."
+    },
+    {
+      "id": "B8-005",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "interview",
+      "tags": ["metrics-pipeline", "ingestion", "architecture"],
+      "source": "Email sample topics; AOSA distsys",
+      "question": "Designing a metrics/logging pipeline for 500K events/sec, which v1 ingestion architecture should you propose?",
+      "options": [
+        "Agents on hosts batch and ship to a partitioned message bus; consumers write to time-series or columnar storage",
+        "Synchronous RPC from each host directly to a single SQL database row per event",
+        "Store raw logs only on local disk with no aggregation path",
+        "Email logs to operators in real time for manual review"
+      ],
+      "correctIndex": 0,
+      "explanation": "High-volume metrics pipelines use async ingestion (Kafka/Pub-Sub), batching, and partitioned consumers — the MapReduce/streaming pattern from email topic lists. Sync per-event DB writes cannot sustain hundreds of thousands of events/sec architecturally."
+    },
+    {
+      "id": "B8-006",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "deep-dive",
+      "tags": ["metrics-pipeline", "query", "aggregation"],
+      "source": "Email rubric; AOSA distsys",
+      "question": "Dashboard queries aggregate metrics over 30-day windows across millions of time series. Which storage/query architectural trade-off fits?",
+      "options": [
+        "Pre-aggregate at ingest into rollups (1m, 1h, 1d); query layer selects granularity by time range",
+        "Store only raw events and scan all rows on every dashboard load",
+        "Keep metrics in application heap memory for fastest reads",
+        "Use a graph traversal engine because metrics form dependencies"
+      ],
+      "correctIndex": 0,
+      "explanation": "Metrics systems architecturally separate hot raw retention from rolled-up long-term storage. Pre-aggregation at ingest trades write complexity for bounded query cost — standard in observability pipeline design, not LeetCode-style data structure tricks."
+    },
+    {
+      "id": "B8-007",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "interview",
+      "tags": ["distributed-cache", "consistency", "architecture"],
+      "source": "AOSA distsys caching; email topic list",
+      "question": "A distributed cache sits in front of a database. Which cache invalidation architecture handles updated records correctly under concurrent writers?",
+      "options": [
+        "Write-through or cache-aside with explicit invalidation/version keys; TTL as safety net",
+        "Infinite TTL with no invalidation because caches are always faster",
+        "Delete the entire cache cluster on every single write globally",
+        "Cache only static configuration; never cache dynamic user data"
+      ],
+      "correctIndex": 0,
+      "explanation": "Cache-aside with explicit invalidation or write-through on mutation is the canonical pattern from AOSA. TTL alone risks stale reads; global flush doesn't scale. Architectural discussion focuses on consistency window acceptance, not implementing LRU in code."
+    },
+    {
+      "id": "B8-008",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "foundational",
+      "tags": ["distributed-cache", "partitioning", "architecture"],
+      "source": "AOSA distsys; email DHT topic",
+      "question": "A distributed cache must scale beyond one machine's memory. Which sharding approach should you describe architecturally?",
+      "options": [
+        "Consistent hashing over cache keys across nodes with virtual nodes for even distribution",
+        "Randomly assign each request to any cache node regardless of key",
+        "Replicate the full dataset to every node always",
+        "Shard by request arrival time instead of key"
+      ],
+      "correctIndex": 0,
+      "explanation": "Consistent hashing (DHT concept from email topic list) enables horizontal cache scale with minimal remapping on node add/remove. Architectural interviews test why key-based partitioning beats random or full replication for large working sets."
+    },
+    {
+      "id": "B8-009",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "interview",
+      "tags": ["web-crawler", "frontier", "architecture"],
+      "source": "Email sample topics; AOSA distsys",
+      "question": "Architecturally, what is the core challenge of a polite large-scale web crawler?",
+      "options": [
+        "Maintaining a scalable URL frontier with deduplication, per-host rate limits, and prioritized fetch scheduling",
+        "Parsing HTML with regular expressions faster than browsers",
+        "Storing crawled pages only in process memory on one machine",
+        "Fetching every URL on the internet simultaneously without coordination"
+      ],
+      "correctIndex": 0,
+      "explanation": "Web crawler system design centers on frontier queue architecture, bloom-filter dedup, politeness per domain, and distributed fetch workers — not HTML parsing code. Email lists crawlers among canonical large-system topics."
+    },
+    {
+      "id": "B8-010",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "interview",
+      "tags": ["web-crawler", "storage", "blob-metadata"],
+      "source": "AOSA image hosting example",
+      "question": "A crawler stores billions of fetched pages. Separating metadata from content architecturally means:",
+      "options": [
+        "Index URL, checksum, fetch time, and size in a queryable store; store raw page bytes in object/blob storage",
+        "Store everything in a single JSON column in one SQL table",
+        "Keep all pages in the crawler's heap and discard after indexing",
+        "Use only a filesystem with no index because paths are unique"
+      ],
+      "correctIndex": 0,
+      "explanation": "Metadata/blob separation (from AOSA image-hosting and email rubric) lets you scale cheap object storage for bytes and fast indexes for lookup. This pattern recurs across crawlers, photo apps, and notification attachments."
+    },
+    {
+      "id": "B8-011",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "foundational",
+      "tags": ["notification-system", "async", "architecture"],
+      "source": "Email sample topics; AOSA message queues",
+      "question": "A notification system must deliver email, SMS, and push from one API call. Which v1 architecture decouples channels appropriately?",
+      "options": [
+        "API enqueues notification events; channel-specific workers consume from queues with retry and dead-letter handling",
+        "API synchronously calls every third-party provider before returning to the user",
+        "Single monolithic worker sends all channels sequentially in one thread on one machine",
+        "Users poll an endpoint every second to check for notifications"
+      ],
+      "correctIndex": 0,
+      "explanation": "Notification systems are canonical async fan-out designs: durable queue, per-channel workers, idempotent delivery. Sync third-party calls on the API path violate latency and reliability goals — standard message-queue pattern from AOSA."
+    },
+    {
+      "id": "B8-012",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "interview",
+      "tags": ["notification-system", "preferences", "architecture"],
+      "source": "Email rubric; mock system design",
+      "question": "Users configure per-channel notification preferences and quiet hours. Where should preference evaluation architecturally occur?",
+      "options": [
+        "Before enqueue or at a routing service that filters/suppresses before channel workers execute",
+        "Only in the mobile client after all messages are already sent",
+        "Hard-coded in each channel worker with no shared preference store",
+        "Preferences are irrelevant for v1 system design"
+      ],
+      "correctIndex": 0,
+      "explanation": "Preference routing is an architectural gate between intent and delivery — typically a dedicated service or pipeline stage reading a preference store. Late filtering wastes provider quota and annoys users; client-only filtering is unreliable."
+    },
+    {
+      "id": "B8-013",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "foundational",
+      "tags": ["rest-api", "design", "interfaces"],
+      "source": "Email rubric — interfaces/APIs OK",
+      "question": "Designing REST APIs for a large user-generated content service, which principle best supports evolvability?",
+      "options": [
+        "Resource-oriented URLs, explicit versioning, pagination cursors, and consistent error schemas",
+        "RPC-style endpoints named after internal function names with no versioning",
+        "Return HTTP 200 with error details in body for all failure cases",
+        "Embed all related entities deeply nested in every response always"
+      ],
+      "correctIndex": 0,
+      "explanation": "Email rubric allows API/payload design at pseudocode level. REST best practices for large systems emphasize stable resource models, version headers/paths, cursor pagination at scale, and machine-readable errors — architectural interface design, not implementation."
+    },
+    {
+      "id": "B8-014",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "interview",
+      "tags": ["rest-api", "idempotency", "architecture"],
+      "source": "Email rubric; distributed systems fundamentals",
+      "question": "A payment API may receive duplicate POST requests due to client retries. Which architectural API design mitigates double charges?",
+      "options": [
+        "Require client-supplied idempotency keys; server deduplicates within a TTL window",
+        "Use GET instead of POST for all mutating operations",
+        "Disable all client retries globally",
+        "Rely on the database primary key alone without application-level dedup"
+      ],
+      "correctIndex": 0,
+      "explanation": "Idempotency keys are standard architectural API design for unreliable networks — conceptual exactly-once from email topic list. This is an interface contract decision, not a coding exercise about HTTP libraries."
+    },
+    {
+      "id": "B8-015",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "interview",
+      "tags": ["metadata-blob", "storage", "architecture"],
+      "source": "AOSA image hosting; Systems Architecture video SA-V3",
+      "question": "An image hosting service stores photos up to 20 MB each with searchable tags and upload timestamps. Why separate metadata from blob storage architecturally?",
+      "options": [
+        "Metadata needs indexed queries; blobs need cheap durable object storage with CDN delivery — different access patterns and cost profiles",
+        "Blobs must live in SQL BLOB columns for transactional guarantees on every byte",
+        "Metadata and blobs must always co-locate on the same disk for performance",
+        "Separation is only needed below 1 GB total storage"
+      ],
+      "correctIndex": 0,
+      "explanation": "SA-V3 mentions separating data vs metadata. AOSA's image hosting example is the canonical reference: SQL/NoSQL for searchable metadata, object store + CDN for bytes. Interviewers test whether you match storage tier to access pattern."
+    },
+    {
+      "id": "B8-016",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "deep-dive",
+      "tags": ["evolution", "v1-v3", "scaling"],
+      "source": "NALSD; email rubric",
+      "question": "A startup's messaging app evolves: v1 single DB, v2 read replicas, v3 sharded multi-region. What architectural driver most likely triggered v2?",
+      "options": [
+        "Read traffic exceeded single-primary capacity; replicas offload reads while writes still hit primary",
+        "Developers wanted to use a new programming language",
+        "Users requested dark mode in the UI",
+        "Legal requirement to delete all message history"
+      ],
+      "correctIndex": 0,
+      "explanation": "v1→v3 evolution under load is a standard interview narrative: vertical scale → read replicas → shard/partition → multi-region. Each step addresses a measured bottleneck. NALSD's iterative design expects you to tie version changes to concrete scaling or reliability triggers."
+    },
+    {
+      "id": "B8-017",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "interview",
+      "tags": ["evolution", "search", "index"],
+      "source": "Email topic list — indexes; AOSA distsys",
+      "question": "Autocomplete search over product names must return suggestions within 50 ms for 10M products. Which architectural index choice fits (not a coding question)?",
+      "options": [
+        "Prefix index or trie-like structure (or search engine) optimized for prefix queries, possibly sharded by prefix",
+        "Full table scan on every keystroke sorted alphabetically",
+        "Store products in a linked list for sequential traversal",
+        "Client-side brute force over a downloaded 10M JSON file"
+      ],
+      "correctIndex": 0,
+      "explanation": "Email lists indexes as a systems architecture topic. Autocomplete is an architectural index problem: prefix indexes, dedicated search engines (Elasticsearch), or trie shards — not linked-list reversal. Choose structure based on query pattern at scale."
+    },
+    {
+      "id": "B8-018",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "foundational",
+      "tags": ["architecture", "data-structure-choice", "hash-vs-index"],
+      "source": "Email rubric — architectural not coding",
+      "question": "A system needs O(1) lookup of user sessions by session token with no range queries. Which architectural storage choice is most appropriate to discuss?",
+      "options": [
+        "Distributed hash/key-value store keyed by session token",
+        "B-tree index on a relational table when only point lookups are needed",
+        "Graph database because sessions relate users to actions",
+        "Append-only log scan for every authentication request"
+      ],
+      "correctIndex": 0,
+      "explanation": "Email explicitly says test *when* hash vs index vs graph is the right architectural choice — not LeetCode implementations. Pure point lookups by opaque key map to hash/KV designs; B-trees add value for range scans you don't need."
+    },
+    {
+      "id": "B8-019",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "interview",
+      "tags": ["evolution", "api-versioning", "architecture"],
+      "source": "Email rubric; NALSD iteration",
+      "question": "v2 of your API introduces breaking payload changes while v1 clients still exist. Which evolution strategy preserves operability?",
+      "options": [
+        "Run v1 and v2 endpoints concurrently with deprecation timeline; gateway routes by version header or path",
+        "Force all clients to upgrade simultaneously with no backward compatibility",
+        "Silently change v1 response schema and fix client bugs in production",
+        "Abandon API versioning and embed schema version in every field name"
+      ],
+      "correctIndex": 0,
+      "explanation": "Large-system evolution requires parallel API versions and explicit deprecation — part of v1→v3 thinking under real-world constraints. NALSD iteration applies to interfaces as well as infrastructure; breaking all clients at once is not viable at scale."
+    },
+    {
+      "id": "B8-020",
+      "module": "B8",
+      "section": "B8",
+      "difficulty": "deep-dive",
+      "tags": ["synthesis", "architecture", "requirements"],
+      "source": "Email rubric; mock system design",
+      "question": "The interviewer asks you to design 'a system like Twitter's home timeline.' Which first architectural fork best separates concerns?",
+      "options": [
+        "Clarify read vs write ratio and fan-out strategy (push fan-out on write vs pull on read vs hybrid)",
+        "Immediately choose a specific database brand without requirements",
+        "Design the mobile UI color scheme for tweet cards",
+        "Implement a red-black tree for storing tweets in memory"
+      ],
+      "correctIndex": 0,
+      "explanation": "Canonical social feed design hinges on the fan-out architectural choice — push, pull, or hybrid — driven by follower distribution and read/write ratio. This is the high-level fork interviewers expect before storage or API details; it tests architectural judgment, not coding."
+    }
+  ]
+}

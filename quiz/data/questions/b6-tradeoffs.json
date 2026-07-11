@@ -1,0 +1,174 @@
+{
+  "questions": [
+    {
+      "id": "B6-001",
+      "module": "B6",
+      "section": "B6",
+      "difficulty": "foundational",
+      "tags": ["trade-offs", "storage", "latency", "cost"],
+      "source": "Systems Architecture video (Gg318hR5JY0) SA-V4; AOSA distsys",
+      "question": "You are designing a photo archive where users rarely access images older than one year, but must be able to retrieve them within seconds when requested. Which storage trade-off best matches this access pattern?",
+      "options": [
+        "Store hot recent photos in flash/SSD and tier older photos to cheaper rotating disk",
+        "Store all photos in memory for uniform low latency regardless of age",
+        "Use only rotating disk everywhere because it is the cheapest per gigabyte",
+        "Replicate every photo to flash in every region to eliminate latency variance"
+      ],
+      "correctIndex": 0,
+      "explanation": "The official Systems Architecture prep video emphasizes that rotating disk offers cheaper storage at higher latency, while flash/memory trade cost for speed. Tiering matches infrequent old access with cost efficiency while keeping recent data fast — a classic trade-off interviewers expect you to articulate explicitly."
+    },
+    {
+      "id": "B6-002",
+      "module": "B6",
+      "section": "B6",
+      "difficulty": "interview",
+      "tags": ["trade-offs", "sql", "nosql", "access-patterns"],
+      "source": "Email rubric; AOSA distsys",
+      "question": "A social feed service needs fast reads of denormalized timelines keyed by user ID, tolerates eventual consistency, and rarely performs cross-user joins. Which database trade-off is most appropriate to discuss first?",
+      "options": [
+        "A wide-column or document store optimized for key-based reads over normalized SQL joins",
+        "A fully normalized relational schema with strict ACID across all feed tables",
+        "An in-memory-only store with no persistence because reads dominate",
+        "A graph database because social networks are inherently graphs"
+      ],
+      "correctIndex": 0,
+      "explanation": "SQL vs NoSQL is not about 'correctness' but access pattern fit. Timeline reads by user ID map naturally to key-value or wide-column designs with denormalized rows. SQL excels at complex joins and strong consistency — less critical here. Interviewers want you to match the datastore to read/write shape and consistency needs."
+    },
+    {
+      "id": "B6-003",
+      "module": "B6",
+      "section": "B6",
+      "difficulty": "interview",
+      "tags": ["trade-offs", "sync", "async", "coupling"],
+      "source": "AOSA distsys; email rubric",
+      "question": "An e-commerce checkout must confirm payment before showing an order receipt, but sending a confirmation email can wait. How should you frame the sync vs async trade-off?",
+      "options": [
+        "Process payment synchronously on the critical path; enqueue email delivery asynchronously",
+        "Make both payment and email fully synchronous so the user sees end-to-end consistency",
+        "Make payment asynchronous and poll for completion to reduce load on the payment gateway",
+        "Skip email entirely in v1 because async adds unacceptable complexity"
+      ],
+      "correctIndex": 0,
+      "explanation": "Sync processing preserves user-visible correctness on the critical path (payment confirmed before receipt). Async decouples non-critical work (email) to improve latency and resilience. The trade-off is coupling vs responsiveness — a coherent design separates what the user must wait for from what can happen later."
+    },
+    {
+      "id": "B6-004",
+      "module": "B6",
+      "section": "B6",
+      "difficulty": "deep-dive",
+      "tags": ["trade-offs", "kafka", "message-queue", "ordering"],
+      "source": "AOSA distsys; email rubric",
+      "question": "You need a durable work queue for order-fulfillment events that must survive consumer restarts, support replay, and handle high throughput with partition-level ordering. Kafka vs a database-backed queue — which trade-off favors Kafka?",
+      "options": [
+        "Kafka's log-based, partitioned design gives replay and ordering at scale; a DB queue simplifies ops but bottlenecks on DB write throughput",
+        "A DB queue is always superior because transactions guarantee exactly-once without extra infrastructure",
+        "Kafka eliminates the need for any persistence layer because consumers hold all state",
+        "Neither is appropriate; synchronous RPC between services is simpler and equally scalable"
+      ],
+      "correctIndex": 0,
+      "explanation": "Kafka trades operational complexity for scalable, ordered, replayable streams. DB queues reuse existing infrastructure but often become write-limited and costly at high volume. The interview answer is not 'always Kafka' — it is explaining when log semantics and partition ordering justify the added system."
+    },
+    {
+      "id": "B6-005",
+      "module": "B6",
+      "section": "B6",
+      "difficulty": "foundational",
+      "tags": ["trade-offs", "normalization", "denormalization"],
+      "source": "AOSA distsys; email rubric",
+      "question": "A read-heavy product catalog page displays product name, price, inventory count, and seller rating together. Queries run thousands of times per second. Which normalization trade-off is most defensible?",
+      "options": [
+        "Denormalize frequently co-read fields into a single document or row to avoid joins on every page load",
+        "Fully normalize into five tables and join on every read to guarantee zero write amplification",
+        "Store only product IDs and fetch each attribute from a separate microservice synchronously",
+        "Avoid any schema design until traffic exceeds one million QPS"
+      ],
+      "correctIndex": 0,
+      "explanation": "Normalization reduces update anomalies; denormalization reduces read latency and join cost. For read-heavy, co-displayed data, controlled denormalization with explicit invalidation strategy is a standard trade-off. Interviewers score whether you can articulate the write-amplification cost you accept for read performance."
+    },
+    {
+      "id": "B6-006",
+      "module": "B6",
+      "section": "B6",
+      "difficulty": "interview",
+      "tags": ["trade-offs", "memory", "disk", "estimation"],
+      "source": "Systems Architecture video SA-V3; AOSA distsys",
+      "question": "Rough latency hierarchy from fastest to slowest for a single random read in a well-provisioned system is typically:",
+      "options": [
+        "CPU cache / main memory → SSD/flash → rotating disk → cross-continent network RTT",
+        "Rotating disk → main memory → SSD → cross-continent network RTT",
+        "Cross-continent network RTT → SSD → main memory → rotating disk",
+        "All storage tiers have equivalent latency if you use a load balancer"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Systems Architecture prep video stresses quantitative intuition: memory reads are orders of magnitude faster than disk, and local network RTT is far cheaper than cross-continental hops. Knowing this hierarchy lets you justify caching, tiering, and regional placement — not memorize exact nanoseconds."
+    },
+    {
+      "id": "B6-007",
+      "module": "B6",
+      "section": "B6",
+      "difficulty": "interview",
+      "tags": ["trade-offs", "coherent-design", "email-rubric"],
+      "source": "Email rubric — trade-offs section",
+      "question": "During a system design interview, you propose Cassandra for a workload that clearly needs strong relational joins. The interviewer asks why. What demonstrates the strongest trade-off thinking?",
+      "options": [
+        "Acknowledge the mismatch, explain why another store fits the access pattern better, and describe what you would sacrifice or gain with each option",
+        "Insist Cassandra is always the right choice at Google scale regardless of access pattern",
+        "Switch topics to sharding without addressing the datastore concern",
+        "Ask to skip storage design because it is not part of the rubric"
+      ],
+      "correctIndex": 0,
+      "explanation": "The recruiter email explicitly states that implications matter more than a single 'correct' choice and that a coherent design beats memorized answers. Acknowledging trade-offs, rejected alternatives, and consistency with requirements shows mature engineering judgment — exactly what B6 evaluates."
+    },
+    {
+      "id": "B6-008",
+      "module": "B6",
+      "section": "B6",
+      "difficulty": "foundational",
+      "tags": ["trade-offs", "cdn", "push", "pull"],
+      "source": "AOSA distsys",
+      "question": "Static assets (JavaScript bundles, images) for a global web app must load quickly worldwide. Which CDN trade-off should you describe?",
+      "options": [
+        "Push popular assets to edge caches proactively; use longer TTLs and cache invalidation for updates",
+        "Pull every asset from origin on each user request to guarantee freshness",
+        "Disable CDN caching entirely to simplify debugging during the interview",
+        "Store assets only in the primary datacenter and rely on users' ISP caching"
+      ],
+      "correctIndex": 0,
+      "explanation": "CDN push (or prefetch) vs pull is a latency/freshness trade-off. Static assets with versioned filenames tolerate long TTLs at the edge, reducing origin load and cross-region RTT. Pull-on-miss is simpler for highly dynamic content. Articulating when to invalidate vs version assets shows practical CDN thinking."
+    },
+    {
+      "id": "B6-009",
+      "module": "B6",
+      "section": "B6",
+      "difficulty": "interview",
+      "tags": ["trade-offs", "consistency", "availability"],
+      "source": "AOSA distsys; email rubric",
+      "question": "A collaborative document editor can show a teammate's cursor with a 200 ms delay but must never lose committed text edits. Which trade-off framing is most appropriate?",
+      "options": [
+        "Strong consistency/durability for committed edits; eventual consistency acceptable for ephemeral presence data",
+        "Strong consistency for all data including cursor positions to eliminate any visual lag",
+        "Eventual consistency everywhere to maximize availability during network partitions",
+        "No consistency model discussion is needed if you shard by document ID"
+      ],
+      "correctIndex": 0,
+      "explanation": "Different data within one product carries different consistency requirements. Committed edits need durability and strong guarantees; presence/cursor data is latency-sensitive and tolerates staleness. Splitting requirements avoids a false binary of 'CP vs AP' for the entire system — a hallmark of good trade-off analysis."
+    },
+    {
+      "id": "B6-010",
+      "module": "B6",
+      "section": "B6",
+      "difficulty": "deep-dive",
+      "tags": ["trade-offs", "documentation", "iteration"],
+      "source": "Systems Architecture video SA-V4; NALSD",
+      "question": "You have time to present one v1 architecture and one improvement pass. What best satisfies the 'trade-offs and compromises' expectation from the official Systems Architecture video?",
+      "options": [
+        "Present a workable v1, name two systematic shortcomings, propose a concrete v2 change, and state what you traded away",
+        "Deliver only the final perfect design without mentioning alternatives to save time",
+        "List ten possible databases without committing to any design",
+        "Focus exclusively on failure modes before establishing any baseline architecture"
+      ],
+      "correctIndex": 0,
+      "explanation": "SA-V4 explicitly asks candidates to identify shortcomings, lay out trade-offs (e.g., disk cost vs latency), consider multiple solutions, commit to one, and iterate. Documenting rejected alternatives and their costs demonstrates the iterative, compromise-aware process Google scores — not a single immutable 'correct' diagram."
+    }
+  ]
+}
