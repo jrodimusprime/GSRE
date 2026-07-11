@@ -1,35 +1,45 @@
 const QuizLoader = (() => {
-  function appRoot() {
-    const script = document.currentScript;
-    if (script?.src) {
-      return new URL('.', script.src).href;
+  let baseUrl = null;
+
+  function getDataBase() {
+    if (baseUrl) return baseUrl;
+    const script = document.querySelector('script[src*="quiz/js/loader.js"]');
+    if (script && script.src) {
+      baseUrl = new URL('quiz/data/', new URL('../..', script.src)).href;
+      return baseUrl;
     }
-    return new URL('./quiz/js/', window.location.href).href;
+    const path = location.pathname.replace(/\/?index\.html$/, '');
+    const prefix = path.endsWith('/') ? path : `${path}/`;
+    baseUrl = `${location.origin}${prefix}quiz/data/`;
+    return baseUrl;
   }
 
-  const ROOT = appRoot().replace(/quiz\/js\/?$/, '');
-  const BASE = `${ROOT}quiz/data/`;
   let cache = { sections: null, video: null, supplemental: {}, allQuestions: null };
+
+  async function fetchJson(path) {
+    const res = await fetch(`${getDataBase()}${path}`);
+    if (!res.ok) {
+      throw new Error(`Failed to load ${path} (${res.status})`);
+    }
+    return res.json();
+  }
 
   async function loadSections() {
     if (cache.sections) return cache.sections;
-    const res = await fetch(`${BASE}sections.json`);
-    cache.sections = await res.json();
+    cache.sections = await fetchJson('sections.json');
     return cache.sections;
   }
 
   async function loadVideoQuestions() {
     if (cache.video) return cache.video;
-    const res = await fetch(`${BASE}questions/sa-video.json`);
-    const data = await res.json();
+    const data = await fetchJson('questions/sa-video.json');
     cache.video = data.questions || data;
     return cache.video;
   }
 
   async function loadSupplemental(file) {
     if (cache.supplemental[file]) return cache.supplemental[file];
-    const res = await fetch(`${BASE}${file}`);
-    const data = await res.json();
+    const data = await fetchJson(file);
     cache.supplemental[file] = data.questions || data;
     return cache.supplemental[file];
   }
@@ -90,5 +100,6 @@ const QuizLoader = (() => {
     getModuleQuestions,
     getAllQuestions,
     shuffle,
+    getDataBase,
   };
 })();

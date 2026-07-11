@@ -5,11 +5,17 @@ const QuizApp = (() => {
 
   async function init() {
     config = await QuizLoader.loadSections();
+    if (!config || !Array.isArray(config.modules) || !config.modules.length) {
+      throw new Error('sections.json is missing modules');
+    }
     moduleById = Object.fromEntries(config.modules.map((m) => [m.id, m]));
     const allIds = config.modules.map((m) => m.id);
     enabledModules = QuizStorage.getEnabledModules(allIds);
 
     const questions = await QuizLoader.getAllQuestions();
+    if (!questions.length) {
+      throw new Error('No questions loaded');
+    }
     QuizEngine.init(questions, enabledModules);
 
     QuizUI.refresh(config.modules, enabledModules);
@@ -64,9 +70,27 @@ const QuizApp = (() => {
       return;
     }
     const mod = moduleById[q.module];
-    QuizUI.renderQuestion(q, QuizEngine.currentShuffledOptions(), mod?.title || q.module);
+    QuizUI.renderQuestion(
+      q,
+      QuizEngine.currentShuffledOptions(),
+      (mod && mod.title) || q.module
+    );
   }
 
-  document.addEventListener('DOMContentLoaded', init);
-  return { init };
+  async function boot() {
+    try {
+      await init();
+    } catch (err) {
+      console.error('Quiz init failed:', err);
+      QuizUI.showInitError(err);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+  return { init, boot };
 })();

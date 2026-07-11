@@ -83,6 +83,18 @@ const QuizUI = (() => {
     el('next-btn').classList.add('hidden');
   }
 
+  function showInitError(err) {
+    el('quiz-meta').textContent = '';
+    el('question-text').textContent = 'Could not load the quiz. Try refreshing the page.';
+    el('options').innerHTML = '';
+    el('video-link').innerHTML = '';
+    const exp = el('explanation');
+    exp.classList.remove('hidden', 'correct');
+    exp.classList.add('incorrect');
+    exp.innerHTML = `<strong>Load error</strong><p>${err && err.message ? err.message : 'Unknown error'}</p>`;
+    el('next-btn').classList.add('hidden');
+  }
+
   function showFeedback(correct, explanation) {
     const exp = el('explanation');
     exp.classList.remove('hidden');
@@ -104,6 +116,7 @@ const QuizUI = (() => {
     renderSectionStats,
     renderQuestion,
     showEmptyPool,
+    showInitError,
     showFeedback,
     refresh,
   };

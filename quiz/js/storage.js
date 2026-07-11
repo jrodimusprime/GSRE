@@ -50,7 +50,7 @@ const QuizStorage = (() => {
 
   function getEnabledModules(allModuleIds) {
     const saved = load().enabledModules;
-    if (!saved || !saved.length) return new Set(allModuleIds);
+    if (!Array.isArray(saved) || !saved.length) return new Set(allModuleIds);
     const valid = saved.filter((id) => allModuleIds.includes(id));
     return valid.length ? new Set(valid) : new Set(allModuleIds);
   }
