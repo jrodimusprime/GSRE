@@ -1,0 +1,164 @@
+{
+  "questions": [
+    {
+      "id": "C5-001",
+      "module": "C5",
+      "difficulty": "interview",
+      "tags": ["sre-manager", "people-management", "reddit:da4h29"],
+      "source": "reddit:da4h29; Jointaro SRE Manager reports",
+      "question": "A Reddit candidate asked whether SRE Manager interviews are less technical than IC loops. What is the best answer for your prep?",
+      "options": [
+        "Manager loops stay technical (e.g., code review, NALSD) plus leadership scenarios — not a reduced technical bar",
+        "Managers are evaluated only on people skills; technical rounds are optional decoration",
+        "All manager candidates must pass the same LeetCode hard loop as new-grad SWEs",
+        "Google skips Systems Architecture for anyone with 'Manager' in the title"
+      ],
+      "correctIndex": 0,
+      "explanation": "r/devops da4h29 and Jointaro SRE Manager experiences report leadership fundamentals, code review, NALSD, troubleshooting, and Googleyness — technical depth plus people leadership."
+    },
+    {
+      "id": "C5-002",
+      "module": "C5",
+      "difficulty": "interview",
+      "tags": ["sre-manager", "performance-management", "reddit:jointaro"],
+      "source": "reddit:da4h29; Jointaro Google SRE Manager",
+      "question": "Jointaro reports a Google SRE Manager question: 'How do you manage a high performer versus a low performer?' What demonstrates SRE manager maturity?",
+      "options": [
+        "High performers: stretch goals and visibility; low performers: clear expectations, coaching plan, timely feedback — not identical treatment",
+        "Treat both identically to avoid perception of favoritism",
+        "Move low performers to on-call only until they quit",
+        "Only high performers need 1:1s; low performers get annual reviews"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reddit-adjacent manager loop questions test differentiated coaching: amplify high performers while giving low performers structured support, documentation, and clear improvement paths."
+    },
+    {
+      "id": "C5-003",
+      "module": "C5",
+      "difficulty": "interview",
+      "tags": ["sre-manager", "error-budget", "reddit:140ma5t"],
+      "source": "reddit:140ma5t; SRE book",
+      "question": "Your product partner wants to ship during an exhausted error budget. As SRE manager, what is the strongest response?",
+      "options": [
+        "Frame trade-offs with data: budget burn, user impact, and options (freeze, canary, rollback plan) — negotiate don’t just block",
+        "Always say yes — error budgets are not real at manager level",
+        "Disable all monitoring so the budget stops counting",
+        "Escalate to HR instead of discussing reliability"
+      ],
+      "correctIndex": 0,
+      "explanation": "r/sre 140ma5t and SRE culture expect managers to partner on velocity vs reliability using error budgets as a decision tool, not a bureaucratic veto."
+    },
+    {
+      "id": "C5-004",
+      "module": "C5",
+      "difficulty": "interview",
+      "tags": ["sre-manager", "on-call", "reddit:raabnp"],
+      "source": "reddit:raabnp; DEV SRE hiring guide",
+      "question": "Reddit r/sre thread on walking away from bad SRE jobs flags on-call burnout. As manager, what systemic fix best prevents burnout?",
+      "options": [
+        "Alert hygiene, fair rotation, track incident load per engineer, and reduce toil — not heroics culture",
+        "Pay overtime for every page regardless of root cause",
+        "Add more people to rotation without fixing noisy alerts",
+        "Eliminate postmortems to save time"
+      ],
+      "correctIndex": 0,
+      "explanation": "raabnp and hiring guides emphasize maturity signals: SLOs, alert quality, and sustainable rotations — managers own the system, not individual heroics."
+    },
+    {
+      "id": "C5-005",
+      "module": "C5",
+      "difficulty": "interview",
+      "tags": ["sre-manager", "influence", "reddit:1346wln"],
+      "source": "reddit:1346wln SRE interviewer perspective",
+      "question": "An SRE interviewer on r/ITCareerQuestions stresses revenue-center vs cost-center SRE teams. As manager pitching reliability work, what resonates with product leadership?",
+      "options": [
+        "Tie reliability investments to user-visible outcomes and revenue risk — not 'ops purity'",
+        "Lead with Kubernetes certification counts",
+        "Argue that features should stop until 100% uptime forever",
+        "Avoid metrics — leadership prefers anecdotes only"
+      ],
+      "correctIndex": 0,
+      "explanation": "1346wln notes hiring teams care whether candidates understand business context. Managers must translate SLOs and error budgets into product and revenue language."
+    },
+    {
+      "id": "C5-006",
+      "module": "C5",
+      "difficulty": "interview",
+      "tags": ["sre-manager", "code-review-culture", "reddit:da4h29"],
+      "source": "reddit:da4h29; Google eng-practices",
+      "question": "Your team’s code reviews bottleneck on you. What is the best manager intervention?",
+      "options": [
+        "Train reviewers on eng-practices standards, rotate review load, and clarify what requires manager sign-off vs peer review",
+        "Review every CL yourself to guarantee quality",
+        "Eliminate code review to increase velocity",
+        "Outsource reviews to a different time zone without context"
+      ],
+      "correctIndex": 0,
+      "explanation": "Manager code-review rounds test whether you scale quality through culture and standards — da4h29’s manager track includes code review as a technical signal."
+    },
+    {
+      "id": "C5-007",
+      "module": "C5",
+      "difficulty": "interview",
+      "tags": ["sre-manager", "hiring", "reddit:1346wln"],
+      "source": "reddit:1346wln; USENIX hiring SRE",
+      "question": "When hiring SRE ICs, r/ITCareerQuestions SRE interviewer post emphasizes practical signals over resume keywords. What should you prioritize?",
+      "options": [
+        "Systems thinking, debugging approach, automation mindset, and communication under ambiguity",
+        "Maximum certifications listed on LinkedIn",
+        "Only candidates who memorized kernel struct layouts",
+        "Candidates who refuse to write code or scripts"
+      ],
+      "correctIndex": 0,
+      "explanation": "1346wln hiring perspective: teams want engineers who can operate at scale with software skills — aligned with USENIX/Google SRE hiring bar."
+    },
+    {
+      "id": "C5-008",
+      "module": "C5",
+      "difficulty": "interview",
+      "tags": ["sre-manager", "incident-comms", "reddit:1kdf6fn"],
+      "source": "reddit:1kdf6fn G&L comments; C4 behavioral",
+      "question": "During a Sev-1 during an exec demo, Reddit G&L prep (1kdf6fn) suggests staying conversational under pressure. As manager, first priority?",
+      "options": [
+        "Assign incident commander, communicate status to stakeholders, and drive mitigation — stay factual and calm",
+        "Hide the outage until the demo ends",
+        "Blame the demo team publicly in the incident channel",
+        "Wait for root cause before any customer or exec update"
+      ],
+      "correctIndex": 0,
+      "explanation": "G&L comments emphasize composure and communication. Managers model mitigation-first incident leadership while keeping stakeholders informed."
+    },
+    {
+      "id": "C5-009",
+      "module": "C5",
+      "difficulty": "deep-dive",
+      "tags": ["sre-manager", "build-vs-buy", "reddit:140ma5t"],
+      "source": "reddit:140ma5t; startup SRE manager guides",
+      "question": "Leadership asks you to choose observability tooling on a tight budget. What framework fits SRE manager interviews?",
+      "options": [
+        "Evaluate against SLO needs, integration cost, operability, and team skill — open source vs vendor is a trade-off not a religion",
+        "Always buy the most expensive enterprise suite",
+        "Always build everything in-house regardless of opportunity cost",
+        "Defer observability until after the next reorg"
+      ],
+      "correctIndex": 0,
+      "explanation": "Manager scenarios from Reddit and public guides test pragmatic build/buy reasoning tied to reliability outcomes and team capacity."
+    },
+    {
+      "id": "C5-010",
+      "module": "C5",
+      "difficulty": "interview",
+      "tags": ["sre-manager", "why-google", "reddit:niomfp"],
+      "source": "reddit:niomfp FAANG SRE advice",
+      "question": "niomfp’s FAANG SRE Reddit post warns that big-company SRE is not for everyone. A strong 'Why SRE manager at Google?' answer includes:",
+      "options": [
+        "Specific interest in Google-scale reliability problems and leading engineers through SRE practices — honest about trade-offs",
+        "Generic praise that Google is the best company on Earth",
+        "Focus only on compensation with no technical or leadership angle",
+        "Claim you want to stop doing technical work entirely"
+      ],
+      "correctIndex": 0,
+      "explanation": "niomfp emphasizes realistic expectations. Googleyness and manager loops reward thoughtful motivation — scale, learning, and leadership — not empty flattery."
+    }
+  ]
+}

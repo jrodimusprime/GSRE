@@ -159,6 +159,134 @@
       ],
       "correctIndex": 0,
       "explanation": "SRE book Ch. 4: error budgets convert SLOs into allowable failure—NALSD cites them when dual shard loss may briefly show stale CTR while reprocessing stays within budget."
+    },
+    {
+      "id": "B5-011",
+      "module": "B5",
+      "difficulty": "interview",
+      "tags": ["NALSD", "reddit-nalsd", "reddit:c3lrks", "requirements"],
+      "source": "reddit:c3lrks Failed NALSD at Google",
+      "question": "A Reddit candidate failed NALSD because the interviewer disengaged mid-interview. What is the most likely cause?",
+      "options": [
+        "Skipped critical requirements or napkin math early — interviewer concluded the approach would not scale",
+        "Used too many colors on the whiteboard",
+        "Asked clarifying questions — Google penalizes all questions",
+        "Proposed replication — replication is never allowed in NALSD"
+      ],
+      "correctIndex": 0,
+      "explanation": "c3lrks comments: disengagement often means you missed a key clarifier, capacity estimate, or constraint. NALSD scores process; losing the interviewer early is a signal you went off-track."
+    },
+    {
+      "id": "B5-012",
+      "module": "B5",
+      "difficulty": "interview",
+      "tags": ["NALSD", "reddit-nalsd", "reddit:c3lrks", "capacity"],
+      "source": "reddit:c3lrks; NALSD workbook",
+      "question": "Reddit NALSD failure thread: you must back design choices with numbers. Which estimate is most often missing in failed interviews?",
+      "options": [
+        "Machine/storage/bandwidth counts derived from QPS and retention — not hand-wavy 'we'll shard'",
+        "Exact hex color of the dashboard UI",
+        "Number of interviewers in the loop",
+        "Alphabetical sort order of service names"
+      ],
+      "correctIndex": 0,
+      "explanation": "c3lrks and o6ozcj stress napkin math. Saying 'scale horizontally' without sizing nodes, disks, or network transfer dooms NALSD credibility."
+    },
+    {
+      "id": "B5-013",
+      "module": "B5",
+      "difficulty": "deep-dive",
+      "tags": ["NALSD", "reddit-nalsd", "transfer-time"],
+      "source": "reddit:o6ozcj; HN Google SRE rubric",
+      "question": "You propose replicating 5 PB cross-region over a 10 Gbps link. A Reddit/HN theme in NALSD prep: why might an interviewer push back?",
+      "options": [
+        "Transfer at 10 Gbps takes weeks/months — design must account for physics and recovery time objectives",
+        "5 PB is too small to matter at Google scale",
+        "10 Gbps exceeds all cloud provider limits",
+        "Replication is always instantaneous if you use SSDs"
+      ],
+      "correctIndex": 0,
+      "explanation": "Popular NALSD failure pattern: ignoring transfer time and bandwidth reality. Back-of-envelope: 5 PB at 10 Gbps ≈ 40+ days — unacceptable for many RTOs."
+    },
+    {
+      "id": "B5-014",
+      "module": "B5",
+      "difficulty": "interview",
+      "tags": ["NALSD", "reddit-nalsd", "failure-modes"],
+      "source": "reddit:c3lrks; NALSD resilient phase",
+      "question": "In NALSD, jumping straight to a detailed component diagram without stating user-facing requirements first is weak because:",
+      "options": [
+        "Interviewers cannot tell if the design solves the right problem or meets SLOs — requirements anchor all math",
+        "Google forbids diagrams in NALSD",
+        "Requirements are only for product managers, not SRE",
+        "SLOs are irrelevant to systems design"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reddit failure stories align with official NALSD phases: clarify possible → quantify → resilient. Skipping requirements mirrors c3lrks 'interviewer already decided no-hire' pattern."
+    },
+    {
+      "id": "B5-015",
+      "module": "B5",
+      "difficulty": "interview",
+      "tags": ["NALSD", "reddit-nalsd", "workshop"],
+      "source": "reddit:c3lrks SRECon workshop comments",
+      "question": "Reddit comments note SRECon NALSD workshop examples feel 'trivial' vs real interviews. Best prep adjustment?",
+      "options": [
+        "Practice with a partner on underspecified prompts — force your own clarifiers and full napkin math beyond workshop slides",
+        "Memorize workshop slides verbatim and repeat them",
+        "Skip quantitative sections — workshops don't use numbers",
+        "Only study abstract SWE system design blogs"
+      ],
+      "correctIndex": 0,
+      "explanation": "c3lrks: workshop helps framing but real NALSD goes deeper on calculations. Pair practice with different approaches is repeatedly recommended on Reddit."
+    },
+    {
+      "id": "B5-016",
+      "module": "B5",
+      "difficulty": "interview",
+      "tags": ["NALSD", "reddit-nalsd", "iteration"],
+      "source": "reddit:o6ozcj; NALSD ch 12",
+      "question": "r/sre o6ozcj comments say NALSD is guaranteed in Google SRE loops. When iterating design, what order matches NALSD?",
+      "options": [
+        "Possible → better → feasible (capacity) → resilient → better again",
+        "Resilient first, requirements never",
+        "Pick microservices immediately, then stop",
+        "Only optimize UI mockups"
+      ],
+      "correctIndex": 0,
+      "explanation": "Workbook NALSD phases and Reddit prep threads align: iterate through feasibility and resilience with numbers, not one-shot architecture theater."
+    },
+    {
+      "id": "B5-017",
+      "module": "B5",
+      "difficulty": "interview",
+      "tags": ["NALSD", "reddit-nalsd", "storage"],
+      "source": "reddit:c3lrks; Systems Architecture video",
+      "question": "You estimate 100K writes/sec × 1 KB × 86400 sec/day for logs. Reddit NALSD failures often omit:",
+      "options": [
+        "Retention multiplier — daily ingest × days retained = total storage (plus replication factor)",
+        "The need to multiply by zero",
+        "Converting bytes to bits incorrectly only",
+        "User's favorite programming language"
+      ],
+      "correctIndex": 0,
+      "explanation": "NALSD napkin math must chain: QPS → daily volume → retention window → replication. Missing retention is a common c3lrks-style gap."
+    },
+    {
+      "id": "B5-018",
+      "module": "B5",
+      "difficulty": "deep-dive",
+      "tags": ["NALSD", "reddit-nalsd", "resilience"],
+      "source": "reddit:ExperiencedDevs NALSD; NALSD workbook",
+      "question": "Reddit ExperiencedDevs NALSD confusion thread: when asked 'Is it resilient?', the strongest answer starts with:",
+      "options": [
+        "Named failure modes (machine, rack, zone, region) and how SLO/error budget is preserved under each",
+        "Assertion that cloud providers never fail",
+        "Deleting all backups to save cost",
+        "Single-server design because it's simpler to explain"
+      ],
+      "correctIndex": 0,
+      "explanation": "NALSD resilience phase expects explicit failure analysis — Reddit confusion often comes from treating resilience as buzzword vs structured degradation/failover plan."
     }
   ]
 }

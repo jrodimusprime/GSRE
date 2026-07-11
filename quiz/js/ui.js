@@ -30,24 +30,41 @@ const QuizUI = (() => {
       .join('');
   }
 
-  function renderSectionStats(modules, enabled) {
-    const stats = QuizStorage.getModuleStats();
+  function renderSectionStats(modules, enabled, progressByModule) {
     const grid = el('stats-grid');
     grid.innerHTML = modules
       .map((m) => {
-        const ms = stats[m.id] || { correct: 0, total: 0 };
-        const pct = ms.total ? Math.round((ms.correct / ms.total) * 100) : null;
+        const p = progressByModule[m.id] || {
+          total: m.questionCount || 0,
+          attempted: 0,
+          remaining: m.questionCount || 0,
+          correct: 0,
+          pct: null,
+          exploredPct: 0,
+        };
         const inactive = !enabled.has(m.id);
-        const barWidth = pct != null ? pct : 0;
+        const hasAttempts = p.attempted > 0;
+        const barWidth = p.exploredPct || 0;
+        const accuracy = p.pct != null ? `${p.pct}%` : '—';
+        const remainingLabel =
+          p.remaining === 1
+            ? '1 not yet attempted'
+            : `${p.remaining} not yet attempted`;
+        const attemptLine = `${p.attempted} / ${p.total} attempted`;
+        const correctLine = hasAttempts ? `${p.correct} / ${p.attempted} correct` : '';
+        const detail = hasAttempts
+          ? `${remainingLabel} · ${correctLine}`
+          : `${remainingLabel} · ${attemptLine}`;
         return `
-      <div class="stat-card${inactive ? ' inactive' : ''}${pct != null ? ' has-data' : ''}">
+      <div class="stat-card${inactive ? ' inactive' : ''}${hasAttempts ? ' has-data' : ''}">
         <div class="stat-header">
           <span class="stat-id">${m.id}</span>
-          <span class="stat-pct">${pct != null ? `${pct}%` : '—'}</span>
+          <span class="stat-pct" title="Accuracy on attempted questions">${accuracy}</span>
         </div>
         <p class="stat-title">${m.title}</p>
-        <div class="stat-bar"><div class="stat-bar-fill" style="width:${barWidth}%"></div></div>
-        <p class="stat-detail">${ms.total ? `${ms.correct} / ${ms.total} correct` : 'Not attempted'}</p>
+        <p class="stat-attempts">${attemptLine}</p>
+        <div class="stat-bar" title="Share of section attempted"><div class="stat-bar-fill" style="width:${barWidth}%"></div></div>
+        <p class="stat-detail">${detail}</p>
       </div>`;
       })
       .join('');
@@ -104,10 +121,10 @@ const QuizUI = (() => {
     document.querySelectorAll('.option-btn').forEach((b) => (b.disabled = true));
   }
 
-  function refresh(modules, enabled) {
+  function refresh(modules, enabled, progressByModule) {
     renderScoreBar();
     renderModuleFilters(modules, enabled);
-    renderSectionStats(modules, enabled);
+    renderSectionStats(modules, enabled, progressByModule || {});
   }
 
   return {

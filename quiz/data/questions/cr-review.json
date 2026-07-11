@@ -424,6 +424,176 @@
       ],
       "correctIndex": 0,
       "explanation": "Interviewers score communication and judgment, not just bug count. Strong candidates use manual test cases, explain user/system impact, and collaborate on fixes — mirroring real CL review culture."
+    },
+    {
+      "id": "CR-026",
+      "module": "CR-REVIEW",
+      "section": "CR-1",
+      "difficulty": "deep-dive",
+      "tags": ["code-review", "reddit:exponent", "interval-logic"],
+      "source": "reddit:da4h29; Exponent L6 EM 200-line interval code",
+      "question": "Exponent reports a failed Google EM code review: 200+ lines of broken interval logic in Google Docs. Best first step in 45 minutes?",
+      "options": [
+        "Skim structure, identify input/output contract, trace one small example manually before proposing rewrites",
+        "Rewrite entire file in another language immediately",
+        "Fix only variable names to save time",
+        "Ask for an IDE plugin"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reddit/manager threads and Exponent: time lost understanding logic is the common failure mode — triage and manual trace before edits."
+    },
+    {
+      "id": "CR-027",
+      "module": "CR-REVIEW",
+      "section": "CR-1",
+      "difficulty": "interview",
+      "tags": ["code-review", "reddit:da4h29", "mutex"],
+      "source": "reddit:da4h29 Google SRE Manager prep list",
+      "question": "da4h29's recruiter prep mentioned mutex/semaphore basics. In code review, a snippet uses `lock` but never unlocks on error paths. You should flag:",
+      "options": [
+        "Resource leak / deadlock risk — ensure unlock in finally/defer or RAII pattern on all paths",
+        "Mutexes are deprecated — remove all locking",
+        "Only style issues matter for manager interviews",
+        "Errors should crash the process without cleanup"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reddit 'too easy' prep topics still appear inside review snippets as concurrency bugs — da4h29's FS/mutex hints map to real review findings."
+    },
+    {
+      "id": "CR-028",
+      "module": "CR-REVIEW",
+      "section": "CR-2",
+      "difficulty": "interview",
+      "tags": ["code-review", "reddit:1klu37j", "complexity"],
+      "source": "reddit:1klu37j practical algorithm in Google Doc",
+      "question": "1klu37j describes 'practical algorithm' on Google Doc for SRE-SE. For your code-review loop, complexity discussion should:",
+      "options": [
+        "State time/space of the existing approach and whether a simpler structure (hash map, heap) fixes bottlenecks",
+        "Recite Big-O of sorting algorithms not used in the snippet",
+        "Avoid complexity — review is only spelling",
+        "Insist on rewriting in assembly"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reddit SE track uses same Doc format; your task is review not implement — but complexity judgment is still scored."
+    },
+    {
+      "id": "CR-029",
+      "module": "CR-REVIEW",
+      "section": "CR-3",
+      "difficulty": "interview",
+      "tags": ["code-review", "reddit:1346wln", "logging"],
+      "source": "reddit:1346wln; eng-practices",
+      "question": "Review catches swallowed exceptions with no log context. SRE interviewer Reddit post (1346wln) would align with which comment?",
+      "options": [
+        "Add structured logging with error context — silent failures harm production debuggability",
+        "Remove try/catch entirely so users see stack traces",
+        "Log only at DEBUG in production always",
+        "Never log — use printf debugging only"
+      ],
+      "correctIndex": 0,
+      "explanation": "SRE hiring perspective values operability. eng-practices + Reddit SRE culture: observability and clear errors are review priorities."
+    },
+    {
+      "id": "CR-030",
+      "module": "CR-REVIEW",
+      "section": "CR-5",
+      "difficulty": "interview",
+      "tags": ["code-review", "reddit:da4h29", "honesty"],
+      "source": "reddit:da4h29 comments on 'I don't know'",
+      "question": "da4h29 comment thread: interviewers want honesty when stuck. In code review, best behavior when unsure about a language API?",
+      "options": [
+        "State uncertainty, describe how you'd verify (docs/tests), and focus on logic bugs you can prove",
+        "Bluff confidently about API behavior",
+        "Stop the interview",
+        "Change subject to system design"
+      ],
+      "correctIndex": 0,
+      "explanation": "Highly upvoted Reddit theme: 'I don't know, but I'd…' beats bluffing — applies to manual trace when API details are fuzzy."
+    },
+    {
+      "id": "CR-031",
+      "module": "CR-REVIEW",
+      "section": "CR-1",
+      "difficulty": "interview",
+      "tags": ["code-review", "reddit:wc4ryg", "filesystem"],
+      "source": "reddit:wc4ryg Linux internals (context for review)",
+      "question": "Review:\n```python\ndef write_pid(path, pid):\n    open(path, 'w').write(str(pid))\n```\nwc4ryg/Linux prep context: production bug risk?",
+      "options": [
+        "No atomic replace — crash mid-write leaves corrupt pid file; use temp file + rename",
+        "PID files cannot exist on Linux",
+        "write() cannot accept strings",
+        "Must use binary mode only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reddit Linux threads emphasize real-world FS behavior. Code review may embed ops patterns — atomic writes are classic SRE review findings."
+    },
+    {
+      "id": "CR-032",
+      "module": "CR-REVIEW",
+      "section": "CR-2",
+      "difficulty": "interview",
+      "tags": ["code-review", "reddit:raabnp", "live-coding-contrast"],
+      "source": "reddit:raabnp prefers collaborative review over LeetCode",
+      "question": "raabnp prefers collaborative code exercises over whiteboard LeetCode. Code review interviews align because:",
+      "options": [
+        "They mirror daily senior work — reading, commenting, and improving real CLs collaboratively",
+        "They eliminate all technical assessment",
+        "They only test memorization of CLRS",
+        "They require compiling and running unit tests live"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reddit SRE philosophy: operational/code-reading skills matter more than algorithm trivia — code review is the scored form of that for your loop."
+    },
+    {
+      "id": "CR-033",
+      "module": "CR-REVIEW",
+      "section": "CR-3",
+      "difficulty": "interview",
+      "tags": ["code-review", "reddit:1fm8wmh", "edge-cases"],
+      "source": "reddit:1fm8wmh Google interview variance",
+      "question": "1fm8wmh notes interviewers may probe edge cases heavily even on 'easy' code. In review, you should proactively:",
+      "options": [
+        "Walk through empty input, single element, duplicates, and boundary indices with manual tests",
+        "Assume happy path only to save time",
+        "Refuse edge cases until interviewer asks three times",
+        "Only test with production traffic"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reddit variance thread: easy-looking problems still test thoroughness — in review, demonstrating edge-case thinking separates strong candidates."
+    },
+    {
+      "id": "CR-034",
+      "module": "CR-REVIEW",
+      "section": "CR-4",
+      "difficulty": "foundational",
+      "tags": ["code-review", "reddit:niomfp", "standards"],
+      "source": "reddit:niomfp FAANG technical bar",
+      "question": "niomfp stresses Google/Facebook technical credibility. In code review, commenting on test gaps shows:",
+      "options": [
+        "You expect CLs to include or update tests for behavior changes — part of code health",
+        "Tests are optional for SRE managers",
+        "Only QA writes tests after merge",
+        "Review should never mention testing"
+      ],
+      "correctIndex": 0,
+      "explanation": "FAANG Reddit advice: technical leaders uphold quality bars. eng-practices includes tests as a standard review dimension."
+    },
+    {
+      "id": "CR-035",
+      "module": "CR-REVIEW",
+      "section": "CR-5",
+      "difficulty": "interview",
+      "tags": ["code-review", "reddit:140ma5t", "manager-track"],
+      "source": "reddit:140ma5t SRE manager skills",
+      "question": "140ma5t asks what skills SRE managers need from prior Staff IC work. Code review interview primarily validates:",
+      "options": [
+        "You can still read code critically and guide engineering quality — technical credibility as a leader",
+        "That you write more code than your team daily",
+        "That you memorized every Google internal tool",
+        "That you avoid all technical discussions with ICs"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reddit manager track: prior tech depth helps but interview proves ongoing ability to evaluate code — not just people management stories."
     }
   ]
 }

@@ -301,10 +301,17 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 .stat-card.has-data .stat-pct { color: var(--google-blue); }
 
 .stat-title {
-  margin: 0.25rem 0 0.6rem;
+  margin: 0.25rem 0 0.25rem;
   font-size: 0.8rem;
   color: var(--text-secondary);
   line-height: 1.3;
+}
+
+.stat-attempts {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
 }
 
 .stat-bar {

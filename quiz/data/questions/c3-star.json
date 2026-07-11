@@ -239,6 +239,102 @@
       ],
       "correctIndex": 0,
       "explanation": "Compound prompts are common—pick a story that genuinely addresses all parts. Multi-dimensional story-bank entries let you cover ambiguity plus results without forcing a poor fit."
+    },
+    {
+      "id": "C3-016",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["googleyness", "reddit:u889b3", "experience-vs-process"],
+      "source": "reddit:u889b3 How are Googleyness interviews assessed",
+      "question": "r/cscareerquestionsEU u889b3 asks how Googleyness is assessed. 'Tell me about a time you received critical feedback' is best answered with:",
+      "options": [
+        "STAR-L — specific Situation, your Actions, Result, and what you Learned about receiving feedback",
+        "A generic essay on the importance of feedback culture",
+        "Refusal to answer because feedback is private",
+        "A system design for a feedback tool"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reddit G&L prep: experience questions need structured personal stories with learnings — interviewers score humility and growth, not definitions."
+    },
+    {
+      "id": "C3-017",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["googleyness", "reddit:u889b3", "process"],
+      "source": "reddit:u889b3; Prepfully Googleyness guide",
+      "question": "'What would you do if a teammate disagreed with your technical approach?' (hypothetical) should be answered as:",
+      "options": [
+        "Process/judgment — listen, align on goals/data, propose experiment or escalation path — brief example optional",
+        "A 10-minute unrelated war story from 2012",
+        "Insist you are always right because of seniority",
+        "Decline hypotheticals — Google only allows STAR"
+      ],
+      "correctIndex": 0,
+      "explanation": "Prepfully/Reddit nuance: not every Googleyness question is STAR. Process questions reward frameworks; experience questions reward stories."
+    },
+    {
+      "id": "C3-018",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["googleyness", "reddit:1kdf6fn", "conversational"],
+      "source": "reddit:1kdf6fn Google SRE G&L comments",
+      "question": "Reddit 1kdf6fn passed G&L in ~25 minutes with conversational rapport. What does this suggest about scoring?",
+      "options": [
+        "Strong signals can emerge quickly — quality and authenticity matter more than filling the entire slot",
+        "You must always use exactly 45 minutes or you fail",
+        "G&L is unscored for SRE candidates",
+        "Humor and small talk replace substance"
+      ],
+      "correctIndex": 0,
+      "explanation": "1kdf6fn comment: finished early with good conversation. Googleyness assesses fit and communication — efficient, genuine answers beat padded monologues."
+    },
+    {
+      "id": "C3-019",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["googleyness", "reddit:220", "emergent-leadership"],
+      "source": "reddit:cscareerquestions Google process thread",
+      "question": "Reddit threads on Googleyness skepticism still agree interviewers want emergent leadership. Which example fits?",
+      "options": [
+        "You stepped in to unblock a cross-team incident without being the assigned owner — then stepped back after handoff",
+        "You demanded the team use your design because you outranked them",
+        "You never volunteered because it wasn't your job description",
+        "You took credit for a teammate's fix in the interview"
+      ],
+      "correctIndex": 0,
+      "explanation": "Even skeptical Reddit posts describe Googleyness as collaboration and initiative — step up when needed, step back when appropriate."
+    },
+    {
+      "id": "C3-020",
+      "module": "C3",
+      "difficulty": "interview",
+      "tags": ["googleyness", "reddit:1kdf6fn", "conflict"],
+      "source": "reddit:1kdf6fn G&L prep comments",
+      "question": "1kdf6fn comments recommend preparing 'conflict with manager' stories. The strongest conflict answer shows:",
+      "options": [
+        "Respectful disagreement, data or user focus, and a constructive outcome — not winning the argument",
+        "That your manager was incompetent and you fixed them",
+        "That you avoid all conflict by agreeing immediately",
+        "That HR sided with you publicly"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reddit G&L prep lists conflict with manager as common. Googleyness rewards mature disagreement and user-focused resolution."
+    },
+    {
+      "id": "C3-021",
+      "module": "C3",
+      "difficulty": "deep-dive",
+      "tags": ["googleyness", "reddit:u889b3", "question-detection"],
+      "source": "reddit:u889b3; leadership video",
+      "question": "How do you detect an experience question vs a process question in Googleyness interviews?",
+      "options": [
+        "Experience: 'Tell me about a time…' — needs your past STAR story; Process: 'How would you…' — needs framework/judgment",
+        "All questions require identical 5-minute STAR stories",
+        "Process questions are trick questions with no right answer",
+        "Experience questions should never mention learnings"
+      ],
+      "correctIndex": 0,
+      "explanation": "u889b3 asks about assessment format — misclassifying question type (story vs framework) is a common prep mistake cited in Googleyness guides."
     }
   ]
 }

@@ -133,7 +133,7 @@ class QuestionBankTests(unittest.TestCase):
         if segs != Counter(expected_segments):
             errors.append(f"SA-VIDEO segment mismatch: {dict(segs)}")
 
-        self.assertEqual(total, 287, f"expected 287 questions, found {total}")
+        self.assertEqual(total, 321, f"expected 321 questions, found {total}")
         self.assertEqual(errors, [], "\n".join(errors[:20]))
 
 
@@ -170,8 +170,19 @@ class QuizAppTests(unittest.TestCase):
 
     def test_all_questions_load(self):
         questions, config = get_all_questions()
-        self.assertEqual(len(questions), 287)
-        self.assertEqual(len(config["modules"]), 18)
+        self.assertEqual(len(questions), 321)
+        self.assertEqual(len(config["modules"]), 19)
+
+    def test_section_progress_uses_module_pool_sizes(self):
+        """Module questionCount should match loader pool (video tags + supplemental)."""
+        config = load_sections()
+        for mod in config["modules"]:
+            qs = load_module_questions(config, mod)
+            self.assertEqual(
+                len(qs),
+                mod["questionCount"],
+                f"{mod['id']} loader pool {len(qs)} != declared {mod['questionCount']}",
+            )
 
     def test_every_module_has_questions_in_pool(self):
         questions, config = get_all_questions()

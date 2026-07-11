@@ -2,6 +2,20 @@ const QuizApp = (() => {
   let config = null;
   let enabledModules = new Set();
   let moduleById = {};
+  let questionIdsByModule = {};
+
+  async function loadQuestionIdsByModule(modules) {
+    const map = {};
+    for (const m of modules) {
+      const qs = await QuizLoader.getModuleQuestions(m.id);
+      map[m.id] = qs.map((q) => q.id);
+    }
+    return map;
+  }
+
+  function moduleProgress() {
+    return QuizStorage.getAttemptedProgress(questionIdsByModule);
+  }
 
   async function init() {
     config = await QuizLoader.loadSections();
@@ -17,8 +31,9 @@ const QuizApp = (() => {
       throw new Error('No questions loaded');
     }
     QuizEngine.init(questions, enabledModules);
+    questionIdsByModule = await loadQuestionIdsByModule(config.modules);
 
-    QuizUI.refresh(config.modules, enabledModules);
+    QuizUI.refresh(config.modules, enabledModules, moduleProgress());
     bindEvents();
     showNextQuestion();
   }
@@ -40,7 +55,7 @@ const QuizApp = (() => {
     const result = QuizEngine.submit(idx);
     if (!result) return;
     QuizUI.showFeedback(result.correct, result.explanation);
-    QuizUI.refresh(config.modules, enabledModules);
+    QuizUI.refresh(config.modules, enabledModules, moduleProgress());
     el('next-btn').classList.remove('hidden');
   }
 
@@ -59,7 +74,7 @@ const QuizApp = (() => {
     }
     QuizStorage.setEnabledModules([...enabledModules]);
     QuizEngine.setEnabledModules(enabledModules);
-    QuizUI.refresh(config.modules, enabledModules);
+    QuizUI.refresh(config.modules, enabledModules, moduleProgress());
     showNextQuestion();
   }
 
