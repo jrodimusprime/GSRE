@@ -2,13 +2,7 @@
 
 Multiple-choice prep quiz for Google SRE SWE interviews (Systems Architecture & Googleyness / Leadership).
 
-## Run locally
-
-```bash
-python3 -m http.server 8080
-```
-
-Open [http://localhost:8080](http://localhost:8080).
+**Live site:** [https://jrodimusprime.github.io/GSRE/](https://jrodimusprime.github.io/GSRE/)
 
 ## Contents
 

@@ -1,5 +1,14 @@
 const QuizLoader = (() => {
-  const BASE = 'quiz/data/';
+  function appRoot() {
+    const script = document.currentScript;
+    if (script?.src) {
+      return new URL('.', script.src).href;
+    }
+    return new URL('./quiz/js/', window.location.href).href;
+  }
+
+  const ROOT = appRoot().replace(/quiz\/js\/?$/, '');
+  const BASE = `${ROOT}quiz/data/`;
   let cache = { sections: null, video: null, supplemental: {} };
 
   async function loadSections() {
