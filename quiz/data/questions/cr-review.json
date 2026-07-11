@@ -1,0 +1,429 @@
+{
+  "questions": [
+    {
+      "id": "CR-001",
+      "module": "CR-REVIEW",
+      "section": "CR-1",
+      "difficulty": "interview",
+      "tags": ["code-review", "bug-finding", "off-by-one"],
+      "source": "Google eng-practices; IGotAnOffer code review guide",
+      "question": "Review this loop:\n```python\nfor i in range(len(items) + 1):\n    process(items[i])\n```\nWhat is the most critical bug?",
+      "options": [
+        "IndexError on the final iteration — range goes one past the last valid index",
+        "range() cannot be used with len()",
+        "process() should be called before the loop",
+        "items must be sorted before iteration"
+      ],
+      "correctIndex": 0,
+      "explanation": "range(len(items) + 1) produces indices 0..len(items), but valid indices are 0..len(items)-1. The last iteration accesses items[len(items)] and raises IndexError. Use range(len(items)) or iterate items directly."
+    },
+    {
+      "id": "CR-002",
+      "module": "CR-REVIEW",
+      "section": "CR-1",
+      "difficulty": "interview",
+      "tags": ["code-review", "bug-finding", "null-check"],
+      "source": "Google eng-practices looking-for.md",
+      "question": "Review:\n```java\npublic String label(User u) {\n    return u.getProfile().getDisplayName().toUpperCase();\n}\n```\nWhich review comment addresses the highest-severity issue first?",
+      "options": [
+        "Add null checks for u, getProfile(), and getDisplayName() — any null causes NPE at runtime",
+        "toUpperCase() should be toLowerCase() for consistency",
+        "Rename method to getLabel for clarity",
+        "User should be an interface instead of a class"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google code review prioritizes correctness. Chained getters without null guards cause NullPointerException in production. Style and naming matter after functional defects are addressed."
+    },
+    {
+      "id": "CR-003",
+      "module": "CR-REVIEW",
+      "section": "CR-1",
+      "difficulty": "interview",
+      "tags": ["code-review", "bug-finding", "logic"],
+      "source": "Exponent L6 EM code review experience",
+      "question": "Review interval-merge logic:\n```python\ndef overlaps(a, b):\n    return a.start <= b.end and b.start <= a.end\n\ndef merge(intervals):\n    merged = []\n    for iv in intervals:\n        if not merged or not overlaps(merged[-1], iv):\n            merged.append(iv)\n        else:\n            merged[-1].end = max(merged[-1].end, iv.end)\n    return merged\n```\nIf input is unsorted, what breaks?",
+      "options": [
+        "Non-adjacent overlapping intervals may not merge — algorithm assumes sorted input but does not sort",
+        "max() cannot compare interval end fields",
+        "merged list should be a set, not a list",
+        "overlaps() uses <= so touching intervals never merge"
+      ],
+      "correctIndex": 0,
+      "explanation": "Classic code-review trap: merge logic often assumes sorted intervals. Unsorted input like [3,6], [1,4] leaves two entries instead of one. Either sort first or document/enforce preconditions."
+    },
+    {
+      "id": "CR-004",
+      "module": "CR-REVIEW",
+      "section": "CR-1",
+      "difficulty": "foundational",
+      "tags": ["code-review", "bug-finding", "comparison"],
+      "source": "Google eng-practices",
+      "question": "Review:\n```python\nif user.role = \"admin\":\n    grant_access()\n```\nWhat is wrong?",
+      "options": [
+        "Single = is assignment, not comparison — use == for equality test",
+        "grant_access() should be called before the if statement",
+        "admin should be uppercase",
+        "user.role cannot be a string"
+      ],
+      "correctIndex": 0,
+      "explanation": "In Python, = assigns; == compares. This snippet raises SyntaxError (in if) or would assign incorrectly in languages that allow it. Basic syntax/convention bugs are fair game in Google Doc reviews."
+    },
+    {
+      "id": "CR-005",
+      "module": "CR-REVIEW",
+      "section": "CR-1",
+      "difficulty": "interview",
+      "tags": ["code-review", "bug-finding", "concurrency"],
+      "source": "Google eng-practices looking-for.md",
+      "question": "Review:\n```java\nprivate int count = 0;\npublic void increment() { count++; }\npublic int getCount() { return count; }\n```\nCalled from many HTTP worker threads. What bug exists?",
+      "options": [
+        "Race condition — count++ is not atomic; lost updates under concurrent increment()",
+        "int cannot be returned from getCount()",
+        "increment() should be private",
+        "count should start at 1"
+      ],
+      "correctIndex": 0,
+      "explanation": "eng-practices explicitly calls out parallel programming safety. Non-atomic read-modify-write on shared mutable state loses counts. Fix: AtomicInteger, synchronized block, or per-thread aggregation."
+    },
+    {
+      "id": "CR-006",
+      "module": "CR-REVIEW",
+      "section": "CR-1",
+      "difficulty": "interview",
+      "tags": ["code-review", "bug-finding", "resource-leak"],
+      "source": "Google eng-practices",
+      "question": "Review:\n```python\ndef read_config(path):\n    f = open(path)\n    data = f.read()\n    return json.loads(data)\n```\nWhat is the primary issue?",
+      "options": [
+        "File handle leak — f is never closed if json.loads raises or on success",
+        "json.loads cannot read strings",
+        "open() requires binary mode for JSON",
+        "return should print instead"
+      ],
+      "correctIndex": 0,
+      "explanation": "Resource leaks are production bugs. Use try/finally, context manager (with open(...)), or ensure close on all paths. Reviewers flag durability and error-path behavior, not just happy path."
+    },
+    {
+      "id": "CR-007",
+      "module": "CR-REVIEW",
+      "section": "CR-1",
+      "difficulty": "deep-dive",
+      "tags": ["code-review", "bug-finding", "integer-overflow"],
+      "source": "IGotAnOffer code review guide",
+      "question": "Review:\n```python\ndef mid(low, high):\n    return (low + high) // 2\n```\nFor large 32-bit integers, what edge case fails?",
+      "options": [
+        "low + high can overflow before division — use low + (high - low) // 2",
+        "Division by 2 is always unsafe",
+        "mid() cannot accept negative low",
+        "high must equal low + 1"
+      ],
+      "correctIndex": 0,
+      "explanation": "Classic binary-search bug: summing two large signed ints overflows. Code review interviews test whether you catch subtle correctness issues, not just obvious typos."
+    },
+    {
+      "id": "CR-008",
+      "module": "CR-REVIEW",
+      "section": "CR-1",
+      "difficulty": "interview",
+      "tags": ["code-review", "bug-finding", "mutable-default"],
+      "source": "Google eng-practices",
+      "question": "Review:\n```python\ndef append_item(item, bucket=[]):\n    bucket.append(item)\n    return bucket\n```\nWhat is the bug?",
+      "options": [
+        "Mutable default argument — all callers share the same list object across calls",
+        "bucket should be a tuple",
+        "append returns None so return is wrong",
+        "item must be a string"
+      ],
+      "correctIndex": 0,
+      "explanation": "Python binds default [] once at function definition. Subsequent calls mutate shared state. Idiom: def append_item(item, bucket=None): bucket = bucket if bucket is not None else []."
+    },
+    {
+      "id": "CR-009",
+      "module": "CR-REVIEW",
+      "section": "CR-2",
+      "difficulty": "interview",
+      "tags": ["code-review", "complexity", "algorithm"],
+      "source": "Google eng-practices looking-for.md",
+      "question": "Review:\n```python\ndef has_duplicate(nums):\n    for i in range(len(nums)):\n        for j in range(len(nums)):\n            if i != j and nums[i] == nums[j]:\n                return True\n    return False\n```\nBest complexity improvement?",
+      "options": [
+        "Use a set — O(n) time and O(n) space instead of O(n²) nested loops",
+        "Sort nums in place only — no other change needed",
+        "Replace for with while loops",
+        "Duplicate check requires O(n²); no improvement possible"
+      ],
+      "correctIndex": 0,
+      "explanation": "Code review assesses algorithmic efficiency. A hash set tracks seen values in one pass. eng-practices: 'Does this CL improve code health?' includes avoiding unnecessary quadratic work."
+    },
+    {
+      "id": "CR-010",
+      "module": "CR-REVIEW",
+      "section": "CR-2",
+      "difficulty": "interview",
+      "tags": ["code-review", "complexity", "design"],
+      "source": "IGotAnOffer code review guide",
+      "question": "Review: A 200-line function `handle_request()` parses HTTP, queries DB, formats JSON, and sends email alerts. What design review comment is most appropriate?",
+      "options": [
+        "Split into focused functions/modules — single function violates separation of concerns and hinders testing",
+        "Add more comments until line count exceeds 300",
+        "Inline all helpers to reduce call stack depth",
+        "200 lines is always acceptable for request handlers"
+      ],
+      "correctIndex": 0,
+      "explanation": "Large monolithic functions are a design smell. Google reviewers evaluate whether code is 'more complex than it needs to be' and suggest decomposition for readability and testability."
+    },
+    {
+      "id": "CR-011",
+      "module": "CR-REVIEW",
+      "section": "CR-2",
+      "difficulty": "foundational",
+      "tags": ["code-review", "complexity", "data-structure"],
+      "source": "Google eng-practices",
+      "question": "Review:\n```python\ndef lookup_user(user_id, users):\n    for u in users:\n        if u.id == user_id:\n            return u\n    return None\n```\nIf `lookup_user` is called thousands of times per second on a 50K-user list, best fix?",
+      "options": [
+        "Build a dict mapping id → user once, then O(1) lookups",
+        "Convert users to a set",
+        "Add sleep(0) to yield CPU",
+        "Linear scan is optimal for all workloads"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reviewers connect code to scale context. Repeated linear scans on large collections are a performance design issue; indexing by id is the standard fix."
+    },
+    {
+      "id": "CR-012",
+      "module": "CR-REVIEW",
+      "section": "CR-2",
+      "difficulty": "interview",
+      "tags": ["code-review", "complexity", "premature-abstraction"],
+      "source": "Google eng-practices looking-for.md",
+      "question": "Review adds a generic `AbstractFactoryProviderManager` for a feature used in one place with no planned second implementation. Which eng-practices principle applies?",
+      "options": [
+        "Developer may be over-engineering for hypothetical future needs — simplify until a second use case exists",
+        "All code must use factory patterns at Google",
+        "Managers are always required for dependency injection",
+        "Abstract classes improve performance automatically"
+      ],
+      "correctIndex": 0,
+      "explanation": "eng-practices: don't implement things you might need in the future but don't need now. Reviewers push back on unnecessary abstraction that increases complexity without current benefit."
+    },
+    {
+      "id": "CR-013",
+      "module": "CR-REVIEW",
+      "section": "CR-2",
+      "difficulty": "deep-dive",
+      "tags": ["code-review", "complexity", "string-building"],
+      "source": "Google eng-practices",
+      "question": "Review:\n```python\nresult = \"\"\nfor line in lines:\n    result += line + \"\\n\"\n```\nFor millions of lines, what issue should you flag?",
+      "options": [
+        "Repeated string concatenation in a loop is O(n²) — use list append + join or io.StringIO",
+        "Newlines are invalid in strings",
+        "for loops cannot iterate strings",
+        "result should be a dict"
+      ],
+      "correctIndex": 0,
+      "explanation": "Immutability of strings makes += in tight loops quadratic. Code review catches scalability issues in 'small' snippets that fail at production data volumes."
+    },
+    {
+      "id": "CR-014",
+      "module": "CR-REVIEW",
+      "section": "CR-3",
+      "difficulty": "interview",
+      "tags": ["code-review", "error-handling", "edge-cases"],
+      "source": "Google eng-practices",
+      "question": "Review:\n```python\ndef divide(a, b):\n    return a / b\n```\nWhat edge case must be handled for production use?",
+      "options": [
+        "Division by zero — raises ZeroDivisionError; validate b or return explicit error",
+        "a and b must be integers only — floats are invalid",
+        "Return type should be void",
+        "Negative numbers cannot be divided"
+      ],
+      "correctIndex": 0,
+      "explanation": "Error handling and edge cases are core review targets. Empty input, zero divisors, null/None, and boundary values should be discussed even in trivial-looking functions."
+    },
+    {
+      "id": "CR-015",
+      "module": "CR-REVIEW",
+      "section": "CR-3",
+      "difficulty": "interview",
+      "tags": ["code-review", "error-handling", "exceptions"],
+      "source": "IGotAnOffer code review guide",
+      "question": "Review:\n```python\ntry:\n    process_all()\nexcept Exception:\n    pass\n```\nWhat is the best review feedback?",
+      "options": [
+        "Bare except swallows all failures silently — catch specific exceptions, log, and handle or re-raise",
+        "try/except is banned at Google",
+        "process_all() should run twice on failure",
+        "pass is required after every except block"
+      ],
+      "correctIndex": 0,
+      "explanation": "Silent catch-all except blocks hide outages and complicate debugging. Reviewers expect deliberate error handling: specific types, logging context, and fail-safe behavior."
+    },
+    {
+      "id": "CR-016",
+      "module": "CR-REVIEW",
+      "section": "CR-3",
+      "difficulty": "interview",
+      "tags": ["code-review", "edge-cases", "input-validation"],
+      "source": "Google eng-practices",
+      "question": "Review API handler:\n```python\ndef get_page(request):\n    page = int(request.args['page'])\n    return fetch_page(page)\n```\nWhich edge cases should the review require handling?",
+      "options": [
+        "Missing 'page' key, non-numeric values, and negative page numbers",
+        "Only missing key — negative pages are valid",
+        "fetch_page already validates everything",
+        "request.args is always present and numeric"
+      ],
+      "correctIndex": 0,
+      "explanation": "Input validation at boundaries prevents 500s and security issues. Reviewers ask: what happens on malformed client input? KeyError, ValueError, and invalid ranges must be addressed."
+    },
+    {
+      "id": "CR-017",
+      "module": "CR-REVIEW",
+      "section": "CR-3",
+      "difficulty": "foundational",
+      "tags": ["code-review", "edge-cases", "empty-input"],
+      "source": "Google eng-practices",
+      "question": "Review:\n```python\ndef average(values):\n    return sum(values) / len(values)\n```\nWhat input causes failure?",
+      "options": [
+        "Empty list — len(values) is 0, causing ZeroDivisionError",
+        "List of strings — sum always works",
+        "Single element — average undefined",
+        "Negative numbers — division forbidden"
+      ],
+      "correctIndex": 0,
+      "explanation": "Empty collection edge cases are interview staples. Review should flag division by zero and suggest explicit behavior (return 0, raise ValueError, or document precondition)."
+    },
+    {
+      "id": "CR-018",
+      "module": "CR-REVIEW",
+      "section": "CR-4",
+      "difficulty": "foundational",
+      "tags": ["code-review", "readability", "naming"],
+      "source": "Google eng-practices looking-for.md",
+      "question": "Review variable names: `int d; int t; int x;` in a payment reconciliation module. Best feedback?",
+      "options": [
+        "Use descriptive names (e.g., days_since_settlement, total_cents) — names should reveal intent",
+        "Single-letter names are required for performance",
+        "Rename to data1, data2, data3",
+        "Naming is irrelevant if logic is correct"
+      ],
+      "correctIndex": 0,
+      "explanation": "eng-practices includes clarity and maintainability. Good names reduce need for comments and help future readers — especially in shared Google Doc review snippets."
+    },
+    {
+      "id": "CR-019",
+      "module": "CR-REVIEW",
+      "section": "CR-4",
+      "difficulty": "interview",
+      "tags": ["code-review", "readability", "comments"],
+      "source": "Google eng-practices",
+      "question": "Review comment on code:\n```python\n# increment i by 1\ni += 1\n```\nAppropriate reviewer response?",
+      "options": [
+        "Remove redundant comment — code is self-explanatory; comments should explain why, not what",
+        "Add more comments for every line",
+        "Change to i = i + 1 without comment",
+        "Comments are mandatory for all arithmetic"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google style: comments explain non-obvious rationale, invariants, or trade-offs — not restate the obvious. Noise comments reduce signal in reviews."
+    },
+    {
+      "id": "CR-020",
+      "module": "CR-REVIEW",
+      "section": "CR-4",
+      "difficulty": "interview",
+      "tags": ["code-review", "maintainability", "magic-numbers"],
+      "source": "Google eng-practices",
+      "question": "Review:\n```python\nif latency_ms > 86400000:\n    alert()\n```\nBest improvement?",
+      "options": [
+        "Replace 86400000 with a named constant (e.g., MS_PER_DAY) documenting the threshold",
+        "Change 86400000 to 99999999",
+        "Remove alert() — magic numbers are fine",
+        "latency_ms must be compared to zero only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Magic numbers harm readability. Named constants communicate intent and make review/debugging easier — standard maintainability feedback."
+    },
+    {
+      "id": "CR-021",
+      "module": "CR-REVIEW",
+      "section": "CR-4",
+      "difficulty": "deep-dive",
+      "tags": ["code-review", "maintainability", "consistency"],
+      "source": "Google eng-practices looking-for.md",
+      "question": "A CL mixes camelCase and snake_case in the same Python module, diverging from the repo's existing snake_case convention. What should the reviewer prioritize?",
+      "options": [
+        "Flag style inconsistency — CLs should follow established project conventions for consistency",
+        "Ignore naming — only logic matters",
+        "Rewrite entire repo in camelCase",
+        "Python requires camelCase for all functions"
+      ],
+      "correctIndex": 0,
+      "explanation": "eng-practices: consistency with existing code style in the file/repo. Style nits come after correctness but still improve code health when they reduce cognitive load."
+    },
+    {
+      "id": "CR-022",
+      "module": "CR-REVIEW",
+      "section": "CR-5",
+      "difficulty": "interview",
+      "tags": ["code-review", "process", "prioritization"],
+      "source": "IGotAnOffer; Exponent L6 EM experience",
+      "question": "You have 45 minutes to review a 180-line Google Doc snippet with a known logic bug, several style nits, and a missing null check. What should you tackle first?",
+      "options": [
+        "Trace core logic and fix correctness bugs (logic + null safety) before style suggestions",
+        "Fix all variable naming before reading the algorithm",
+        "Rewrite the entire solution from scratch in the first 10 minutes",
+        "Only comment on style — logic is the author's problem"
+      ],
+      "correctIndex": 0,
+      "explanation": "EM/SRE code review interviews reward triage: correctness and functional defects first, then complexity/design, then style. Exponent reports failing when spending too long understanding logic without fixing critical bugs."
+    },
+    {
+      "id": "CR-023",
+      "module": "CR-REVIEW",
+      "section": "CR-5",
+      "difficulty": "foundational",
+      "tags": ["code-review", "process", "format"],
+      "source": "IGotAnOffer code review guide",
+      "question": "Google's code review interview typically uses which format?",
+      "options": [
+        "A code snippet in Google Docs — no IDE, no compiler; manual trace and suggested fixes",
+        "Live pair programming in a shared IDE with full test suite",
+        "Take-home project due in 48 hours",
+        "Multiple-choice scantron only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Official EM prep and candidate reports describe a shared Google Doc with problematic code, ~45 minutes, manual debugging — the alternative to a live coding round for manager tracks."
+    },
+    {
+      "id": "CR-024",
+      "module": "CR-REVIEW",
+      "section": "CR-5",
+      "difficulty": "interview",
+      "tags": ["code-review", "process", "scope"],
+      "source": "Google eng-practices standard of code review",
+      "question": "During review, you notice the CL fixes a bug but also refactors three unrelated modules. Best process feedback?",
+      "options": [
+        "Ask to split — bug fix and unrelated refactors should be separate CLs for easier review and rollback",
+        "Approve immediately — larger CLs show more impact",
+        "Reject all refactoring forever",
+        "Unrelated changes are required in every bug fix"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google's standard of code review: each CL should be a self-contained incremental improvement. Mixed concerns make review harder and increase rollback risk — valid process signal in interviews."
+    },
+    {
+      "id": "CR-025",
+      "module": "CR-REVIEW",
+      "section": "CR-5",
+      "difficulty": "interview",
+      "tags": ["code-review", "process", "communication"],
+      "source": "Google eng-practices; Google code review interview prep",
+      "question": "After identifying a subtle bug, what demonstrates strong code review communication in the interview?",
+      "options": [
+        "Walk through a concrete failing input, explain impact, and propose a specific fix with trade-offs",
+        "Say 'this is wrong' without examples",
+        "Wait until the end to mention all bugs at once without discussion",
+        "Only suggest rewriting in another language"
+      ],
+      "correctIndex": 0,
+      "explanation": "Interviewers score communication and judgment, not just bug count. Strong candidates use manual test cases, explain user/system impact, and collaborate on fixes — mirroring real CL review culture."
+    }
+  ]
+}

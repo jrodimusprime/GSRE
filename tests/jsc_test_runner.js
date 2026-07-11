@@ -119,7 +119,7 @@ QuizApp.boot().then(() => {
   assert(stats.innerHTML.includes('stat-card'), 'section stats should render on init');
 
   QuizLoader.getAllQuestions().then((all) => {
-    assert(all.length === 258, `expected 258 questions, got ${all.length}`);
+    assert(all.length === 287, `expected 287 questions, got ${all.length}`);
     QuizEngine.init(all, new Set(['B1']));
     const q = QuizEngine.pickRandom();
     assert(q && q.module === 'B1', 'engine should pick from enabled module');

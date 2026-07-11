@@ -43,13 +43,13 @@
       "source": "Interview prep hub SRE path; recruiter email",
       "question": "You are interviewing for SRE Software Engineering (SRE-SWE). How does this track differ from SRE Systems Engineering (SRE-SE)?",
       "options": [
-        "SRE-SWE emphasizes software development, automation, and coding alongside systems design; SRE-SE leans more toward Linux/systems administration depth",
-        "SRE-SWE requires no coding; SRE-SE is a pure algorithm interview loop",
+        "SRE-SWE emphasizes software development, automation, and systems design; SRE-SE leans more toward Linux/systems administration depth",
+        "SRE-SWE requires no technical interviews; SRE-SE is a pure algorithm interview loop",
         "The tracks are identical; the label is only for HR reporting",
         "SRE-SE candidates skip the Systems Architecture round entirely"
       ],
       "correctIndex": 0,
-      "explanation": "The interview prep path distinguishes SRE-SWE (software engineering focus per recruiter email) from SRE-SE (heavier Linux/ops loop). SRE-SWE still includes coding and 60-min Systems Architecture — not a pure ops track."
+      "explanation": "The interview prep path distinguishes SRE-SWE (software engineering focus per recruiter email) from SRE-SE (heavier Linux/ops loop). Technical rounds differ by track — e.g., live coding vs code review vs Linux depth — plus shared rounds like Systems Architecture for SRE-SWE."
     },
     {
       "id": "A1-004",
@@ -196,13 +196,81 @@
       "source": "Recruiter email; interview prep hub",
       "question": "For an SRE-SWE loop per the recruiter email, which interview pairing is explicitly listed?",
       "options": [
-        "60-minute Systems Architecture plus 45-minute Googleyness & Leadership",
+        "60-minute Systems Architecture plus 45-minute Googleyness & Leadership (plus other loop rounds such as code review per recruiter)",
         "Only a 4-hour continuous coding contest with no behavioral component",
-        "Systems Architecture replaces all coding rounds for SRE candidates",
+        "Systems Architecture replaces all other technical rounds for SRE candidates",
         "Googleyness is optional and not scored for engineering roles"
       ],
       "correctIndex": 0,
-      "explanation": "The recruiter email explicitly schedules 60-min Systems Architecture and 45-min Googleyness & Leadership for this candidate's SRE-SWE path — alongside other rounds (coding, etc.) in the full loop. Both named rounds are scored and prep-worthy."
+      "explanation": "The recruiter email explicitly schedules 60-min Systems Architecture and 45-min Googleyness & Leadership for this candidate's SRE-SWE path — alongside other loop rounds (e.g., code review instead of live coding). Both named rounds are scored and prep-worthy."
+    },
+    {
+      "id": "A1-013",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "interview",
+      "tags": ["hiring", "code-review", "no-coding"],
+      "source": "Recruiter email; IGotAnOffer code review guide; REDDIT-PLAN",
+      "question": "Your recruiter confirmed the technical code round is code review only — no live coding. What should you expect?",
+      "options": [
+        "Review a code snippet in Google Docs: find bugs, discuss complexity, suggest fixes — no IDE or writing from scratch",
+        "Implement LeetCode hard problems on a whiteboard for 45 minutes",
+        "No technical assessment of code at all — only behavioral questions",
+        "Automated HackerRank with 90 minutes of algorithm contests"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google EM/SRE EM loops offer coding OR code review; your loop is review-only. Expect a shared doc, manual trace, correctness and design feedback — same delivery format as many scripting rounds but reviewing existing code."
+    },
+    {
+      "id": "A1-014",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "foundational",
+      "tags": ["hiring", "code-review", "vs-coding"],
+      "source": "Google eng-practices; IGotAnOffer",
+      "question": "How does Google's code review interview differ from a standard coding interview?",
+      "options": [
+        "You evaluate and improve existing code rather than implementing a new solution from a blank slate",
+        "Code review is shorter and unscored — coding is the only scored technical round",
+        "Code review allows Stack Overflow and copy-paste from GitHub",
+        "Coding interviews never use Google Docs"
+      ],
+      "correctIndex": 0,
+      "explanation": "Coding rounds test implementation from scratch; code review rounds test reading comprehension, defect detection, complexity judgment, and communication — skills used daily by senior engineers and managers."
+    },
+    {
+      "id": "A1-015",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "interview",
+      "tags": ["hiring", "code-review", "prioritization"],
+      "source": "Google eng-practices looking-for.md",
+      "question": "In a Google code review interview, which issue should you flag first?",
+      "options": [
+        "Correctness bugs and production-risk defects before naming/style nits",
+        "Variable naming only — logic is secondary",
+        "Missing comments on every line",
+        "Choice of programming language"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google eng-practices prioritizes functionality, design, and complexity before nits. Interviewers expect you to triage a large snippet: critical bugs and safety first, then structure and style."
+    },
+    {
+      "id": "A1-016",
+      "module": "A1",
+      "section": "A1",
+      "difficulty": "interview",
+      "tags": ["hiring", "code-review", "prep"],
+      "source": "REDDIT-PLAN; Exponent L6 EM experience",
+      "question": "Given no live coding in your loop, which prep strategy is most appropriate?",
+      "options": [
+        "Practice reviewing buggy snippets for off-by-one, null safety, concurrency, and complexity — skip LeetCode grinding",
+        "Complete 500 LeetCode hard problems before the interview",
+        "Memorize Linux kernel struct field layouts exclusively",
+        "Skip all technical prep — code review is unscored"
+      ],
+      "correctIndex": 0,
+      "explanation": "Your loop replaces implementation drills with review skills. Practice reading unfamiliar code, stating bugs with test cases, and proposing fixes. LeetCode-heavy prep targets a different round type."
     }
   ]
 }
