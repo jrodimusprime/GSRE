@@ -1,0 +1,310 @@
+{
+  "questions": [
+    {
+      "id": "E3-001",
+      "module": "E3",
+      "section": "E3-OSI",
+      "difficulty": "foundational",
+      "tags": ["osi", "networking", "linux-internals"],
+      "source": "reddit:wc4ryg; reddit:z5c3m7; TCP/IP fundamentals",
+      "question": "At which OSI layer does TCP operate, and what is its primary responsibility?",
+      "options": [
+        "Layer 4 (Transport) — reliable end-to-end delivery, sequencing, and retransmission between hosts",
+        "Layer 2 (Data Link) — MAC addressing and switching within a LAN",
+        "Layer 7 (Application) — HTTP headers and JSON payloads",
+        "Layer 1 (Physical) — voltage on the wire"
+      ],
+      "correctIndex": 0,
+      "explanation": "TCP is Transport layer (L4). SRE troubleshooting maps symptoms to layers: L4 issues include connection resets, retransmits, and port reachability."
+    },
+    {
+      "id": "E3-002",
+      "module": "E3",
+      "section": "E3-OSI",
+      "difficulty": "foundational",
+      "tags": ["osi", "networking"],
+      "source": "reddit:wc4ryg Google SRE Linux/networking interview",
+      "question": "You can ping a host but HTTPS fails with connection timeout. Which OSI layers are most relevant to investigate first?",
+      "options": [
+        "Layer 3 (routing/IP) and Layer 4 (TCP/443) — ICMP may work while TCP to port 443 is blocked or filtered",
+        "Layer 7 only — ping proves the application is fine",
+        "Layer 1 only — replace the cable",
+        "Layer 8 — political problems exclusively"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ping uses ICMP (L3). HTTPS needs TCP L4 to 443 plus TLS/app above. Reddit wc4ryg notes networking depth beyond kernel trivia — layer thinking is core."
+    },
+    {
+      "id": "E3-003",
+      "module": "E3",
+      "section": "E3-OSI",
+      "difficulty": "interview",
+      "tags": ["osi", "dns", "networking"],
+      "source": "Effective Troubleshooting; OSI model",
+      "question": "DNS resolution failures most directly map to which OSI layer in troubleshooting frameworks?",
+      "options": [
+        "Layer 7 (Application) — name-to-address mapping service, though it sits above UDP/TCP (L4)",
+        "Layer 2 — DNS is an Ethernet protocol",
+        "Layer 1 — DNS runs on fiber only",
+        "Layer 5 — DNS is exclusively session layer with no transport"
+      ],
+      "correctIndex": 0,
+      "explanation": "DNS is an application-layer service (L7) using UDP/TCP transport. SRE interviews expect you to connect DNS symptoms to resolver config, TTL, and upstream connectivity."
+    },
+    {
+      "id": "E3-004",
+      "module": "E3",
+      "section": "E3-OSI",
+      "difficulty": "interview",
+      "tags": ["osi", "networking", "mtu"],
+      "source": "reddit:wc4ryg networking depth",
+      "question": "Path MTU black holes often cause TLS handshakes to hang mid-connection. Which layers are involved?",
+      "options": [
+        "Layer 3 IP fragmentation and Layer 2 MTU — large packets dropped without ICMP 'fragmentation needed'",
+        "Layer 7 only — TLS bug in OpenSSL",
+        "Layer 5 session timeout exclusively",
+        "Layer 1 clock skew"
+      ],
+      "correctIndex": 0,
+      "explanation": "PMTUD spans L3/L2. Symptoms look like app hangs (L7) but root cause is MTU/fragmentation — classic SRE layer separation skill."
+    },
+    {
+      "id": "E3-005",
+      "module": "E3",
+      "section": "E3-OSI",
+      "difficulty": "foundational",
+      "tags": ["osi", "networking"],
+      "source": "Networking fundamentals",
+      "question": "Which OSI layer does a load balancer performing TCP connection termination primarily operate at?",
+      "options": [
+        "Layer 4 (Transport) — accepts TCP connections and forwards to backends",
+        "Layer 1 — amplifies electrical signals only",
+        "Layer 7 always — L4 load balancers do not exist",
+        "Layer 3 — load balancers only route IP packets without ports"
+      ],
+      "correctIndex": 0,
+      "explanation": "L4 LB works on IP+port (TCP/UDP). L7 LB inspects HTTP headers. Knowing the distinction is standard systems/network interview material."
+    },
+    {
+      "id": "E3-006",
+      "module": "E3",
+      "section": "E3-OSI",
+      "difficulty": "interview",
+      "tags": ["osi", "troubleshooting"],
+      "source": "Brendan Gregg USE method; OSI",
+      "question": "When troubleshooting latency, mapping 'high TCP retransmit rate' to OSI helps because retransmits are primarily a:",
+      "options": [
+        "Layer 4 transport symptom — may indicate loss, congestion, or middlebox interference on the path",
+        "Layer 7 application bug only",
+        "Layer 2 ARP cache aesthetic issue",
+        "Layer 1 power supply failure"
+      ],
+      "correctIndex": 0,
+      "explanation": "Retransmits are observed at L4 (TCP). SREs correlate with L3 routing, L2 errors, or upstream congestion — not jump straight to app code."
+    },
+    {
+      "id": "E3-007",
+      "module": "E3",
+      "section": "E3-Linux",
+      "difficulty": "interview",
+      "tags": ["linux-internals", "process", "reddit:z5c3m7"],
+      "source": "reddit:z5c3m7; LPI; Google SRE SE prep",
+      "question": "What happens when a parent process calls fork() and the child calls exec()?",
+      "options": [
+        "fork() clones the process; exec() replaces the child's memory image with a new program — classic spawn pattern",
+        "fork() creates a thread; exec() kills the parent",
+        "exec() must run before fork() always",
+        "fork() duplicates only the network stack, not memory"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reddit z5c3m7 recommends process lifecycle fundamentals over kernel struct trivia. fork+exec is the Unix spawn model every SRE-SE candidate should explain."
+    },
+    {
+      "id": "E3-008",
+      "module": "E3",
+      "section": "E3-Linux",
+      "difficulty": "interview",
+      "tags": ["linux-internals", "signals", "reddit:wc4ryg"],
+      "source": "reddit:wc4ryg; APUE",
+      "question": "A process stuck in uninterruptible sleep (D state) usually indicates:",
+      "options": [
+        "Waiting on I/O (often disk) — cannot be killed until kernel completes the I/O operation",
+        "Waiting for user input at the terminal",
+        "Normal idle state — D means 'Done'",
+        "CPU spinning at 100% in user space"
+      ],
+      "correctIndex": 0,
+      "explanation": "D-state processes block in kernel on I/O. Reddit/HN SRE rubrics cite checking D-state when CPU looks idle but workloads hang — storage or NFS issues."
+    },
+    {
+      "id": "E3-009",
+      "module": "E3",
+      "section": "E3-Linux",
+      "difficulty": "foundational",
+      "tags": ["linux-internals", "memory"],
+      "source": "reddit:1fkwupo Linux for Google SRE",
+      "question": "What is the main difference between virtual memory and physical RAM from an application’s perspective?",
+      "options": [
+        "Each process sees a private virtual address space mapped by the MMU to physical frames — enabling isolation and overcommit",
+        "Virtual memory is slower disk only; RAM is never used",
+        "They are identical terms",
+        "Virtual memory exists only in containers, not on Linux hosts"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reddit 1fkwupo stresses fundamentals over tools. Virtual memory + page faults explain OOM, swap thrashing, and mmap behavior in interviews."
+    },
+    {
+      "id": "E3-010",
+      "module": "E3",
+      "section": "E3-Linux",
+      "difficulty": "interview",
+      "tags": ["linux-internals", "filesystem"],
+      "source": "reddit:z5c3m7; LPI",
+      "question": "A disk reports 100% full but `df` shows space available. What Linux filesystem concept explains inode exhaustion?",
+      "options": [
+        "All inodes are allocated — many small files can fill inode table while bytes remain",
+        "df is always wrong on ext4",
+        "Inodes only exist on Windows NTFS",
+        "The kernel auto-deletes files when inodes run low"
+      ],
+      "correctIndex": 0,
+      "explanation": "Inode vs block exhaustion is classic Linux internals. SRE interviews expect you to check `df -i` and know implications for apps creating millions of small files."
+    },
+    {
+      "id": "E3-011",
+      "module": "E3",
+      "section": "E3-Linux",
+      "difficulty": "interview",
+      "tags": ["linux-internals", "syscalls"],
+      "source": "reddit:wc4ryg user-space implications",
+      "question": "Why might strace show a process repeatedly calling futex() with high latency?",
+      "options": [
+        "Lock contention — futex backs userspace mutexes; threads block waiting for a contended lock",
+        "DNS failure at Layer 7",
+        "futex always means memory leak",
+        "The process is idle and futex is normal sleep with zero cost"
+      ],
+      "correctIndex": 0,
+      "explanation": "wc4ryg: explain implications, not memorizing struct fields. futex + lock contention connects syscalls to performance debugging."
+    },
+    {
+      "id": "E3-012",
+      "module": "E3",
+      "section": "E3-Linux",
+      "difficulty": "deep-dive",
+      "tags": ["linux-internals", "cgroups"],
+      "source": "Google SRE; Linux cgroups",
+      "question": "A container hits OOMKilled despite the host having free RAM. Most likely Linux mechanism?",
+      "options": [
+        " cgroup memory limit enforced by the kernel — container exceeded its cgroup max, not host RAM",
+        "Docker randomly kills containers",
+        "OOM only happens when disk is full",
+        "Virtual memory is disabled in containers"
+      ],
+      "correctIndex": 0,
+      "explanation": "cgroup v1/v2 memory limits cause OOM kill inside the group. SRE-SE candidates tie Linux internals to Kubernetes/production symptoms."
+    },
+    {
+      "id": "E3-013",
+      "module": "E3",
+      "section": "E3-Net",
+      "difficulty": "interview",
+      "tags": ["networking", "tcp", "reddit:wc4ryg"],
+      "source": "reddit:wc4ryg IP networking depth",
+      "question": "During TCP three-way handshake, which flag combination does the server send in the second step (SYN-ACK)?",
+      "options": [
+        "SYN and ACK both set — acknowledges client SYN and sends server SYN",
+        "FIN and RST",
+        "ACK only with no SYN",
+        "PSH and URG"
+      ],
+      "correctIndex": 0,
+      "explanation": "TCP state machine basics appear in Google SRE SE networking depth per Reddit wc4ryg. SYN-ACK is step 2 of handshake."
+    },
+    {
+      "id": "E3-014",
+      "module": "E3",
+      "section": "E3-Net",
+      "difficulty": "interview",
+      "tags": ["networking", "dns"],
+      "source": "Effective Troubleshooting",
+      "question": "Intermittent 'Could not resolve host' errors affect one AZ only. Best first networking check?",
+      "options": [
+        "Compare resolver config (/etc/resolv.conf, systemd-resolved) and reachability to DNS servers from affected AZ",
+        "Rebuild the application binary",
+        "Clear browser cache on laptops",
+        "Assume DNS is global and ignore AZ"
+      ],
+      "correctIndex": 0,
+      "explanation": "DNS is infrastructure. SRE troubleshooting starts with resolver paths, VPC DNS endpoints, and L3 reachability to nameservers."
+    },
+    {
+      "id": "E3-015",
+      "module": "E3",
+      "section": "E3-Net",
+      "difficulty": "interview",
+      "tags": ["networking", "firewall", "osi"],
+      "source": "reddit:1klu37j troubleshooting format",
+      "question": "curl works to IP:443 but fails to hostname:443. What does this narrow down?",
+      "options": [
+        "DNS or hostname resolution problem — TCP/IP path to the IP is likely fine",
+        "TLS certificate expired only when using hostnames",
+        "Layer 1 cable fault",
+        "HTTP Layer 7 bug exclusively"
+      ],
+      "correctIndex": 0,
+      "explanation": "Classic divide: IP works, name fails → DNS or SNI-related naming. Reddit troubleshooting threads emphasize systematic elimination."
+    },
+    {
+      "id": "E3-016",
+      "module": "E3",
+      "section": "E3-Net",
+      "difficulty": "foundational",
+      "tags": ["networking", "udp"],
+      "source": "Networking fundamentals",
+      "question": "Why does DNS commonly use UDP for queries (with TCP fallback for large responses)?",
+      "options": [
+        "UDP is lightweight for small request/response — lower overhead than TCP for simple lookups",
+        "UDP guarantees delivery unlike TCP",
+        "DNS cannot use TCP by design",
+        "UDP operates at Layer 2 only"
+      ],
+      "correctIndex": 0,
+      "explanation": "DNS over UDP:53 for typical queries; TCP when truncation occurs. Know transport choice for SRE networking questions."
+    },
+    {
+      "id": "E3-017",
+      "module": "E3",
+      "section": "E3-Net",
+      "difficulty": "interview",
+      "tags": ["networking", "latency", "reddit:o6ozcj"],
+      "source": "reddit:o6ozcj; Brendan Gregg",
+      "question": "High network latency between two hosts in the same region but different subnets. OSI-aware checklist item?",
+      "options": [
+        "Trace L3 path (traceroute), check ACLs/security groups (L3/L4), and NIC/driver errors (L1/L2)",
+        "Only restart the application",
+        "Latency in-region is always zero — ignore network",
+        "Check CSS files first"
+      ],
+      "correctIndex": 0,
+      "explanation": "o6ozcj confirms Linux/networking focus for SRE-SE. Same-region latency implicates routing, firewalls, or NIC issues across L1–L4."
+    },
+    {
+      "id": "E3-018",
+      "module": "E3",
+      "section": "E3-Net",
+      "difficulty": "deep-dive",
+      "tags": ["networking", "linux-internals", "ephemeral-ports"],
+      "source": "SRE book; Linux networking",
+      "question": "A busy proxy runs out of ephemeral ports causing connection failures. Linux tuning concept?",
+      "options": [
+        "Expand ip_local_port_range and reduce TIME_WAIT duration / enable connection reuse — exhaustion at L4",
+        "Increase inode count",
+        "Disable TCP entirely",
+        "Add more RAM to fix port exhaustion"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ephemeral port exhaustion is L4 (TCP quadruple). SREs know sysctl tuning and connection pooling — bridges Linux internals and networking."
+    }
+  ]
+}

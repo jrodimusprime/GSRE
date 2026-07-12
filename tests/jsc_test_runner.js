@@ -119,10 +119,33 @@ QuizApp.boot().then(() => {
   assert(stats.innerHTML.includes('stat-card'), 'section stats should render on init');
 
   QuizLoader.getAllQuestions().then((all) => {
-    assert(all.length === 321, `expected 321 questions, got ${all.length}`);
+    assert(all.length === 339, `expected 339 questions, got ${all.length}`);
+
+    const e3 = all.filter((q) => q.module === 'E3');
+    assert(e3.length === 18, `expected 18 E3 questions, got ${e3.length}`);
+
     QuizEngine.init(all, new Set(['B1']));
     const q = QuizEngine.pickRandom();
     assert(q && q.module === 'B1', 'engine should pick from enabled module');
+
+    const remainingEl = document.getElementById('pool-remaining');
+    assert(
+      remainingEl.textContent.includes('remaining'),
+      'pool remaining should display in score bar on init'
+    );
+
+    const b1Ids = all.filter((q) => q.module === 'B1').map((q) => q.id);
+    QuizStorage.clearProgress();
+    QuizEngine.init(all, new Set(['B1']), new Set(b1Ids));
+    for (const id of b1Ids) {
+      QuizStorage.recordAnswer(id, true, 'B1');
+    }
+    assert(QuizEngine.pickRandom() === null, 'engine should not repeat answered questions');
+    assert(QuizEngine.remainingCount() === 0, 'remaining count should be zero when pool exhausted');
+
+    const pool = QuizStorage.getEnabledPoolProgress({ B1: b1Ids }, new Set(['B1']));
+    assert(pool.remaining === 0 && pool.total === b1Ids.length, 'pool progress should track remaining');
+
     print('PASS: quiz init smoke tests');
   }).catch((err) => fail(err.stack || String(err)));
 }).catch((err) => fail(err.stack || String(err)));

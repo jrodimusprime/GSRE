@@ -1,13 +1,15 @@
 const QuizEngine = (() => {
   let allQuestions = [];
   let enabledModules = new Set();
+  let eligibleQuestionIds = null;
   let currentQuestion = null;
   let shuffledOptions = [];
   let lastQuestionId = null;
 
-  function init(questions, enabled) {
+  function init(questions, enabled, eligibleIds) {
     allQuestions = questions;
     enabledModules = new Set(enabled);
+    eligibleQuestionIds = eligibleIds instanceof Set ? eligibleIds : new Set(eligibleIds || []);
     currentQuestion = null;
     lastQuestionId = null;
     shuffledOptions = [];
@@ -17,8 +19,28 @@ const QuizEngine = (() => {
     enabledModules = new Set(enabled);
   }
 
+  function setEligibleQuestionIds(ids) {
+    eligibleQuestionIds = ids instanceof Set ? ids : new Set(ids || []);
+  }
+
   function activePool() {
+    if (eligibleQuestionIds && eligibleQuestionIds.size) {
+      return allQuestions.filter((q) => eligibleQuestionIds.has(q.id));
+    }
     return allQuestions.filter((q) => enabledModules.has(q.module));
+  }
+
+  function unattemptedPool() {
+    const answered = QuizStorage.getAnswers();
+    return activePool().filter((q) => !answered[q.id]);
+  }
+
+  function remainingCount() {
+    return unattemptedPool().length;
+  }
+
+  function activePoolTotal() {
+    return activePool().length;
   }
 
   function shuffleOptions(q) {
@@ -27,15 +49,15 @@ const QuizEngine = (() => {
   }
 
   function pickRandom() {
-    const pool = activePool();
-    if (!pool.length) {
+    let candidates = unattemptedPool();
+    if (!candidates.length) {
       currentQuestion = null;
       shuffledOptions = [];
       return null;
     }
-    let candidates = pool;
-    if (pool.length > 1 && lastQuestionId) {
-      candidates = pool.filter((q) => q.id !== lastQuestionId);
+    if (candidates.length > 1 && lastQuestionId) {
+      const filtered = candidates.filter((q) => q.id !== lastQuestionId);
+      if (filtered.length) candidates = filtered;
     }
     const idx = Math.floor(Math.random() * candidates.length);
     currentQuestion = candidates[idx];
@@ -63,7 +85,11 @@ const QuizEngine = (() => {
   return {
     init,
     setEnabledModules,
+    setEligibleQuestionIds,
     activePool,
+    unattemptedPool,
+    remainingCount,
+    activePoolTotal,
     pickRandom,
     current,
     currentShuffledOptions,

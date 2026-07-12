@@ -52,7 +52,35 @@ const QuizStorage = (() => {
     return load().answers || {};
   }
 
-  /** Unique question IDs answered, optionally filtered by module. */
+  /** Progress for enabled module pools (union of question IDs per enabled module). */
+  function getEnabledPoolProgress(questionIdsByModule, enabledModules) {
+    const answers = getAnswers();
+    const enabled = enabledModules instanceof Set ? enabledModules : new Set(enabledModules);
+    const idSet = new Set();
+    for (const [moduleId, ids] of Object.entries(questionIdsByModule)) {
+      if (!enabled.has(moduleId)) continue;
+      for (const id of ids) idSet.add(id);
+    }
+    let attempted = 0;
+    let correct = 0;
+    for (const id of idSet) {
+      if (!answers[id]) continue;
+      attempted++;
+      if (answers[id].correct) correct++;
+    }
+    const total = idSet.size;
+    const remaining = Math.max(0, total - attempted);
+    return {
+      total,
+      attempted,
+      remaining,
+      correct,
+      pct: attempted ? Math.round((correct / attempted) * 100) : null,
+      exploredPct: total ? Math.round((attempted / total) * 100) : 0,
+    };
+  }
+
+  /** Unique question IDs answered per module pool. */
   function getAttemptedProgress(questionIdsByModule) {
     const answers = getAnswers();
     const out = {};
@@ -105,6 +133,7 @@ const QuizStorage = (() => {
     getModuleStats,
     getAnswers,
     getAttemptedProgress,
+    getEnabledPoolProgress,
     getEnabledModules,
     setEnabledModules,
     getWrongBook,

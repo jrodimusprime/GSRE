@@ -13,8 +13,26 @@ const QuizApp = (() => {
     return map;
   }
 
+  function buildEligibleQuestionIds() {
+    const ids = new Set();
+    for (const modId of enabledModules) {
+      for (const id of questionIdsByModule[modId] || []) {
+        ids.add(id);
+      }
+    }
+    return ids;
+  }
+
+  function syncEnginePool() {
+    QuizEngine.setEligibleQuestionIds(buildEligibleQuestionIds());
+  }
+
   function moduleProgress() {
     return QuizStorage.getAttemptedProgress(questionIdsByModule);
+  }
+
+  function poolProgress() {
+    return QuizStorage.getEnabledPoolProgress(questionIdsByModule, enabledModules);
   }
 
   async function init() {
@@ -30,18 +48,23 @@ const QuizApp = (() => {
     if (!questions.length) {
       throw new Error('No questions loaded');
     }
-    QuizEngine.init(questions, enabledModules);
     questionIdsByModule = await loadQuestionIdsByModule(config.modules);
+    QuizEngine.init(questions, enabledModules, buildEligibleQuestionIds());
 
-    QuizUI.refresh(config.modules, enabledModules, moduleProgress());
+    refreshUI();
     bindEvents();
     showNextQuestion();
+  }
+
+  function refreshUI() {
+    QuizUI.refresh(config.modules, enabledModules, moduleProgress(), poolProgress());
   }
 
   function bindEvents() {
     el('options').addEventListener('click', onOptionClick);
     el('next-btn').addEventListener('click', onNext);
     el('module-chips').addEventListener('change', onModuleToggle);
+    el('reset-progress-btn').addEventListener('click', onResetProgress);
   }
 
   function el(id) {
@@ -55,7 +78,7 @@ const QuizApp = (() => {
     const result = QuizEngine.submit(idx);
     if (!result) return;
     QuizUI.showFeedback(result.correct, result.explanation);
-    QuizUI.refresh(config.modules, enabledModules, moduleProgress());
+    refreshUI();
     el('next-btn').classList.remove('hidden');
   }
 
@@ -74,21 +97,37 @@ const QuizApp = (() => {
     }
     QuizStorage.setEnabledModules([...enabledModules]);
     QuizEngine.setEnabledModules(enabledModules);
-    QuizUI.refresh(config.modules, enabledModules, moduleProgress());
+    syncEnginePool();
+    refreshUI();
+    showNextQuestion();
+  }
+
+  function onResetProgress() {
+    if (!window.confirm('Clear all quiz progress and show every question again?')) return;
+    QuizStorage.clearProgress();
+    enabledModules = QuizStorage.getEnabledModules(config.modules.map((m) => m.id));
+    syncEnginePool();
+    refreshUI();
     showNextQuestion();
   }
 
   function showNextQuestion() {
+    const pool = poolProgress();
+    if (!pool.total) {
+      QuizUI.showEmptyPool();
+      return;
+    }
     const q = QuizEngine.pickRandom();
     if (!q) {
-      QuizUI.showEmptyPool();
+      QuizUI.showPoolExhausted(pool);
       return;
     }
     const mod = moduleById[q.module];
     QuizUI.renderQuestion(
       q,
       QuizEngine.currentShuffledOptions(),
-      (mod && mod.title) || q.module
+      (mod && mod.title) || q.module,
+      pool.remaining
     );
   }
 

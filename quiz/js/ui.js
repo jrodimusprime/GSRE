@@ -1,19 +1,37 @@
 const QuizUI = (() => {
   const el = (id) => document.getElementById(id);
 
-  function renderScoreBar() {
+  function renderScoreBar(poolProgress) {
     const stats = QuizStorage.getOverallStats();
     const avgEl = el('avg-score');
     const detailEl = el('score-detail');
+    const remainingEl = el('pool-remaining');
+    const pool = poolProgress || { total: 0, remaining: 0, attempted: 0, correct: 0, pct: null };
+
+    if (remainingEl) {
+      if (!pool.total) {
+        remainingEl.textContent = 'No sections selected';
+      } else if (pool.remaining === 0) {
+        remainingEl.textContent = 'All questions in selected sections completed';
+      } else {
+        remainingEl.textContent =
+          pool.remaining === 1
+            ? '1 question remaining in selected sections'
+            : `${pool.remaining} questions remaining in selected sections`;
+      }
+    }
+
     if (!stats.total) {
       avgEl.textContent = '—';
       avgEl.classList.remove('has-score');
-      detailEl.textContent = 'No questions answered yet';
+      detailEl.textContent = pool.attempted
+        ? `${pool.correct} / ${pool.attempted} correct so far`
+        : 'No questions answered yet';
       return;
     }
     avgEl.textContent = `${stats.pct}%`;
     avgEl.classList.add('has-score');
-    detailEl.textContent = `${stats.correct} / ${stats.total} correct`;
+    detailEl.textContent = `${stats.correct} / ${stats.total} correct overall`;
   }
 
   function renderModuleFilters(modules, enabled) {
@@ -70,8 +88,12 @@ const QuizUI = (() => {
       .join('');
   }
 
-  function renderQuestion(q, shuffledOpts, moduleTitle) {
-    el('quiz-meta').textContent = moduleTitle || q.module;
+  function renderQuestion(q, shuffledOpts, moduleTitle, remainingInPool) {
+    const remainingNote =
+      remainingInPool != null && remainingInPool > 0
+        ? `${remainingInPool} left in selected sections`
+        : '';
+    el('quiz-meta').textContent = [moduleTitle || q.module, remainingNote].filter(Boolean).join(' · ');
     el('question-text').textContent = q.question;
     const optsEl = el('options');
     optsEl.innerHTML = shuffledOpts
@@ -100,6 +122,17 @@ const QuizUI = (() => {
     el('next-btn').classList.add('hidden');
   }
 
+  function showPoolExhausted(poolProgress) {
+    const pool = poolProgress || { total: 0, attempted: 0 };
+    el('quiz-meta').textContent = 'Pool complete';
+    el('question-text').textContent =
+      `You have answered all ${pool.total} questions in the selected sections. Untick sections to narrow focus, or reset progress to start over.`;
+    el('options').innerHTML = '';
+    el('video-link').innerHTML = '';
+    el('explanation').classList.add('hidden');
+    el('next-btn').classList.add('hidden');
+  }
+
   function showInitError(err) {
     el('quiz-meta').textContent = '';
     el('question-text').textContent = 'Could not load the quiz. Try refreshing the page.';
@@ -121,8 +154,8 @@ const QuizUI = (() => {
     document.querySelectorAll('.option-btn').forEach((b) => (b.disabled = true));
   }
 
-  function refresh(modules, enabled, progressByModule) {
-    renderScoreBar();
+  function refresh(modules, enabled, progressByModule, poolProgress) {
+    renderScoreBar(poolProgress);
     renderModuleFilters(modules, enabled);
     renderSectionStats(modules, enabled, progressByModule || {});
   }
@@ -133,6 +166,7 @@ const QuizUI = (() => {
     renderSectionStats,
     renderQuestion,
     showEmptyPool,
+    showPoolExhausted,
     showInitError,
     showFeedback,
     refresh,

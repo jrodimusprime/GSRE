@@ -22,6 +22,7 @@
         <span class="score-label">Average score</span>
         <span id="avg-score" class="avg-score">—</span>
         <span id="score-detail" class="score-detail">No questions answered yet</span>
+        <span id="pool-remaining" class="pool-remaining">—</span>
       </div>
     </div>
   </header>
@@ -43,7 +44,10 @@
     </section>
 
     <section id="section-stats" class="section-stats">
-      <h2>Performance by section</h2>
+      <div class="section-stats-header">
+        <h2>Performance by section</h2>
+        <button id="reset-progress-btn" type="button" class="btn-secondary">Reset progress</button>
+      </div>
       <div id="stats-grid" class="stats-grid"></div>
     </section>
   </main>

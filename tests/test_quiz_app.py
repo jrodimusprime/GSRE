@@ -18,12 +18,14 @@ JSC = Path("/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpe
 REQUIRED_DOM_IDS = [
     "avg-score",
     "score-detail",
+    "pool-remaining",
     "quiz-meta",
     "question-text",
     "options",
     "next-btn",
     "module-chips",
     "stats-grid",
+    "reset-progress-btn",
 ]
 
 REQUIRED_SCRIPTS = [
@@ -133,7 +135,7 @@ class QuestionBankTests(unittest.TestCase):
         if segs != Counter(expected_segments):
             errors.append(f"SA-VIDEO segment mismatch: {dict(segs)}")
 
-        self.assertEqual(total, 321, f"expected 321 questions, found {total}")
+        self.assertEqual(total, 339, f"expected 339 questions, found {total}")
         self.assertEqual(errors, [], "\n".join(errors[:20]))
 
 
@@ -170,8 +172,8 @@ class QuizAppTests(unittest.TestCase):
 
     def test_all_questions_load(self):
         questions, config = get_all_questions()
-        self.assertEqual(len(questions), 321)
-        self.assertEqual(len(config["modules"]), 19)
+        self.assertEqual(len(questions), 339)
+        self.assertEqual(len(config["modules"]), 20)
 
     def test_section_progress_uses_module_pool_sizes(self):
         """Module questionCount should match loader pool (video tags + supplemental)."""
@@ -213,6 +215,21 @@ class QuizAppTests(unittest.TestCase):
     def test_engine_returns_none_when_all_sections_disabled(self):
         questions, _config = get_all_questions()
         self.assertIsNone(pick_random(questions, set()))
+
+    def test_engine_skips_answered_questions(self):
+        engine_js = (JS / "engine.js").read_text(encoding="utf-8")
+        storage_js = (JS / "storage.js").read_text(encoding="utf-8")
+        self.assertIn("unattemptedPool", engine_js)
+        self.assertIn("getAnswers()", engine_js)
+        self.assertIn("getEnabledPoolProgress", storage_js)
+
+    def test_app_wires_eligible_pool_and_remaining(self):
+        app_js = (JS / "app.js").read_text(encoding="utf-8")
+        ui_js = (JS / "ui.js").read_text(encoding="utf-8")
+        self.assertIn("setEligibleQuestionIds", app_js)
+        self.assertIn("poolProgress", app_js)
+        self.assertIn("showPoolExhausted", app_js)
+        self.assertIn("pool-remaining", ui_js)
 
     def test_init_must_render_question_and_filters(self):
         app_js = (JS / "app.js").read_text(encoding="utf-8")

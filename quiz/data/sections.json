@@ -43,7 +43,15 @@
       "buildOrder": 17
     },
     { "id": "D1", "title": "What would you do first?", "questionCount": 15, "dataFile": "questions/d1-scenarios.json", "buildOrder": 18 },
-    { "id": "D2", "title": "Identify the flaw", "questionCount": 10, "dataFile": "questions/d2-flaws.json", "buildOrder": 19 }
+    { "id": "D2", "title": "Identify the flaw", "questionCount": 10, "dataFile": "questions/d2-flaws.json", "buildOrder": 19 },
+    {
+      "id": "E3",
+      "title": "Linux, networking & OSI",
+      "sourceUrl": "https://reddit.com/r/devops/comments/wc4ryg/",
+      "questionCount": 18,
+      "dataFile": "questions/e3-linux-networking.json",
+      "buildOrder": 20
+    }
   ],
   "examPresets": [
     {
@@ -63,15 +71,15 @@
     {
       "id": "your-loop",
       "label": "Your loop (code review + Systems Arch + G&L + Manager)",
-      "modules": ["CR-REVIEW", "SA-VIDEO", "B1", "B2", "B5", "B6", "B7", "C1", "C2", "C3", "C4", "C5", "A1"],
-      "questionCount": 60,
+      "modules": ["CR-REVIEW", "SA-VIDEO", "B1", "B2", "B5", "B6", "B7", "E3", "C1", "C2", "C3", "C4", "C5", "A1"],
+      "questionCount": 78,
       "minutes": 0
     },
     {
       "id": "systems-architecture-60",
       "label": "Systems Architecture mock (60 min)",
-      "modules": ["SA-VIDEO", "B1", "B2", "B3", "B5", "B6", "B7"],
-      "questionCount": 60,
+      "modules": ["SA-VIDEO", "B1", "B2", "B3", "B5", "B6", "B7", "E3"],
+      "questionCount": 78,
       "minutes": 60
     },
     {
@@ -82,10 +90,10 @@
       "minutes": 45
     },
     {
-      "id": "full-321",
-      "label": "Full bank (321 Q)",
-      "modules": ["SA-VIDEO", "CR-REVIEW", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "A1", "A2", "C1", "C2", "C3", "C4", "C5", "D1", "D2"],
-      "questionCount": 321,
+      "id": "full-339",
+      "label": "Full bank (339 Q)",
+      "modules": ["SA-VIDEO", "CR-REVIEW", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "A1", "A2", "C1", "C2", "C3", "C4", "C5", "D1", "D2", "E3"],
+      "questionCount": 339,
       "minutes": 0
     }
   ],
