@@ -117,7 +117,7 @@
         "Ask to skip storage design because it is not part of the rubric"
       ],
       "correctIndex": 0,
-      "explanation": "The recruiter email explicitly states that implications matter more than a single 'correct' choice and that a coherent design beats memorized answers. Acknowledging trade-offs, rejected alternatives, and consistency with requirements shows mature engineering judgment — exactly what B6 evaluates."
+      "explanation": "The Systems Architecture rubric states that implications matter more than a single 'correct' choice and that a coherent design beats memorized answers. Acknowledging trade-offs, rejected alternatives, and consistency with requirements shows mature engineering judgment — exactly what B6 evaluates."
     },
     {
       "id": "B6-008",

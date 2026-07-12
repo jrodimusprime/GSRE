@@ -28,7 +28,7 @@
     { "id": "B6", "title": "Trade-offs & design decisions", "questionCount": 16, "dataFile": "questions/b6-tradeoffs.json", "videoSegments": ["SA-V4"], "videoCount": 6, "buildOrder": 8 },
     { "id": "B7", "title": "Failure modes & recovery", "questionCount": 18, "dataFile": "questions/b7-failures.json", "videoSegments": ["SA-V4"], "videoCount": 4, "buildOrder": 9 },
     { "id": "B8", "title": "APIs & canonical patterns", "questionCount": 20, "dataFile": "questions/b8-patterns.json", "buildOrder": 10 },
-    { "id": "A1", "title": "Hiring process", "questionCount": 16, "dataFile": "questions/a1-hiring.json", "buildOrder": 11 },
+    { "id": "A1", "title": "Hiring process", "questionCount": 24, "dataFile": "questions/a1-hiring.json", "buildOrder": 11 },
     { "id": "A2", "title": "SRE principles", "questionCount": 13, "dataFile": "questions/a2-sre-principles.json", "buildOrder": 12 },
     { "id": "C1", "title": "Googleyness", "questionCount": 15, "dataFile": "questions/c1-googleyness.json", "buildOrder": 13 },
     { "id": "C2", "title": "Leadership dimensions", "questionCount": 15, "dataFile": "questions/c2-leadership.json", "buildOrder": 14 },
@@ -90,10 +90,10 @@
       "minutes": 45
     },
     {
-      "id": "full-339",
-      "label": "Full bank (339 Q)",
+      "id": "full-347",
+      "label": "Full bank (347 Q)",
       "modules": ["SA-VIDEO", "CR-REVIEW", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "A1", "A2", "C1", "C2", "C3", "C4", "C5", "D1", "D2", "E3"],
-      "questionCount": 339,
+      "questionCount": 347,
       "minutes": 0
     }
   ],

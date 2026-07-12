@@ -168,7 +168,7 @@
         "Detection is optional if you design for zero failures"
       ],
       "correctIndex": 0,
-      "explanation": "The recruiter email separates detecting failure, defending against spread, and recovering operation — mirroring SRE troubleshooting practice. You cannot recover what you haven't detected; defenses (breakers, backpressure, degradation) bridge detection and full recovery."
+      "explanation": "The failure-response rubric separates detecting failure, defending against spread, and recovering operation — mirroring SRE troubleshooting practice. You cannot recover what you haven't detected; defenses (breakers, backpressure, degradation) bridge detection and full recovery."
     },
     {
       "id": "B7-011",

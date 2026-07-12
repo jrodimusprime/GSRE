@@ -119,7 +119,7 @@ QuizApp.boot().then(() => {
   assert(stats.innerHTML.includes('stat-card'), 'section stats should render on init');
 
   QuizLoader.getAllQuestions().then((all) => {
-    assert(all.length === 339, `expected 339 questions, got ${all.length}`);
+    assert(all.length === 347, `expected 347 questions, got ${all.length}`);
 
     const e3 = all.filter((q) => q.module === 'E3');
     assert(e3.length === 18, `expected 18 E3 questions, got ${e3.length}`);

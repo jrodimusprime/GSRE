@@ -5,7 +5,7 @@
       "module": "B2",
       "difficulty": "interview",
       "tags": ["clarification", "underspecified", "requirements"],
-      "source": "recruiter-email-rubric",
+      "source": "systems-architecture-rubric",
       "question": "An interviewer says: 'Design a notification system for our product.' Before drawing any boxes, which question is MOST valuable to ask?",
       "options": [
         "What are the expected scale, latency targets, and delivery guarantees (at-least-once vs exactly-once)?",
@@ -14,7 +14,7 @@
         "What is the Big-O complexity of sorting user IDs alphabetically?"
       ],
       "correctIndex": 0,
-      "explanation": "The email rubric prioritizes clarifying underspecified problems—especially scale, latency, and reliability constraints—before architecture. Language choice, UI colors, and micro-algorithm trivia do not unblock a meaningful v1 design."
+      "explanation": "The Systems Architecture rubric prioritizes clarifying underspecified problems — especially scale, latency, and reliability constraints — before architecture. Language choice, UI colors, and micro-algorithm trivia do not unblock a meaningful v1 design."
     },
     {
       "id": "B2-002",
@@ -37,7 +37,7 @@
       "module": "B2",
       "difficulty": "interview",
       "tags": ["clarification", "read-write-ratio", "scale"],
-      "source": "recruiter-email-rubric",
+      "source": "systems-architecture-rubric",
       "question": "When clarifying requirements for a read-heavy social feed, which follow-up question most directly informs your storage and caching strategy?",
       "options": [
         "What is the read-to-write ratio, and how fresh must feed items appear to users?",
@@ -46,7 +46,7 @@
         "What font size should the feed use on tablet devices?"
       ],
       "correctIndex": 0,
-      "explanation": "Read/write ratio and freshness (consistency/latency) directly drive caching, replication, and CDN decisions. The email rubric and AOSA both emphasize probing access patterns and consistency needs before committing to architecture."
+      "explanation": "Read/write ratio and freshness (consistency/latency) directly drive caching, replication, and CDN decisions. The Systems Architecture rubric and AOSA both emphasize probing access patterns and consistency needs before committing to architecture."
     },
     {
       "id": "B2-004",
@@ -85,7 +85,7 @@
       "module": "B2",
       "difficulty": "interview",
       "tags": ["constraints", "geography", "compliance"],
-      "source": "recruiter-email-rubric",
+      "source": "systems-architecture-rubric",
       "question": "A prompt says: 'Design data storage for a health-records product.' Which clarifying question addresses a constraint that could fundamentally change your architecture?",
       "options": [
         "Are there geographic residency or compliance requirements (e.g., HIPAA, GDPR) for where data may be stored and processed?",
@@ -94,7 +94,7 @@
         "How many spaces wide should code indentation be in the repository?"
       ],
       "correctIndex": 0,
-      "explanation": "Geographic and compliance constraints can mandate regional sharding, encryption, and audit architectures. The email rubric lists constraints as a first-class clarification topic; formatting preferences do not change system topology."
+      "explanation": "Geographic and compliance constraints can mandate regional sharding, encryption, and audit architectures. The Systems Architecture rubric treats constraints as a first-class clarification topic; formatting preferences do not change system topology."
     },
     {
       "id": "B2-007",
@@ -117,7 +117,7 @@
       "module": "B2",
       "difficulty": "interview",
       "tags": ["API-contract", "interfaces", "decomposition"],
-      "source": "recruiter-email-rubric",
+      "source": "systems-architecture-rubric",
       "question": "After decomposing a system into components, what should you define BEFORE deep-diving into internal storage choices for each service?",
       "options": [
         "The API contracts and data passed between components, including key request/response fields and error semantics",
@@ -126,14 +126,14 @@
         "The font family used in internal runbooks"
       ],
       "correctIndex": 0,
-      "explanation": "The email rubric highlights interfaces and APIs as central to the Systems Architecture round. Defining component contracts first enables parallel deep-dives and mirrors how Google expects candidates to decompose before optimizing internals."
+      "explanation": "The Systems Architecture rubric highlights interfaces and APIs as central to the round. Defining component contracts first enables parallel deep-dives and mirrors how Google expects candidates to decompose before optimizing internals."
     },
     {
       "id": "B2-009",
       "module": "B2",
       "difficulty": "interview",
       "tags": ["functional-requirements", "feature-set", "scope"],
-      "source": "recruiter-email-rubric",
+      "source": "systems-architecture-rubric",
       "question": "The interviewer lists possible features: real-time sync, offline mode, full-text search, and admin audit logs. You have 40 minutes remaining. What is the BEST requirements-clarification move?",
       "options": [
         "Ask which features are must-haves for v1 versus nice-to-haves, and confirm priority order with the interviewer",
@@ -142,7 +142,7 @@
         "Ignore the feature list and design only the CI/CD pipeline"
       ],
       "correctIndex": 0,
-      "explanation": "The email rubric and NALSD both emphasize scope negotiation—identifying MVP feature sets before architecture. Blind commitment or refusing to proceed without exhaustive docs wastes the collaborative clarification phase."
+      "explanation": "The Systems Architecture rubric and NALSD both emphasize scope negotiation — identifying MVP feature sets before architecture. Blind commitment or refusing to proceed without exhaustive docs wastes the collaborative clarification phase."
     },
     {
       "id": "B2-010",

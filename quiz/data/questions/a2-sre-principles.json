@@ -57,7 +57,7 @@
       "section": "A2",
       "difficulty": "interview",
       "tags": ["sre", "blameless-postmortem", "culture"],
-      "source": "SRE book; recruiter email SRE blurb",
+      "source": "SRE book; SRE role overview",
       "question": "A blameless postmortem after a production incident primarily aims to:",
       "options": [
         "Understand systemic causes and prevent recurrence without punishing individuals for honest mistakes",
@@ -66,7 +66,7 @@
         "Avoid writing anything down to protect the team from management"
       ],
       "correctIndex": 0,
-      "explanation": "Blameless postmortems are core SRE culture (recruiter email mentions them explicitly). Focus is systemic fixes, shared learning, and action items — not individual blame. This connects to leadership behavioral prep (growth from failure)."
+      "explanation": "Blameless postmortems are core SRE culture. Focus is systemic fixes, shared learning, and action items — not individual blame. This connects to leadership behavioral prep (growth from failure)."
     },
     {
       "id": "A2-005",
@@ -100,7 +100,7 @@
         "Traditional ops and SRE are identical at Google"
       ],
       "correctIndex": 0,
-      "explanation": "SRE book intro positions SRE as software engineers who apply engineering to operations: automation, SLO-driven decisions, shared responsibility with dev teams. The recruiter email's SRE blurb reflects availability, automation, capacity, and postmortems."
+      "explanation": "SRE book intro positions SRE as software engineers who apply engineering to operations: automation, SLO-driven decisions, shared responsibility with dev teams. The SRE role overview reflects availability, automation, capacity, and postmortems."
     },
     {
       "id": "A2-007",
@@ -142,7 +142,7 @@
       "section": "A2",
       "difficulty": "foundational",
       "tags": ["sre", "lifecycle", "launch"],
-      "source": "SRE book; NALSD; recruiter email",
+      "source": "SRE book; NALSD; SRE role overview",
       "question": "Which sequence best captures the SRE engagement lifecycle for a new large service?",
       "options": [
         "Design review → launch readiness → operate/monitor → iterate/refine reliability",

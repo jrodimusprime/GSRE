@@ -449,7 +449,7 @@
       "difficulty": "interview",
       "tags": ["code-review", "reddit:da4h29", "mutex"],
       "source": "reddit:da4h29 Google SRE Manager prep list",
-      "question": "da4h29's recruiter prep mentioned mutex/semaphore basics. In code review, a snippet uses `lock` but never unlocks on error paths. You should flag:",
+      "question": "da4h29's prep list mentioned mutex/semaphore basics. In code review, a snippet uses `lock` but never unlocks on error paths. You should flag:",
       "options": [
         "Resource leak / deadlock risk — ensure unlock in finally/defer or RAII pattern on all paths",
         "Mutexes are deprecated — remove all locking",
@@ -457,7 +457,7 @@
         "Errors should crash the process without cleanup"
       ],
       "correctIndex": 0,
-      "explanation": "Reddit 'too easy' prep topics still appear inside review snippets as concurrency bugs — da4h29's FS/mutex hints map to real review findings."
+      "explanation": "Reddit 'too easy' prep topics still appear inside review snippets as concurrency bugs — da4h29's filesystem and mutex hints map to real review findings."
     },
     {
       "id": "CR-028",

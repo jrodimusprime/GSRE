@@ -23,16 +23,16 @@
       "section": "A1",
       "difficulty": "foundational",
       "tags": ["hiring", "process", "pipeline"],
-      "source": "Google How We Hire; recruiter email",
+      "source": "Google How We Hire; confirmed loop notes",
       "question": "Which sequence best represents Google's typical hiring pipeline after initial application?",
       "options": [
-        "Recruiter screen → phone/video interviews → onsite loop → hiring committee → team matching",
+        "Initial screen → phone/video interviews → onsite loop → hiring committee → team matching",
         "Onsite first → take-home exam only → automatic offer with no committee",
         "Single 15-minute call → immediate team assignment without interviews",
         "Committee decision before any interviews occur"
       ],
       "correctIndex": 0,
-      "explanation": "Official How We Hire describes recruiter conversation, remote/phone screens, onsite (or virtual onsite) interviews, then a hiring committee that reviews packet feedback holistically, followed by team matching for accepted candidates — not instant placement."
+      "explanation": "Official How We Hire describes an initial conversation, remote/phone screens, onsite (or virtual onsite) interviews, then a hiring committee that reviews packet feedback holistically, followed by team matching for accepted candidates — not instant placement."
     },
     {
       "id": "A1-003",
@@ -40,7 +40,7 @@
       "section": "A1",
       "difficulty": "interview",
       "tags": ["hiring", "sre-swe", "sre-se", "track"],
-      "source": "Interview prep hub SRE path; recruiter email",
+      "source": "Interview prep hub SRE path; confirmed loop notes",
       "question": "You are interviewing for SRE Software Engineering (SRE-SWE). How does this track differ from SRE Systems Engineering (SRE-SE)?",
       "options": [
         "SRE-SWE emphasizes software development, automation, and systems design; SRE-SE leans more toward Linux/systems administration depth",
@@ -49,7 +49,7 @@
         "SRE-SE candidates skip the Systems Architecture round entirely"
       ],
       "correctIndex": 0,
-      "explanation": "The interview prep path distinguishes SRE-SWE (software engineering focus per recruiter email) from SRE-SE (heavier Linux/ops loop). Technical rounds differ by track — e.g., live coding vs code review vs Linux depth — plus shared rounds like Systems Architecture for SRE-SWE."
+      "explanation": "The interview prep path distinguishes SRE-SWE (software engineering focus) from SRE-SE (heavier Linux/ops loop). Technical rounds differ by track — e.g., live coding vs code review vs Linux depth — plus shared rounds like Systems Architecture for SRE-SWE."
     },
     {
       "id": "A1-004",
@@ -57,8 +57,8 @@
       "section": "A1",
       "difficulty": "interview",
       "tags": ["hiring", "systems-architecture", "no-coding"],
-      "source": "Recruiter email; Systems Architecture video",
-      "question": "The recruiter email describes the 60-minute Systems Architecture interview. Which statement is accurate?",
+      "source": "Confirmed loop notes; Systems Architecture video",
+      "question": "Confirmed guidance describes the 60-minute Systems Architecture interview. Which statement is accurate?",
       "options": [
         "It is not a coding interview; interfaces, APIs, and pseudocode payloads are acceptable",
         "You must implement production-ready code in your language of choice on a laptop",
@@ -66,7 +66,7 @@
         "No diagrams or estimates are allowed; verbal answers only"
       ],
       "correctIndex": 0,
-      "explanation": "Both the recruiter email and official Systems Architecture video (Gg318hR5JY0) state explicitly: no coding in this round. Defining APIs, data payloads at pseudocode level, whiteboard diagrams, and numeric estimates are in scope and encouraged."
+      "explanation": "Both confirmed loop guidance and the official Systems Architecture video (Gg318hR5JY0) state explicitly: no coding in this round. Defining APIs, data payloads at pseudocode level, whiteboard diagrams, and numeric estimates are in scope and encouraged."
     },
     {
       "id": "A1-005",
@@ -159,7 +159,7 @@
       "section": "A1",
       "difficulty": "interview",
       "tags": ["hiring", "interviewer-matching", "strengths"],
-      "source": "How We Hire; recruiter email",
+      "source": "How We Hire; confirmed loop notes",
       "question": "Why might Google match specific interviewers to a candidate's stated strengths or background?",
       "options": [
         "To assess role-related knowledge fairly and allow the candidate to demonstrate depth in relevant areas",
@@ -193,16 +193,16 @@
       "section": "A1",
       "difficulty": "deep-dive",
       "tags": ["hiring", "sre-swe", "interview-rounds"],
-      "source": "Recruiter email; interview prep hub",
-      "question": "For an SRE-SWE loop per the recruiter email, which interview pairing is explicitly listed?",
+      "source": "Confirmed loop notes; interview prep hub",
+      "question": "For the confirmed SRE-SWE loop, which interview pairing is explicitly listed?",
       "options": [
-        "60-minute Systems Architecture plus 45-minute Googleyness & Leadership (plus other loop rounds such as code review per recruiter)",
+        "60-minute Systems Architecture plus 45-minute Googleyness & Leadership (plus other loop rounds such as code review)",
         "Only a 4-hour continuous coding contest with no behavioral component",
         "Systems Architecture replaces all other technical rounds for SRE candidates",
         "Googleyness is optional and not scored for engineering roles"
       ],
       "correctIndex": 0,
-      "explanation": "The recruiter email explicitly schedules 60-min Systems Architecture and 45-min Googleyness & Leadership for this candidate's SRE-SWE path — alongside other loop rounds (e.g., code review instead of live coding). Both named rounds are scored and prep-worthy."
+      "explanation": "The confirmed SRE-SWE path includes 60-min Systems Architecture and 45-min Googleyness & Leadership — alongside other loop rounds such as code review instead of live coding. Both named rounds are scored and prep-worthy."
     },
     {
       "id": "A1-013",
@@ -210,8 +210,8 @@
       "section": "A1",
       "difficulty": "interview",
       "tags": ["hiring", "code-review", "no-coding"],
-      "source": "Recruiter email; IGotAnOffer code review guide; REDDIT-PLAN",
-      "question": "Your recruiter confirmed the technical code round is code review only — no live coding. What should you expect?",
+      "source": "Confirmed loop notes; IGotAnOffer code review guide; REDDIT-PLAN",
+      "question": "The confirmed technical code round is code review only — no live coding. What should you expect?",
       "options": [
         "Review a code snippet in Google Docs: find bugs, discuss complexity, suggest fixes — no IDE or writing from scratch",
         "Implement LeetCode hard problems on a whiteboard for 45 minutes",
@@ -219,7 +219,7 @@
         "Automated HackerRank with 90 minutes of algorithm contests"
       ],
       "correctIndex": 0,
-      "explanation": "Google EM/SRE EM loops offer coding OR code review; your loop is review-only. Expect a shared doc, manual trace, correctness and design feedback — same delivery format as many scripting rounds but reviewing existing code."
+      "explanation": "Google EM/SRE EM loops can use coding or code review; this loop is review-only. Expect a shared doc, manual trace, correctness and design feedback — same delivery format as many scripting rounds but reviewing existing code."
     },
     {
       "id": "A1-014",
@@ -270,7 +270,143 @@
         "Skip all technical prep — code review is unscored"
       ],
       "correctIndex": 0,
-      "explanation": "Your loop replaces implementation drills with review skills. Practice reading unfamiliar code, stating bugs with test cases, and proposing fixes. LeetCode-heavy prep targets a different round type."
+      "explanation": "This loop replaces implementation drills with review skills. Practice reading unfamiliar code, stating bugs with test cases, and proposing fixes. LeetCode-heavy prep targets a different round type."
+    },
+    {
+      "id": "A1-017",
+      "module": "A1",
+      "section": "A1-USENIX",
+      "difficulty": "deep-dive",
+      "tags": ["hiring", "sre-role", "usenix", "treynor-curve"],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "question": "In the Chris Jones/Todd Underwood/Shylaja Nukala SRE hiring article, the most valuable SRE candidate profile is often:",
+      "options": [
+        "A hybrid who trades some single-domain depth for meaningful breadth across software and systems engineering",
+        "A pure operations specialist who never writes production software",
+        "A pure product SWE with no interest in operating services",
+        "A candidate selected mainly by educational pedigree rather than interview performance"
+      ],
+      "correctIndex": 0,
+      "explanation": "The article describes the Treynor Curve: SRE hiring values candidates who bridge SWE and systems engineering, especially those with enough breadth to reason across both disciplines."
+    },
+    {
+      "id": "A1-018",
+      "module": "A1",
+      "section": "A1-USENIX",
+      "difficulty": "interview",
+      "tags": ["hiring", "systems-engineering", "sre-role", "usenix"],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "question": "The article's definition of systems engineering in SRE most strongly emphasizes:",
+      "options": [
+        "Understanding how many services compose into a larger system with emergent reliability, bottleneck, and resiliency properties",
+        "Only knowing how to rack hardware and install operating systems",
+        "Only implementing isolated algorithms without considering production behavior",
+        "Delegating monitoring, replication, and bottleneck analysis to a separate architecture role"
+      ],
+      "correctIndex": 0,
+      "explanation": "Jones et al. contrast systems engineering with narrow software internals or traditional system administration: SREs reason about connections between services, monitoring, bottlenecks, replication, and resiliency."
+    },
+    {
+      "id": "A1-019",
+      "module": "A1",
+      "section": "A1-USENIX",
+      "difficulty": "foundational",
+      "tags": ["hiring", "interview-style", "troubleshooting", "usenix"],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "question": "Why does the article discourage brainteasers and trivia in SRE interviews?",
+      "options": [
+        "They provide little signal about how a candidate decomposes unfamiliar production problems and reasons under uncertainty",
+        "They are too difficult for senior engineers to answer consistently",
+        "They are useful only for manager candidates, not individual contributors",
+        "They replace the need for written interviewer feedback"
+      ],
+      "correctIndex": 0,
+      "explanation": "The article frames interviews as peer conversations designed to find the edge of knowledge and observe reasoning, assumptions, and systematic troubleshooting — not memorized trivia."
+    },
+    {
+      "id": "A1-020",
+      "module": "A1",
+      "section": "A1-USENIX",
+      "difficulty": "interview",
+      "tags": ["hiring", "interview-topics", "usenix"],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "question": "A structured SRE interview panel assigns each interviewer a topic such as programming, UNIX internals, networks, or troubleshooting primarily to:",
+      "options": [
+        "Cover the role's essential skill surface with less duplication and better cross-topic signal",
+        "Ensure every interviewer asks exactly the same trivia list in the same order",
+        "Avoid technical depth by spreading the conversation thinly",
+        "Let one interviewer make the full hire/no-hire decision alone"
+      ],
+      "correctIndex": 0,
+      "explanation": "The paper recommends topic assignment so the loop covers the breadth SRE needs while minimizing repeated assessment. Each interviewer can then probe depth and reasoning in a focused area."
+    },
+    {
+      "id": "A1-021",
+      "module": "A1",
+      "section": "A1-USENIX",
+      "difficulty": "deep-dive",
+      "tags": ["hiring", "systems-architecture", "nalsd", "usenix"],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "question": "In the article's non-abstract large-system design example, why is saying \"use Bigtable because Google uses it\" insufficient?",
+      "options": [
+        "It hides the real reasoning: throughput, storage, reliability, cost, build difficulty, and how layers fit down to hardware",
+        "It is insufficient only because Bigtable is never used for large systems",
+        "It is acceptable if the candidate draws enough boxes around it",
+        "It proves the candidate knows internal Google systems and should end the design discussion"
+      ],
+      "correctIndex": 0,
+      "explanation": "The article explicitly rejects magic-technology answers. Strong design answers include estimates and trade-offs for each component, with concrete reasoning through layers of the system."
+    },
+    {
+      "id": "A1-022",
+      "module": "A1",
+      "section": "A1-USENIX",
+      "difficulty": "interview",
+      "tags": ["hiring", "committee", "bias", "usenix"],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "question": "Why does the article argue for a hiring committee rather than letting a single prospective manager decide?",
+      "options": [
+        "A committee preserves a consistent organization-wide bar, reduces short-term staffing bias, and supports internal mobility",
+        "It makes hiring faster by skipping written interview feedback",
+        "It lets the candidate choose their own score after the loop",
+        "It ensures each team can lower standards when headcount is urgent"
+      ],
+      "correctIndex": 0,
+      "explanation": "Jones et al. argue that committee decisions reduce the temptation to fill immediate vacancies with weaker signal, keep standards consistent across offices/teams, and separate hire/no-hire from team allocation."
+    },
+    {
+      "id": "A1-023",
+      "module": "A1",
+      "section": "A1-USENIX",
+      "difficulty": "interview",
+      "tags": ["hiring", "sre-manager", "technical-bar", "usenix"],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "question": "For SRE management candidates, the article says the technical bar is:",
+      "options": [
+        "The same technical bar as individual contributors, because SRE line managers are usually technical contributors and may join on-call",
+        "Lower than IC candidates because management is evaluated only on people leadership",
+        "Replaced entirely by a project-management certification",
+        "Limited to memorizing incident command terminology"
+      ],
+      "correctIndex": 0,
+      "explanation": "The paper states prospective SRE managers must meet the same technical bar as ICs and understand that SRE managers coordinate autonomous contributors while often remaining technical contributors themselves."
+    },
+    {
+      "id": "A1-024",
+      "module": "A1",
+      "section": "A1-USENIX",
+      "difficulty": "foundational",
+      "tags": ["hiring", "interviewer-calibration", "question-bank", "usenix"],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "question": "What is the purpose of maintaining a pool of SRE interview questions with gold-standard responses?",
+      "options": [
+        "To calibrate interviewers and provide consistent starting points, while still allowing deeper follow-up discussion",
+        "To force every candidate through a rigid checklist with no conversation",
+        "To eliminate the need for experienced interviewers",
+        "To reward candidates who memorize exact answers from leaked question banks"
+      ],
+      "correctIndex": 0,
+      "explanation": "The article recommends canonical questions and responses for consistency and interviewer development, but stresses that strong interviews refine depth through follow-up rather than checking off trivia."
     }
   ]
 }

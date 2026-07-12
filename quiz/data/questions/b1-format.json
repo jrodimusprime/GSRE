@@ -5,7 +5,7 @@
       "module": "B1",
       "difficulty": "interview",
       "tags": ["interview-format", "email-rubric", "evaluation"],
-      "source": "recruiter-email-rubric",
+      "source": "systems-architecture-rubric",
       "question": "According to Google's Systems Architecture interview rubric, which aspect carries the most weight when interviewers evaluate your design?",
       "options": [
         "Whether you can articulate trade-offs, implications, and a coherent design process",
@@ -14,14 +14,14 @@
         "Whether you choose the most exotic technology stack to demonstrate breadth"
       ],
       "correctIndex": 0,
-      "explanation": "The recruiter email explicitly states that trade-offs and their implications matter more than picking a single 'correct' choice, and that interviewers want a coherent design. The official prep video reinforces that process and communication are scored—not memorized diagrams or production code."
+      "explanation": "The Systems Architecture rubric states that trade-offs and their implications matter more than picking a single 'correct' choice, and that interviewers want a coherent design. The official prep video reinforces that process and communication are scored — not memorized diagrams or production code."
     },
     {
       "id": "B1-002",
       "module": "B1",
       "difficulty": "interview",
       "tags": ["interview-format", "time-box", "structure"],
-      "source": "recruiter-email-rubric",
+      "source": "systems-architecture-rubric",
       "question": "You have a 60-minute Systems Architecture interview. Based on Google's guidance, how should you allocate the opening portion of the session?",
       "options": [
         "Spend roughly the first 20 minutes clarifying requirements and presenting an initial high-level solution",
@@ -53,7 +53,7 @@
       "module": "B1",
       "difficulty": "interview",
       "tags": ["interview-format", "no-coding", "interfaces"],
-      "source": "recruiter-email-rubric",
+      "source": "systems-architecture-rubric",
       "question": "During the Systems Architecture interview, which of the following is explicitly acceptable according to Google's rubric?",
       "options": [
         "Describing API contracts, interfaces, and pseudocode for message payloads between components",
@@ -62,7 +62,7 @@
         "Using an IDE on your laptop to compile and test your design live"
       ],
       "correctIndex": 0,
-      "explanation": "The recruiter email states this is not a coding interview but that interfaces, APIs, and pseudocode payloads are fine. Full implementation, IDE usage, or refusing to discuss component boundaries all miss the intended format."
+      "explanation": "The Systems Architecture rubric states this is not a coding interview but that interfaces, APIs, and pseudocode payloads are fine. Full implementation, IDE usage, or refusing to discuss component boundaries all miss the intended format."
     },
     {
       "id": "B1-005",
