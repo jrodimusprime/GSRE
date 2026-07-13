@@ -155,10 +155,14 @@ const QuizUI = (() => {
   }
 
   function scrollToQuizTop() {
-    const target = el('score-bar') || document.querySelector('header');
-    if (!target || !target.scrollIntoView) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const behavior = reduceMotion ? 'auto' : 'smooth';
     requestAnimationFrame(() => {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.scrollTo({ top: 0, left: 0, behavior });
+      const quiz = el('quiz-area');
+      if (quiz && quiz.scrollIntoView) {
+        quiz.scrollIntoView({ behavior, block: 'start' });
+      }
     });
   }
 
