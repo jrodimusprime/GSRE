@@ -178,7 +178,7 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
   scroll-margin-top: 1rem;
 }
 
-.meta { font-size: 0.85rem; color: var(--text-secondary); }
+.meta { font-size: 0.85rem; color: var(--text-secondary); outline: none; }
 
 .question {
   font-size: 1.1rem;

@@ -155,15 +155,28 @@ const QuizUI = (() => {
   }
 
   function scrollToQuizTop() {
+    const meta = el('quiz-meta');
+    const header = document.querySelector('header');
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const behavior = reduceMotion ? 'auto' : 'smooth';
-    requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, left: 0, behavior });
-      const quiz = el('quiz-area');
-      if (quiz && quiz.scrollIntoView) {
-        quiz.scrollIntoView({ behavior, block: 'start' });
+    const instant = coarsePointer || reduceMotion;
+
+    function runScroll() {
+      let top = 0;
+      if (!instant && meta) {
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        top = Math.max(0, meta.getBoundingClientRect().top + window.scrollY - headerHeight - 8);
       }
+      const behavior = instant ? 'auto' : 'smooth';
+      window.scrollTo({ top, left: 0, behavior });
+      document.documentElement.scrollTop = top;
+      document.body.scrollTop = top;
+    }
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(runScroll);
     });
+    window.setTimeout(runScroll, instant ? 50 : 100);
   }
 
   function refresh(modules, enabled, progressByModule, poolProgress) {
