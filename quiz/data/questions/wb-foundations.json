@@ -1,0 +1,378 @@
+{
+  "questions": [
+    {
+      "id": "WB-FOUND-001",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "foundational",
+      "tags": ["devops", "sre", "culture"],
+      "source": "SRE Workbook ch 1",
+      "question": "The SRE Workbook distinguishes DevOps from SRE by noting that SRE:",
+      "options": [
+        "Codifies DevOps-aligned principles with explicit engineering practices such as SLOs, error budgets, and a defined SRE role",
+        "Rejects all automation in favor of manual operations",
+        "Is unrelated to DevOps and opposes continuous delivery",
+        "Focuses exclusively on hiring practices with no operational methodology"
+      ],
+      "correctIndex": 0,
+      "explanation": "Workbook chapter 1 positions SRE as Google's implementation of DevOps ideals — concrete practices (SLO/error budget, toil limits, blameless postmortems) rather than culture alone."
+    },
+    {
+      "id": "WB-FOUND-002",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "interview",
+      "tags": ["devops", "sre", "implementation"],
+      "source": "SRE Workbook ch 1",
+      "question": "An organization adopts DevOps slogans but lacks measurable reliability targets or error budget policy. The workbook would classify this as:",
+      "options": [
+        "Cultural adoption without the quantifiable accountability mechanisms that make SRE/DevOps sustainable",
+        "Full SRE maturity because culture is sufficient",
+        "Superior to Google's approach because metrics create bureaucracy",
+        "Equivalent to having implemented SLO-based alerting"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 1 stresses that DevOps without measurable outcomes — SLOs, budgets, toil tracking — lacks the feedback loops SRE uses to balance velocity and reliability."
+    },
+    {
+      "id": "WB-FOUND-003",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "foundational",
+      "tags": ["slo", "implementation", "stakeholders"],
+      "source": "SRE Workbook ch 2",
+      "question": "When implementing SLOs, workbook chapter 2 recommends starting with:",
+      "options": [
+        "User journeys and critical workflows, then selecting SLIs that reflect user-perceived reliability for those journeys",
+        "Every internal metric the monitoring system already collects",
+        "The strictest possible target (99.999%) as a default for all services",
+        "SLAs copied from competitor marketing pages"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 2's implementation guide begins with what users care about — journeys and workflows — then derives measurable SLIs and negotiated SLO targets, avoiding metric-driven SLOs disconnected from user impact."
+    },
+    {
+      "id": "WB-FOUND-004",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "interview",
+      "tags": ["slo", "implementation", "window"],
+      "source": "SRE Workbook ch 2",
+      "question": "A team proposes a 1-hour rolling SLO window for a monthly billing batch job that runs once daily. The workbook-aligned critique is:",
+      "options": [
+        "The measurement window should match the user expectation cycle — a monthly or daily window aligns better than hourly noise for batch workloads",
+        "Shorter windows are always better regardless of workload cadence",
+        "Batch jobs cannot have SLOs under any circumstances",
+        "1-hour windows eliminate the need for error budgets"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 2 emphasizes aligning SLO windows with how users experience the service. Hourly windows on daily batch jobs create false precision and alert noise."
+    },
+    {
+      "id": "WB-FOUND-005",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "deep-dive",
+      "tags": ["slo", "implementation", "documentation"],
+      "source": "SRE Workbook ch 2",
+      "question": "An SLO document should explicitly record which of the following per workbook guidance?",
+      "options": [
+        "SLI definition, measurement method, exclusion rules, target, window, and owners — so ambiguity does not drift over time",
+        "Only the numeric target without defining how it is measured",
+        "The names of on-call engineers for the next year",
+        "Competitor SLO values for benchmarking only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 2 and appendix examples stress precise SLI specifications: what counts as valid/invalid, how latency is aggregated, who owns the SLO. Undocumented assumptions cause SLO debates during incidents."
+    },
+    {
+      "id": "WB-FOUND-006",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "interview",
+      "tags": ["slo", "case-study", "tiering"],
+      "source": "SRE Workbook ch 3",
+      "question": "SLO case studies in chapter 3 demonstrate that different service tiers should have:",
+      "options": [
+        "Different SLO targets and error budget policies reflecting business criticality, not identical nines for every system",
+        "Identical 99.99% targets to simplify executive reporting",
+        "No written SLOs for internal-only services",
+        "SLOs set exclusively by the monitoring vendor's defaults"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 3 case studies show tiered SLO design: critical user paths get tighter targets and stricter budget policy; best-effort internal tools get looser targets — rational risk allocation."
+    },
+    {
+      "id": "WB-FOUND-007",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "interview",
+      "tags": ["slo", "case-study", "iteration"],
+      "source": "SRE Workbook ch 3",
+      "question": "A case study team discovers their availability SLI counts dependency failures as service errors. The corrective action is:",
+      "options": [
+        "Refine SLI scope and exclusion rules to measure what the service controls, then recalibrate the SLO target if needed",
+        "Abandon SLOs entirely because SLIs can never be corrected",
+        "Blame users for triggering dependency calls",
+        "Keep the flawed SLI to preserve historical graph continuity without annotation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 3 case studies show SLO implementation is iterative. SLI definitions must be refined when they misrepresent user experience — with documented changes and target adjustments."
+    },
+    {
+      "id": "WB-FOUND-008",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "foundational",
+      "tags": ["monitoring", "use-method", "resources"],
+      "source": "SRE Workbook ch 4",
+      "question": "The USE method (Utilization, Saturation, Errors) from workbook chapter 4 applies best to:",
+      "options": [
+        "Infrastructure resources such as CPU, memory, and I/O subsystems",
+        "Only application-level request latency percentiles",
+        "Executive quarterly business reviews",
+        "User satisfaction survey text analysis"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 4 presents USE for resource-oriented monitoring — how full, how saturated, how error-prone each resource is. It complements RED/ golden signals for services."
+    },
+    {
+      "id": "WB-FOUND-009",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "interview",
+      "tags": ["monitoring", "red-method", "services"],
+      "source": "SRE Workbook ch 4",
+      "question": "For a request-driven microservice, the RED method captures:",
+      "options": [
+        "Rate, Errors, and Duration of requests",
+        "Replication, Encryption, and Deployment frequency",
+        "Risk, Equity, and Debt financial metrics",
+        "Recovery, Escalation, and Documentation of incidents"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 4's RED method — Rate, Errors, Duration — provides a service-centric monitoring checklist aligned with the four golden signals but framed for microservice dashboards."
+    },
+    {
+      "id": "WB-FOUND-010",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "interview",
+      "tags": ["monitoring", "use", "saturation"],
+      "source": "SRE Workbook ch 4",
+      "question": "A disk shows 40% utilization but I/O wait queue length is climbing. Under USE, the saturation signal indicates:",
+      "options": [
+        "The resource has queued work beyond immediate capacity — a leading indicator of latency growth even at moderate utilization",
+        "The disk is healthy because utilization is below 50%",
+        "Errors are necessarily zero when utilization is low",
+        "Saturation only applies to network interfaces, not storage"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 4 defines saturation as the degree of queued work. Utilization alone misleads — queue depth reveals contention that will soon affect service latency."
+    },
+    {
+      "id": "WB-FOUND-011",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "foundational",
+      "tags": ["alerting", "burn-rate", "slo"],
+      "source": "SRE Workbook ch 5",
+      "question": "Burn-rate alerting on SLOs measures:",
+      "options": [
+        "How quickly the error budget is being consumed relative to the SLO window — fast burn warrants faster response",
+        "Only the absolute error count in the last minute regardless of SLO target",
+        "Engineer burnout from too many pages",
+        "The rate of code commits to the main branch"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 5 introduces multi-window burn-rate alerts: relative budget consumption over short and long windows detects both sudden spikes and slow leaks threatening the SLO."
+    },
+    {
+      "id": "WB-FOUND-012",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "interview",
+      "tags": ["alerting", "burn-rate", "multi-window"],
+      "source": "SRE Workbook ch 5",
+      "question": "A multi-window burn-rate alert uses a 1-hour window at 14.4× burn AND a 5-minute window at 14.4× burn to:",
+      "options": [
+        "Page for rapid budget consumption while reducing false positives from brief blips that self-resolve within minutes",
+        "Eliminate all pages by requiring infinite burn rate",
+        "Alert on every single failed request immediately",
+        "Replace SLO tracking with log-based anomaly detection only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 5's worked examples combine short and long windows at the same burn factor: both must fire, confirming sustained SLO-threatening degradation rather than transient noise."
+    },
+    {
+      "id": "WB-FOUND-013",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "deep-dive",
+      "tags": ["alerting", "burn-rate", "ticket"],
+      "source": "SRE Workbook ch 5",
+      "question": "Chapter 5 recommends ticket (non-paging) alerts at lower burn rates than page alerts because:",
+      "options": [
+        "Slow budget leaks deserve investigation without waking on-call, preserving pager signal-to-noise for user-threatening burns",
+        "Tickets are never acted upon so they replace SLO tracking entirely",
+        "Lower burn rates always indicate false positives",
+        "Only executives should receive burn-rate tickets"
+      ],
+      "correctIndex": 0,
+      "explanation": "Tiered burn-rate responses: high burn pages on-call immediately; moderate burn creates tickets for next-business-day investigation. This aligns operational response with budget impact."
+    },
+    {
+      "id": "WB-FOUND-014",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "interview",
+      "tags": ["alerting", "burn-rate", "availability-slo"],
+      "source": "SRE Workbook ch 5",
+      "question": "For a 99.9% availability SLO over 30 days, sustained 100% error rate for 1 hour consumes what fraction of the monthly error budget?",
+      "options": [
+        "Roughly 14% of the monthly budget (1 hour of total failure against ~43 minutes total budget)",
+        "Less than 1% because one hour is negligible",
+        "100% of the budget only if errors continue for 30 days",
+        "Zero because burn rate does not apply to availability SLOs"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 5's burn-rate math: 99.9% monthly allows ~43 min downtime; 60 min at 100% errors ≈ 60/43 ≈ 1.4× monthly budget in one hour — about 14% per hour of total outage at that SLO (workbook uses similar proportional reasoning for alert thresholds)."
+    },
+    {
+      "id": "WB-FOUND-015",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "foundational",
+      "tags": ["toil", "workbook", "measurement"],
+      "source": "SRE Workbook ch 6",
+      "question": "Workbook chapter 6 recommends measuring toil by:",
+      "options": [
+        "Tracking the percentage of engineering time spent on manual, repetitive, automatable operational work",
+        "Counting total lines of automation code written",
+        "Surveying only managers about team happiness",
+        "Measuring only production incident count"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 6 operationalizes toil measurement so teams can set reduction goals — typically targeting below ~50% and investing freed capacity in engineering."
+    },
+    {
+      "id": "WB-FOUND-016",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "interview",
+      "tags": ["toil", "workbook", "prioritization"],
+      "source": "SRE Workbook ch 6",
+      "question": "When prioritizing toil reduction, chapter 6 suggests favoring automation that:",
+      "options": [
+        "Eliminates the highest-volume repetitive tasks with clear ROI and reduces on-call burden",
+        "Automates the most technically interesting problem regardless of frequency",
+        "Replaces all human judgment in architectural decisions",
+        "Creates new manual verification steps for each automated action"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 6 prioritizes by impact: high-frequency toil and on-call pain first. Interesting-but-rare automation may not repay its maintenance cost."
+    },
+    {
+      "id": "WB-FOUND-017",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "foundational",
+      "tags": ["simplicity", "workbook", "operational-cost"],
+      "source": "SRE Workbook ch 7",
+      "question": "Workbook chapter 7 links simplicity to operational sustainability by arguing that:",
+      "options": [
+        "Every component added is a future liability requiring monitoring, upgrades, and incident response",
+        "Simple systems require no SLOs or error budgets",
+        "Complexity always improves mean time to recovery",
+        "Simplicity means avoiding all third-party dependencies unconditionally"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 7 extends the SRE book's simplicity principle with workbook case material: component count drives operational load. Restraint in architecture is a reliability investment."
+    },
+    {
+      "id": "WB-FOUND-018",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "interview",
+      "tags": ["simplicity", "workbook", "refactoring"],
+      "source": "SRE Workbook ch 7",
+      "question": "A workbook simplicity case study consolidates three overlapping deployment pipelines into one. Expected reliability gains include:",
+      "options": [
+        "Reduced cognitive load for on-call, fewer failure modes, and clearer rollback paths",
+        "Elimination of all need for progressive rollouts",
+        "Higher toil because one pipeline is harder to understand than three",
+        "Removal of monitoring requirements during deploys"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 7 case studies show consolidation reduces incident confusion and maintenance burden — operators need one mental model for deploy/rollback during stress."
+    },
+    {
+      "id": "WB-FOUND-019",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "interview",
+      "tags": ["slo-document", "appendix", "error-budget"],
+      "source": "SRE Workbook appendix",
+      "question": "The workbook's example SLO document includes an error budget policy section that specifies:",
+      "options": [
+        "Actions at defined budget consumption thresholds — such as slowing launches or requiring additional review",
+        "Only the numeric SLO with no behavioral consequences",
+        "Personal performance ratings for on-call engineers",
+        "Mandatory 100% availability during holiday shopping season without exception"
+      ],
+      "correctIndex": 0,
+      "explanation": "Appendix SLO examples tie metrics to policy: what happens at 25%, 50%, 75%, 100% budget consumption. Without policy, error budgets are numbers without organizational teeth."
+    },
+    {
+      "id": "WB-FOUND-020",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "deep-dive",
+      "tags": ["slo-document", "appendix", "escalation"],
+      "source": "SRE Workbook appendix",
+      "question": "When an example error budget policy escalates to 'launch freeze' at budget exhaustion, the workbook emphasizes:",
+      "options": [
+        "Pre-negotiated agreement between product and SRE so the freeze is a policy outcome, not an arbitrary ops veto",
+        "Unilateral SRE authority to cancel all product development permanently",
+        "Launch freezes should never be documented in advance",
+        "Budget exhaustion automatically raises the SLO target"
+      ],
+      "correctIndex": 0,
+      "explanation": "Appendix templates show error budget policy as a social contract documented upfront. Escalation steps are agreed with stakeholders — making budget exhaustion a predictable business decision."
+    },
+    {
+      "id": "WB-FOUND-021",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "interview",
+      "tags": ["slo-document", "appendix", "review"],
+      "source": "SRE Workbook appendix",
+      "question": "Example SLO documents in the workbook recommend periodic review because:",
+      "options": [
+        "Services, user expectations, and architecture evolve — stale SLOs misalign incentives and alerting",
+        "SLOs are immutable once written and never need updates",
+        "Review replaces the need for burn-rate alerting",
+        "Only legal teams may change SLO targets"
+      ],
+      "correctIndex": 0,
+      "explanation": "Appendix guidance treats SLO documents as living artifacts reviewed quarterly or after major architecture changes — keeping SLIs, targets, and policy aligned with reality."
+    },
+    {
+      "id": "WB-FOUND-022",
+      "module": "WB-FOUND",
+      "section": "WB-FOUND",
+      "difficulty": "deep-dive",
+      "tags": ["slo", "error-budget", "policy", "appendix"],
+      "source": "SRE Workbook appendix",
+      "question": "An example error budget policy allows 'budget borrowing' from next quarter with executive approval. The workbook uses this to illustrate:",
+      "options": [
+        "Error budgets can flex for exceptional business needs when borrowing is explicit, tracked, and repaid — not silently ignored",
+        "Error budgets are meaningless and should be waived routinely",
+        "Borrowing eliminates the need to track burn rate",
+        "Only SRE managers may borrow budget without recording it"
+      ],
+      "correctIndex": 0,
+      "explanation": "Appendix examples show sophisticated budget governance: borrowing is permitted but visible — preserving the model's integrity while accommodating rare business imperatives like major launches."
+    }
+  ]
+}

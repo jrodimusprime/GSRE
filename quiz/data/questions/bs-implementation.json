@@ -1,0 +1,344 @@
+{
+  "questions": [
+    {
+      "id": "BS-IMPL-001",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "foundational",
+      "tags": ["pki", "ca", "trust-chain"],
+      "source": "BSRS ch 11",
+      "question": "In a PKI hierarchy, the root CA's primary role is to:",
+      "options": [
+        "Anchor trust by signing intermediate CA certificates whose keys issue end-entity certificates",
+        "Issue TLS certificates directly for every internal microservice daily",
+        "Replace the need for certificate expiration dates",
+        "Store application passwords in encrypted form"
+      ],
+      "correctIndex": 0,
+      "explanation": "BSRS chapter 11 describes PKI as a chain of trust: closely guarded root CAs sign intermediates, which issue leaf certificates. Keeping roots offline limits blast radius if an issuing CA is compromised."
+    },
+    {
+      "id": "BS-IMPL-002",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "interview",
+      "tags": ["pki", "ca", "rotation"],
+      "source": "BSRS ch 11",
+      "question": "Google's PKI lessons in chapter 11 emphasize automated certificate rotation because:",
+      "options": [
+        "Short-lived certificates reduce the window of abuse if a key is compromised and avoid manual renewal outages",
+        "Certificates should never expire to prevent service interruption",
+        "Manual yearly renewal scales better than automation at large fleet size",
+        "Rotation eliminates the need for private key protection"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 11 documents moving from long-lived manual certs to automated issuance and frequent rotation — shrinking compromise impact and removing human error from renewal."
+    },
+    {
+      "id": "BS-IMPL-003",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "interview",
+      "tags": ["pki", "ca", "incident-response"],
+      "source": "BSRS ch 11",
+      "question": "If an intermediate CA private key is suspected compromised, chapter 11's response priority includes:",
+      "options": [
+        "Revoke affected certificates, rotate the compromised CA, and re-issue downstream certs while preserving trust chain integrity",
+        "Wait for certificate natural expiration because revocation is unnecessary",
+        "Publish the private key publicly to prove transparency",
+        "Disable TLS entirely until the next quarterly maintenance window"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 11 CA lessons cover incident playbooks: rapid revocation, CA rotation, and fleet-wide re-issuance. PKI incidents are high-severity because trust anchor compromise affects all dependents."
+    },
+    {
+      "id": "BS-IMPL-004",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "deep-dive",
+      "tags": ["pki", "ca", "certificate-transparency"],
+      "source": "BSRS ch 11",
+      "question": "Certificate Transparency logs help detect mis-issued certificates by:",
+      "options": [
+        "Providing publicly auditable records of issued certs so domain owners can detect unauthorized issuance",
+        "Encrypting private keys before storage in DNS",
+        "Replacing OCSP stapling with DNS TXT records only",
+        "Eliminating the need for CA hierarchy"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 11 discusses CT as a detective control: append-only public logs enable monitoring for certs issued without authorization — complementing preventive CA access controls."
+    },
+    {
+      "id": "BS-IMPL-005",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "foundational",
+      "tags": ["secure-coding", "sql-injection", "parameterization"],
+      "source": "BSRS ch 12",
+      "question": "The primary defense against SQL injection in chapter 12's secure coding guidance is:",
+      "options": [
+        "Parameterized queries or prepared statements that separate query structure from user-supplied data",
+        "Escaping user input by manually replacing single quotes only in production",
+        "Storing SQL queries exclusively in client-side JavaScript",
+        "Using string concatenation with input validation as the sole control"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 12 treats parameterization as the canonical SQLi defense: the database driver binds data separately from SQL structure, preventing attacker-controlled input from altering query semantics."
+    },
+    {
+      "id": "BS-IMPL-006",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "interview",
+      "tags": ["secure-coding", "sql-injection", "orm"],
+      "source": "BSRS ch 12",
+      "question": "An ORM query builder concatenates user input into a raw SQL fragment via string interpolation. Chapter 12 would classify this as:",
+      "options": [
+        "Still vulnerable to SQL injection because ORM use does not automatically parameterize unsafe raw fragments",
+        "Safe because ORMs eliminate all injection classes by default",
+        "Safe if the ORM is open source",
+        "Safe because injection only affects NoSQL databases"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 12 warns that ORMs provide safe APIs only when used correctly. Raw SQL fragments with interpolated user data reintroduce injection regardless of the surrounding framework."
+    },
+    {
+      "id": "BS-IMPL-007",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "interview",
+      "tags": ["secure-coding", "xss", "encoding"],
+      "source": "BSRS ch 12",
+      "question": "To prevent stored XSS when rendering user comments in HTML, chapter 12 recommends:",
+      "options": [
+        "Context-appropriate output encoding or sanitization before insertion into the DOM",
+        "Reflecting user input verbatim to preserve formatting fidelity",
+        "Relying on HTTPS alone to neutralize script injection",
+        "Disabling browser JavaScript globally for all users"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 12's XSS defenses center on encoding for the specific output context (HTML body, attribute, JavaScript). TLS protects transport, not stored script execution in browsers."
+    },
+    {
+      "id": "BS-IMPL-008",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "deep-dive",
+      "tags": ["secure-coding", "xss", "csp"],
+      "source": "BSRS ch 12",
+      "question": "Content Security Policy (CSP) serves as a defense-in-depth measure against XSS by:",
+      "options": [
+        "Restricting which script sources may execute, limiting damage when an injection point exists",
+        "Replacing the need for input validation and output encoding entirely",
+        "Encrypting HTML responses so browsers cannot parse tags",
+        "Blocking all HTTP requests including same-origin API calls unconditionally"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 12 positions CSP as layered defense: even if encoding fails, a strict CSP can block inline script execution. It complements — not replaces — secure coding practices."
+    },
+    {
+      "id": "BS-IMPL-009",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "foundational",
+      "tags": ["fuzzing", "dynamic-analysis", "testing"],
+      "source": "BSRS ch 13",
+      "question": "Fuzz testing in chapter 13 differs from unit testing primarily because fuzzing:",
+      "options": [
+        "Generates malformed or unexpected inputs automatically to explore code paths humans rarely anticipate",
+        "Requires manual writing of every input case before execution",
+        "Only validates happy-path API contracts",
+        "Replaces the need for code review"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 13 describes fuzzing as automated adversarial input generation — finding memory corruption, panics, and logic bugs in parsers and protocol handlers that manual tests miss."
+    },
+    {
+      "id": "BS-IMPL-010",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "interview",
+      "tags": ["fuzzing", "coverage", "continuous"],
+      "source": "BSRS ch 13",
+      "question": "Continuous fuzzing integrated into the build pipeline primarily provides:",
+      "options": [
+        "Ongoing discovery of regressions and new vulnerabilities as code changes, not just one-time pre-release testing",
+        "Guaranteed proof that no bugs exist in the codebase",
+        "Elimination of static analysis tooling",
+        "Replacement for all manual QA user acceptance testing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 13 advocates continuous fuzzing as code evolves — new parsers and refactors introduce fresh attack surface. Fuzzing complements static analysis; neither proves absence of all bugs."
+    },
+    {
+      "id": "BS-IMPL-011",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "interview",
+      "tags": ["static-analysis", "sast", "ci"],
+      "source": "BSRS ch 13",
+      "question": "Static analysis in CI catches vulnerabilities by:",
+      "options": [
+        "Examining source or bytecode without execution to flag dangerous patterns such as injection sinks and unsafe API usage",
+        "Running production traffic against staging environments",
+        "Measuring runtime CPU utilization of security checks",
+        "Replacing dependency version pinning"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 13 covers SAST as pre-deployment analysis: taint tracking, pattern matchers, and type-aware checkers find bug classes before code ships — complementary to dynamic fuzzing."
+    },
+    {
+      "id": "BS-IMPL-012",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "deep-dive",
+      "tags": ["static-analysis", "false-positives", "triage"],
+      "source": "BSRS ch 13",
+      "question": "High false-positive rates in static analysis tooling most undermine security when teams:",
+      "options": [
+        "Ignore all findings including true positives due to alert fatigue — chapter 13 recommends tuning, suppression with justification, and prioritization",
+        "Fix every warning without triage regardless of exploitability",
+        "Disable the compiler to reduce warnings",
+        "Run static analysis only once at initial project creation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 13 acknowledges SAST limitations. Sustainable programs tune rules, track suppressions, and prioritize reachable vulnerabilities — otherwise tooling becomes noise and real bugs slip through."
+    },
+    {
+      "id": "BS-IMPL-013",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "foundational",
+      "tags": ["provenance", "verifiable-builds", "supply-chain"],
+      "source": "BSRS ch 14",
+      "question": "Binary provenance in chapter 14 records:",
+      "options": [
+        "Cryptographically verifiable metadata linking an artifact to its exact source revision, build configuration, and builder identity",
+        "Only the file size and MIME type of the deployed binary",
+        "The marketing version name without commit hash",
+        "User passwords used during the build process"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 14's provenance model enables verifying that a deployed binary was built from expected source in a trusted environment — foundational for supply chain security."
+    },
+    {
+      "id": "BS-IMPL-014",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "interview",
+      "tags": ["provenance", "verifiable-builds", "hermetic"],
+      "source": "BSRS ch 14",
+      "question": "Verifiable builds require hermetic build environments because:",
+      "options": [
+        "Non-hermetic builds may incorporate undeclared inputs, making reproducibility and provenance claims unverifiable",
+        "Hermetic builds run faster by skipping dependency downloads",
+        "Reproducibility is impossible for compiled languages",
+        "Hermetic builds eliminate the need for code signing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 14 ties hermeticity to verifiability: only declared inputs participate in the build. Undeclared ambient state breaks reproducibility and allows supply chain tampering to go undetected."
+    },
+    {
+      "id": "BS-IMPL-015",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "interview",
+      "tags": ["provenance", "deployment", "policy"],
+      "source": "BSRS ch 14",
+      "question": "A deployment policy requiring verified provenance before promotion prevents:",
+      "options": [
+        "Running binaries whose origin cannot be traced to an authorized build pipeline and source commit",
+        "All rollbacks to previous known-good versions",
+        "Use of any container orchestration platform",
+        "Automated canary analysis during rollout"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 14 describes policy enforcement at deploy time: reject artifacts lacking valid provenance signatures — blocking tampered or manually built binaries from production."
+    },
+    {
+      "id": "BS-IMPL-016",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "deep-dive",
+      "tags": ["provenance", "reproducibility", "verification"],
+      "source": "BSRS ch 14",
+      "question": "Reproducible builds support provenance verification when:",
+      "options": [
+        "Independent rebuild from the same source and config produces bit-identical or semantically equivalent artifacts, confirming the published binary matches source",
+        "Build timestamps match exactly across rebuilds",
+        "Developers build locally on laptops and upload binaries directly",
+        "Only dynamic languages can achieve reproducibility"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 14 explains reproducibility as the ability to recreate artifacts: matching outputs confirm provenance claims weren't forged and detect build-time injection."
+    },
+    {
+      "id": "BS-IMPL-017",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "foundational",
+      "tags": ["logging", "immutable", "audit"],
+      "source": "BSRS ch 15",
+      "question": "Immutable logging in chapter 15 means:",
+      "options": [
+        "Log entries cannot be altered or deleted after append without detection, preserving evidentiary integrity",
+        "Logs are stored only in volatile memory for performance",
+        "Engineers may freely edit production logs to remove sensitive data post-incident",
+        "Log volume is capped at zero to prevent storage costs"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 15 defines immutability for audit and security logs: append-only storage with integrity protections (hash chains, WORM storage) so tampering is detectable."
+    },
+    {
+      "id": "BS-IMPL-018",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "interview",
+      "tags": ["logging", "immutable", "tamper-evidence"],
+      "source": "BSRS ch 15",
+      "question": "Hash-chained log entries primarily provide:",
+      "options": [
+        "Tamper evidence: modifying a historical entry breaks subsequent hash links, revealing alteration",
+        "Compression of log payloads for long-term archival",
+        "Automatic encryption of all application secrets in logs",
+        "Elimination of the need for access controls on log readers"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 15 describes hash chaining as a lightweight integrity mechanism: each entry includes the prior hash, forming a detectable chain if an attacker edits history."
+    },
+    {
+      "id": "BS-IMPL-019",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "interview",
+      "tags": ["logging", "immutable", "separation"],
+      "source": "BSRS ch 15",
+      "question": "Chapter 15 recommends separating security audit logs from application debug logs because:",
+      "options": [
+        "Different retention, access controls, and immutability guarantees apply — debug logs are mutable and verbose; audit logs require strict integrity",
+        "Debug logs are more trustworthy than audit logs for compliance",
+        "Audit logs should be writable by all application service accounts",
+        "Combining logs reduces storage cost with no security trade-off"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 15 distinguishes log tiers: audit trails need restricted write access, long retention, and immutability; debug logs prioritize developer velocity and may be rotated or sampled."
+    },
+    {
+      "id": "BS-IMPL-020",
+      "module": "BS-IMPL",
+      "section": "BS-IMPL",
+      "difficulty": "deep-dive",
+      "tags": ["logging", "immutable", "incident-response"],
+      "source": "BSRS ch 15",
+      "question": "During a suspected breach, immutable audit logs support investigation because:",
+      "options": [
+        "Investigators can trust the timeline was not retroactively altered by the attacker to cover tracks",
+        "Logs automatically identify the attacker without analysis",
+        "Immutable logs eliminate the need for network forensics",
+        "Attackers cannot read logs if they are immutable"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 15 positions immutable logging as forensic integrity: post-compromise, attackers often attempt log tampering. Append-only, tamper-evident storage preserves trustworthy evidence for IR and legal review."
+    }
+  ]
+}

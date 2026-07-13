@@ -119,13 +119,16 @@ QuizApp.boot().then(() => {
   assert(stats.innerHTML.includes('stat-card'), 'section stats should render on init');
 
   QuizLoader.getAllQuestions().then((all) => {
-    assert(all.length === 362, `expected 362 questions, got ${all.length}`);
+    assert(all.length === 458, `expected 458 questions, got ${all.length}`);
 
     const e3 = all.filter((q) => q.module === 'E3');
     assert(e3.length === 18, `expected 18 E3 questions, got ${e3.length}`);
 
     const spanner = all.filter((q) => q.module === 'B9');
     assert(spanner.length === 15, `expected 15 B9 Spanner questions, got ${spanner.length}`);
+
+    const srPrin = all.filter((q) => q.module === 'SR-PRIN');
+    assert(srPrin.length === 24, `expected 24 SR-PRIN questions, got ${srPrin.length}`);
 
     QuizEngine.init(all, new Set(['B1']));
     const q = QuizEngine.pickRandom();

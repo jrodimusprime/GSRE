@@ -52,15 +52,54 @@
       "questionCount": 18,
       "dataFile": "questions/e3-linux-networking.json",
       "buildOrder": 20
+    },
+    {
+      "id": "SR-PRIN",
+      "title": "SRE Book: Principles",
+      "sourceUrl": "https://sre.google/sre-book/table-of-contents/",
+      "questionCount": 24,
+      "dataFile": "questions/sr-principles.json",
+      "buildOrder": 21
+    },
+    {
+      "id": "SR-SCALE",
+      "title": "SRE Book: Scaling & systems",
+      "sourceUrl": "https://sre.google/sre-book/table-of-contents/",
+      "questionCount": 30,
+      "dataFile": "questions/sr-scaling.json",
+      "buildOrder": 22
+    },
+    {
+      "id": "WB-FOUND",
+      "title": "SRE Workbook: Foundations",
+      "sourceUrl": "https://sre.google/workbook/table-of-contents/",
+      "questionCount": 22,
+      "dataFile": "questions/wb-foundations.json",
+      "buildOrder": 23
+    },
+    {
+      "id": "BS-IMPL",
+      "title": "BSRS: Secure implementation",
+      "sourceUrl": "https://sre.google/books/",
+      "questionCount": 20,
+      "dataFile": "questions/bs-implementation.json",
+      "buildOrder": 24
     }
   ],
   "examPresets": [
     {
       "id": "code-review-45",
       "label": "Code review mock (45 min)",
-      "modules": ["CR-REVIEW"],
-      "questionCount": 35,
+      "modules": ["CR-REVIEW", "BS-IMPL"],
+      "questionCount": 55,
       "minutes": 45
+    },
+    {
+      "id": "sre-books-core",
+      "label": "SRE books core (Principles + Scale + Workbook + BSRS)",
+      "modules": ["SR-PRIN", "SR-SCALE", "WB-FOUND", "BS-IMPL", "A2"],
+      "questionCount": 109,
+      "minutes": 0
     },
     {
       "id": "reddit-comprehensive",
@@ -72,15 +111,15 @@
     {
       "id": "your-loop",
       "label": "Your loop (code review + Systems Arch + G&L + Manager)",
-      "modules": ["CR-REVIEW", "SA-VIDEO", "B1", "B2", "B5", "B6", "B7", "B9", "E3", "C1", "C2", "C3", "C4", "C5", "A1"],
-      "questionCount": 93,
+      "modules": ["CR-REVIEW", "BS-IMPL", "SA-VIDEO", "B1", "B2", "B5", "B6", "B7", "B9", "SR-SCALE", "WB-FOUND", "E3", "C1", "C2", "C3", "C4", "C5", "A1", "SR-PRIN"],
+      "questionCount": 167,
       "minutes": 0
     },
     {
       "id": "systems-architecture-60",
       "label": "Systems Architecture mock (60 min)",
-      "modules": ["SA-VIDEO", "B1", "B2", "B3", "B5", "B6", "B7", "B9", "E3"],
-      "questionCount": 93,
+      "modules": ["SA-VIDEO", "B1", "B2", "B3", "B5", "B6", "B7", "B9", "SR-SCALE", "WB-FOUND", "E3"],
+      "questionCount": 145,
       "minutes": 60
     },
     {
@@ -91,10 +130,10 @@
       "minutes": 45
     },
     {
-      "id": "full-362",
-      "label": "Full bank (362 Q)",
-      "modules": ["SA-VIDEO", "CR-REVIEW", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "A1", "A2", "C1", "C2", "C3", "C4", "C5", "D1", "D2", "E3"],
-      "questionCount": 362,
+      "id": "full-458",
+      "label": "Full bank (458 Q)",
+      "modules": ["SA-VIDEO", "CR-REVIEW", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "A1", "A2", "C1", "C2", "C3", "C4", "C5", "D1", "D2", "E3", "SR-PRIN", "SR-SCALE", "WB-FOUND", "BS-IMPL"],
+      "questionCount": 458,
       "minutes": 0
     }
   ],

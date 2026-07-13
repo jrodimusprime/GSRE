@@ -1,0 +1,412 @@
+{
+  "questions": [
+    {
+      "id": "SR-PRIN-001",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "foundational",
+      "tags": ["risk", "availability-target", "cost"],
+      "source": "SRE Book ch 3",
+      "question": "The SRE book argues that pursuing 100% availability for most user-facing services is economically irrational because:",
+      "options": [
+        "The marginal cost of each additional nine of reliability grows superlinearly while user-perceived benefit flattens",
+        "Cloud providers contractually forbid five-nines targets on shared hardware",
+        "Users always prefer faster feature delivery over any measurable reliability",
+        "100% availability is technically impossible only for batch pipelines, not for online APIs"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 3 frames reliability as a risk-management problem: each nine costs disproportionately more in redundancy, testing, and operational overhead, while users rarely notice differences beyond a well-chosen SLO. SRE explicitly embraces a non-zero failure rate as the rational target."
+    },
+    {
+      "id": "SR-PRIN-002",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "interview",
+      "tags": ["risk", "error-budget", "product-tradeoff"],
+      "source": "SRE Book ch 3",
+      "question": "A product team proposes raising an API's availability SLO from 99.9% to 99.99% without additional engineering investment. From an SRE risk perspective, the strongest objection is:",
+      "options": [
+        "Tighter SLOs shrink the error budget, reducing permissible launch risk and requiring costly reliability work to remain achievable",
+        "Higher SLOs automatically eliminate the need for postmortems after incidents",
+        "99.99% is always the minimum acceptable target for any HTTP service",
+        "SLO changes require no stakeholder alignment because they are purely internal metrics"
+      ],
+      "correctIndex": 0,
+      "explanation": "Embracing risk means choosing an SLO that balances user benefit and engineering cost. Tightening the target without investment makes the error budget vanish, forcing either missed SLOs or frozen velocity — undermining the negotiated dev/SRE model described in chapters 3 and 4."
+    },
+    {
+      "id": "SR-PRIN-003",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "deep-dive",
+      "tags": ["risk", "availability", "nines"],
+      "source": "SRE Book ch 3",
+      "question": "A service targets 99.95% monthly availability. Approximately how much downtime budget does that allow per 30-day month?",
+      "options": [
+        "About 22 minutes",
+        "About 4.3 minutes",
+        "About 2.2 hours",
+        "About 43 minutes"
+      ],
+      "correctIndex": 0,
+      "explanation": "99.95% permits 0.05% unavailability: 0.0005 × 30 × 24 × 60 ≈ 21.6 minutes per month. SRE candidates should fluently translate nines into error budgets — the quantitative foundation for launch and incident decisions in chapter 4."
+    },
+    {
+      "id": "SR-PRIN-004",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "interview",
+      "tags": ["sli", "slo", "measurement-window"],
+      "source": "SRE Book ch 4",
+      "question": "When defining an availability SLI as 'successful responses / valid requests,' which request class should typically be excluded from the denominator?",
+      "options": [
+        "Requests that fail due to client-side errors such as malformed input the service correctly rejects with 4xx",
+        "All requests that exceed the latency SLO threshold",
+        "Requests from internal monitoring probes regardless of outcome",
+        "Every request including those blocked by upstream DDoS mitigation before reaching the service"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 4 stresses SLIs that reflect user-perceived reliability. Client-caused 4xx errors are often excluded because they do not indicate service failure. The exact policy must be documented, but counting user mistakes as downtime distorts SLOs and error budgets."
+    },
+    {
+      "id": "SR-PRIN-005",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "foundational",
+      "tags": ["sli", "latency", "percentile"],
+      "source": "SRE Book ch 4",
+      "question": "For a latency SLI on a search API, which formulation best aligns with SRE practice?",
+      "options": [
+        "Proportion of queries completing within 500 ms at the 95th percentile over a rolling 28-day window",
+        "Average latency across all requests in the last hour",
+        "Maximum latency observed on any single request during peak traffic",
+        "Median latency of requests originating from the engineering office network only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 4 recommends distribution-aware SLIs — typically tail percentiles over meaningful windows — because averages hide outliers that degrade user experience. Rolling windows smooth noise while preserving long-term accountability."
+    },
+    {
+      "id": "SR-PRIN-006",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "interview",
+      "tags": ["slo", "error-budget", "policy"],
+      "source": "SRE Book ch 4",
+      "question": "An error budget policy states that when 75% of the quarterly budget is consumed with six weeks remaining, the team should:",
+      "options": [
+        "Treat this as an early warning: increase reliability focus, review recent changes, and tighten launch criteria before budget exhaustion",
+        "Immediately freeze all development until the next quarter regardless of remaining budget",
+        "Lower the SLO target mid-quarter to restore budget without engineering changes",
+        "Ignore the burn rate because only 100% budget consumption triggers action"
+      ],
+      "correctIndex": 0,
+      "explanation": "Error budgets are leading indicators, not binary switches. Chapter 4 describes tiered responses as burn rate accelerates — early intervention preserves remaining budget and avoids emergency freezes. Secretly moving SLO targets destroys trust in the model."
+    },
+    {
+      "id": "SR-PRIN-007",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "deep-dive",
+      "tags": ["slo", "composite", "dependency"],
+      "source": "SRE Book ch 4",
+      "question": "A composite service depends on three backends each with independent 99.9% SLOs. Without redundancy, what is the approximate theoretical ceiling on end-to-end availability?",
+      "options": [
+        "Roughly 99.7% (product of individual availabilities)",
+        "Exactly 99.9% because the slowest dependency sets the floor",
+        "100% if the composite layer retries all failures",
+        "99.99% because SLOs add when services are chained"
+      ],
+      "correctIndex": 0,
+      "explanation": "Serial dependency availability multiplies: 0.999³ ≈ 0.997. Chapter 4's SLI/SLO material implies composite services need stricter component targets or redundancy to meet user-facing goals — a common system-design interview insight."
+    },
+    {
+      "id": "SR-PRIN-008",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "interview",
+      "tags": ["slo", "sla", "stakeholder"],
+      "source": "SRE Book ch 4",
+      "question": "Why do SRE teams typically set internal SLOs slightly stricter than external SLAs?",
+      "options": [
+        "To consume the SLA margin as an error budget buffer, reducing contractual breach risk while preserving a measurable internal target",
+        "Because legal teams require internal targets to exceed contractual commitments",
+        "SLAs are always stricter than SLOs by industry regulation",
+        "There is no relationship; SLOs and SLAs must be identical"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 4 explains the SLO-as-buffer pattern: internal targets tighter than customer-facing SLAs give teams measurable budget to spend on velocity while maintaining contractual headroom. Breaching an SLA triggers external consequences; exhausting an SLO triggers internal policy."
+    },
+    {
+      "id": "SR-PRIN-009",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "foundational",
+      "tags": ["toil", "definition", "operational-work"],
+      "source": "SRE Book ch 5",
+      "question": "Which characteristic is NOT part of the SRE book's definition of toil?",
+      "options": [
+        "Work that permanently improves the system's architecture on first execution",
+        "Manual and repetitive execution",
+        "Triggered by operational events rather than proactive design",
+        "Grows proportionally with service growth if left unaddressed"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 5 defines toil as manual, repetitive, automatable operational work that scales with service size — not engineering that durably improves the system. One-time architectural improvements are valuable SRE work, not toil."
+    },
+    {
+      "id": "SR-PRIN-010",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "interview",
+      "tags": ["toil", "automation", "capacity"],
+      "source": "SRE Book ch 5",
+      "question": "An SRE team tracks toil as 45% of time. Leadership asks why not automate the remaining ticket queue immediately. The principled response is:",
+      "options": [
+        "Automation itself requires engineering capacity; prioritize highest-volume toil with best ROI while preserving time for SLO work, launches, and on-call",
+        "45% toil is above the 50% cap so no action is needed until it reaches 50%",
+        "All toil should be eliminated in one quarter regardless of other priorities",
+        "Toil above 30% means the team should stop participating in design reviews"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 5 recommends capping toil (commonly ~50%) and investing remaining capacity in automation — but automation is not free. Prioritization by impact, balancing on-call and project work, reflects realistic SRE capacity management."
+    },
+    {
+      "id": "SR-PRIN-011",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "deep-dive",
+      "tags": ["toil", "ticket-rotation", "on-call"],
+      "source": "SRE Book ch 5",
+      "question": "Rotating through the same manual remediation playbook every on-call shift without automating the underlying fix primarily increases:",
+      "options": [
+        "Ongoing toil that scales with incident frequency and prevents engineering investment in durable reliability improvements",
+        "Error budget because manual work is excluded from SLO calculations",
+        "Team morale sustainably because operators gain deep system familiarity",
+        "Launch velocity because on-call experience replaces design review"
+      ],
+      "correctIndex": 0,
+      "explanation": "Repeated manual remediation is textbook toil: it returns each shift, grows with traffic, and crowds out project work. Chapter 5 argues each toil instance should either be automated or eliminated at the source."
+    },
+    {
+      "id": "SR-PRIN-012",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "foundational",
+      "tags": ["monitoring", "golden-signals", "latency"],
+      "source": "SRE Book ch 6",
+      "question": "In the four golden signals framework, 'latency' specifically refers to:",
+      "options": [
+        "The time to service a request, distinguishing successful request duration from failed or slow-error paths",
+        "Only network round-trip time between datacenters",
+        "CPU scheduling delay on the host regardless of request outcome",
+        "Time until the next deployment completes"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 6 defines latency as time to serve a request, emphasizing that failed requests can return quickly (e.g., 500 errors) and must be tracked separately from successful-path latency to avoid misleading dashboards."
+    },
+    {
+      "id": "SR-PRIN-013",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "interview",
+      "tags": ["monitoring", "golden-signals", "saturation"],
+      "source": "SRE Book ch 6",
+      "question": "A service shows low CPU utilization but rising request queue depth and growing p99 latency. Which golden signal best explains the user-visible degradation?",
+      "options": [
+        "Saturation: a resource limit (threads, connections, or I/O) is exhausted even though CPU appears idle",
+        "Traffic: request volume has necessarily dropped",
+        "Errors: all failures are client-side 404 responses",
+        "Latency is irrelevant when CPU is below 50%"
+      ],
+      "correctIndex": 0,
+      "explanation": "Saturation captures how 'full' a service is — thread pools, connection limits, disk I/O. Chapter 6 warns that CPU alone misleads; queue buildup with tail latency growth is classic saturation even at moderate CPU."
+    },
+    {
+      "id": "SR-PRIN-014",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "interview",
+      "tags": ["monitoring", "alerting", "symptoms"],
+      "source": "SRE Book ch 6",
+      "question": "Chapter 6 recommends alerting on symptoms rather than causes. Which alert rule best follows this principle?",
+      "options": [
+        "Page when user-visible error rate exceeds SLO budget burn threshold for 15 minutes",
+        "Page when any single host's disk reaches 70% capacity",
+        "Page when a developer merges code to the main branch",
+        "Page when log volume increases 10% week-over-week"
+      ],
+      "correctIndex": 0,
+      "explanation": "Symptom-based alerting ties pages to user impact — error rate threatening SLOs — rather than low-level causes that may not affect users. Cause-based alerts belong in tickets or dashboards, not wake-up pages."
+    },
+    {
+      "id": "SR-PRIN-015",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "deep-dive",
+      "tags": ["monitoring", "golden-signals", "traffic"],
+      "source": "SRE Book ch 6",
+      "question": "During a gradual traffic shift from an old to a new API version, error rate stays flat but latency SLI degrades. Which golden-signal analysis is most appropriate first?",
+      "options": [
+        "Compare traffic distribution and per-version latency distributions to detect a canary or routing regression",
+        "Assume errors will appear later and wait 24 hours before investigating",
+        "Disable all latency monitoring because error rate is stable",
+        "Increase traffic to the new version to average out latency spikes"
+      ],
+      "correctIndex": 0,
+      "explanation": "Traffic and latency must be examined together during rollouts. Chapter 6's golden signals are interdependent: a version receiving disproportionate load or exhibiting tail latency can breach SLOs before error rates move."
+    },
+    {
+      "id": "SR-PRIN-016",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "foundational",
+      "tags": ["automation", "hierarchy", "self-service"],
+      "source": "SRE Book ch 7",
+      "question": "In the SRE automation hierarchy, which level represents the highest maturity?",
+      "options": [
+        "Autonomous systems that require no human intervention for routine operation and self-heal within defined bounds",
+        "Manual runbooks executed by on-call engineers for every change",
+        "Externally maintained tools that cannot be modified by the service team",
+        "Automation that runs once per quarter during maintenance windows only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 7 describes automation maturity progressing from manual operation through externally owned tools, internally maintained automation, to autonomous systems. The goal is reducing operational toil while preserving human oversight for exceptional cases."
+    },
+    {
+      "id": "SR-PRIN-017",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "interview",
+      "tags": ["automation", "hierarchy", "ownership"],
+      "source": "SRE Book ch 7",
+      "question": "A team relies on a central platform team's automation that breaks whenever the service changes its deployment model. Per chapter 7, the reliability gap is:",
+      "options": [
+        "Dependence on externally maintained automation without internal ownership — the team should adopt or build internally maintained automation aligned to their service lifecycle",
+        "Automation is inherently unreliable and should be abandoned for manual operation",
+        "The platform team should be dissolved because shared tools never work",
+        "External automation is always superior to service-owned automation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 7 ranks internally maintained automation above external tools because service teams can adapt automation to their changing needs. Relying on brittle external dependencies creates toil when the tool and service diverge."
+    },
+    {
+      "id": "SR-PRIN-018",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "deep-dive",
+      "tags": ["automation", "complexity", "maintenance"],
+      "source": "SRE Book ch 7",
+      "question": "When evaluating whether to automate a rare but complex manual procedure, chapter 7 suggests the decision should weigh:",
+      "options": [
+        "Frequency, error rate of manual execution, cost to automate, and cost of automation maintenance over the service lifetime",
+        "Only whether the procedure has ever caused an outage",
+        "Whether automation eliminates the need for on-call entirely",
+        "Whether the procedure can be completed in under five minutes manually"
+      ],
+      "correctIndex": 0,
+      "explanation": "Not every rare task merits automation. Chapter 7 advocates weighing execution frequency, human error risk, and long-term maintenance cost — automation itself can become a reliability burden if over-applied to edge cases."
+    },
+    {
+      "id": "SR-PRIN-019",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "foundational",
+      "tags": ["release-engineering", "hermetic", "reproducibility"],
+      "source": "SRE Book ch 8",
+      "question": "Hermetic build systems in release engineering primarily ensure:",
+      "options": [
+        "Builds depend only on declared inputs, producing reproducible artifacts unaffected by ambient machine state",
+        "Builds run faster by skipping all dependency pinning",
+        "Only one engineer can trigger a production release per quarter",
+        "Source code is never stored in version control"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 8 emphasizes hermetic, reproducible builds as the foundation of reliable release engineering. Declared inputs eliminate 'works on my machine' drift and enable verifiable, auditable artifacts."
+    },
+    {
+      "id": "SR-PRIN-020",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "interview",
+      "tags": ["release-engineering", "canary", "rollback"],
+      "source": "SRE Book ch 8",
+      "question": "A canary deployment shows elevated error rate on 5% of traffic while the stable version remains healthy. The release-engineering-aligned response is:",
+      "options": [
+        "Automatically halt rollout and roll back the canary, preserving majority traffic on the known-good version while investigating",
+        "Continue rollout to 100% because 95% of traffic is fine",
+        "Remove canarying and deploy directly to all instances to finish faster",
+        "Disable monitoring during rollout to avoid false alarms"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 8 describes progressive rollout with automated rollback on regression signals. Canary analysis limits blast radius; continuing a bad rollout consumes error budget across the full fleet."
+    },
+    {
+      "id": "SR-PRIN-021",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "interview",
+      "tags": ["release-engineering", "configuration", "separation"],
+      "source": "SRE Book ch 8",
+      "question": "Why does chapter 8 advocate separating release artifacts from configuration?",
+      "options": [
+        "The same binary can be promoted across environments with environment-specific config, reducing rebuild risk and enabling faster rollback to a known artifact",
+        "Configuration should be compiled into binaries to prevent tampering",
+        "Artifacts and configuration must always be deployed in a single atomic blob with no separation",
+        "Separation increases the number of required manual steps per release"
+      ],
+      "correctIndex": 0,
+      "explanation": "Decoupling immutable artifacts from mutable configuration is core release engineering: promote tested binaries, apply config per environment, and roll back by reverting config or redeploying a prior artifact without rebuilding."
+    },
+    {
+      "id": "SR-PRIN-022",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "foundational",
+      "tags": ["simplicity", "complexity", "design"],
+      "source": "SRE Book ch 9",
+      "question": "Chapter 9 states that simplicity is a prerequisite for reliability because:",
+      "options": [
+        "Complex systems have more interaction surfaces where failures emerge unpredictably and are harder to debug under pressure",
+        "Simple systems never require monitoring or on-call",
+        "Complexity always reduces operational cost per request",
+        "Simplicity means using the fewest lines of code regardless of clarity"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 9 argues complexity is the enemy of reliability: emergent failures, difficult reasoning under incident stress, and higher maintenance burden. Simplicity is intentional design restraint, not minimalism for its own sake."
+    },
+    {
+      "id": "SR-PRIN-023",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "interview",
+      "tags": ["simplicity", "abstraction", "operational-cost"],
+      "source": "SRE Book ch 9",
+      "question": "A team adds a third overlapping configuration system because the existing two are 'too simple' for edge cases. Chapter 9 would most likely warn that:",
+      "options": [
+        "Accrued complexity increases long-term operational burden and incident confusion more than the edge cases justify",
+        "Multiple config systems always improve reliability through redundancy",
+        "Edge cases should drive unbounded system growth without consolidation plans",
+        "Simplicity applies only to user-facing UI, not backend infrastructure"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 9's simplicity principle opposes unnecessary accretion. Each new subsystem adds failure modes, cognitive load, and on-call surface area. Consolidation and deliberate abstraction beat parallel overlapping systems."
+    },
+    {
+      "id": "SR-PRIN-024",
+      "module": "SR-PRIN",
+      "section": "SR-PRIN",
+      "difficulty": "deep-dive",
+      "tags": ["simplicity", "software-debt", "reliability"],
+      "source": "SRE Book ch 9",
+      "question": "When prioritizing simplicity work alongside feature requests, chapter 9 aligns with which approach?",
+      "options": [
+        "Treat simplification as reliability engineering with measurable reduction in operational toil and incident frequency, not as optional cleanup",
+        "Defer all simplification until the service reaches 10x traffic growth",
+        "Simplicity work requires no metrics because it is purely aesthetic",
+        "Add complexity first and simplify only after a major outage occurs"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 9 frames simplicity as operational necessity, not vanity refactoring. Measuring toil reduction, faster incident resolution, and fewer moving parts justifies simplification alongside feature work — connecting to chapters 5 and 4's error-budget framing."
+    }
+  ]
+}

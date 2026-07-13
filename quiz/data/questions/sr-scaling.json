@@ -1,0 +1,514 @@
+{
+  "questions": [
+    {
+      "id": "SR-SCALE-001",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "foundational",
+      "tags": ["frontend-lb", "dns", "anycast"],
+      "source": "SRE Book ch 19",
+      "question": "Frontend load balancing at global scale typically combines DNS-based distribution with:",
+      "options": [
+        "Anycast or geo-proximity routing so clients reach nearby healthy points of presence",
+        "A single monolithic server in one datacenter to simplify routing",
+        "Client-side random selection with no health awareness",
+        "Eliminating health checks to reduce DNS query volume"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 19 describes layered frontend LB: DNS directs clients toward regional entry points, often via anycast or geo-DNS, with health-aware routing to avoid sending users to failed locations."
+    },
+    {
+      "id": "SR-SCALE-002",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["frontend-lb", "dns-ttl", "failover"],
+      "source": "SRE Book ch 19",
+      "question": "During a regional outage, DNS TTL of 300 seconds delays traffic shift. Which mitigation does chapter 19 discuss?",
+      "options": [
+        "Combine low TTLs where feasible with anycast or proxy layers that can redirect traffic faster than DNS propagation alone",
+        "Increase TTL to 86400 seconds to reduce resolver load during outages",
+        "Rely solely on clients to cache stale DNS indefinitely",
+        "Disable DNS entirely and require users to bookmark IP addresses"
+      ],
+      "correctIndex": 0,
+      "explanation": "DNS caching limits failover speed. Chapter 19 advocates layered approaches — anycast, GFE/proxy tiers, controlled TTLs — because DNS alone cannot instantly drain a failed region."
+    },
+    {
+      "id": "SR-SCALE-003",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["frontend-lb", "capacity", "health"],
+      "source": "SRE Book ch 19",
+      "question": "A frontend load balancer receives health signals indicating one cluster is degraded but not fully down. Capacity-aware routing should:",
+      "options": [
+        "Reduce traffic sent to the degraded cluster proportionally while maintaining service via healthier clusters",
+        "Send all traffic to the degraded cluster to 'help it recover'",
+        "Mark the cluster healthy because partial degradation is normal",
+        "Drain all clusters equally regardless of health state"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 19 emphasizes health- and capacity-aware frontend routing: steer away from struggling clusters before they fail completely, preserving user experience across the global footprint."
+    },
+    {
+      "id": "SR-SCALE-004",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "foundational",
+      "tags": ["datacenter-lb", "consistent-hashing", "session"],
+      "source": "SRE Book ch 20",
+      "question": "Datacenter load balancers often use consistent hashing for stateful connection affinity because:",
+      "options": [
+        "It minimizes remapping when backend servers are added or removed compared to naive modulo hashing",
+        "It guarantees zero connection loss during any server failure",
+        "It eliminates the need for health checks on backend pools",
+        "It requires clients to reconnect on every request for fairness"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 20 covers datacenter LB algorithms. Consistent hashing limits disruption when the backend set changes — only keys near the changed node remap — important for caches and connection state."
+    },
+    {
+      "id": "SR-SCALE-005",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["datacenter-lb", "connection-pooling", "latency"],
+      "source": "SRE Book ch 20",
+      "question": "A proxy load balancer maintains persistent connections to backends while clients use short-lived HTTP requests. The primary reliability benefit is:",
+      "options": [
+        "Amortizing connection setup cost and enabling better backend load visibility without per-request TCP handshakes",
+        "Eliminating all backend failures because connections never close",
+        "Preventing clients from retrying failed requests",
+        "Removing the need for TLS on client-facing connections"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 20 describes connection management at the datacenter LB layer: pooling reduces latency and CPU overhead, while the proxy observes backend health and distributes load with full connection context."
+    },
+    {
+      "id": "SR-SCALE-006",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "deep-dive",
+      "tags": ["datacenter-lb", "subset-selection", "fan-out"],
+      "source": "SRE Book ch 20",
+      "question": "When a frontend must fan out to thousands of backend tasks, subset selection in the load balancer addresses:",
+      "options": [
+        "Limiting each client proxy to a manageable backend subset, reducing connection state and health-check overhead while preserving load spread",
+        "Sending every request to every backend simultaneously for redundancy",
+        "Eliminating load balancing by using broadcast",
+        "Increasing fan-out so each proxy tracks all backends globally"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 20's subsetting pattern trades perfect global optimality for scalability: each LB instance tracks a subset of backends, avoiding O(n) connection and health-check costs at massive scale."
+    },
+    {
+      "id": "SR-SCALE-007",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "foundational",
+      "tags": ["overload", "load-shedding", "priority"],
+      "source": "SRE Book ch 21",
+      "question": "Under overload, chapter 21 recommends load shedding based on:",
+      "options": [
+        "Request priority and criticality, dropping or degrading low-priority work before core user paths fail entirely",
+        "Random rejection of exactly 50% of all requests regardless of type",
+        "First-in-first-out acceptance until hardware physically fails",
+        "Shedding only internal monitoring traffic while accepting unbounded user load"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 21 on handling overload advocates deliberate shedding with priority classes — protect revenue-critical and user-visible paths, drop deferrable work — rather than uncontrolled collapse."
+    },
+    {
+      "id": "SR-SCALE-008",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["overload", "admission-control", "graceful-degradation"],
+      "source": "SRE Book ch 21",
+      "question": "A service detects queue wait time exceeding its SLO-derived threshold. The overload response aligned with chapter 21 is:",
+      "options": [
+        "Reject new requests early with explicit error codes rather than accepting work that will miss latency targets",
+        "Accept all requests and rely on client timeouts to shed load",
+        "Disable autoscaling to prevent additional instances from joining",
+        "Increase retry rates from clients to improve success probability"
+      ],
+      "correctIndex": 0,
+      "explanation": "Graceful degradation under overload means failing fast with clear signals (429/503). Chapter 21 contrasts this with slow failure where queues grow, memory exhausts, and cascading outages follow."
+    },
+    {
+      "id": "SR-SCALE-009",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["overload", "utilization-target", "headroom"],
+      "source": "SRE Book ch 21",
+      "question": "Why does chapter 21 argue against running services at 100% utilization under steady state?",
+      "options": [
+        "Zero headroom eliminates capacity to absorb latency variance and traffic spikes, turning minor perturbations into SLO breaches",
+        "100% utilization improves tail latency by maximizing throughput",
+        "Autoscaling makes headroom unnecessary at all timescales",
+        "High utilization reduces the need for load shedding logic"
+      ],
+      "correctIndex": 0,
+      "explanation": "Operating at maximum utilization removes buffer for bursts and dependency slowdowns. Chapter 21 ties overload design to deliberate headroom and shedding policies rather than running hot continuously."
+    },
+    {
+      "id": "SR-SCALE-010",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "deep-dive",
+      "tags": ["overload", "client-feedback", "retry"],
+      "source": "SRE Book ch 21",
+      "question": "When shedding load, returning Retry-After headers alongside 503 responses primarily helps:",
+      "options": [
+        "Signal clients to back off cooperatively, reducing retry amplification during partial overload recovery",
+        "Guarantee the same request succeeds on immediate retry",
+        "Hide overload conditions from monitoring systems",
+        "Force clients to switch to a different protocol permanently"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 21 emphasizes cooperative degradation: explicit backoff signals help well-behaved clients avoid retry storms that would prevent recovery — linking overload handling to cascading-failure prevention."
+    },
+    {
+      "id": "SR-SCALE-011",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "foundational",
+      "tags": ["cascading-failure", "positive-feedback", "metastable"],
+      "source": "SRE Book ch 22",
+      "question": "Chapter 22 defines a cascading failure as:",
+      "options": [
+        "A failure in one component triggering overload or errors in dependents, propagating through positive feedback until the system reaches a new stable failure state",
+        "Any single-server crash that is replaced automatically by the load balancer",
+        "A planned maintenance window affecting one availability zone",
+        "A gradual performance improvement as load increases"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 22 distinguishes ordinary single-component failure from cascades: positive feedback loops (retries, queue growth, resource exhaustion) spread failure across otherwise healthy components."
+    },
+    {
+      "id": "SR-SCALE-012",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["cascading-failure", "retry-budget", "amplification"],
+      "source": "SRE Book ch 22",
+      "question": "A retry budget limits the fraction of backend capacity that may be consumed by retries. Its purpose in cascade prevention is:",
+      "options": [
+        "Capping retry amplification so recovery attempts cannot multiply load beyond what the degraded system can sustain",
+        "Eliminating all retries to maximize success rate on first attempt",
+        "Allowing unlimited retries for premium users only",
+        "Replacing health checks with retry counters"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 22's retry budgets address a distinct angle from generic backoff: even well-jittered retries can overwhelm a recovering backend. Budgets enforce a hard ceiling on retry traffic as a fraction of total capacity."
+    },
+    {
+      "id": "SR-SCALE-013",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["cascading-failure", "bulkhead", "isolation"],
+      "source": "SRE Book ch 22",
+      "question": "Bulkhead partitioning in a multi-tenant service primarily prevents:",
+      "options": [
+        "One tenant's traffic spike or failure mode from exhausting shared thread pools, connections, or memory used by other tenants",
+        "All cross-tenant data access for compliance reasons only",
+        "Autoscaling from adding capacity to individual tenants",
+        "Monitoring from attributing errors to specific tenants"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 22 bulkheads isolate resource pools per tenant or subsystem — a cascade-containment pattern distinct from circuit breakers. One tenant's retry storm cannot drain the shared pool that serves everyone."
+    },
+    {
+      "id": "SR-SCALE-014",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "deep-dive",
+      "tags": ["cascading-failure", "metastable-failure", "recovery"],
+      "source": "SRE Book ch 22",
+      "question": "A system recovers from an initial trigger but remains in a degraded metastable state because load now exceeds reduced capacity. Chapter 22 recommends:",
+      "options": [
+        "Temporarily reduce offered load (shedding, throttling clients) until the system returns to a stable operating point below saturation",
+        "Immediately restore full traffic because the initial trigger has cleared",
+        "Add retries globally to push through the degraded state faster",
+        "Disable bulkheads to maximize resource sharing during recovery"
+      ],
+      "correctIndex": 0,
+      "explanation": "Metastable failures persist after the trigger is gone because the system cannot serve full load at its degraded capacity. Chapter 22 stresses deliberate load reduction — not just fixing the root trigger — to exit the bad equilibrium."
+    },
+    {
+      "id": "SR-SCALE-015",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["cascading-failure", "server-overload", "cpu"],
+      "source": "SRE Book ch 22",
+      "question": "Chapter 22 notes that server overload protection should trigger before CPU reaches 100% because:",
+      "options": [
+        "By the time CPU saturates, queues and latency have already degraded, and recovery requires shedding load not just adding CPU",
+        "CPU at 100% always causes immediate kernel panic",
+        "Load balancers cannot route to servers above 50% CPU",
+        "100% CPU improves request prioritization automatically"
+      ],
+      "correctIndex": 0,
+      "explanation": "Cascade prevention is proactive: overload signals (latency, queue depth, error rate) should trigger shedding before hard resource exhaustion. At 100% CPU the system is often already in a metastable failure mode."
+    },
+    {
+      "id": "SR-SCALE-016",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "foundational",
+      "tags": ["consensus", "paxos", "fault-tolerance"],
+      "source": "SRE Book ch 23",
+      "question": "Paxos guarantees safety (consistency) with how many replicas tolerating f simultaneous failures in the standard 2f+1 configuration?",
+      "options": [
+        "f failures with 2f+1 total replicas",
+        "f failures with f+1 total replicas",
+        "2f failures with f total replicas",
+        "Any number of failures with three replicas regardless of f"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 23 explains Paxos requires a quorum majority: 2f+1 replicas tolerate f failures while preserving agreement. This generic consensus foundation underpins many distributed systems without being Spanner-specific."
+    },
+    {
+      "id": "SR-SCALE-017",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["consensus", "paxos", "leader-election"],
+      "source": "SRE Book ch 23",
+      "question": "In Multi-Paxos, electing a stable leader primarily reduces:",
+      "options": [
+        "The number of round-trip phases required per operation by avoiding full Paxos prepare rounds on every write",
+        "The total number of replicas required for quorum",
+        "The need for any persistent storage on replicas",
+        "Network partitions by eliminating minority partitions"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 23 describes Multi-Paxos optimization: a stable leader skips repeated leader election and prepare phases for steady-state writes, improving throughput while preserving Paxos safety guarantees."
+    },
+    {
+      "id": "SR-SCALE-018",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "deep-dive",
+      "tags": ["consensus", "paxos", "liveness"],
+      "source": "SRE Book ch 23",
+      "question": "Paxos can guarantee safety during a network partition but may sacrifice liveness when:",
+      "options": [
+        "A quorum cannot be assembled, preventing progress until enough replicas communicate",
+        "Any single replica reboots regardless of quorum status",
+        "Clients use idempotent request IDs",
+        "Leaders rotate on a fixed schedule every second"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 23 distinguishes safety (never returning inconsistent results) from liveness (eventually making progress). Without quorum, Paxos correctly halts rather than violating consistency — a key interview distinction."
+    },
+    {
+      "id": "SR-SCALE-019",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["consensus", "state-machine", "replication"],
+      "source": "SRE Book ch 23",
+      "question": "Replicated state machines built on consensus logs ensure:",
+      "options": [
+        "All non-faulty replicas apply the same ordered operations, producing identical state given deterministic execution",
+        "Replicas may diverge arbitrarily as long as one is designated primary",
+        "Order of operations is irrelevant if all replicas eventually receive all messages",
+        "Only the leader's state matters; followers are never read from"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 23's replicated state machine pattern: consensus orders a log; each replica applies entries deterministically. Identical inputs and order yield identical state — the generic model behind many distributed databases."
+    },
+    {
+      "id": "SR-SCALE-020",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "foundational",
+      "tags": ["cron", "thundering-herd", "scheduling"],
+      "source": "SRE Book ch 24",
+      "question": "Chapter 24's cron at scale problem arises when:",
+      "options": [
+        "Many jobs scheduled at the same wall-clock time simultaneously hammer shared dependencies such as databases or lock services",
+        "Cron jobs run too infrequently to be useful",
+        "Jobs execute on only one machine globally by design",
+        "Cron daemons cannot log their execution history"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 24 describes thundering herd from synchronized cron schedules — distinct from cache stampede (B7) because the trigger is temporal coordination of batch jobs, not cache expiry."
+    },
+    {
+      "id": "SR-SCALE-021",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["cron", "thundering-herd", "jitter"],
+      "source": "SRE Book ch 24",
+      "question": "To mitigate cron-induced thundering herds, chapter 24 recommends:",
+      "options": [
+        "Adding randomized jitter to scheduled start times and spreading work across a time window",
+        "Running all jobs at exactly midnight UTC for operational simplicity",
+        "Disabling monitoring during cron windows",
+        "Consolidating all cron jobs into a single monolithic script"
+      ],
+      "correctIndex": 0,
+      "explanation": "Jitter and windowed scheduling spread load over time, preventing synchronized spikes. Chapter 24 also discusses distributed cron systems with leader election and work partitioning."
+    },
+    {
+      "id": "SR-SCALE-022",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["cron", "distributed", "idempotency"],
+      "source": "SRE Book ch 24",
+      "question": "In a distributed cron system with at-least-once execution semantics, jobs must be:",
+      "options": [
+        "Idempotent or guarded with external locking so duplicate runs do not corrupt state",
+        "Non-idempotent by design to detect duplicate scheduling",
+        "Restricted to run longer than the scheduling interval",
+        "Executed only on the datacenter master clock node"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 24's distributed cron designs assume failures and duplicates. Idempotent job design or distributed locks prevent double billing, double emails, or duplicate data mutations."
+    },
+    {
+      "id": "SR-SCALE-023",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "foundational",
+      "tags": ["data-pipeline", "at-least-once", "delivery"],
+      "source": "SRE Book ch 25",
+      "question": "Most large-scale data pipelines prefer at-least-once delivery with idempotent sinks because:",
+      "options": [
+        "Exactly-once end-to-end is often impractical at scale; idempotent processing makes duplicates safe",
+        "At-most-once delivery guarantees no data loss",
+        "Exactly-once requires no coordination overhead in distributed systems",
+        "Idempotent sinks eliminate the need for monitoring pipeline lag"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 25 acknowledges delivery guarantees trade-offs. At-least-once with deduplication or idempotent writes is the pragmatic pattern for reliable pipelines when true exactly-once is costly or impossible."
+    },
+    {
+      "id": "SR-SCALE-024",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["data-pipeline", "monitoring", "freshness"],
+      "source": "SRE Book ch 25",
+      "question": "Which SLI is most appropriate for a batch analytics pipeline serving daily dashboards?",
+      "options": [
+        "Data freshness: proportion of pipeline runs completing within N hours of source data availability",
+        "CPU utilization of the least-loaded worker",
+        "Number of lines in the pipeline configuration file",
+        "Count of engineers who can read the pipeline code"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 25 applies SRE thinking to pipelines: user-visible SLIs include freshness, completeness, and correctness — not just infrastructure metrics. Freshness lag directly affects dashboard trust."
+    },
+    {
+      "id": "SR-SCALE-025",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "deep-dive",
+      "tags": ["data-pipeline", "dead-letter", "quality"],
+      "source": "SRE Book ch 25",
+      "question": "A pipeline stage rejects malformed records. Chapter 25-aligned handling stores them in a dead-letter path and:",
+      "options": [
+        "Alerts on growing dead-letter volume, preserving good records flowing while enabling inspection and replay of bad data",
+        "Silently drops malformed records with no metrics",
+        "Halts the entire pipeline permanently on the first bad record",
+        "Re-injects malformed records unchanged into the output table"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pipeline reliability separates poison records from healthy flow. Dead-letter queues with alerting mirror queue hygiene patterns while preserving data quality SLIs for downstream consumers."
+    },
+    {
+      "id": "SR-SCALE-026",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "foundational",
+      "tags": ["data-integrity", "checksum", "verification"],
+      "source": "SRE Book ch 26",
+      "question": "Chapter 26 advocates continuous data integrity verification because:",
+      "options": [
+        "Silent corruption from hardware, software bugs, or migration errors can propagate undetected without proactive checksums and audits",
+        "Databases guarantee bitwise integrity forever once data is written",
+        "Integrity checks should only run during initial data import",
+        "Checksums reduce storage reliability by adding overhead"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 26 treats data integrity as an ongoing SRE responsibility: end-to-end checksums, periodic audits, and repair workflows catch corruption that replication alone may propagate."
+    },
+    {
+      "id": "SR-SCALE-027",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["data-integrity", "repair", "replication"],
+      "source": "SRE Book ch 26",
+      "question": "A checksum audit detects bit rot on one replica while others are healthy. The integrity-aligned response is:",
+      "options": [
+        "Rebuild the corrupted replica from a verified good copy and investigate root cause before corruption spreads",
+        "Delete all replicas and restore from the oldest backup regardless of verification",
+        "Ignore single-replica corruption because quorum reads mask it",
+        "Disable checksums to reduce audit-induced load"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 26 describes detection-and-repair loops: verify, quarantine bad copies, rebuild from golden sources. Proactive repair prevents silent spread through replication and backup chains."
+    },
+    {
+      "id": "SR-SCALE-028",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "interview",
+      "tags": ["data-integrity", "canary", "migration"],
+      "source": "SRE Book ch 26",
+      "question": "During a large data migration, chapter 26-style integrity practice includes:",
+      "options": [
+        "Dual-write or shadow-read validation comparing checksums and row counts between old and new stores before cutover",
+        "Cutover immediately after starting migration to minimize dual-system cost",
+        "Skipping validation for tables under 1 TB because corruption is unlikely",
+        "Migrating only a random 1% sample with no rollback plan"
+      ],
+      "correctIndex": 0,
+      "explanation": "Migration is a high-risk integrity window. Chapter 26 emphasizes verification gates — compare outputs, validate invariants, maintain rollback — before declaring migration complete."
+    },
+    {
+      "id": "SR-SCALE-029",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "foundational",
+      "tags": ["launch", "checklist", "readiness"],
+      "source": "SRE Book ch 27",
+      "question": "Launch readiness reviews in chapter 27 exist primarily to:",
+      "options": [
+        "Verify operational preparedness — monitoring, SLOs, rollback, capacity, and on-call — before production traffic exposure",
+        "Replace all post-launch monitoring with a one-time sign-off",
+        "Guarantee zero bugs in new code before any testing",
+        "Shift all reliability responsibility from development to SRE permanently"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 27's reliable launches framework ensures services are operable at scale: defined SLOs, alerting, runbooks, capacity plans, and rollback paths — not just feature completeness."
+    },
+    {
+      "id": "SR-SCALE-030",
+      "module": "SR-SCALE",
+      "section": "SR-SCALE",
+      "difficulty": "deep-dive",
+      "tags": ["launch", "progressive-rollout", "error-budget"],
+      "source": "SRE Book ch 27",
+      "question": "A launch checklist requires staged traffic ramp with automatic rollback hooks tied to SLO burn rate. This connects launch engineering to:",
+      "options": [
+        "Error budget policy: stopping a bad launch before it consumes disproportionate budget across the full fleet",
+        "Eliminating the need for postmortems after failed launches",
+        "Deploying only during holidays when traffic is zero",
+        "Removing canary analysis in favor of big-bang releases"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chapter 27 integrates launches with SRE principles: progressive exposure limits blast radius, SLO-linked rollback preserves error budget, and checklist items ensure the service is observable during ramp."
+    }
+  ]
+}
