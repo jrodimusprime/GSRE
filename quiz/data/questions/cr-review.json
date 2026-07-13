@@ -1444,6 +1444,23 @@
       ],
       "correctIndex": 0,
       "explanation": "Retry/backoff changes affect outages directly. Tests document intended behavior and prevent regressions — standard eng-practices bar."
+    },
+    {
+      "id": "CR-086",
+      "module": "CR-REVIEW",
+      "section": "CR-1",
+      "difficulty": "interview",
+      "tags": ["code-review", "concurrency", "mutex", "semaphore", "reddit:da4h29"],
+      "source": "reddit:da4h29 mutex/semaphore prep; Linux concurrency basics",
+      "question": "A worker must allow **at most 10 concurrent** HTTP calls to the same backend (not one-at-a-time). Two teammates propose:\n```python\n# Alice\nlock = threading.Lock()\ndef call_api():\n    with lock:\n        return requests.get(url, timeout=5)\n```\n```python\n# Bob\nsem = threading.Semaphore(10)\ndef call_api():\n    with sem:\n        return requests.get(url, timeout=5)\n```\nWhich review comment is correct?",
+      "options": [
+        "Bob's Semaphore(10) limits concurrency to 10; Alice's Lock is a mutex that serializes to one caller at a time",
+        "Lock and Semaphore behave identically when used with a with-statement",
+        "Semaphore(10) allows only one thread in the critical section — use Lock for parallelism",
+        "Neither works in Python because of the GIL — use multiprocessing only"
+      ],
+      "correctIndex": 0,
+      "explanation": "A mutex (Lock) grants exclusive access to one thread. A counting semaphore grants N permits — the usual pattern for bounding concurrent I/O or protecting a pool of resources. da4h29's prep list calls out mutex vs semaphore basics; code review interviews test whether you pick the right primitive, not just spot syntax bugs."
     }
   ]
 }

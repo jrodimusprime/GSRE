@@ -15,10 +15,10 @@
       "id": "CR-REVIEW",
       "title": "Code review interview (no live coding)",
       "sourceUrl": "https://github.com/google/eng-practices/blob/master/review/reviewer/looking-for.md",
-      "questionCount": 85,
+      "questionCount": 86,
       "dataFile": "questions/cr-review.json",
       "segments": [
-        { "id": "CR-1", "label": "Bug finding", "count": 11 },
+        { "id": "CR-1", "label": "Bug finding", "count": 12 },
         { "id": "CR-2", "label": "Complexity & design", "count": 7 },
         { "id": "CR-3", "label": "Error handling & edge cases", "count": 6 },
         { "id": "CR-4", "label": "Readability & maintainability", "count": 5 },
@@ -97,9 +97,9 @@
   "examPresets": [
     {
       "id": "code-review-full",
-      "label": "Code review deep drill (85 Q)",
+      "label": "Code review deep drill (86 Q)",
       "modules": ["CR-REVIEW"],
-      "questionCount": 85,
+      "questionCount": 86,
       "minutes": 45
     },
     {
@@ -114,7 +114,7 @@
       "id": "code-review-45",
       "label": "Code review mock (45 min)",
       "modules": ["CR-REVIEW", "BS-IMPL"],
-      "questionCount": 105,
+      "questionCount": 106,
       "minutes": 45
     },
     {
@@ -153,10 +153,10 @@
       "minutes": 45
     },
     {
-      "id": "full-508",
-      "label": "Full bank (508 Q)",
+      "id": "full-509",
+      "label": "Full bank (509 Q)",
       "modules": ["SA-VIDEO", "CR-REVIEW", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "A1", "A2", "C1", "C2", "C3", "C4", "C5", "D1", "D2", "E3", "SR-PRIN", "SR-SCALE", "WB-FOUND", "BS-IMPL"],
-      "questionCount": 508,
+      "questionCount": 509,
       "minutes": 0
     }
   ],
