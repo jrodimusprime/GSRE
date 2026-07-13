@@ -15,7 +15,7 @@
       "id": "CR-REVIEW",
       "title": "Code review interview (no live coding)",
       "sourceUrl": "https://github.com/google/eng-practices/blob/master/review/reviewer/looking-for.md",
-      "questionCount": 55,
+      "questionCount": 85,
       "dataFile": "questions/cr-review.json",
       "priority": 1,
       "buildOrder": 2
@@ -91,7 +91,7 @@
       "id": "code-review-45",
       "label": "Code review mock (45 min)",
       "modules": ["CR-REVIEW", "BS-IMPL"],
-      "questionCount": 55,
+      "questionCount": 105,
       "minutes": 45
     },
     {
@@ -130,10 +130,10 @@
       "minutes": 45
     },
     {
-      "id": "full-478",
-      "label": "Full bank (478 Q)",
+      "id": "full-508",
+      "label": "Full bank (508 Q)",
       "modules": ["SA-VIDEO", "CR-REVIEW", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "A1", "A2", "C1", "C2", "C3", "C4", "C5", "D1", "D2", "E3", "SR-PRIN", "SR-SCALE", "WB-FOUND", "BS-IMPL"],
-      "questionCount": 478,
+      "questionCount": 508,
       "minutes": 0
     }
   ],

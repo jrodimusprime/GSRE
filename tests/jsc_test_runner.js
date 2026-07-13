@@ -130,10 +130,10 @@ QuizApp.boot().then(() => {
   assert(stats.innerHTML.includes('stat-card'), 'section stats should render on init');
 
   QuizLoader.getAllQuestions().then((all) => {
-    assert(all.length === 478, `expected 478 questions, got ${all.length}`);
+    assert(all.length === 508, `expected 508 questions, got ${all.length}`);
 
     const cr = all.filter((q) => q.module === 'CR-REVIEW');
-    assert(cr.length === 55, `expected 55 CR-REVIEW questions, got ${cr.length}`);
+    assert(cr.length === 85, `expected 85 CR-REVIEW questions, got ${cr.length}`);
 
     const e3 = all.filter((q) => q.module === 'E3');
     assert(e3.length === 18, `expected 18 E3 questions, got ${e3.length}`);

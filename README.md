@@ -7,4 +7,4 @@ Multiple-choice prep quiz for Google SRE SWE interviews (Systems Architecture & 
 ## Contents
 
 - `index.html` — quiz app entry point
-- `quiz/` — styles, JavaScript, and question data (478 questions)
+- `quiz/` — styles, JavaScript, and question data (508 questions)
