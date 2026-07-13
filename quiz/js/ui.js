@@ -154,6 +154,14 @@ const QuizUI = (() => {
     document.querySelectorAll('.option-btn').forEach((b) => (b.disabled = true));
   }
 
+  function scrollToQuizTop() {
+    const target = el('score-bar') || document.querySelector('header');
+    if (!target || !target.scrollIntoView) return;
+    requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
   function refresh(modules, enabled, progressByModule, poolProgress) {
     renderScoreBar(poolProgress);
     renderModuleFilters(modules, enabled);
@@ -169,6 +177,7 @@ const QuizUI = (() => {
     showPoolExhausted,
     showInitError,
     showFeedback,
+    scrollToQuizTop,
     refresh,
   };
 })();

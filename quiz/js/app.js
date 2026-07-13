@@ -85,6 +85,7 @@ const QuizApp = (() => {
   function onNext() {
     el('next-btn').classList.add('hidden');
     showNextQuestion();
+    QuizUI.scrollToQuizTop();
   }
 
   function onModuleToggle(e) {
