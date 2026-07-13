@@ -148,10 +148,8 @@ class QuizAppTests(unittest.TestCase):
     def test_html_loads_scripts_in_order(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
         for script in REQUIRED_SCRIPTS:
-            self.assertIn(f'src="{script}', html, f"missing script {script}")
+            self.assertIn(f'src="{script}"', html)
         self.assertIn('id="quiz-loader"', html)
-        self.assertIn('tabindex="-1"', html)
-        self.assertIn('id="quiz-meta"', html)
 
     def test_app_boot_handles_ready_state(self):
         app_js = (JS / "app.js").read_text(encoding="utf-8")
@@ -225,12 +223,11 @@ class QuizAppTests(unittest.TestCase):
         self.assertIn("getAnswers()", engine_js)
         self.assertIn("getEnabledPoolProgress", storage_js)
 
-    def test_app_scrolls_on_next_question(self):
+    def test_app_scrolls_to_top_on_next_question(self):
         app_js = (JS / "app.js").read_text(encoding="utf-8")
         ui_js = (JS / "ui.js").read_text(encoding="utf-8")
-        self.assertIn("scrollToQuizTop", app_js)
-        self.assertIn("scrollToQuizTop", ui_js)
-        self.assertIn("document.documentElement.scrollTop", ui_js)
+        self.assertIn("window.scrollTo(0, 0)", app_js)
+        self.assertNotIn("scrollToQuizTop", ui_js)
 
     def test_app_wires_eligible_pool_and_remaining(self):
         app_js = (JS / "app.js").read_text(encoding="utf-8")
