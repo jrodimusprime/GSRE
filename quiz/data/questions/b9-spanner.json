@@ -1,0 +1,259 @@
+{
+  "questions": [
+    {
+      "id": "B9-001",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "foundational",
+      "tags": ["spanner", "overview", "newsql"],
+      "source": "Spanner OSDI 2012 paper (Corbett et al.)",
+      "question": "Which description best characterizes Google Spanner?",
+      "options": [
+        "A scalable, multi-version, globally distributed, synchronously replicated database with SQL and externally consistent transactions",
+        "An eventually consistent key-value cache with no transactions",
+        "A single-region in-memory store used only for session data",
+        "A batch analytics engine that replaces MapReduce for offline jobs"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Spanner paper defines it as a multi-version, globally distributed, synchronously replicated database that shards data across Paxos state machines and supports externally consistent distributed transactions with a SQL query language."
+    },
+    {
+      "id": "B9-002",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "interview",
+      "tags": ["spanner", "truetime", "clocks"],
+      "source": "Spanner OSDI 2012 paper — Section 3 TrueTime",
+      "question": "What makes the TrueTime API different from a normal system clock?",
+      "options": [
+        "TT.now() returns an interval [earliest, latest] that is guaranteed to contain the true absolute time, explicitly exposing clock uncertainty",
+        "It returns a single exact nanosecond value with zero error",
+        "It only works on one machine and cannot be compared across datacenters",
+        "It replaces Paxos so replication is no longer needed"
+      ],
+      "correctIndex": 0,
+      "explanation": "TrueTime reifies uncertainty: TT.now() yields a bounded interval guaranteed to contain the real time. Spanner reasons about ordering using these bounds instead of trusting a single clock reading."
+    },
+    {
+      "id": "B9-003",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "interview",
+      "tags": ["spanner", "truetime", "hardware"],
+      "source": "Spanner OSDI 2012 paper — TrueTime implementation",
+      "question": "TrueTime keeps its uncertainty bound small (generally under ~10 ms) by relying on which time references?",
+      "options": [
+        "GPS receivers and atomic clocks, which have uncorrelated failure modes",
+        "A single NTP server per continent",
+        "Client-side wall-clock estimates averaged together",
+        "The commit timestamps of recent transactions only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Time-master machines use GPS and atomic clocks precisely because their failure modes are uncorrelated. Daemons poll multiple masters and apply a Marzullo-style algorithm to reject outliers, keeping uncertainty (epsilon) small."
+    },
+    {
+      "id": "B9-004",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "deep-dive",
+      "tags": ["spanner", "external-consistency", "linearizability"],
+      "source": "Spanner OSDI 2012 paper — external consistency invariant",
+      "question": "Spanner's external consistency guarantee states that:",
+      "options": [
+        "If transaction T1 commits before T2 starts, then T1's commit timestamp is less than T2's commit timestamp",
+        "All transactions are eventually visible in some arbitrary order",
+        "Reads may return data from any point in time with no ordering guarantee",
+        "Writes never need coordination because clocks are perfectly synchronized"
+      ],
+      "correctIndex": 0,
+      "explanation": "External consistency (equivalent to linearizability) means the commit-timestamp order matches real-time order: a transaction that commits before another starts is assigned an earlier timestamp."
+    },
+    {
+      "id": "B9-005",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "deep-dive",
+      "tags": ["spanner", "commit-wait", "truetime"],
+      "source": "Spanner OSDI 2012 paper — Section 4.1.2 commit wait",
+      "question": "How does Spanner's 'commit wait' use TrueTime to preserve external consistency?",
+      "options": [
+        "The coordinator waits until TT.after(s) is true — until the commit timestamp s is guaranteed to be in the past — before making the write visible",
+        "It waits a fixed 10 seconds after every commit regardless of clock uncertainty",
+        "It skips waiting entirely and relies on clients to retry",
+        "It waits only for the slowest disk flush, not for time to pass"
+      ],
+      "correctIndex": 0,
+      "explanation": "After choosing commit timestamp s from TT.now().latest, the coordinator waits out the uncertainty until TT.after(s) holds. This guarantees s is in the absolute past, so later transactions get strictly larger timestamps. Expected wait is about 2*epsilon."
+    },
+    {
+      "id": "B9-006",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "interview",
+      "tags": ["spanner", "paxos", "replication"],
+      "source": "Spanner OSDI 2012 paper — Section 2.1",
+      "question": "How does Spanner replicate a split (tablet) across failure domains?",
+      "options": [
+        "Each split is managed by a Paxos group; a majority of voting replicas must agree, and one replica is elected leader to handle writes",
+        "Each split is copied lazily with no consensus, accepting divergence",
+        "A single primary machine holds the only copy of each split",
+        "Splits are replicated only within one rack for speed"
+      ],
+      "correctIndex": 0,
+      "explanation": "Spanner runs a Paxos state machine per tablet. As long as a majority of voting replicas are up, a leader is elected to process writes while sufficiently up-to-date replicas can serve reads."
+    },
+    {
+      "id": "B9-007",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "deep-dive",
+      "tags": ["spanner", "leader-lease", "availability"],
+      "source": "Spanner OSDI 2012 paper — Paxos leader leases",
+      "question": "Spanner's Paxos leaders hold time-based leader leases (10 seconds by default). What is the key invariant these leases enforce?",
+      "options": [
+        "Disjointness: each Paxos leader's lease interval is disjoint from every other leader's, so timestamp assignment stays monotonic across leaders",
+        "That every replica becomes leader in round-robin order",
+        "That leases never expire so failover is unnecessary",
+        "That reads must always go through the previous leader"
+      ],
+      "correctIndex": 0,
+      "explanation": "Long-lived leases make leadership stable and enforce the disjointness invariant: no two leaders' lease intervals overlap. This lets Spanner assign monotonically increasing timestamps even across leader changes."
+    },
+    {
+      "id": "B9-008",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "interview",
+      "tags": ["spanner", "directory", "data-placement"],
+      "source": "Spanner OSDI 2012 paper — Section 2.2 directories",
+      "question": "In Spanner, what is a 'directory' (bucket)?",
+      "options": [
+        "A set of contiguous keys sharing a common prefix — the unit of data placement and movement between Paxos groups",
+        "A filesystem folder on each spanserver's local disk",
+        "A cache of recently read rows held only in memory",
+        "A list of all users assigned to a datacenter"
+      ],
+      "correctIndex": 0,
+      "explanation": "A directory is a bucket of contiguous keys with a shared prefix. It is the smallest unit whose placement and geographic replication can be specified, and Movedir relocates data directory-by-directory (actually by fragment) between Paxos groups."
+    },
+    {
+      "id": "B9-009",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "interview",
+      "tags": ["spanner", "spanserver", "colossus", "storage"],
+      "source": "Spanner OSDI 2012 paper — Section 2.1 spanserver stack",
+      "question": "Where is a Spanner tablet's state physically stored?",
+      "options": [
+        "In B-tree-like files and a write-ahead log on the Colossus distributed file system",
+        "Only in the leader's local RAM with no durable log",
+        "In a single global SQL master database",
+        "On the client machine that issued the write"
+      ],
+      "correctIndex": 0,
+      "explanation": "Each spanserver hosts 100–1000 tablets whose state lives in B-tree-like files plus a write-ahead log on Colossus (the GFS successor). Spanner layers Paxos, a lock table, and a transaction manager on top of this Bigtable-derived stack."
+    },
+    {
+      "id": "B9-010",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "deep-dive",
+      "tags": ["spanner", "two-phase-commit", "transactions"],
+      "source": "Spanner OSDI 2012 paper — Section 4.2.1",
+      "question": "When a read-write transaction spans multiple Paxos groups, how does Spanner commit it atomically?",
+      "options": [
+        "The groups' leaders run two-phase commit layered over Paxos, with one participant group acting as coordinator",
+        "It abandons atomicity and commits each group independently",
+        "It forces all groups to merge into one machine first",
+        "It uses a single global lock that blocks the whole database"
+      ],
+      "correctIndex": 0,
+      "explanation": "Single-group transactions bypass the transaction manager (Paxos + lock table suffice). Multi-group transactions use two-phase commit across participant leaders, coordinated by one chosen group, with each phase durably logged through Paxos."
+    },
+    {
+      "id": "B9-011",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "interview",
+      "tags": ["spanner", "read-only-transaction", "snapshot"],
+      "source": "Spanner OSDI 2012 paper — Section 4.1.4",
+      "question": "Why can Spanner's read-only transactions execute without acquiring locks?",
+      "options": [
+        "They run as lock-free snapshot reads at a system-chosen timestamp, so incoming writes are never blocked",
+        "They lock the entire database for the duration of the read",
+        "They only ever read a single row at a time",
+        "They disable replication while running"
+      ],
+      "correctIndex": 0,
+      "explanation": "Read-only transactions are predeclared as write-free and execute at a chosen timestamp as snapshot reads on any sufficiently up-to-date replica. This avoids locking and does not block concurrent writes."
+    },
+    {
+      "id": "B9-012",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "interview",
+      "tags": ["spanner", "read-write-transaction", "concurrency"],
+      "source": "Spanner OSDI 2012 paper — Section 4.2.1",
+      "question": "Which concurrency-control mechanism do Spanner read-write transactions use?",
+      "options": [
+        "Pessimistic two-phase locking at the leader, with wound-wait to avoid deadlocks",
+        "Optimistic concurrency control with no locks at all",
+        "Timestamp-only ordering with no locks, like Calvin",
+        "Single global serialization on one coordinator node"
+      ],
+      "correctIndex": 0,
+      "explanation": "Read-write transactions acquire read/write locks at the leader using two-phase locking and use wound-wait to prevent deadlocks. Writes are buffered at the client until commit."
+    },
+    {
+      "id": "B9-013",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "foundational",
+      "tags": ["spanner", "zones", "universe", "organization"],
+      "source": "Spanner OSDI 2012 paper — Section 2 implementation",
+      "question": "How is a Spanner deployment organized at the top level?",
+      "options": [
+        "A universe contains zones (units of physical isolation and replication); each zone has a zonemaster and many spanservers",
+        "A single flat pool of identical servers with no zones",
+        "One server per continent connected directly to clients",
+        "A hierarchy of CDNs with no persistent storage tier"
+      ],
+      "correctIndex": 0,
+      "explanation": "A Spanner deployment is a universe organized into zones — the unit of administrative deployment and physical isolation. A zone has a zonemaster (assigns data to spanservers) and 100s–1000s of spanservers; a placement driver moves data between zones."
+    },
+    {
+      "id": "B9-014",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "deep-dive",
+      "tags": ["spanner", "cap", "consistency", "availability"],
+      "source": "Spanner OSDI 2012 paper; CAP analysis",
+      "question": "In CAP terms, how is Spanner best characterized?",
+      "options": [
+        "A CP system: it preserves consistency during partitions and relies on Paxos majorities plus TrueTime for very high availability in practice",
+        "An AP system that always accepts writes on any replica during a partition",
+        "A system that abandons partition tolerance entirely",
+        "A cache with no consistency guarantees"
+      ],
+      "correctIndex": 0,
+      "explanation": "Spanner chooses consistency over availability under partitions (CP). Because writes need a Paxos majority and external consistency depends on TrueTime, a minority-partitioned replica cannot accept conflicting writes — but majority quorums keep practical availability very high."
+    },
+    {
+      "id": "B9-015",
+      "module": "B9",
+      "section": "B9",
+      "difficulty": "interview",
+      "tags": ["spanner", "f1", "use-case", "resharding"],
+      "source": "Spanner OSDI 2012 paper — Section 5.4 F1",
+      "question": "Why did Google's F1 advertising backend migrate from sharded MySQL to Spanner?",
+      "options": [
+        "To eliminate painful manual resharding while gaining synchronous replication, automatic failover, and strong transactional semantics",
+        "Because Spanner was eventually consistent and cheaper to operate",
+        "Because F1 needed a single-datacenter cache with no transactions",
+        "Because Spanner removed the need for any schema or SQL"
+      ],
+      "correctIndex": 0,
+      "explanation": "F1's sharded MySQL required multi-year resharding efforts and had risky failover. Spanner removed manual resharding and provided synchronous Paxos replication, automatic failover, and strong transactions across arbitrary data."
+    }
+  ]
+}
