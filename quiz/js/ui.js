@@ -94,7 +94,7 @@ const QuizUI = (() => {
         ? `${remainingInPool} left in selected sections`
         : '';
     el('quiz-meta').textContent = [moduleTitle || q.module, remainingNote].filter(Boolean).join(' · ');
-    el('question-text').textContent = q.question;
+    el('question-text').innerHTML = QuizFormat.formatRichText(q.question);
     const optsEl = el('options');
     optsEl.innerHTML = shuffledOpts
       .map(
@@ -150,7 +150,7 @@ const QuizUI = (() => {
     exp.classList.remove('hidden');
     exp.classList.toggle('correct', correct);
     exp.classList.toggle('incorrect', !correct);
-    exp.innerHTML = `<strong>${correct ? 'Correct' : 'Incorrect'}</strong><p>${explanation}</p>`;
+    exp.innerHTML = `<strong>${correct ? 'Correct' : 'Incorrect'}</strong>${QuizFormat.formatRichText(explanation)}`;
     document.querySelectorAll('.option-btn').forEach((b) => (b.disabled = true));
   }
 

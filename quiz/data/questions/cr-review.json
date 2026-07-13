@@ -24,15 +24,15 @@
       "difficulty": "interview",
       "tags": ["code-review", "bug-finding", "null-check"],
       "source": "Google eng-practices looking-for.md",
-      "question": "Review:\n```java\npublic String label(User u) {\n    return u.getProfile().getDisplayName().toUpperCase();\n}\n```\nWhich review comment addresses the highest-severity issue first?",
+      "question": "Review:\n```python\ndef label(user):\n    return user.profile.display_name.upper()\n```\nWhich review comment addresses the highest-severity issue first?",
       "options": [
-        "Add null checks for u, getProfile(), and getDisplayName() — any null causes NPE at runtime",
-        "toUpperCase() should be toLowerCase() for consistency",
-        "Rename method to getLabel for clarity",
-        "User should be an interface instead of a class"
+        "Guard against None — if user, profile, or display_name is missing, this raises AttributeError at runtime",
+        "upper() should be lower() for consistency",
+        "Rename function to get_label for clarity",
+        "user should be a TypedDict instead of an object"
       ],
       "correctIndex": 0,
-      "explanation": "Google code review prioritizes correctness. Chained getters without null guards cause NullPointerException in production. Style and naming matter after functional defects are addressed."
+      "explanation": "Google code review prioritizes correctness. Chained attribute access without None guards crashes in production when data is partial. Style and naming matter after functional defects are addressed."
     },
     {
       "id": "CR-003",
@@ -75,15 +75,15 @@
       "difficulty": "interview",
       "tags": ["code-review", "bug-finding", "concurrency"],
       "source": "Google eng-practices looking-for.md",
-      "question": "Review:\n```java\nprivate int count = 0;\npublic void increment() { count++; }\npublic int getCount() { return count; }\n```\nCalled from many HTTP worker threads. What bug exists?",
+      "question": "Review:\n```python\ncount = 0\n\ndef increment():\n    global count\n    count += 1\n\ndef get_count():\n    return count\n```\nCalled from many HTTP worker threads. What bug exists?",
       "options": [
-        "Race condition — count++ is not atomic; lost updates under concurrent increment()",
-        "int cannot be returned from getCount()",
+        "Race condition — count += 1 is not atomic; lost updates under concurrent increment()",
+        "global count cannot be used in a function",
         "increment() should be private",
         "count should start at 1"
       ],
       "correctIndex": 0,
-      "explanation": "eng-practices explicitly calls out parallel programming safety. Non-atomic read-modify-write on shared mutable state loses counts. Fix: AtomicInteger, synchronized block, or per-thread aggregation."
+      "explanation": "eng-practices explicitly calls out parallel programming safety. Non-atomic read-modify-write on shared mutable state loses counts under concurrency. Fix: threading.Lock, a single-writer pattern, or atomic metrics from the framework."
     },
     {
       "id": "CR-006",
@@ -594,6 +594,346 @@
       ],
       "correctIndex": 0,
       "explanation": "Reddit manager track: prior tech depth helps but interview proves ongoing ability to evaluate code — not just people management stories."
+    },
+    {
+      "id": "CR-036",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "oom", "memory"],
+      "source": "SRE code review pattern; production log processing",
+      "question": "Review this transaction log processor:\n```python\ndef process_transaction_log(file_path):\n    with open(file_path, 'r') as file:\n        lines = file.readlines()\n    transactions = []\n    for line in lines:\n        if \"SUCCESS\" in line:\n            parts = line.split(\",\")\n            transactions.append({\"id\": parts[0], \"amount\": float(parts[1])})\n    return transactions\n```\nWhat is the highest-severity production risk?",
+      "options": [
+        "readlines() loads the entire file into RAM — a multi-GB log can trigger the OOM killer and crash the container",
+        "SUCCESS should be checked with a regex instead of `in`",
+        "float() cannot parse currency amounts",
+        "The function should return None instead of a list"
+      ],
+      "correctIndex": 0,
+      "explanation": "Under heavy load, log files can reach tens of gigabytes. Loading them entirely into memory is O(file size) and can kill the process. Stream line-by-line with `for line in file:` to keep memory O(1)."
+    },
+    {
+      "id": "CR-037",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "retry-storm", "thundering-herd"],
+      "source": "SRE cascading failure patterns; Reddit cascade threads",
+      "question": "Review this config fetcher when the metadata service is degraded:\n```python\nimport time\nimport requests\n\ndef fetch_config_with_retry():\n    url = \"http://internal-metadata/config\"\n    for i in range(5):\n        try:\n            response = requests.get(url, timeout=5)\n            if response.status_code == 200:\n                return response.json()\n        except requests.RequestException:\n            pass\n        time.sleep(1)\n    raise RuntimeError(\"Failed to fetch config\")\n```\nWhat is the highest-severity production risk?",
+      "options": [
+        "Fixed 1-second retries synchronize across clients and can thundering-herd the recovering service",
+        "Five retries is always too many — should retry exactly once",
+        "requests.get cannot call internal HTTP services",
+        "timeout=5 is too short for any production HTTP call"
+      ],
+      "correctIndex": 0,
+      "explanation": "Static retry intervals align thousands of tasks to retry at the same moment, amplifying load when the dependency is weakest. Use exponential backoff with jitter and an overall deadline context."
+    },
+    {
+      "id": "CR-038",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "observability", "silent-failure"],
+      "source": "SRE telemetry blindspot pattern; reddit:1346wln",
+      "question": "Review this payment handler:\n```python\ndef process_payment(payment_gateway, request):\n    try:\n        payment_gateway.charge(request['user_id'], request['amount'])\n        print(f\"Payment processed for user: {request['user_id']}\")\n    except Exception as e:\n        print(f\"Error processing payment: {e}\")\n```\nWhat is the highest-severity production risk?",
+      "options": [
+        "Exceptions are swallowed and only printed — no structured logs or failure metrics, so on-call stays blind",
+        "print() is slower than logging for successful payments",
+        "charge() should be called before the try block",
+        "request should be a tuple instead of a dict"
+      ],
+      "correctIndex": 0,
+      "explanation": "print() is unstructured and invisible to alerting pipelines. Swallowing exceptions lets the caller think work succeeded. Use structured logging, re-raise or return errors, and increment a failure counter for dashboards."
+    },
+    {
+      "id": "CR-039",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "concurrency", "thread-leak"],
+      "source": "SRE resource exhaustion; reddit:da4h29 concurrency",
+      "question": "Review this audit helper on a high-traffic API:\n```python\nimport threading\n\ndef audit_handler(request, database_client):\n    def run_audit():\n        try:\n            database_client.save_to_audit_database(\n                request.get('user_id'), request.get('action')\n            )\n        except Exception as e:\n            print(f\"Failed to write audit: {e}\")\n\n    thread = threading.Thread(target=run_audit)\n    thread.start()\n    return {\"status\": \"Action logged\", \"code\": 200}\n```\nWhat is the highest-severity production risk?",
+      "options": [
+        "A new OS thread per request is unbounded — under traffic spikes this exhausts threads or file descriptors",
+        "database_client should be created inside run_audit",
+        "return code should be 201 instead of 200",
+        "threading is not available in Python 3"
+      ],
+      "correctIndex": 0,
+      "explanation": "Fire-and-forget threads do not scale with request rate. Use a bounded ThreadPoolExecutor, a queue with fixed workers, or an external task system so concurrency has a hard ceiling."
+    },
+    {
+      "id": "CR-040",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "cache", "memory-leak"],
+      "source": "SRE in-memory cache anti-pattern",
+      "question": "Review this profile cache:\n```python\nGLOBAL_USER_CACHE = {}\n\ndef get_user_profile(user_id, database_client):\n    if user_id in GLOBAL_USER_CACHE:\n        return GLOBAL_USER_CACHE[user_id]\n    profile = database_client.fetch_user_by_id(user_id)\n    GLOBAL_USER_CACHE[user_id] = profile\n    return profile\n```\nWhat is the highest-severity production risk?",
+      "options": [
+        "The dict grows without bound — millions of unique users cause a slow memory leak leading to OOM",
+        "database_client should be global instead of passed in",
+        "user_id must be an integer, not a string key",
+        "Caching always violates user privacy regulations"
+      ],
+      "correctIndex": 0,
+      "explanation": "An unbounded process-local cache never evicts entries. Over days it consumes all RAM. Use functools.lru_cache(maxsize=...) or a cache with TTL and size limits."
+    },
+    {
+      "id": "CR-041",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "timeout", "availability"],
+      "source": "reddit:1klu37j practical production code",
+      "question": "Review:\n```python\ndef fetch_health_status(endpoint):\n    response = requests.get(endpoint)\n    return response.json()\n```\nCalled from every incoming API request. What should you flag first?",
+      "options": [
+        "No timeout — a hung dependency blocks workers and can cause pile-up across the fleet",
+        "json() should be text() for health checks",
+        "requests.get cannot be used inside request handlers",
+        "endpoint must always end with /healthz"
+      ],
+      "correctIndex": 0,
+      "explanation": "Calls without connect/read timeouts can hang indefinitely, tying up threads or async workers. Always set timeouts and propagate failure quickly."
+    },
+    {
+      "id": "CR-042",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "retry", "idempotency"],
+      "source": "Glassdoor payment/retry review patterns",
+      "question": "Review:\n```python\ndef charge_with_retry(client, user_id, amount):\n    for attempt in range(3):\n        try:\n            return client.charge(user_id, amount)\n        except Exception:\n            time.sleep(2 ** attempt)\n    raise RuntimeError(\"charge failed\")\n```\nWhat is the highest-severity issue?",
+      "options": [
+        "Retrying a non-idempotent charge can double-bill customers if the first attempt succeeded but the response was lost",
+        "Exponential backoff is never appropriate for payments",
+        "range(3) should be range(10) for reliability",
+        "user_id should not be passed to charge()"
+      ],
+      "correctIndex": 0,
+      "explanation": "Retries are safe only with idempotency keys or deduplication. Blind retries on financial writes are a correctness incident waiting to happen."
+    },
+    {
+      "id": "CR-043",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "circuit-breaker", "cascade"],
+      "source": "SRE Book cascading failure; B7 failures module",
+      "question": "Review dependency client:\n```python\ndef get_recommendations(user_id):\n    while True:\n        try:\n            return recommendations_service.fetch(user_id)\n        except ServiceUnavailable:\n            time.sleep(0.1)\n```\nWhat is the highest-severity production risk?",
+      "options": [
+        "Infinite retry loop on failure prevents recovery and burns CPU — needs backoff, limits, and circuit breaking",
+        "sleep(0.1) is too long for recommendation latency",
+        "user_id should be hashed before the call",
+        "while True is required for resilient clients"
+      ],
+      "correctIndex": 0,
+      "explanation": "Tight infinite retries keep pressure on a failing dependency and stall callers. Fail fast after bounded attempts and open a circuit so the system can heal."
+    },
+    {
+      "id": "CR-044",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "concurrency", "race"],
+      "source": "Glassdoor check-then-act pattern",
+      "question": "Review cache populate logic:\n```python\ncache = {}\n\ndef get_or_load(key, loader):\n    if key not in cache:\n        cache[key] = loader()\n    return cache[key]\n```\nUnder concurrent requests for the same missing key, what breaks?",
+      "options": [
+        "Check-then-act race — multiple threads can call loader() and overwrite, wasting work or returning inconsistent state",
+        "dict keys cannot be strings in Python",
+        "loader() must return a list",
+        "cache should be a set, not a dict"
+      ],
+      "correctIndex": 0,
+      "explanation": "Without synchronization, duplicate expensive loads happen under contention. Use a lock per key, functools.lru_cache, or a single-flight pattern."
+    },
+    {
+      "id": "CR-045",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "async", "blocking"],
+      "source": "Modern async service review pattern",
+      "question": "Review:\n```python\nimport asyncio\nimport time\n\nasync def handle_request():\n    time.sleep(5)\n    return {\"ok\": True}\n```\nWhat is the bug?",
+      "options": [
+        "time.sleep blocks the event loop — use await asyncio.sleep() or run blocking work in an executor",
+        "async def cannot return a dict",
+        "5 seconds is too short for any handler",
+        "asyncio should not be imported in handlers"
+      ],
+      "correctIndex": 0,
+      "explanation": "Blocking calls inside async handlers stall all concurrent requests on that loop. Offload blocking I/O to a thread pool or use async-native APIs."
+    },
+    {
+      "id": "CR-046",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "security", "sql-injection"],
+      "source": "Glassdoor security review common pattern",
+      "question": "Review:\n```python\ndef find_user(db, username):\n    query = f\"SELECT * FROM users WHERE name = '{username}'\"\n    return db.execute(query)\n```\nWhat is the highest-severity issue?",
+      "options": [
+        "SQL injection — user input is interpolated into the query string",
+        "SELECT * is slower than SELECT id",
+        "db.execute cannot run string queries",
+        "username should be uppercased before lookup"
+      ],
+      "correctIndex": 0,
+      "explanation": "Never build SQL with string formatting from untrusted input. Use parameterized queries / bound parameters."
+    },
+    {
+      "id": "CR-047",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "security", "subprocess"],
+      "source": "Linux prep; shell injection pattern",
+      "question": "Review:\n```python\nimport subprocess\n\ndef ping_host(hostname):\n    subprocess.run(f\"ping -c 1 {hostname}\", shell=True, check=True)\n```\nWhat is the highest-severity issue?",
+      "options": [
+        "shell=True with interpolated input enables command injection",
+        "ping should use -c 3 instead of -c 1",
+        "subprocess.run cannot check return codes",
+        "hostname must be resolved to an IP first"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pass arguments as a list without shell=True: subprocess.run(['ping', '-c', '1', hostname]). Shell interpolation is a classic injection vector."
+    },
+    {
+      "id": "CR-048",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "observability", "metrics"],
+      "source": "SRE Book monitoring cardinality",
+      "question": "Review metrics instrumentation:\n```python\ndef record_latency(user_id, latency_ms):\n    metrics.histogram('request_latency', latency_ms, labels={'user_id': user_id})\n```\nWhat is the highest-severity production risk?",
+      "options": [
+        "user_id as a metric label creates unbounded cardinality and can crash the metrics backend",
+        "histograms cannot store latency values",
+        "latency_ms should be a string label",
+        "metrics.histogram requires exactly two arguments"
+      ],
+      "correctIndex": 0,
+      "explanation": "High-cardinality labels (per-user IDs) explode time-series storage. Use bounded labels like route, status, or shard — never raw user identifiers."
+    },
+    {
+      "id": "CR-049",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "error-handling", "http"],
+      "source": "Glassdoor API review pattern",
+      "question": "Review:\n```python\ndef update_settings(handler, body):\n    try:\n        save_settings(body)\n    except Exception as e:\n        log_error(e)\n    return 200, {\"status\": \"ok\"}\n```\nWhat is wrong?",
+      "options": [
+        "Always returning 200 hides failures from callers and load balancers — propagate 5xx or 4xx on error",
+        "save_settings should be called after the return",
+        "body must be JSON-encoded before save_settings",
+        "log_error should use print instead"
+      ],
+      "correctIndex": 0,
+      "explanation": "Returning success on failure breaks monitoring, retries, and client behavior. Map errors to appropriate HTTP status codes."
+    },
+    {
+      "id": "CR-050",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "backpressure", "queue"],
+      "source": "SRE cascading failure / queue growth",
+      "question": "Review:\n```python\nfrom queue import Queue\n\ntask_queue = Queue()\n\ndef enqueue_job(job):\n    task_queue.put(job)\n    return True\n```\nUnder sustained overload, what fails?",
+      "options": [
+        "Unbounded queue grows until memory is exhausted — need maxsize and backpressure or drop policy",
+        "Queue.put cannot accept arbitrary job objects",
+        "return True should be return False on success",
+        "Jobs must be strings only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Accepting all work without bounds queues unbounded memory. Use maxsize, block with timeout, or shed load when saturated."
+    },
+    {
+      "id": "CR-051",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "cpu", "busy-wait"],
+      "source": "Gregg CPU checklist; production spin loops",
+      "question": "Review:\n```python\ndef wait_until_ready(flag):\n    while not flag.is_set():\n        pass\n```\nWhat is the production impact?",
+      "options": [
+        "Busy-wait spins a CPU core at 100% — use threading.Event.wait() or similar blocking primitive",
+        "flag.is_set() is not a valid method",
+        "while loops are banned in production Python",
+        "flag must be a boolean, not an Event"
+      ],
+      "correctIndex": 0,
+      "explanation": "Spin loops waste CPU and can starve other work on the host. Block efficiently with event.wait(timeout=...) or polling with sleep."
+    },
+    {
+      "id": "CR-052",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "security", "deserialization"],
+      "source": "Python-specific security baseline",
+      "question": "Review:\n```python\nimport pickle\n\ndef load_session(blob):\n    return pickle.loads(blob)\n```\n`blob` comes from client cookies. What is the highest-severity issue?",
+      "options": [
+        "pickle.loads on untrusted data allows arbitrary code execution",
+        "pickle cannot serialize session data",
+        "blob should be base64-encoded after loading",
+        "load_session should return a string"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pickle is not a safe interchange format for untrusted input. Use signed tokens (JWT), JSON with schema validation, or another safe serialization."
+    },
+    {
+      "id": "CR-053",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "security", "secrets"],
+      "source": "Blind/Glassdoor credential leak pattern",
+      "question": "Review:\n```python\nAPI_KEY = \"sk-live-8f3a2b1c9d0e\"\n\ndef call_vendor(payload):\n    return requests.post(\n        \"https://api.vendor.com/v1/charge\",\n        headers={\"Authorization\": f\"Bearer {API_KEY}\"},\n        json=payload,\n    )\n```\nWhat is the highest-severity issue?",
+      "options": [
+        "Hardcoded live API key in source — credential leak via repo, logs, or binaries",
+        "requests.post cannot send JSON bodies",
+        "Authorization header must be lowercase",
+        "API_KEY should be an integer"
+      ],
+      "correctIndex": 0,
+      "explanation": "Secrets belong in a secret manager or environment injected at deploy time, never committed in code. Rotate any exposed key immediately."
+    },
+    {
+      "id": "CR-054",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "database", "n-plus-one"],
+      "source": "Glassdoor performance review pattern",
+      "question": "Review:\n```python\ndef list_order_summaries(order_ids, db):\n    summaries = []\n    for oid in order_ids:\n        order = db.fetch_order(oid)\n        user = db.fetch_user(order.user_id)\n        summaries.append({\"order\": order, \"user\": user})\n    return summaries\n```\nFor 10,000 order IDs, what is the primary scalability issue?",
+      "options": [
+        "N+1 (and N+1 on users) database round-trips — batch or join queries instead",
+        "summaries should be a set, not a list",
+        "order_ids must be sorted first",
+        "db.fetch_order cannot be called in a loop"
+      ],
+      "correctIndex": 0,
+      "explanation": "Per-row queries in a hot path do not scale. Batch fetches, IN clauses, or a single joined query reduce latency and DB load."
+    },
+    {
+      "id": "CR-055",
+      "module": "CR-REVIEW",
+      "section": "CR-6",
+      "difficulty": "interview",
+      "tags": ["code-review", "sre-production", "observability", "logging"],
+      "source": "eng-practices; structured logging",
+      "question": "Review:\n```python\ndef handle_request(request):\n    logger.info(\"request received\")\n    result = process(request.body)\n    logger.info(\"request done\")\n    return result\n```\nWhat observability gap should you flag?",
+      "options": [
+        "Logs lack request/correlation IDs — cannot trace a single request across services during an incident",
+        "logger.info is too verbose for production",
+        "process() should be called before logging",
+        "request.body cannot be passed to process()"
+      ],
+      "correctIndex": 0,
+      "explanation": "Structured logs need correlation IDs, route, latency, and status to debug distributed failures. Generic bookend messages are useless at scale."
     }
   ]
 }

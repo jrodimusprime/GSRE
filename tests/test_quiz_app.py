@@ -32,6 +32,7 @@ REQUIRED_SCRIPTS = [
     "quiz/js/loader.js",
     "quiz/js/storage.js",
     "quiz/js/engine.js",
+    "quiz/js/format.js",
     "quiz/js/ui.js",
     "quiz/js/app.js",
 ]
@@ -135,7 +136,7 @@ class QuestionBankTests(unittest.TestCase):
         if segs != Counter(expected_segments):
             errors.append(f"SA-VIDEO segment mismatch: {dict(segs)}")
 
-        self.assertEqual(total, 458, f"expected 458 questions, found {total}")
+        self.assertEqual(total, 478, f"expected 478 questions, found {total}")
         self.assertEqual(errors, [], "\n".join(errors[:20]))
 
 
@@ -148,8 +149,24 @@ class QuizAppTests(unittest.TestCase):
     def test_html_loads_scripts_in_order(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
         for script in REQUIRED_SCRIPTS:
-            self.assertIn(f'src="{script}"', html)
+            self.assertIn(f'src="{script}', html, f"missing script {script}")
         self.assertIn('id="quiz-loader"', html)
+
+    def test_format_renders_python_code_blocks(self):
+        format_js = (JS / "format.js").read_text(encoding="utf-8")
+        ui_js = (JS / "ui.js").read_text(encoding="utf-8")
+        self.assertIn("highlightPython", format_js)
+        self.assertIn("formatRichText", format_js)
+        self.assertIn("code-block", format_js)
+        self.assertIn("tok-keyword", format_js)
+        self.assertIn("QuizFormat.formatRichText", ui_js)
+
+    def test_cr_review_questions_use_python_only(self):
+        cr = json.loads((DATA / "questions" / "cr-review.json").read_text(encoding="utf-8"))
+        for q in cr["questions"]:
+            if "```" in q.get("question", ""):
+                self.assertNotIn("```java", q["question"], f"{q['id']} uses Java")
+                self.assertRegex(q["question"], r"```(?:python|py)\b", f"{q['id']} missing python fence")
 
     def test_app_boot_handles_ready_state(self):
         app_js = (JS / "app.js").read_text(encoding="utf-8")
@@ -172,7 +189,7 @@ class QuizAppTests(unittest.TestCase):
 
     def test_all_questions_load(self):
         questions, config = get_all_questions()
-        self.assertEqual(len(questions), 458)
+        self.assertEqual(len(questions), 478)
         self.assertEqual(len(config["modules"]), 25)
 
     def test_section_progress_uses_module_pool_sizes(self):

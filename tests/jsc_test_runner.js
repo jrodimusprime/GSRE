@@ -98,15 +98,26 @@ function assert(cond, msg) {
 load(`${ROOT}quiz/js/loader.js`);
 load(`${ROOT}quiz/js/storage.js`);
 load(`${ROOT}quiz/js/engine.js`);
+load(`${ROOT}quiz/js/format.js`);
 load(`${ROOT}quiz/js/ui.js`);
 load(`${ROOT}quiz/js/app.js`);
+
+const sample = QuizFormat.formatRichText('Review:\n```python\ndef foo():\n    return 1\n```\nWhat is wrong?');
+assert(sample.includes('code-block'), 'formatRichText should render code blocks');
+assert(sample.includes('tok-keyword'), 'formatRichText should highlight keywords');
+assert(sample.includes('tok-number'), 'formatRichText should highlight numbers');
+assert(!sample.includes('<script>'), 'formatRichText should escape HTML in prose');
+assert(
+  !QuizFormat.formatRichText('if x < 1 and y > 0').includes('<script>'),
+  'formatRichText should escape comparison operators'
+);
 
 QuizApp.boot().then(() => {
   const chips = document.getElementById('module-chips');
   assert(chips.innerHTML.length > 0, 'module chips should render on init');
 
   const question = document.getElementById('question-text');
-  assert(question.textContent.length > 0, 'a question should render on init');
+  assert(question.innerHTML.length > 0, 'a question should render on init');
   assert(
     question.textContent !== 'Select at least one section below to start quizzing.',
     'question pool should not be empty on init'
@@ -119,7 +130,10 @@ QuizApp.boot().then(() => {
   assert(stats.innerHTML.includes('stat-card'), 'section stats should render on init');
 
   QuizLoader.getAllQuestions().then((all) => {
-    assert(all.length === 458, `expected 458 questions, got ${all.length}`);
+    assert(all.length === 478, `expected 478 questions, got ${all.length}`);
+
+    const cr = all.filter((q) => q.module === 'CR-REVIEW');
+    assert(cr.length === 55, `expected 55 CR-REVIEW questions, got ${cr.length}`);
 
     const e3 = all.filter((q) => q.module === 'E3');
     assert(e3.length === 18, `expected 18 E3 questions, got ${e3.length}`);
