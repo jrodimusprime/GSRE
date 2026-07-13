@@ -32,7 +32,44 @@ const QuizApp = (() => {
   }
 
   function poolProgress() {
-    return QuizStorage.getEnabledPoolProgress(questionIdsByModule, enabledModules);
+    const pool = QuizEngine.activePool();
+    const answers = QuizStorage.getAnswers();
+    let attempted = 0;
+    let correct = 0;
+    for (const q of pool) {
+      const rec = answers[q.id];
+      if (!rec) continue;
+      attempted++;
+      if (rec.correct) correct++;
+    }
+    const total = pool.length;
+    const remaining = Math.max(0, total - attempted);
+    return {
+      total,
+      attempted,
+      remaining,
+      correct,
+      pct: attempted ? Math.round((correct / attempted) * 100) : null,
+      exploredPct: total ? Math.round((attempted / total) * 100) : 0,
+    };
+  }
+
+  function applyUrlFilters() {
+    const loc = (typeof window !== 'undefined' && window.location) || globalThis.location;
+    let tag = null;
+    if (typeof URLSearchParams !== 'undefined' && loc && loc.search) {
+      tag = new URLSearchParams(loc.search).get('tag');
+    } else if (loc && loc.search) {
+      const match = loc.search.match(/[?&]tag=([^&]+)/);
+      tag = match ? decodeURIComponent(match[1].replace(/\+/g, ' ')) : null;
+    }
+    if (!tag) return;
+    QuizEngine.setRequiredTags(
+      tag
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean)
+    );
   }
 
   async function init() {
@@ -50,6 +87,7 @@ const QuizApp = (() => {
     }
     questionIdsByModule = await loadQuestionIdsByModule(config.modules);
     QuizEngine.init(questions, enabledModules, buildEligibleQuestionIds());
+    applyUrlFilters();
 
     refreshUI();
     bindEvents();
@@ -136,7 +174,7 @@ const QuizApp = (() => {
       q,
       QuizEngine.currentShuffledOptions(),
       (mod && mod.title) || q.module,
-      pool.remaining
+      QuizEngine.remainingCount()
     );
   }
 

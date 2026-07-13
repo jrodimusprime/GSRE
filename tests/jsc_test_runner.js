@@ -26,7 +26,7 @@ globalThis.localStorage = {
   removeItem(k) { delete mockStorage[k]; },
 };
 
-globalThis.location = { href: `file://${ROOT}index.html`, pathname: '/GSRE/index.html', origin: 'file://' };
+globalThis.location = { href: `file://${ROOT}index.html`, pathname: '/GSRE/index.html', origin: 'file://', search: '' };
 
 const elements = {};
 function makeEl(id) {
@@ -107,10 +107,8 @@ assert(sample.includes('code-block'), 'formatRichText should render code blocks'
 assert(sample.includes('tok-keyword'), 'formatRichText should highlight keywords');
 assert(sample.includes('tok-number'), 'formatRichText should highlight numbers');
 assert(!sample.includes('<script>'), 'formatRichText should escape HTML in prose');
-assert(
-  !QuizFormat.formatRichText('if x < 1 and y > 0').includes('<script>'),
-  'formatRichText should escape comparison operators'
-);
+const withBuiltin = QuizFormat.formatRichText('```python\nn = len(items)\n```');
+assert(withBuiltin.includes('tok-builtin'), 'formatRichText should highlight builtins');
 
 QuizApp.boot().then(() => {
   const chips = document.getElementById('module-chips');

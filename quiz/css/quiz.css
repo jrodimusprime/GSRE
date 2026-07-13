@@ -229,6 +229,8 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 }
 
 .tok-keyword { color: #c792ea; }
+.tok-builtin { color: #82aaff; }
+.tok-fn { color: #ffcb6b; }
 .tok-string { color: #c3e88d; }
 .tok-comment { color: #676e95; font-style: italic; }
 .tok-number { color: #f78c6c; }

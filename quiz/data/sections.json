@@ -17,6 +17,14 @@
       "sourceUrl": "https://github.com/google/eng-practices/blob/master/review/reviewer/looking-for.md",
       "questionCount": 85,
       "dataFile": "questions/cr-review.json",
+      "segments": [
+        { "id": "CR-1", "label": "Bug finding", "count": 11 },
+        { "id": "CR-2", "label": "Complexity & design", "count": 7 },
+        { "id": "CR-3", "label": "Error handling & edge cases", "count": 6 },
+        { "id": "CR-4", "label": "Readability & maintainability", "count": 5 },
+        { "id": "CR-5", "label": "Process & prioritization", "count": 6 },
+        { "id": "CR-6", "label": "SRE production patterns", "count": 50 }
+      ],
       "priority": 1,
       "buildOrder": 2
     },
@@ -88,6 +96,21 @@
   ],
   "examPresets": [
     {
+      "id": "code-review-full",
+      "label": "Code review deep drill (85 Q)",
+      "modules": ["CR-REVIEW"],
+      "questionCount": 85,
+      "minutes": 45
+    },
+    {
+      "id": "code-review-sre",
+      "label": "SRE production bugs (50 Q, CR-6)",
+      "modules": ["CR-REVIEW"],
+      "tags": ["sre-production"],
+      "questionCount": 50,
+      "minutes": 0
+    },
+    {
       "id": "code-review-45",
       "label": "Code review mock (45 min)",
       "modules": ["CR-REVIEW", "BS-IMPL"],
@@ -105,28 +128,28 @@
       "id": "reddit-comprehensive",
       "label": "Reddit research pack (CR + NALSD + G&L + Manager)",
       "modules": ["CR-REVIEW", "B5", "C3", "C5", "A1"],
-      "questionCount": 50,
+      "questionCount": 166,
       "minutes": 0
     },
     {
       "id": "your-loop",
       "label": "Your loop (code review + Systems Arch + G&L + Manager)",
       "modules": ["CR-REVIEW", "BS-IMPL", "SA-VIDEO", "B1", "B2", "B5", "B6", "B7", "B9", "SR-SCALE", "WB-FOUND", "E3", "C1", "C2", "C3", "C4", "C5", "A1", "SR-PRIN"],
-      "questionCount": 167,
+      "questionCount": 444,
       "minutes": 0
     },
     {
       "id": "systems-architecture-60",
       "label": "Systems Architecture mock (60 min)",
       "modules": ["SA-VIDEO", "B1", "B2", "B3", "B5", "B6", "B7", "B9", "SR-SCALE", "WB-FOUND", "E3"],
-      "questionCount": 145,
+      "questionCount": 235,
       "minutes": 60
     },
     {
       "id": "leadership-45",
       "label": "Googleyness & Leadership mock (45 min)",
       "modules": ["C1", "C2", "C3", "C4", "C5"],
-      "questionCount": 45,
+      "questionCount": 76,
       "minutes": 45
     },
     {

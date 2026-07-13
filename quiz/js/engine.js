@@ -2,6 +2,7 @@ const QuizEngine = (() => {
   let allQuestions = [];
   let enabledModules = new Set();
   let eligibleQuestionIds = null;
+  let requiredTags = null;
   let currentQuestion = null;
   let shuffledOptions = [];
   let lastQuestionId = null;
@@ -23,11 +24,28 @@ const QuizEngine = (() => {
     eligibleQuestionIds = ids instanceof Set ? ids : new Set(ids || []);
   }
 
-  function activePool() {
-    if (eligibleQuestionIds && eligibleQuestionIds.size) {
-      return allQuestions.filter((q) => eligibleQuestionIds.has(q.id));
+  function setRequiredTags(tags) {
+    if (!tags || !tags.length) {
+      requiredTags = null;
+      return;
     }
-    return allQuestions.filter((q) => enabledModules.has(q.module));
+    requiredTags = Array.isArray(tags) ? tags : [tags];
+  }
+
+  function activePool() {
+    let pool;
+    if (eligibleQuestionIds && eligibleQuestionIds.size) {
+      pool = allQuestions.filter((q) => eligibleQuestionIds.has(q.id));
+    } else {
+      pool = allQuestions.filter((q) => enabledModules.has(q.module));
+    }
+    if (requiredTags && requiredTags.length) {
+      pool = pool.filter((q) => {
+        const qtags = q.tags || [];
+        return requiredTags.every((tag) => qtags.includes(tag));
+      });
+    }
+    return pool;
   }
 
   function unattemptedPool() {
@@ -86,6 +104,7 @@ const QuizEngine = (() => {
     init,
     setEnabledModules,
     setEligibleQuestionIds,
+    setRequiredTags,
     activePool,
     unattemptedPool,
     remainingCount,

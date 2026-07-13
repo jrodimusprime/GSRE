@@ -159,7 +159,26 @@ class QuizAppTests(unittest.TestCase):
         self.assertIn("formatRichText", format_js)
         self.assertIn("code-block", format_js)
         self.assertIn("tok-keyword", format_js)
+        self.assertIn("tok-builtin", format_js)
+        self.assertIn("tok-fn", format_js)
         self.assertIn("QuizFormat.formatRichText", ui_js)
+
+    def test_cr_review_segments_match_questions(self):
+        from collections import Counter
+
+        config = json.loads((DATA / "sections.json").read_text(encoding="utf-8"))
+        cr_mod = next(m for m in config["modules"] if m["id"] == "CR-REVIEW")
+        cr = json.loads((DATA / "questions" / "cr-review.json").read_text(encoding="utf-8"))
+        actual = Counter(q["section"] for q in cr["questions"])
+        expected = {s["id"]: s["count"] for s in cr_mod["segments"]}
+        self.assertEqual(dict(actual), expected)
+        self.assertEqual(len(cr["questions"]), 85)
+
+    def test_engine_supports_tag_filter(self):
+        engine_js = (JS / "engine.js").read_text(encoding="utf-8")
+        app_js = (JS / "app.js").read_text(encoding="utf-8")
+        self.assertIn("setRequiredTags", engine_js)
+        self.assertIn("applyUrlFilters", app_js)
 
     def test_cr_review_questions_use_python_only(self):
         cr = json.loads((DATA / "questions" / "cr-review.json").read_text(encoding="utf-8"))

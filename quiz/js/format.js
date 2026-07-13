@@ -2,6 +2,9 @@ const QuizFormat = (() => {
   const PY_KEYWORDS =
     /\b(?:def|class|return|if|elif|else|for|while|try|except|finally|with|as|import|from|pass|raise|lambda|True|False|None|and|or|not|in|is|global|nonlocal|yield|async|await|break|continue)\b/g;
 
+  const PY_BUILTINS =
+    /\b(?:len|range|open|print|int|str|float|list|dict|set|tuple|sum|max|min|enumerate|isinstance|getattr|hasattr|super|type|staticmethod|classmethod|property|abs|all|any|map|filter|zip|sorted|reversed|format|input|id|hash|repr|bool|bytes|next|iter|object)\b/g;
+
   const FENCE_RE = /```(?:python|py)?\s*\n([\s\S]*?)```/gi;
 
   function escapeHtml(text) {
@@ -49,7 +52,17 @@ const QuizFormat = (() => {
   }
 
   function wrapPlain(text) {
-    return escapeHtml(text).replace(PY_KEYWORDS, '<span class="tok-keyword">$&</span>');
+    let html = escapeHtml(text).replace(PY_KEYWORDS, '<span class="tok-keyword">$&</span>');
+    html = html.replace(PY_BUILTINS, '<span class="tok-builtin">$&</span>');
+    html = html.replace(
+      /(<span class="tok-keyword">def<\/span>\s+)(\w+)/g,
+      '$1<span class="tok-fn">$2</span>'
+    );
+    html = html.replace(
+      /(<span class="tok-keyword">class<\/span>\s+)(\w+)/g,
+      '$1<span class="tok-fn">$2</span>'
+    );
+    return html;
   }
 
   function codeBlock(code) {
