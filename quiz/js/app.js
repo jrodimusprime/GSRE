@@ -82,10 +82,18 @@ const QuizApp = (() => {
     el('next-btn').classList.remove('hidden');
   }
 
+  function scrollPageToTop() {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+
   function onNext() {
     el('next-btn').classList.add('hidden');
     showNextQuestion();
-    window.scrollTo(0, 0);
+    scrollPageToTop();
+    requestAnimationFrame(scrollPageToTop);
+    window.setTimeout(scrollPageToTop, 0);
   }
 
   function onModuleToggle(e) {

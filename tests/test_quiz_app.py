@@ -226,7 +226,8 @@ class QuizAppTests(unittest.TestCase):
     def test_app_scrolls_to_top_on_next_question(self):
         app_js = (JS / "app.js").read_text(encoding="utf-8")
         ui_js = (JS / "ui.js").read_text(encoding="utf-8")
-        self.assertIn("window.scrollTo(0, 0)", app_js)
+        self.assertIn("scrollPageToTop", app_js)
+        self.assertIn("document.documentElement.scrollTop = 0", app_js)
         self.assertNotIn("scrollToQuizTop", ui_js)
 
     def test_app_wires_eligible_pool_and_remaining(self):
