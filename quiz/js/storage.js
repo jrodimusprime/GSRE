@@ -21,6 +21,9 @@ const QuizStorage = (() => {
       data.wrongBook = data.wrongBook || [];
       if (!data.wrongBook.includes(questionId)) data.wrongBook.push(questionId);
     }
+    if (Array.isArray(data.skipped)) {
+      data.skipped = data.skipped.filter((id) => id !== questionId);
+    }
     data.moduleStats = data.moduleStats || {};
     const ms = data.moduleStats[moduleId] || { correct: 0, total: 0 };
     ms.total++;
@@ -123,6 +126,27 @@ const QuizStorage = (() => {
     return load().wrongBook || [];
   }
 
+  function getSkipped() {
+    const list = load().skipped;
+    return Array.isArray(list) ? list : [];
+  }
+
+  function addSkipped(questionId) {
+    if (!questionId) return;
+    const data = load();
+    const skipped = Array.isArray(data.skipped) ? data.skipped : [];
+    if (!skipped.includes(questionId)) skipped.push(questionId);
+    data.skipped = skipped;
+    save(data);
+  }
+
+  function removeSkipped(questionId) {
+    const data = load();
+    const skipped = Array.isArray(data.skipped) ? data.skipped : [];
+    data.skipped = skipped.filter((id) => id !== questionId);
+    save(data);
+  }
+
   function clearProgress() {
     localStorage.removeItem(KEY);
   }
@@ -137,6 +161,9 @@ const QuizStorage = (() => {
     getEnabledModules,
     setEnabledModules,
     getWrongBook,
+    getSkipped,
+    addSkipped,
+    removeSkipped,
     clearProgress,
     load,
   };

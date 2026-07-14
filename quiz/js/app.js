@@ -101,6 +101,7 @@ const QuizApp = (() => {
   function bindEvents() {
     el('options').addEventListener('click', onOptionClick);
     el('next-btn').addEventListener('click', onNext);
+    el('skip-btn').addEventListener('click', onSkip);
     el('module-chips').addEventListener('change', onModuleToggle);
     el('reset-progress-btn').addEventListener('click', onResetProgress);
   }
@@ -128,6 +129,15 @@ const QuizApp = (() => {
 
   function onNext() {
     el('next-btn').classList.add('hidden');
+    showNextQuestion();
+    scrollPageToTop();
+    requestAnimationFrame(scrollPageToTop);
+    window.setTimeout(scrollPageToTop, 0);
+  }
+
+  function onSkip() {
+    if (!QuizEngine.current()) return;
+    QuizEngine.skipCurrent();
     showNextQuestion();
     scrollPageToTop();
     requestAnimationFrame(scrollPageToTop);

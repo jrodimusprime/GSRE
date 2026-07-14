@@ -22,6 +22,7 @@ REQUIRED_DOM_IDS = [
     "quiz-meta",
     "question-text",
     "options",
+    "skip-btn",
     "next-btn",
     "module-chips",
     "stats-grid",
@@ -265,6 +266,17 @@ class QuizAppTests(unittest.TestCase):
         self.assertIn("scrollPageToTop", app_js)
         self.assertIn("document.documentElement.scrollTop = 0", app_js)
         self.assertNotIn("scrollToQuizTop", ui_js)
+
+    def test_app_supports_skip_for_later(self):
+        app_js = (JS / "app.js").read_text(encoding="utf-8")
+        engine_js = (JS / "engine.js").read_text(encoding="utf-8")
+        storage_js = (JS / "storage.js").read_text(encoding="utf-8")
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('id="skip-btn"', html)
+        self.assertIn("onSkip", app_js)
+        self.assertIn("skipCurrent", engine_js)
+        self.assertIn("addSkipped", storage_js)
+        self.assertIn("getSkipped", storage_js)
 
     def test_app_wires_eligible_pool_and_remaining(self):
         app_js = (JS / "app.js").read_text(encoding="utf-8")

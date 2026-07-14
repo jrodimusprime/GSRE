@@ -67,12 +67,17 @@ const QuizEngine = (() => {
   }
 
   function pickRandom() {
-    let candidates = unattemptedPool();
-    if (!candidates.length) {
+    const pool = unattemptedPool();
+    if (!pool.length) {
       currentQuestion = null;
       shuffledOptions = [];
       return null;
     }
+
+    const deferred = new Set(QuizStorage.getSkipped());
+    const fresh = pool.filter((q) => !deferred.has(q.id));
+    let candidates = fresh.length ? fresh : pool;
+
     if (candidates.length > 1 && lastQuestionId) {
       const filtered = candidates.filter((q) => q.id !== lastQuestionId);
       if (filtered.length) candidates = filtered;
@@ -82,6 +87,16 @@ const QuizEngine = (() => {
     lastQuestionId = currentQuestion.id;
     shuffledOptions = shuffleOptions(currentQuestion);
     return currentQuestion;
+  }
+
+  function skipCurrent() {
+    const q = currentQuestion;
+    if (!q) return null;
+    QuizStorage.addSkipped(q.id);
+    lastQuestionId = q.id;
+    currentQuestion = null;
+    shuffledOptions = [];
+    return q;
   }
 
   function current() {
@@ -110,6 +125,7 @@ const QuizEngine = (() => {
     remainingCount,
     activePoolTotal,
     pickRandom,
+    skipCurrent,
     current,
     currentShuffledOptions,
     submit,

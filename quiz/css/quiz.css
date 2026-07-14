@@ -267,7 +267,7 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 .option-btn:disabled { cursor: default; opacity: 0.9; }
 
 .btn-primary {
-  margin-top: 1rem;
+  margin-top: 0;
   padding: 0.6rem 1.25rem;
   border-radius: 20px;
   border: none;
@@ -283,6 +283,18 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 .btn-primary:hover {
   background: #5a95f5;
   box-shadow: 0 1px 4px rgba(66, 133, 244, 0.45);
+}
+
+.quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.quiz-actions .btn-secondary {
+  margin: 0;
 }
 
 .explanation {

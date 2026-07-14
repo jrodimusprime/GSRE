@@ -111,6 +111,8 @@ const QuizUI = (() => {
         ? `<span class="source-ref">Source: ${q.source}</span>`
         : '';
     el('next-btn').classList.add('hidden');
+    const skipBtn = el('skip-btn');
+    if (skipBtn) skipBtn.classList.remove('hidden');
   }
 
   function showEmptyPool() {
@@ -120,6 +122,8 @@ const QuizUI = (() => {
     el('video-link').innerHTML = '';
     el('explanation').classList.add('hidden');
     el('next-btn').classList.add('hidden');
+    const skipBtn = el('skip-btn');
+    if (skipBtn) skipBtn.classList.add('hidden');
   }
 
   function showPoolExhausted(poolProgress) {
@@ -131,6 +135,8 @@ const QuizUI = (() => {
     el('video-link').innerHTML = '';
     el('explanation').classList.add('hidden');
     el('next-btn').classList.add('hidden');
+    const skipBtn = el('skip-btn');
+    if (skipBtn) skipBtn.classList.add('hidden');
   }
 
   function showInitError(err) {
@@ -143,6 +149,8 @@ const QuizUI = (() => {
     exp.classList.add('incorrect');
     exp.innerHTML = `<strong>Load error</strong><p>${err && err.message ? err.message : 'Unknown error'}</p>`;
     el('next-btn').classList.add('hidden');
+    const skipBtn = el('skip-btn');
+    if (skipBtn) skipBtn.classList.add('hidden');
   }
 
   function showFeedback(correct, explanation) {
@@ -152,6 +160,8 @@ const QuizUI = (() => {
     exp.classList.toggle('incorrect', !correct);
     exp.innerHTML = `<strong>${correct ? 'Correct' : 'Incorrect'}</strong>${QuizFormat.formatRichText(explanation)}`;
     document.querySelectorAll('.option-btn').forEach((b) => (b.disabled = true));
+    const skipBtn = el('skip-btn');
+    if (skipBtn) skipBtn.classList.add('hidden');
   }
 
   function refresh(modules, enabled, progressByModule, poolProgress) {
