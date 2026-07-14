@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GSRE Interview Cheat Sheet</title>
+  <style>
+    @page { size: A4 portrait; margin: 8mm; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 7.2pt;
+      line-height: 1.22;
+      color: #1a1a1a;
+      background: #fff;
+      padding: 0;
+    }
+    h1 {
+      font-size: 13pt;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1mm;
+    }
+    .subtitle { font-size: 7.5pt; color: #444; margin-bottom: 2mm; }
+    .loop-bar {
+      display: flex;
+      gap: 2mm;
+      margin-bottom: 2.5mm;
+      font-size: 6.8pt;
+      font-weight: 600;
+    }
+    .loop-step {
+      flex: 1;
+      background: #e8f0fe;
+      border: 0.3pt solid #1a73e8;
+      border-radius: 1mm;
+      padding: 1.2mm 1.5mm;
+      text-align: center;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2mm;
+    }
+    section {
+      border: 0.3pt solid #ccc;
+      border-radius: 1mm;
+      padding: 1.8mm;
+      break-inside: avoid;
+    }
+    h2 {
+      font-size: 8pt;
+      font-weight: 700;
+      color: #1a73e8;
+      border-bottom: 0.4pt solid #1a73e8;
+      padding-bottom: 0.5mm;
+      margin-bottom: 1.2mm;
+    }
+    h3 {
+      font-size: 6.8pt;
+      font-weight: 700;
+      color: #333;
+      margin: 1mm 0 0.4mm;
+    }
+    ul { padding-left: 3mm; margin-bottom: 0.8mm; }
+    li { margin-bottom: 0.35mm; }
+    .mono { font-family: "Menlo", "Consolas", monospace; font-size: 6.5pt; }
+    .tag { font-size: 5.8pt; color: #666; font-weight: 400; }
+    .warn { color: #c5221f; font-weight: 600; }
+    .ok { color: #137333; font-weight: 600; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 6.5pt;
+      margin: 0.5mm 0;
+    }
+    td, th {
+      border: 0.25pt solid #ddd;
+      padding: 0.5mm 0.8mm;
+      vertical-align: top;
+    }
+    th { background: #f5f5f5; font-weight: 600; text-align: left; }
+    .full { grid-column: 1 / -1; }
+    .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; }
+    .footer {
+      margin-top: 1.5mm;
+      font-size: 6pt;
+      color: #888;
+      text-align: center;
+    }
+    .footer a { color: #1a73e8; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<h1>Google SRE / SRE Manager — Interview Cheat Sheet</h1>
+<p class="subtitle">GSRE quiz bank (537 Q) · Your loop: Code review · Systems Architecture 60m · Googleyness &amp; Leadership 45m</p>
+
+<div class="loop-bar">
+  <div class="loop-step">① CODE REVIEW 45m<br><span class="tag">Google Doc · no IDE · CR + BS-IMPL</span></div>
+  <div class="loop-step">② SYSTEMS ARCH 60m<br><span class="tag">No coding · clarify · math · NALSD</span></div>
+  <div class="loop-step">③ G&amp;L 45m<br><span class="tag">STAR · manager scenarios · conversational OK</span></div>
+</div>
+
+<div class="grid">
+
+  <section>
+    <h2>Code review — triage order</h2>
+    <ol style="padding-left:3mm;font-size:6.8pt;">
+      <li><strong>Correctness</strong> — logic, off-by-one, null, races</li>
+      <li><strong>Concurrency / resources</strong> — locks, leaks, OOM</li>
+      <li><strong>Security</strong> — injection, pickle, secrets</li>
+      <li><strong>Reliability</strong> — retries, timeouts, backpressure</li>
+      <li><strong>Observability</strong> — metrics not print, HTTP codes</li>
+      <li><strong>Style / naming</strong> — last, not first</li>
+    </ol>
+    <h3>Google Doc rules</h3>
+    <ul>
+      <li>Manual trace + propose test cases</li>
+      <li>Narrate aloud; ask when stuck</li>
+      <li>200-line CL: understand before fixing</li>
+      <li>Style nits are often <span class="warn">decoys</span></li>
+    </ul>
+    <h3>Primitives</h3>
+    <ul>
+      <li><span class="mono">Lock</span> = exclusive access</li>
+      <li><span class="mono">Semaphore(N)</span> = cap concurrency at N</li>
+      <li>Always release in <span class="mono">finally</span> / context mgr</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>CR-6 production bugs (spot these)</h2>
+    <table>
+      <tr><th>Pattern</th><th>Fix instinct</th></tr>
+      <tr><td><span class="mono">readlines()</span> huge file</td><td>Stream / chunk / seek</td></tr>
+      <tr><td>Fixed retry interval</td><td>Jitter + backoff + budget</td></tr>
+      <tr><td>Thread per request</td><td>Bounded pool / queue</td></tr>
+      <tr><td>Unbounded cache/queue</td><td>maxsize + shed load</td></tr>
+      <tr><td>No timeouts on HTTP/DB</td><td>connect + read deadlines</td></tr>
+      <tr><td>Retry w/o idempotency</td><td>Idempotency keys</td></tr>
+      <tr><td>Always HTTP 200</td><td>Propagate 4xx/5xx</td></tr>
+      <tr><td><span class="mono">user_id</span> metric label</td><td>Bounded cardinality</td></tr>
+      <tr><td>SQL f-string / <span class="mono">shell=True</span></td><td>Params / list args</td></tr>
+      <tr><td><span class="mono">pickle.loads</span> untrusted</td><td>RCE — never</td></tr>
+      <tr><td>Busy-wait spin loop</td><td><span class="mono">Event.wait()</span></td></tr>
+      <tr><td>FD / connection leak</td><td>Context managers, pools</td></tr>
+      <tr><td>Blocking in <span class="mono">async</span></td><td>Thread pool / rewrite</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>NALSD / Systems Architecture</h2>
+    <h3>Not greenfield — fix existing system</h3>
+    <ul>
+      <li>Clarify scope, scale, constraints first (~20 min)</li>
+      <li>BOM: machines, cores, disk, bandwidth</li>
+      <li>Iterate: possible → feasible → resilient</li>
+      <li>Incremental ops fixes &gt; re-architect</li>
+    </ul>
+    <h3>When overloaded</h3>
+    <ul>
+      <li>Admission control · load shed · bounded queues</li>
+      <li>Return <span class="mono">503</span> early vs deep queue timeout</li>
+      <li>Fix <span class="warn">tail latency</span> (p99), not just average</li>
+    </ul>
+    <h3>Four golden signals</h3>
+    <ul>
+      <li>Latency · Traffic · Errors · Saturation</li>
+    </ul>
+    <h3>SLO / error budget</h3>
+    <ul>
+      <li>Agree SLIs before boxes</li>
+      <li>Exhausted budget → negotiate with data</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Napkin math</h2>
+    <table>
+      <tr><th>Calc</th><th>Formula</th></tr>
+      <tr><td>Required cores</td><td>QPS × latency(s)</td></tr>
+      <tr><td>Queue RAM</td><td>depth × payload size</td></tr>
+      <tr><td>Storage/day</td><td>writes/s × bytes × 86400 × retention × repl</td></tr>
+      <tr><td>2<sup>32</sup></td><td>≈ 4B (uint32 max)</td></tr>
+      <tr><td>Mid+high overflow</td><td><span class="mono">low + (high-low)//2</span></td></tr>
+    </table>
+    <h3>Physics traps — <span class="ok">say impossible = pass</span></h3>
+    <ul>
+      <li>5 PB / 10 Gbps ≈ <strong>weeks</strong>, not 4h RTO</li>
+      <li>1 TB → 10k nodes: tree/P2P fanout, not serial</li>
+      <li>78% avg CPU → bursts → queue → timeouts at peak</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Troubleshooting — first moves</h2>
+    <ul>
+      <li><strong>Impact</strong> — who, how much, since when?</li>
+      <li><strong>Changes</strong> — deploys, flags, config, traffic</li>
+      <li><strong>Mitigate</strong> before root cause (one change at a time)</li>
+      <li><strong>Golden signals</strong> — don't trust CPU alone</li>
+    </ul>
+    <h3>Shakespeare blackbox alert</h3>
+    <ul>
+      <li>Probe red ≠ always user impact — verify real traffic</li>
+      <li>Check pipeline: index → serve → deps</li>
+    </ul>
+    <h3>Synthetic green, users red</h3>
+    <ul>
+      <li>Probe misses path / region / cohort</li>
+      <li>Compare canary coverage vs prod traffic</li>
+    </ul>
+    <h3>Post-deploy latency spike</h3>
+    <ul>
+      <li>Correlate timeline · canary vs full · rollback candidate</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Linux &amp; networking (E3)</h2>
+    <table>
+      <tr><th>Symptom</th><th>Check</th></tr>
+      <tr><td>Ping OK, HTTPS fail</td><td>L4–L7: ports, TLS, LB</td></tr>
+      <tr><td>IP works, hostname fails</td><td>DNS</td></tr>
+      <tr><td>TLS hang mid-handshake</td><td>Path MTU black hole</td></tr>
+      <tr><td>D-state process</td><td>Kernel I/O block</td></tr>
+      <tr><td>OOMKilled, host has RAM</td><td>cgroup limit</td></tr>
+      <tr><td>Connection failures at scale</td><td>Ephemeral ports / TIME_WAIT</td></tr>
+      <tr><td><span class="mono">futex</span> storm in strace</td><td>Lock contention</td></tr>
+      <tr><td>Disk full, df shows space</td><td>Inodes</td></tr>
+    </table>
+    <h3>Phone-screen classics</h3>
+    <ul>
+      <li>Zombie = child exited, parent didn't <span class="mono">wait()</span></li>
+      <li>Hard link = same inode; symlink = path pointer</li>
+      <li><span class="mono">ls -l</span>: shell → fork → exec → getdents/stat</li>
+      <li>TCP reliable ordered; UDP fast, may drop</li>
+    </ul>
+  </section>
+
+  <section class="full">
+    <h2>Weird &amp; unexpected (WX) — don't get surprised</h2>
+    <div class="cols2">
+      <div>
+        <h3>Loop / format surprises</h3>
+        <ul>
+          <li>Recruiter prep (mutex/FS) ≠ onsite shape — topics hide in review/NALSD</li>
+          <li>Manager loop still technical: code review + NALSD + G&amp;L</li>
+          <li>Only 3 onsite rounds possible — confirm with recruiter</li>
+          <li>Must-pass code review fail → ~12 month cooldown (some reports)</li>
+          <li>SRE-SWE may get LeetCode; SRE-SE more practical — know your track</li>
+          <li>Walk away if role said troubleshooting but loop is only LeetCode</li>
+        </ul>
+        <h3>Apache live-debug gauntlet (Glassdoor)</h3>
+        <ul>
+          <li>① File permissions → check Apache logs</li>
+          <li>② File in different dir → read <span class="mono">httpd.conf</span></li>
+          <li>③ Unicode homoglyph filename → search literal ASCII string</li>
+          <li>④ Segfault → <span class="mono">gdb</span> core dump → explain intentional <span class="mono">SIGSEGV</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Googleyness &amp; Leadership (C3, C5)</h3>
+        <ul>
+          <li>STAR: Situation → Task → Action → Result (+ Learning)</li>
+          <li>Prep: conflict with manager, critical feedback, teammate disagreement</li>
+          <li>25 min G&amp;L can be fine — conversational rapport scores</li>
+          <li>High vs low performer: differentiated coaching, not identical treatment</li>
+          <li>Error budget exhausted: negotiate with data, don't just veto</li>
+          <li>Burnout: alert hygiene, fair rotation, reduce toil — not heroics</li>
+          <li>Sev-1 during demo: IC role, calm comms, mitigate first</li>
+          <li>Four attributes: GCA · RRK · Leadership · Googleyness</li>
+        </ul>
+        <h3>IC coding awareness (not your loop, but reported)</h3>
+        <ul>
+          <li><span class="mono">tail</span> large file: seek backward in chunks</li>
+          <li>Word frequency: stream once, hash map count</li>
+          <li>Confusing cities: count (city, name) pairs ≥ 3</li>
+          <li>Deadlock vs livelock: blocked forever vs busy, no progress</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="full">
+    <h2>Systems Architecture — 60 min flow</h2>
+    <div class="cols2">
+      <div>
+        <strong>0–20 min:</strong> Clarify — users, QPS, read/write ratio, latency, retention, consistency, failure tolerance<br>
+        <strong>Then:</strong> High-level boxes + data flows (API, storage, cache, queue, CDN)<br>
+        <strong>Deep-dive when asked:</strong> One component — APIs, keys, failure behavior<br>
+        <strong>Always volunteer:</strong> How you know it's healthy (lag, drops, SLO alerts)
+      </div>
+      <div>
+        <strong>Vague prompts</strong> ("trends in unstructured data"): clarify data volume, consumers, latency, privacy, what "trend" means<br>
+        <strong>Toy prompts</strong> ("snakes game"): still do requirements + math + SLOs + failure modes<br>
+        <strong>Interviewer disengaged in NALSD:</strong> likely missed early clarifier — pause and restate scope
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<p class="footer">GSRE · <a href="https://jrodimusprime.github.io/GSRE/">Quiz</a> · <a href="cheat-sheet.pdf">PDF</a> · Modules: CR-REVIEW · B5 · E3 · C3 · C5 · WX</p>
+
+</body>
+</html>

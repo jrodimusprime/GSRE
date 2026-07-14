@@ -93,6 +93,18 @@ header h1 {
 
 .subtitle { color: var(--text-secondary); margin: 0.25rem 0 0; }
 
+.resource-links {
+  margin: 0.35rem 0 0;
+  font-size: 0.875rem;
+}
+
+.resource-links a {
+  color: var(--google-blue);
+  text-decoration: none;
+}
+
+.resource-links a:hover { text-decoration: underline; }
+
 .score-bar {
   text-align: right;
   min-width: 140px;
