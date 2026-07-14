@@ -128,7 +128,7 @@ QuizApp.boot().then(() => {
   assert(stats.innerHTML.includes('stat-card'), 'section stats should render on init');
 
   QuizLoader.getAllQuestions().then((all) => {
-    assert(all.length === 509, `expected 509 questions, got ${all.length}`);
+    assert(all.length === 537, `expected 537 questions, got ${all.length}`);
 
     const cr = all.filter((q) => q.module === 'CR-REVIEW');
     assert(cr.length === 86, `expected 86 CR-REVIEW questions, got ${cr.length}`);

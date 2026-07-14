@@ -1,0 +1,452 @@
+{
+  "questions": [
+    {
+      "id": "WX-001",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "troubleshooting", "on-call", "glassdoor:igotanoffer"],
+      "source": "IGotAnOffer; SRE Book Shakespeare example; SRE-INTERVIEW-CASES W-I16",
+      "question": "You are on-call for the Shakespeare search service. A black-box probe alert fires: search for \"the forms of things unknown\" has failed for five minutes. Synthetic checks are red. What should you do FIRST?",
+      "options": [
+        "Confirm user impact (real traffic vs probe-only), check recent deploys/changes, and triage search pipeline health before deep debugging",
+        "Immediately restart every server in every region without checking dashboards",
+        "Ignore the alert because literary quotes are not real queries",
+        "Wait 24 hours to see if the probe self-heals"
+      ],
+      "correctIndex": 0,
+      "explanation": "IGotAnOffer and SRE troubleshooting guidance: start with impact scope, change correlation, and service-level signals — then narrow to indexing, serving, or dependency failure."
+    },
+    {
+      "id": "WX-002",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "troubleshooting", "observability", "reddit:reddit-plan"],
+      "source": "REDDIT-PLAN E2; SRE-INTERVIEW-CASES W-I18",
+      "question": "Dashboards show green synthetic probes and \"clean\" error logs, but support tickets report widespread user failures. What is the most likely explanation?",
+      "options": [
+        "Synthetic probes or log sampling miss the failing path — real user traffic hits a different code path, region, or cohort",
+        "Users are lying; the system is definitely healthy",
+        "Green dashboards prove all regions and features work",
+        "Error logs always capture 100% of user-visible failures"
+      ],
+      "correctIndex": 0,
+      "explanation": "A classic unexpected troubleshooting trap: probes test a narrow slice. Interviewers want you to compare synthetic vs real traffic, canary coverage, and client-side failures."
+    },
+    {
+      "id": "WX-003",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "live-debug", "apache", "glassdoor"],
+      "source": "Glassdoor SRE progressive Apache debug; SRE-INTERVIEW-CASES W-I12",
+      "question": "Live-debug interview: a simple website returns permission errors for a static file. Apache logs show 403. The file exists on disk as a blank text file. What is the most likely fix?",
+      "options": [
+        "File ownership or mode is too restrictive for the Apache user — adjust permissions so the web server can read it",
+        "Rename the file to .php so Apache executes it",
+        "Delete Apache and use Python only",
+        "The 403 always means DNS failure"
+      ],
+      "correctIndex": 0,
+      "explanation": "Glassdoor's progressive Apache gauntlet starts with a basic permissions problem. Read logs, verify path, check owner/mode — classic page-1 trap."
+    },
+    {
+      "id": "WX-004",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "live-debug", "apache", "glassdoor"],
+      "source": "Glassdoor SRE Apache debug page 2; SRE-INTERVIEW-CASES W-I13",
+      "question": "Next live-debug page: logs show 404 for `challenge2.shtml` but `ls` in the document root shows no such file. What should you check NEXT?",
+      "options": [
+        "Apache configuration — the URL may map to a different directory than the one you listed",
+        "Reinstall the Linux kernel",
+        "Assume the interviewer typo'd the filename and stop",
+        "Only check browser cache; never read server config"
+      ],
+      "correctIndex": 0,
+      "explanation": "Page 2 of the Glassdoor escape-room: the file lives elsewhere per Apache config. Candidates who only `ls` the obvious webroot get stuck."
+    },
+    {
+      "id": "WX-005",
+      "module": "WX",
+      "difficulty": "deep-dive",
+      "tags": ["weird-unexpected", "live-debug", "unicode", "glassdoor"],
+      "source": "Glassdoor SRE Apache debug page 3; SRE-INTERVIEW-CASES W-I14",
+      "question": "Live-debug: a filename looks correct in the terminal (`challenge3.shtml`) but Apache logs show URL-encoded characters and 500 errors. `ls` shows a matching name. What is happening?",
+      "options": [
+        "Unicode homoglyphs — the on-disk name uses look-alike characters; search for the literal ASCII string to find the wrong file",
+        "Apache cannot serve .shtml files by design",
+        "The terminal is lying about file existence",
+        "500 errors always mean out-of-memory"
+      ],
+      "correctIndex": 0,
+      "explanation": "Glassdoor page 3: Unicode filenames render like ASCII in the terminal. Open/search for the exact expected string — a memorable \"weird\" SRE debug moment."
+    },
+    {
+      "id": "WX-006",
+      "module": "WX",
+      "difficulty": "deep-dive",
+      "tags": ["weird-unexpected", "live-debug", "gdb", "glassdoor"],
+      "source": "Glassdoor SRE Apache debug page 4; SRE-INTERVIEW-CASES W-I15",
+      "question": "Final live-debug page: requesting `challenge4.shtml` segfaults Apache. `gdb` on the core dump points to mod_rewrite C source line with `strstr(filename, \"challenge4.shtml\")` followed by `SIGSEGV`. What do you tell the interviewer?",
+      "options": [
+        "The module deliberately segfaults when that filename matches — explain the strstr check triggers intentional SIGSEGV; fixing is not required",
+        "strstr always causes segfaults in Apache",
+        "You must patch the kernel to allow segfaults",
+        "gdb output is unreliable for Apache modules"
+      ],
+      "correctIndex": 0,
+      "explanation": "Glassdoor page 4: candidates run gdb, read the C source, and explain intentional crash on a specific filename. They are not asked to fix it — only diagnose."
+    },
+    {
+      "id": "WX-007",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "hiring", "code-review", "exponent"],
+      "source": "Exponent L6 EM fd33b1; SRE-INTERVIEW-CASES W-M09",
+      "question": "Exponent reports failing Google's must-pass EM code review round (200+ line Google Doc). What re-interview constraint do some candidates report?",
+      "options": [
+        "A long cooldown (often ~12 months) before re-interviewing for the same level after failing a must-pass round",
+        "Automatic promotion to the next level on retry",
+        "No cooldown — you can retry the next day with the same packet",
+        "Failed code review rounds are never scored"
+      ],
+      "correctIndex": 0,
+      "explanation": "Exponent L6 EM failure stories note harsh cooldown on must-pass code review — especially painful when time was lost reading legacy logic, not missing fundamentals."
+    },
+    {
+      "id": "WX-008",
+      "module": "WX",
+      "difficulty": "foundational",
+      "tags": ["weird-unexpected", "hiring", "loop-variance", "reddit:1kdf6fn"],
+      "source": "reddit:1kdf6fn; SRE-INTERVIEW-CASES W-I03",
+      "question": "A Reddit candidate reports only three onsite interviews after phone screens, while blog posts describe four to five. Best takeaway?",
+      "options": [
+        "Loop length and round mix vary by level, track, and team — confirm your schedule with the recruiter",
+        "Every Google SRE loop is identical worldwide",
+        "Three rounds means the candidate was down-leveled automatically",
+        "Blog posts are always authoritative over recruiters"
+      ],
+      "correctIndex": 0,
+      "explanation": "1kdf6fn is a real variance data point. Prep for your confirmed rounds, not generic blog templates."
+    },
+    {
+      "id": "WX-009",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "hiring", "recruiter-prep", "reddit:da4h29"],
+      "source": "reddit:da4h29; SRE-INTERVIEW-CASES W-M21",
+      "question": "reddit:da4h29: recruiter prep covered mutex, semaphore, and filesystem basics and felt \"too easy.\" Onsite still felt harder. What explains the gap?",
+      "options": [
+        "Prep topics appear inside different round shapes (code review snippets, NALSD math, troubleshooting) — not as standalone trivia questions",
+        "Recruiter prep is always identical to onsite question wording",
+        "Easy prep means onsite will only ask behavioral questions",
+        "Candidates should ignore recruiter prep entirely"
+      ],
+      "correctIndex": 0,
+      "explanation": "da4h29 pattern: fundamentals show up embedded in production-style review and design — the format surprise matters as much as the topic list."
+    },
+    {
+      "id": "WX-010",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "NALSD", "reddit:c3lrks"],
+      "source": "SRE Workbook NALSD; DEV walkthrough; SRE-INTERVIEW-CASES W-I06",
+      "question": "Many candidates treat Google's NALSD round like \"design Twitter from scratch.\" What is NALSD actually?",
+      "options": [
+        "Analyze and incrementally improve an existing large production system under real constraints — not greenfield boxes",
+        "Only draw microservices with no numbers",
+        "A LeetCode hard dynamic programming round",
+        "A behavioral interview about favorite programming languages"
+      ],
+      "correctIndex": 0,
+      "explanation": "NALSD = Non-Abstract Large System Design. The \"weird\" surprise is fixing/diagnosing a broken system with napkin math — c3lrks and workbook materials align."
+    },
+    {
+      "id": "WX-011",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "NALSD", "glassdoor:igotanoffer"],
+      "source": "IGotAnOffer Glassdoor list; SRE-INTERVIEW-CASES W-I07",
+      "question": "IGotAnOffer aggregates \"Design a snakes game\" alongside AdWords-scale NALSD prompts. How should you respond if you get a toy-sounding design prompt?",
+      "options": [
+        "Treat it seriously — clarify requirements, estimate scale, state SLOs, and iterate; toy prompts still test NALSD process",
+        "Refuse because games are not serious engineering",
+        "Only discuss graphics APIs and skip reliability",
+        "Assume it is a trick and end the interview"
+      ],
+      "correctIndex": 0,
+      "explanation": "Prompt surface area varies; interviewers still score requirements, math, failure modes, and incremental design — even for game-like scenarios."
+    },
+    {
+      "id": "WX-012",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "NALSD", "sre-manager", "jointaro"],
+      "source": "Jointaro SRE Manager US; SRE-INTERVIEW-CASES W-M05",
+      "question": "Jointaro reports a Google SRE Manager system-design prompt: \"Design a system to understand trends in a non-structured dataset.\" What should you do FIRST?",
+      "options": [
+        "Clarify data volume, sources, latency needs, who consumes trends, privacy, and what \"trend\" means operationally",
+        "Immediately pick Hadoop because big data",
+        "Draw Kubernetes clusters without asking questions",
+        "Decline because the prompt is too vague to discuss"
+      ],
+      "correctIndex": 0,
+      "explanation": "Vague product-ish prompts are intentional. Manager-track design still rewards clarifiers before architecture — same as Systems Architecture prep."
+    },
+    {
+      "id": "WX-013",
+      "module": "WX",
+      "difficulty": "deep-dive",
+      "tags": ["weird-unexpected", "napkin-math", "glassdoor"],
+      "source": "Glassdoor LinkedIn SRE; SRE-INTERVIEW-CASES W-I34",
+      "question": "Glassdoor: distribute 1 TB from one server to 10,000 nodes; copying to one node takes hours. How do you avoid ~20,000 hours total serial copy time?",
+      "options": [
+        "Use tree/broadcast fanout, P2P-style propagation, or staged distribution so nodes help replicate — plus checksums for corruption detection",
+        "Copy serially to each node and accept 20,000 hours",
+        "Email the terabyte to each administrator",
+        "Compression eliminates the need for any network transfer"
+      ],
+      "correctIndex": 0,
+      "explanation": "Classic fanout math trap: O(n) serial copies explode. Interviewers want layered distribution and integrity checks — reported on Glassdoor SRE interviews."
+    },
+    {
+      "id": "WX-014",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "napkin-math", "glassdoor"],
+      "source": "Glassdoor Google SRE 2015; SRE-INTERVIEW-CASES W-I33",
+      "question": "Glassdoor SRE interview: \"What's 2^32?\" What approach best demonstrates systems thinking?",
+      "options": [
+        "Decompose: 2^32 = 2^10 × 2^10 × 2^10 × 2^2 ≈ 1000³ × 4 ≈ 4 billion; note unsigned 32-bit overflow boundary",
+        "Memorize exactly 4,294,967,296 with no reasoning",
+        "Answer \"4 giga\" and stop",
+        "Say it is impossible to estimate powers of two"
+      ],
+      "correctIndex": 0,
+      "explanation": "Glassdoor reports mental-math decomposition, not calculator precision. Connecting to uint32 max is a strong SRE signal."
+    },
+    {
+      "id": "WX-015",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "coding-awareness", "glassdoor"],
+      "source": "Glassdoor Google SRE; SRE-INTERVIEW-CASES W-I23",
+      "question": "Glassdoor reports: \"Code the tail command for large datasets.\" Which approach is correct?",
+      "options": [
+        "Seek near end of file and read backwards in chunks — do not load the entire file into memory",
+        "Read all lines into a Python list with readlines()",
+        "Copy the file to RAM disk first",
+        "tail requires loading the full file to count newlines from the start"
+      ],
+      "correctIndex": 0,
+      "explanation": "Even if your loop is code review, IC-track reports include practical Unix-style tasks. Bounded memory via seek/chunked read is the expected insight."
+    },
+    {
+      "id": "WX-016",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "coding-awareness", "glassdoor"],
+      "source": "Glassdoor Google SRE; SRE-INTERVIEW-CASES W-I31",
+      "question": "Glassdoor: find the most repeated words in a large text file. What is the core scalable approach?",
+      "options": [
+        "Stream the file once, count with a hash map / Counter, track max — O(n) time, bounded by unique words not file reread",
+        "Sort the entire file on disk then scan once",
+        "Load the file into a string and split without streaming",
+        "Ask the user to manually count"
+      ],
+      "correctIndex": 0,
+      "explanation": "Practical file-processing question — tests streaming and aggregation, not graph algorithms."
+    },
+    {
+      "id": "WX-017",
+      "module": "WX",
+      "difficulty": "foundational",
+      "tags": ["weird-unexpected", "linux", "glassdoor:igotanoffer"],
+      "source": "IGotAnOffer Linux list; SRE-INTERVIEW-CASES W-I22",
+      "question": "IGotAnOffer / Glassdoor: \"What is a zombie process?\" What is the accurate answer?",
+      "options": [
+        "A child process that exited but whose parent has not called wait() — still has a PID entry until reaped",
+        "Any process using 100% CPU",
+        "A process infected with malware",
+        "A thread inside the kernel only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Phone-screen \"basic\" Linux that stumps ops folks. Zombies are about parent/child lifecycle, not CPU usage."
+    },
+    {
+      "id": "WX-018",
+      "module": "WX",
+      "difficulty": "foundational",
+      "tags": ["weird-unexpected", "linux", "glassdoor:igotanoffer"],
+      "source": "IGotAnOffer; SRE-INTERVIEW-CASES W-I21",
+      "question": "What's the difference between a hard link and a soft (symbolic) link in Linux?",
+      "options": [
+        "Hard link shares the same inode; symlink is a separate path pointing to another path — symlinks can cross filesystems, hard links typically cannot",
+        "Hard links only work on directories; symlinks only work on files",
+        "They are identical; ln always creates symlinks",
+        "Symlinks increase inode count; hard links do not reference inodes"
+      ],
+      "correctIndex": 0,
+      "explanation": "Foundational but still appears in senior SRE phone screens per IGotAnOffer aggregation."
+    },
+    {
+      "id": "WX-019",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "linux", "glassdoor:igotanoffer"],
+      "source": "IGotAnOffer trick questions; SRE-INTERVIEW-CASES W-I19",
+      "question": "IGotAnOffer lists: \"Which system call's return value is not zero although it ended successfully?\" Which family of answers is correct?",
+      "options": [
+        "Calls like wait()/waitpid() return the child PID (positive), or lseek() may return a non-zero offset — success ≠ return 0",
+        "All successful syscalls always return exactly 0",
+        "Only failed syscalls return non-zero values",
+        "read() always returns 0 on success"
+      ],
+      "correctIndex": 0,
+      "explanation": "Classic trick question — tests whether you know success is not always zero (e.g., wait returns pid, read returns byte count)."
+    },
+    {
+      "id": "WX-020",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "linux", "glassdoor:igotanoffer"],
+      "source": "IGotAnOffer; SRE-INTERVIEW-CASES W-I20",
+      "question": "When asked \"What happens when you type `ls -l`?\" in a Linux internals interview, what depth is expected FIRST?",
+      "options": [
+        "Shell parses input → fork/exec → ls binary → getdents/stat syscalls → format output — high-level path before struct trivia",
+        "Recite every field in task_struct from memory",
+        "Answer only \"it lists files\" with no further detail",
+        "Explain GPU driver internals"
+      ],
+      "correctIndex": 0,
+      "explanation": "wc4ryg debate: implications and call chain beat memorizing kernel structs. Walk shell → fork → exec → filesystem syscalls."
+    },
+    {
+      "id": "WX-021",
+      "module": "WX",
+      "difficulty": "foundational",
+      "tags": ["weird-unexpected", "networking", "glassdoor:igotanoffer"],
+      "source": "IGotAnOffer Linux list; SRE-INTERVIEW-CASES",
+      "question": "IGotAnOffer: \"What's the difference between TCP and UDP?\" Which answer fits SRE interviews?",
+      "options": [
+        "TCP: connection-oriented, reliable, ordered delivery; UDP: connectionless, no delivery guarantees — choose based on latency/tolerance for loss",
+        "TCP is always faster than UDP for all workloads",
+        "UDP is only used for DNS and never elsewhere",
+        "They are identical above layer 3"
+      ],
+      "correctIndex": 0,
+      "explanation": "Basic but frequently listed for Google SRE phone screens — tie to reliability vs latency trade-offs."
+    },
+    {
+      "id": "WX-022",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "troubleshooting", "deployments"],
+      "source": "SRE-INTERVIEW-CASES §4.3; common on-call pattern",
+      "question": "Latency spikes immediately after a deploy; error rate is rising. Dashboards show CPU is normal. What should you investigate FIRST?",
+      "options": [
+        "Correlate deploy timeline, check canary vs full rollout, and compare golden signals / traces for the new binary vs rollback candidate",
+        "Assume users are imagining latency",
+        "Wait a week for metrics to stabilize",
+        "Only check CPU because it is the only signal that matters"
+      ],
+      "correctIndex": 0,
+      "explanation": "Post-deploy regression is a common unexpected troubleshooting narrative — change correlation before deep kernel dives."
+    },
+    {
+      "id": "WX-023",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "hiring", "reddit:raabnp"],
+      "source": "reddit:raabnp; SRE-INTERVIEW-CASES W-I09",
+      "question": "reddit:raabnp asks when to walk away from an SRE interview process. Which situation best justifies declining to continue?",
+      "options": [
+        "Job posting emphasized troubleshooting/ops but onsite is only LeetCode with no connection to stated role — misaligned process",
+        "Interviewer asks a clarifying question you do not know",
+        "You must use a Google Doc instead of an IDE",
+        "NALSD includes napkin math"
+      ],
+      "correctIndex": 0,
+      "explanation": "raabnp philosophy: severe role/process mismatch is a walk-away trigger — not normal Google format quirks like Docs or NALSD math."
+    },
+    {
+      "id": "WX-024",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "sre-manager", "jointaro"],
+      "source": "Jointaro Google EM MV; SRE-INTERVIEW-CASES W-M14",
+      "question": "Jointaro Google EM reports deadlock vs livelock in a system design discussion. What is the key distinction?",
+      "options": [
+        "Deadlock: threads blocked forever waiting on each other; livelock: threads keep changing state but make no progress",
+        "They are identical terms for mutex contention",
+        "Livelock only happens in databases; deadlock only in kernels",
+        "Both mean the process exited with code 0"
+      ],
+      "correctIndex": 0,
+      "explanation": "Classic concurrency topic appearing in manager design rounds — unexpected if you only prepped people-management stories."
+    },
+    {
+      "id": "WX-025",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "code-review", "exponent"],
+      "source": "Exponent; IGotAnOffer; SRE-INTERVIEW-CASES W-M17",
+      "question": "Exponent EM candidates report code review in a plain Google Doc with no IDE, syntax highlighting, or run button. Best adaptation?",
+      "options": [
+        "Manual trace with small test inputs, triage correctness before style, and narrate reasoning aloud",
+        "Refuse to review without an IDE",
+        "Spend most time fixing variable naming",
+        "Assume typos cannot exist because Google Docs has spellcheck"
+      ],
+      "correctIndex": 0,
+      "explanation": "Format surprise is real — muscle memory from IDE debugging does not transfer. Process matches CR-022/026 prep."
+    },
+    {
+      "id": "WX-026",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "track-split", "reddit:1fm8wmh"],
+      "source": "reddit:1fm8wmh; SRE-INTERVIEW-CASES W-I01",
+      "question": "reddit:1fm8wmh was surprised by heavy LeetCode (graphs/DP) when expecting practical SRE coding. Best explanation?",
+      "options": [
+        "SRE-SWE track can include algorithmic coding; SRE-SE leans practical/Linux — confirm your track with recruiter",
+        "All Google SRE loops never include algorithms",
+        "LeetCode only appears for managers",
+        "Surprise means the interview was invalid"
+      ],
+      "correctIndex": 0,
+      "explanation": "Track variance is the weird part — 1fm8wmh vs 1klu37j show different bars. Your confirmed loop is code review, but know IC variance."
+    },
+    {
+      "id": "WX-027",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "coding-awareness", "glassdoor"],
+      "source": "Glassdoor Booking.com 2019; SRE-INTERVIEW-CASES W-I32",
+      "question": "Glassdoor (Booking.com SRE): given hotel tuples `(id, name, city)`, return cities with ≥3 hotels sharing the same name. Core approach?",
+      "options": [
+        "Count (city, hotel_name) pairs with a hash map; emit city when any name reaches count 3",
+        "Sort all tuples by hotel_id and binary search",
+        "Return every city in the input",
+        "Only check the first hotel name in each city"
+      ],
+      "correctIndex": 0,
+      "explanation": "Product-flavored coding reported on Glassdoor — hash/count pattern, not graph DP."
+    },
+    {
+      "id": "WX-028",
+      "module": "WX",
+      "difficulty": "interview",
+      "tags": ["weird-unexpected", "NALSD", "physics"],
+      "source": "DEV NALSD math traps; B5-013; SRE-INTERVIEW-CASES §3.4",
+      "question": "In NALSD you must replicate 5 PB cross-region with 4-hour RTO over a 10 Gbps link. Quick physics check: can this work?",
+      "options": [
+        "No — 5 PB over 10 Gbps takes on the order of weeks; flag impossibility and discuss revised RTO, more bandwidth, or partial replication",
+        "Yes — 10 Gbps easily moves 5 PB in 4 hours",
+        "Yes — compress 5 PB to 1 MB with gzip",
+        "Skip math — cloud is infinite"
+      ],
+      "correctIndex": 0,
+      "explanation": "Stopping when math fails is a pass signal in NALSD. Already in B5-013; WX reinforces the weird \"say no\" moment."
+    }
+  ]
+}

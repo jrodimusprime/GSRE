@@ -92,6 +92,14 @@
       "questionCount": 20,
       "dataFile": "questions/bs-implementation.json",
       "buildOrder": 24
+    },
+    {
+      "id": "WX",
+      "title": "Weird & unexpected interview cases",
+      "sourceUrl": "SRE-INTERVIEW-CASES-PLAN.md",
+      "questionCount": 28,
+      "dataFile": "questions/wx-weird.json",
+      "buildOrder": 25
     }
   ],
   "examPresets": [
@@ -126,16 +134,23 @@
     },
     {
       "id": "reddit-comprehensive",
-      "label": "Reddit research pack (CR + NALSD + G&L + Manager)",
-      "modules": ["CR-REVIEW", "B5", "C3", "C5", "A1"],
-      "questionCount": 167,
+      "label": "Reddit research pack (CR + NALSD + G&L + Manager + Weird)",
+      "modules": ["CR-REVIEW", "B5", "C3", "C5", "A1", "WX"],
+      "questionCount": 195,
+      "minutes": 0
+    },
+    {
+      "id": "weird-cases",
+      "label": "Weird & unexpected cases (28 Q)",
+      "modules": ["WX"],
+      "questionCount": 28,
       "minutes": 0
     },
     {
       "id": "your-loop",
-      "label": "Your loop (code review + Systems Arch + G&L + Manager)",
-      "modules": ["CR-REVIEW", "BS-IMPL", "SA-VIDEO", "B1", "B2", "B5", "B6", "B7", "B9", "SR-SCALE", "WB-FOUND", "E3", "C1", "C2", "C3", "C4", "C5", "A1", "SR-PRIN"],
-      "questionCount": 445,
+      "label": "Your loop (code review + Systems Arch + G&L + Manager + Weird)",
+      "modules": ["CR-REVIEW", "BS-IMPL", "SA-VIDEO", "B1", "B2", "B5", "B6", "B7", "B9", "SR-SCALE", "WB-FOUND", "E3", "C1", "C2", "C3", "C4", "C5", "A1", "SR-PRIN", "WX"],
+      "questionCount": 473,
       "minutes": 0
     },
     {
@@ -153,10 +168,10 @@
       "minutes": 45
     },
     {
-      "id": "full-509",
-      "label": "Full bank (509 Q)",
-      "modules": ["SA-VIDEO", "CR-REVIEW", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "A1", "A2", "C1", "C2", "C3", "C4", "C5", "D1", "D2", "E3", "SR-PRIN", "SR-SCALE", "WB-FOUND", "BS-IMPL"],
-      "questionCount": 509,
+      "id": "full-537",
+      "label": "Full bank (537 Q)",
+      "modules": ["SA-VIDEO", "CR-REVIEW", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "A1", "A2", "C1", "C2", "C3", "C4", "C5", "D1", "D2", "E3", "SR-PRIN", "SR-SCALE", "WB-FOUND", "BS-IMPL", "WX"],
+      "questionCount": 537,
       "minutes": 0
     }
   ],
