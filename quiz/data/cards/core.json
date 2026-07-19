@@ -5210,6 +5210,1466 @@
       "source": "BSRS ch 14",
       "front": "A deployment policy requiring verified provenance before promotion prevents:",
       "back": "Running binaries whose origin cannot be traced to an authorized build pipeline and source commit \u2014 Chapter 14 describes policy enforcement at deploy time: reject artifacts lacking valid provenance signatures \u2014 blocking tampered or manually built binaries from production."
+    },
+    {
+      "id": "FC-WX-023",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "hiring",
+        "reddit:raabnp"
+      ],
+      "source": "reddit:raabnp; SRE-INTERVIEW-CASES W-I09",
+      "front": "reddit:raabnp asks when to walk away from an SRE interview process. Which situation best justifies declining to continue?",
+      "back": "Job posting emphasized troubleshooting/ops but onsite is only LeetCode with no connection to stated role \u2014 misaligned process \u2014 raabnp philosophy: severe role/process mismatch is a walk-away trigger \u2014 not normal Google format quirks like Docs or NALSD math."
+    },
+    {
+      "id": "FC-WX-024",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "sre-manager",
+        "jointaro"
+      ],
+      "source": "Jointaro Google EM MV; SRE-INTERVIEW-CASES W-M14",
+      "front": "Jointaro Google EM reports deadlock vs livelock in a system design discussion. What is the key distinction?",
+      "back": "Deadlock: threads blocked forever waiting on each other; livelock: threads keep changing state but make no progress \u2014 Classic concurrency topic appearing in manager design rounds \u2014 unexpected if you only prepped people-management stories."
+    },
+    {
+      "id": "FC-WX-025",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "code-review",
+        "exponent"
+      ],
+      "source": "Exponent; IGotAnOffer; SRE-INTERVIEW-CASES W-M17",
+      "front": "Exponent EM candidates report code review in a plain Google Doc with no IDE, syntax highlighting, or run button. Best adaptation?",
+      "back": "Manual trace with small test inputs, triage correctness before style, and narrate reasoning aloud \u2014 Format surprise is real \u2014 muscle memory from IDE debugging does not transfer. Process matches CR-022/026 prep."
+    },
+    {
+      "id": "FC-WX-026",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "track-split",
+        "reddit:1fm8wmh"
+      ],
+      "source": "reddit:1fm8wmh; SRE-INTERVIEW-CASES W-I01",
+      "front": "reddit:1fm8wmh was surprised by heavy LeetCode (graphs/DP) when expecting practical SRE coding. Best explanation?",
+      "back": "SRE-SWE track can include algorithmic coding; SRE-SE leans practical/Linux \u2014 confirm your track with recruiter \u2014 Track variance is the weird part \u2014 1fm8wmh vs 1klu37j show different bars. Your confirmed loop is code review, but know IC variance."
+    },
+    {
+      "id": "FC-WX-027",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "coding-awareness",
+        "glassdoor"
+      ],
+      "source": "Glassdoor Booking.com 2019; SRE-INTERVIEW-CASES W-I32",
+      "front": "Glassdoor (Booking.com SRE): given hotel tuples `(id, name, city)`, return cities with \u22653 hotels sharing the same name. Core approach?",
+      "back": "Count (city, hotel_name) pairs with a hash map; emit city when any name reaches count 3 \u2014 Product-flavored coding reported on Glassdoor \u2014 hash/count pattern, not graph DP."
+    },
+    {
+      "id": "FC-WX-028",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "NALSD",
+        "physics"
+      ],
+      "source": "DEV NALSD math traps; B5-013; SRE-INTERVIEW-CASES \u00a73.4",
+      "front": "In NALSD you must replicate 5 PB cross-region with 4-hour RTO over a 10 Gbps link. Quick physics check: can this work?",
+      "back": "No \u2014 5 PB over 10 Gbps takes on the order of weeks; flag impossibility and discuss revised RTO, more bandwidth, or partial replication \u2014 Stopping when math fails is a pass signal in NALSD. Already in B5-013; WX reinforces the weird \"say no\" moment."
+    },
+    {
+      "id": "FC-C5-009",
+      "deck": "core",
+      "tags": [
+        "sre-manager",
+        "build-vs-buy",
+        "reddit:140ma5t"
+      ],
+      "source": "reddit:140ma5t; startup SRE manager guides",
+      "front": "Leadership asks you to choose observability tooling on a tight budget. What framework fits SRE manager interviews?",
+      "back": "Evaluate against SLO needs, integration cost, operability, and team skill \u2014 open source vs vendor is a trade-off not a religion \u2014 Manager scenarios from Reddit and public guides test pragmatic build/buy reasoning tied to reliability outcomes and team capacity."
+    },
+    {
+      "id": "FC-C5-010",
+      "deck": "core",
+      "tags": [
+        "sre-manager",
+        "why-google",
+        "reddit:niomfp"
+      ],
+      "source": "reddit:niomfp FAANG SRE advice",
+      "front": "niomfp\u2019s FAANG SRE Reddit post warns that big-company SRE is not for everyone. A strong 'Why SRE manager at Google?' answer includes:",
+      "back": "Specific interest in Google-scale reliability problems and leading engineers through SRE practices \u2014 honest about trade-offs \u2014 niomfp emphasizes realistic expectations. Googleyness and manager loops reward thoughtful motivation \u2014 scale, learning, and leadership \u2014 not empty flattery."
+    },
+    {
+      "id": "FC-CR-070",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "complexity",
+        "design",
+        "CR-2"
+      ],
+      "source": "IGotAnOffer code review guide",
+      "front": "Review: A 200-line function `handle_request()` parses HTTP, queries DB, formats JSON, and sends email alerts. What design review comment is most appropriate?",
+      "back": "Split into focused functions/modules \u2014 single function violates separation of concerns and hinders testing \u2014 Large monolithic functions are a design smell. Google reviewers evaluate whether code is 'more complex than it needs to be' and suggest decomposition for readability and testability."
+    },
+    {
+      "id": "FC-CR-071",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "complexity",
+        "premature-abstraction",
+        "CR-2"
+      ],
+      "source": "Google eng-practices looking-for.md",
+      "front": "Review adds a generic `AbstractFactoryProviderManager` for a feature used in one place with no planned second implementation. Which eng-practices principle applies?",
+      "back": "Developer may be over-engineering for hypothetical future needs \u2014 simplify until a second use case exists \u2014 eng-practices: don't implement things you might need in the future but don't need now. Reviewers push back on unnecessary abstraction that increases complexity without current benefit."
+    },
+    {
+      "id": "FC-CR-072",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "readability",
+        "naming",
+        "CR-4"
+      ],
+      "source": "Google eng-practices looking-for.md",
+      "front": "Review variable names: `int d; int t; int x;` in a payment reconciliation module. Best feedback?",
+      "back": "Use descriptive names (e.g., days_since_settlement, total_cents) \u2014 names should reveal intent \u2014 eng-practices includes clarity and maintainability. Good names reduce need for comments and help future readers \u2014 especially in shared Google Doc review snippets."
+    },
+    {
+      "id": "FC-CR-073",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "maintainability",
+        "consistency",
+        "CR-4"
+      ],
+      "source": "Google eng-practices looking-for.md",
+      "front": "A CL mixes camelCase and snake_case in the same Python module, diverging from the repo's existing snake_case convention. What should the reviewer prioritize?",
+      "back": "Flag style inconsistency \u2014 CLs should follow established project conventions for consistency \u2014 eng-practices: consistency with existing code style in the file/repo. Style nits come after correctness but still improve code health when they reduce cognitive load."
+    },
+    {
+      "id": "FC-CR-074",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "process",
+        "prioritization",
+        "CR-5"
+      ],
+      "source": "IGotAnOffer; Exponent L6 EM experience",
+      "front": "You have 45 minutes to review a 180-line Google Doc snippet with a known logic bug, several style nits, and a missing null check. What should you tackle first?",
+      "back": "Trace core logic and fix correctness bugs (logic + null safety) before style suggestions \u2014 EM/SRE code review interviews reward triage: correctness and functional defects first, then complexity/design, then style. Exponent reports failing when spending too long understanding logic without fixing critical bugs."
+    },
+    {
+      "id": "FC-CR-075",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "process",
+        "format",
+        "CR-5"
+      ],
+      "source": "IGotAnOffer code review guide",
+      "front": "Google's code review interview typically uses which format?",
+      "back": "A code snippet in Google Docs \u2014 no IDE, no compiler; manual trace and suggested fixes \u2014 Official EM prep and candidate reports describe a shared Google Doc with problematic code, ~45 minutes, manual debugging \u2014 the alternative to a live coding round for manager tracks."
+    },
+    {
+      "id": "FC-CR-076",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "process",
+        "scope",
+        "CR-5"
+      ],
+      "source": "Google eng-practices standard of code review",
+      "front": "During review, you notice the CL fixes a bug but also refactors three unrelated modules. Best process feedback?",
+      "back": "Ask to split \u2014 bug fix and unrelated refactors should be separate CLs for easier review and rollback \u2014 Google's standard of code review: each CL should be a self-contained incremental improvement. Mixed concerns make review harder and increase rollback risk \u2014 valid process signal in interviews."
+    },
+    {
+      "id": "FC-CR-077",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "process",
+        "communication",
+        "CR-5"
+      ],
+      "source": "Google eng-practices; Google code review interview prep",
+      "front": "After identifying a subtle bug, what demonstrates strong code review communication in the interview?",
+      "back": "Walk through a concrete failing input, explain impact, and propose a specific fix with trade-offs \u2014 Interviewers score communication and judgment, not just bug count. Strong candidates use manual test cases, explain user/system impact, and collaborate on fixes \u2014 mirroring real CL review culture."
+    },
+    {
+      "id": "FC-CR-078",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "reddit:exponent",
+        "interval-logic",
+        "CR-1"
+      ],
+      "source": "reddit:da4h29; Exponent L6 EM 200-line interval code",
+      "front": "Exponent reports a failed Google EM code review: 200+ lines of broken interval logic in Google Docs. Best first step in 45 minutes?",
+      "back": "Skim structure, identify input/output contract, trace one small example manually before proposing rewrites \u2014 Reddit/manager threads and Exponent: time lost understanding logic is the common failure mode \u2014 triage and manual trace before edits."
+    },
+    {
+      "id": "FC-CR-079",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "reddit:da4h29",
+        "mutex",
+        "CR-1"
+      ],
+      "source": "reddit:da4h29 Google SRE Manager prep list",
+      "front": "da4h29's prep list mentioned mutex/semaphore basics. In code review, a snippet uses `lock` but never unlocks on error paths. You should flag:",
+      "back": "Resource leak / deadlock risk \u2014 ensure unlock in finally/defer or RAII pattern on all paths \u2014 Reddit 'too easy' prep topics still appear inside review snippets as concurrency bugs \u2014 da4h29's filesystem and mutex hints map to real review findings."
+    },
+    {
+      "id": "FC-CR-080",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "reddit:1klu37j",
+        "complexity",
+        "CR-2"
+      ],
+      "source": "reddit:1klu37j practical algorithm in Google Doc",
+      "front": "1klu37j describes 'practical algorithm' on Google Doc for SRE-SE. For your code-review loop, complexity discussion should:",
+      "back": "State time/space of the existing approach and whether a simpler structure (hash map, heap) fixes bottlenecks \u2014 Reddit SE track uses same Doc format; your task is review not implement \u2014 but complexity judgment is still scored."
+    },
+    {
+      "id": "FC-CR-081",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "reddit:1346wln",
+        "logging",
+        "CR-3"
+      ],
+      "source": "reddit:1346wln; eng-practices",
+      "front": "Review catches swallowed exceptions with no log context. SRE interviewer Reddit post (1346wln) would align with which comment?",
+      "back": "Add structured logging with error context \u2014 silent failures harm production debuggability \u2014 SRE hiring perspective values operability. eng-practices + Reddit SRE culture: observability and clear errors are review priorities."
+    },
+    {
+      "id": "FC-CR-082",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "reddit:da4h29",
+        "honesty",
+        "CR-5"
+      ],
+      "source": "reddit:da4h29 comments on 'I don't know'",
+      "front": "da4h29 comment thread: interviewers want honesty when stuck. In code review, best behavior when unsure about a language API?",
+      "back": "State uncertainty, describe how you'd verify (docs/tests), and focus on logic bugs you can prove \u2014 Highly upvoted Reddit theme: 'I don't know, but I'd\u2026' beats bluffing \u2014 applies to manual trace when API details are fuzzy."
+    },
+    {
+      "id": "FC-CR-083",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "reddit:raabnp",
+        "live-coding-contrast",
+        "CR-2"
+      ],
+      "source": "reddit:raabnp prefers collaborative review over LeetCode",
+      "front": "raabnp prefers collaborative code exercises over whiteboard LeetCode. Code review interviews align because:",
+      "back": "They mirror daily senior work \u2014 reading, commenting, and improving real CLs collaboratively \u2014 Reddit SRE philosophy: operational/code-reading skills matter more than algorithm trivia \u2014 code review is the scored form of that for your loop."
+    },
+    {
+      "id": "FC-CR-084",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "reddit:1fm8wmh",
+        "edge-cases",
+        "CR-3"
+      ],
+      "source": "reddit:1fm8wmh Google interview variance",
+      "front": "1fm8wmh notes interviewers may probe edge cases heavily even on 'easy' code. In review, you should proactively:",
+      "back": "Walk through empty input, single element, duplicates, and boundary indices with manual tests \u2014 Reddit variance thread: easy-looking problems still test thoroughness \u2014 in review, demonstrating edge-case thinking separates strong candidates."
+    },
+    {
+      "id": "FC-CR-085",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "reddit:niomfp",
+        "standards",
+        "CR-4"
+      ],
+      "source": "reddit:niomfp FAANG technical bar",
+      "front": "niomfp stresses Google/Facebook technical credibility. In code review, commenting on test gaps shows:",
+      "back": "You expect CLs to include or update tests for behavior changes \u2014 part of code health \u2014 FAANG Reddit advice: technical leaders uphold quality bars. eng-practices includes tests as a standard review dimension."
+    },
+    {
+      "id": "FC-CR-086",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "reddit:140ma5t",
+        "manager-track",
+        "CR-5"
+      ],
+      "source": "reddit:140ma5t SRE manager skills",
+      "front": "140ma5t asks what skills SRE managers need from prior Staff IC work. Code review interview primarily validates:",
+      "back": "You can still read code critically and guide engineering quality \u2014 technical credibility as a leader \u2014 Reddit manager track: prior tech depth helps but interview proves ongoing ability to evaluate code \u2014 not just people management stories."
+    },
+    {
+      "id": "FC-D1-009",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "clarify",
+        "prioritization"
+      ],
+      "source": "NALSD / Systems Architecture prep",
+      "front": "Twenty minutes remain. You have clarified requirements and drawn a high-level diagram for a metrics pipeline, but have not estimated throughput. The interviewer is silent. What is the best NEXT move?",
+      "back": "Proactively provide a rough QPS/events-per-second estimate and identify the likely bottleneck component \u2014 With time remaining, strong candidates drive the interview forward\u2014quantitative scale and bottleneck identification\u2014rather than stalling or diving into irrelevant trivia."
+    },
+    {
+      "id": "FC-D1-010",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "high-level",
+        "api-design"
+      ],
+      "source": "Email rubric \u2014 APIs OK, no coding",
+      "front": "Design a notification system. After requirements, which high-level element should you establish BEFORE discussing SMS provider APIs in detail?",
+      "back": "Core flow: event ingestion \u2192 routing/dedup \u2192 channel workers (push/email/SMS) \u2192 delivery tracking \u2014 Start with component boundaries and data flow. The email rubric allows API/payload discussion but not full implementation\u2014architecture first, then interface sketches."
+    },
+    {
+      "id": "FC-D1-011",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "trade-offs",
+        "consistency"
+      ],
+      "source": "AOSA / distributed systems fundamentals",
+      "front": "For a collaborative document editor, the interviewer asks whether you need strong consistency. What is the best FIRST step?",
+      "back": "Clarify consistency requirements per operation (title rename vs real-time cursor vs comment feed) before picking CP vs AP patterns \u2014 Consistency trade-offs depend on operation semantics. Clarify what users must see and when\u2014then choose replication and coordination models accordingly."
+    },
+    {
+      "id": "FC-D1-012",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "communication",
+        "iteration"
+      ],
+      "source": "Systems Architecture video SA-V5",
+      "front": "You present a first-pass design and the interviewer says: 'That won't work for global writes.' What should you do FIRST?",
+      "back": "Acknowledge the gap, ask a clarifying question if needed, and iterate on the design with explicit improvements \u2014 The prep video encourages improving on your first answer and treating the interview as collaborative problem-solving\u2014not performing a rehearsed monologue."
+    },
+    {
+      "id": "FC-D1-013",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "deep-dive",
+        "sharding"
+      ],
+      "source": "Systems Architecture video SA-V2",
+      "front": "You are designing a web crawler at planet scale. Requirements are clear. The interviewer asks how you partition the URL frontier. What type of response is expected FIRST?",
+      "back": "Deep-dive sharding/partitioning strategy for the frontier queue with worker coordination and deduplication \u2014 When the interviewer targets a specific scaling challenge (frontier partitioning, dedup, politeness), answer that deep-dive directly\u2014the video explicitly mentions sharding large datasets across workers."
+    },
+    {
+      "id": "FC-D1-014",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "observability",
+        "failure-modes"
+      ],
+      "source": "Email rubric \u2014 detect if system is working",
+      "front": "Near the end of a metrics aggregation design, you have not mentioned monitoring. The interviewer has not asked yet. What should you proactively do?",
+      "back": "Describe how you know the pipeline is healthy: lag metrics, dropped events, alerting on SLOs, and debug hooks \u2014 Google expects candidates to address how the system detects problems at scale. Observability is part of coherent design, not an optional afterthought."
+    },
+    {
+      "id": "FC-D1-015",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "estimation",
+        "storage",
+        "trade-offs"
+      ],
+      "source": "NALSD / SA-V3",
+      "front": "Design a logging system. You know 100K servers each emit 1 MB/minute of logs retained 30 days. Before choosing object storage vs HDFS vs a time-series DB, what should you do FIRST?",
+      "back": "Compute total storage and ingest rate, then discuss retention, query patterns, and cost/latency trade-offs driving storage choice \u2014 Quantitative sizing (ingest QPS, total TB) informs architecture choices. Estimate first, then map requirements to storage/compute patterns with explicit trade-offs."
+    },
+    {
+      "id": "FC-D2-009",
+      "deck": "core",
+      "tags": [
+        "flaws",
+        "observability",
+        "backpressure"
+      ],
+      "source": "Effective Troubleshooting / SRE practices",
+      "front": "Architecture: An event bus ingests spikes to 1M events/sec. Consumers lag silently with no queue depth metrics, consumer lag alerts, or dead-letter queues. Producers have unlimited retry with no backoff. What combined flaw is most dangerous?",
+      "back": "Missing observability plus retry storms\u2014operators cannot see backlog growth and retries amplify overload \u2014 Invisible consumer lag plus aggressive retries creates cascading failure (retry storm). Observability (lag metrics, DLQ) and backpressure are essential\u2014not optional polish."
+    },
+    {
+      "id": "FC-D2-010",
+      "deck": "core",
+      "tags": [
+        "flaws",
+        "consistency",
+        "replication"
+      ],
+      "source": "AOSA / replication lag",
+      "front": "Architecture: User profile updates write to the primary DB in us-east. Reads immediately after write go to async replicas in us-west with up to 30s replication lag. The app routes reads to nearest replica for latency. What user-visible flaw occurs?",
+      "back": "Read-your-writes violation\u2014users in us-west may not see their update for up to 30 seconds \u2014 Geo-routed reads from lagging async replicas break read-your-writes consistency after updates. Fixes include sticky routing to primary post-write or synchronous/quorum reads for recent writes."
+    },
+    {
+      "id": "FC-A2-011",
+      "deck": "core",
+      "tags": [
+        "sre",
+        "sli",
+        "measurement",
+        "A2"
+      ],
+      "source": "SRE workbook \u2014 implementing SLOs",
+      "front": "Which is a well-formed SLI for a latency-sensitive API?",
+      "back": "Proportion of requests completing in under 200 ms over a rolling window \u2014 SLIs must be measurable, user-centric indicators \u2014 request latency percentiles, availability ratios, freshness lag. SRE workbook SLO chapters stress choosing SLIs that reflect user experience, then setting SLO targets and error budgets atop them."
+    },
+    {
+      "id": "FC-A2-012",
+      "deck": "core",
+      "tags": [
+        "sre",
+        "reliability",
+        "design",
+        "A2"
+      ],
+      "source": "NALSD workbook chapter",
+      "front": "NALSD states that deferring reliability issues during design is akin to:",
+      "back": "Accepting fewer features at higher operational cost later \u2014 NALSD opening argument: reliability is the most critical production feature. Deferring failure defense and capacity planning creates expensive retrofit work \u2014 directly relevant to Systems Architecture interviews scoring failure response and iteration."
+    },
+    {
+      "id": "FC-A2-013",
+      "deck": "core",
+      "tags": [
+        "sre",
+        "toil",
+        "engineering",
+        "A2"
+      ],
+      "source": "SRE book \u2014 eliminating toil",
+      "front": "An SRE team spends 70% of time on manual ticket-driven work with no automation roadmap. What principle says this is unsustainable?",
+      "back": "SRE work should cap toil (commonly ~50% guideline) and invest remaining capacity in engineering that reduces future toil \u2014 SRE book's toil chapter advocates limiting manual operational load so SREs can engineer durable fixes. Unchecked toil means no time for automation, reliability projects, or design review \u2014 undermining the SRE model described in intro and USENIX hiring paper."
+    },
+    {
+      "id": "FC-B2-009",
+      "deck": "core",
+      "tags": [
+        "functional-requirements",
+        "feature-set",
+        "scope"
+      ],
+      "source": "systems-architecture-rubric",
+      "front": "The interviewer lists possible features: real-time sync, offline mode, full-text search, and admin audit logs. You have 40 minutes remaining. What is the BEST requirements-clarification move?",
+      "back": "Ask which features are must-haves for v1 versus nice-to-haves, and confirm priority order with the interviewer \u2014 The Systems Architecture rubric and NALSD both emphasize scope negotiation \u2014 identifying MVP feature sets before architecture. Blind commitment or refusing to proceed without exhaustive docs wastes the collaborative clarification phase."
+    },
+    {
+      "id": "FC-B2-010",
+      "deck": "core",
+      "tags": [
+        "failure-tolerance",
+        "non-functional",
+        "clarification"
+      ],
+      "source": "NALSD",
+      "front": "When designing a distributed storage system, which non-functional clarification MOST affects your replication and consistency choices?",
+      "back": "What availability and durability targets apply during regional failures, and can the system tolerate stale reads? \u2014 NALSD's requirements phase treats failure tolerance, durability, and consistency (stale reads vs strong consistency) as foundational non-functional inputs that drive replication topology. Team rituals and cosmetic choices do not."
+    },
+    {
+      "id": "FC-B2-011",
+      "deck": "core",
+      "tags": [
+        "decomposition",
+        "resource-requirements",
+        "NALSD"
+      ],
+      "source": "NALSD",
+      "front": "During the decomposition phase, NALSD recommends estimating resource requirements per component. What is the PRIMARY purpose of this step?",
+      "back": "To validate whether the proposed architecture is feasible at the stated scale before investing in resilience details \u2014 NALSD's workflow moves from 'is it possible?' to 'is it feasible?' by attaching rough resource estimates (QPS, storage, bandwidth) to each component. This grounds decomposition in reality\u2014not HR budgeting, licensing, or silent work."
+    },
+    {
+      "id": "FC-BS-016",
+      "deck": "core",
+      "tags": [
+        "provenance",
+        "reproducibility",
+        "verification",
+        "BS-IMPL"
+      ],
+      "source": "BSRS ch 14",
+      "front": "Reproducible builds support provenance verification when:",
+      "back": "Independent rebuild from the same source and config produces bit-identical or semantically equivalent artifacts, confirming the published binary matches source \u2014 Chapter 14 explains reproducibility as the ability to recreate artifacts: matching outputs confirm provenance claims weren't forged and detect build-time injection."
+    },
+    {
+      "id": "FC-BS-017",
+      "deck": "core",
+      "tags": [
+        "logging",
+        "immutable",
+        "audit",
+        "BS-IMPL"
+      ],
+      "source": "BSRS ch 15",
+      "front": "Immutable logging in chapter 15 means:",
+      "back": "Log entries cannot be altered or deleted after append without detection, preserving evidentiary integrity \u2014 Chapter 15 defines immutability for audit and security logs: append-only storage with integrity protections (hash chains, WORM storage) so tampering is detectable."
+    },
+    {
+      "id": "FC-BS-018",
+      "deck": "core",
+      "tags": [
+        "logging",
+        "immutable",
+        "tamper-evidence",
+        "BS-IMPL"
+      ],
+      "source": "BSRS ch 15",
+      "front": "Hash-chained log entries primarily provide:",
+      "back": "Tamper evidence: modifying a historical entry breaks subsequent hash links, revealing alteration \u2014 Chapter 15 describes hash chaining as a lightweight integrity mechanism: each entry includes the prior hash, forming a detectable chain if an attacker edits history."
+    },
+    {
+      "id": "FC-BS-019",
+      "deck": "core",
+      "tags": [
+        "logging",
+        "immutable",
+        "separation",
+        "BS-IMPL"
+      ],
+      "source": "BSRS ch 15",
+      "front": "Chapter 15 recommends separating security audit logs from application debug logs because:",
+      "back": "Different retention, access controls, and immutability guarantees apply \u2014 debug logs are mutable and verbose; audit logs require strict integrity \u2014 Chapter 15 distinguishes log tiers: audit trails need restricted write access, long retention, and immutability; debug logs prioritize developer velocity and may be rotated or sampled."
+    },
+    {
+      "id": "FC-BS-020",
+      "deck": "core",
+      "tags": [
+        "logging",
+        "immutable",
+        "incident-response",
+        "BS-IMPL"
+      ],
+      "source": "BSRS ch 15",
+      "front": "During a suspected breach, immutable audit logs support investigation because:",
+      "back": "Investigators can trust the timeline was not retroactively altered by the attacker to cover tracks \u2014 Chapter 15 positions immutable logging as forensic integrity: post-compromise, attackers often attempt log tampering. Append-only, tamper-evident storage preserves trustworthy evidence for IR and legal review."
+    },
+    {
+      "id": "FC-SA-013",
+      "deck": "core",
+      "tags": [
+        "observability",
+        "health-checks"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "The prep video states you should be able to explain how you would know if your system is working. This most directly relates to:",
+      "back": "Monitoring, health checks, metrics, and alerting to detect degradation or failures \u2014 Knowing whether a system works requires observability\u2014metrics, health checks, and alerting. The video treats operability at scale as part of the design exercise, not post-hoc user complaints."
+    },
+    {
+      "id": "FC-SA-014",
+      "deck": "core",
+      "tags": [
+        "bottlenecks",
+        "performance"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Identifying bottlenecks is a key skill tested in the Systems Architecture interview. Which question best demonstrates bottleneck analysis?",
+      "back": "At 1M requests/sec, will the database connection pool, network bandwidth, or single hot partition limit throughput first? \u2014 The SA-V2 segment calls out identifying bottlenecks\u2014connecting load to limiting components like connection pools, network, or hot partitions. Cosmetic, trivia, or logistical questions do not demonstrate this skill."
+    },
+    {
+      "id": "FC-SA-015",
+      "deck": "core",
+      "tags": [
+        "APIs",
+        "interfaces",
+        "decomposition"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Google expects candidates to define APIs between components in a scaled design. Why are explicit APIs important?",
+      "back": "They establish clear contracts for data flow, enable independent scaling, and make failure domains explicit \u2014 The video mentions APIs between components as a scaling primitive\u2014defining contracts and boundaries. APIs complement (not replace) storage design and apply beyond any single protocol style."
+    },
+    {
+      "id": "FC-SA-016",
+      "deck": "core",
+      "tags": [
+        "sharding",
+        "partitioning",
+        "workers"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "When a dataset is too large for a single machine, the official video suggests sharding it across worker machines. What problem does sharding primarily solve?",
+      "back": "Storage and compute capacity limits by partitioning data so each worker handles a subset \u2014 Sharding/partitioning distributes a large dataset across workers to overcome single-machine storage and throughput limits. It does not eliminate networking or mandate a single server."
+    },
+    {
+      "id": "FC-SA-017",
+      "deck": "core",
+      "tags": [
+        "worker-pools",
+        "parallelism",
+        "fastest-worker"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "The video mentions patterns like a pool of machines where the fastest worker handles the next task. This pattern primarily improves:",
+      "back": "Throughput and latency for parallelizable work by utilizing multiple workers dynamically \u2014 Worker pools and fastest-worker patterns distribute parallelizable tasks across machines to improve throughput and reduce tail latency. They are not about global locks, client-only storage, or skipping auth."
+    },
+    {
+      "id": "FC-SA-018",
+      "deck": "core",
+      "tags": [
+        "latency",
+        "performance"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "When discussing system properties at scale, latency refers to:",
+      "back": "The time delay experienced for an individual operation or request to complete \u2014 The SA-V2 segment lists latency alongside throughput and storage as key properties. Latency is per-operation delay\u2014not machine count, cost, or team size."
+    },
+    {
+      "id": "FC-SA-019",
+      "deck": "core",
+      "tags": [
+        "throughput",
+        "performance"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Throughput in a scaled system design context measures:",
+      "back": "How many operations or requests the system can handle per unit of time \u2014 Throughput is the rate of work processed (e.g., requests per second)\u2014one of the three properties (latency, throughput, storage) the video asks candidates to reason about quantitatively."
+    },
+    {
+      "id": "FC-SA-020",
+      "deck": "core",
+      "tags": [
+        "storage",
+        "capacity"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "When Google asks about storage properties of your design, they expect you to address:",
+      "back": "How much data accumulates over time, retention policies, and whether storage growth is sustainable at scale \u2014 Storage properties include growth rate, retention, and capacity planning at scale. Nearly every scaled system (logs, databases, media) has storage implications\u2014not just file systems or caches alone."
+    },
+    {
+      "id": "FC-SA-021",
+      "deck": "core",
+      "tags": [
+        "estimation",
+        "quantitative",
+        "QPS"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "The prep video emphasizes providing numeric estimates (e.g., requests per second) with justification. Why is justification important?",
+      "back": "It shows you can connect assumptions to reality and sanity-check whether the design is feasible \u2014 The SA-V3 segment wants concrete, justified estimates grounded in assumptions\u2014not memorized internal stats. Estimation supports feasibility analysis and complements (not replaces) trade-offs and failure discussion."
+    },
+    {
+      "id": "FC-SA-022",
+      "deck": "core",
+      "tags": [
+        "physics",
+        "reality",
+        "constraints"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Google expects Systems Architecture answers to respect the 'laws of physics' or physical reality. Which claim violates this principle?",
+      "back": "A design that serves 1 billion users globally with 1 ms read latency from a single disk in one datacenter for all users \u2014 Physical reality includes speed-of-light latency limits and I/O bounds. Serving global users with 1 ms reads from one disk ignores geography and hardware limits; the other options acknowledge real constraints."
+    },
+    {
+      "id": "FC-SA-023",
+      "deck": "core",
+      "tags": [
+        "latency-hierarchy",
+        "disk",
+        "memory"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "According to the official video, which ordering correctly ranks typical access latency from FASTEST to SLOWEST?",
+      "back": "Memory read \u2192 Disk read \u2192 LAN round-trip \u2192 Cross-continental round-trip \u2014 The SA-V3 segment presents a relative cost/latency hierarchy: memory reads are fastest, then disk, then LAN RTT, then cross-continental RTT. This underpins napkin-math and caching decisions."
+    },
+    {
+      "id": "FC-SA-024",
+      "deck": "core",
+      "tags": [
+        "latency-hierarchy",
+        "network",
+        "RTT"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Why does the prep video distinguish LAN round-trip time from cross-continental round-trip time?",
+      "back": "Geographic distance and network hops make cross-continent RTT orders of magnitude larger, affecting synchronous global designs \u2014 The video explicitly contrasts LAN vs cross-continental RTT because global synchronous operations hit speed-of-light and routing delays\u2014often dominating latency budgets compared to local network hops."
+    },
+    {
+      "id": "FC-SA-025",
+      "deck": "core",
+      "tags": [
+        "sharding",
+        "patterns",
+        "partitioning"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Sharding is listed in the video as an industry pattern Google expects you to know. In an interview, demonstrating sharding knowledge means you can explain:",
+      "back": "How to partition data by a key so each shard holds a disjoint subset and scales independently \u2014 Sharding is a partitioning strategy for scale\u2014disjoint subsets by key. Password hashing and linked-list algorithms are coding interview topics, not the sharding pattern the Systems Architecture video references."
+    },
+    {
+      "id": "FC-SA-026",
+      "deck": "core",
+      "tags": [
+        "replication",
+        "availability",
+        "consistency"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "The video mentions replication types as patterns you should understand. Why might you choose asynchronous replication over synchronous replication?",
+      "back": "To reduce write latency and tolerate temporary lag between replicas, accepting possible stale reads \u2014 Async replication trades stronger immediate consistency for lower write latency and higher availability under partition\u2014interviewers expect you to articulate this trade-off. The other options misstate replication properties."
+    },
+    {
+      "id": "FC-SA-027",
+      "deck": "core",
+      "tags": [
+        "WAL",
+        "durability",
+        "logging"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Write-ahead logging (WAL) is cited as a pattern Google expects you to know. What problem does WAL primarily address?",
+      "back": "Durability: ensuring committed writes survive process crashes by persisting changes to log before applying them \u2014 WAL ensures durability by logging changes before applying them to storage so crashes can recover committed data. It is a storage durability pattern\u2014not UI, LB, or CDN optimization."
+    },
+    {
+      "id": "FC-SA-028",
+      "deck": "core",
+      "tags": [
+        "metadata",
+        "load-distribution",
+        "data-separation"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Separating data from metadata and distributing load are patterns mentioned in the video. What is a typical benefit of separating metadata from bulk data?",
+      "back": "Metadata (indexes, routing tables) can be replicated and queried quickly while bulk data is stored cheaply at larger scale \u2014 Separating metadata from bulk data allows fast routing/index lookups on small, replicated metadata while storing large payloads efficiently\u2014a common large-system pattern the video highlights alongside load distribution."
+    },
+    {
+      "id": "FC-SA-029",
+      "deck": "core",
+      "tags": [
+        "shortcomings",
+        "critical-analysis"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "The SA-V4 segment asks candidates to identify systematic shortcomings in their designs. Which response best demonstrates this skill?",
+      "back": "Acknowledging that a single-region design cannot survive regional outages and proposing multi-region failover \u2014 Identifying systematic shortcomings means honestly analyzing failure modes and limits\u2014e.g., single-region vulnerability\u2014not denying flaws or focusing on trivia."
+    },
+    {
+      "id": "FC-SA-030",
+      "deck": "core",
+      "tags": [
+        "failure-response",
+        "resilience"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "When interviewers ask how your system responds to failures, they expect you to describe:",
+      "back": "Detection (monitoring/alerts), mitigation (retries, failover, degradation), and recovery procedures \u2014 The video explicitly covers failure response\u2014detecting problems and designing mitigation/recovery. Happy-path-only answers or claiming failure is out of scope miss a core evaluation criterion."
+    },
+    {
+      "id": "FC-SA-031",
+      "deck": "core",
+      "tags": [
+        "trade-offs",
+        "disk",
+        "flash"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "The video gives rotating disk vs flash as an example trade-off. Choosing rotating disk over flash primarily trades:",
+      "back": "Lower storage cost for higher latency and slower random I/O \u2014 The SA-V4 example: disk offers cheaper storage at the cost of higher latency compared to flash/SSD. The other options invert or confuse the trade-off."
+    },
+    {
+      "id": "FC-SA-032",
+      "deck": "core",
+      "tags": [
+        "trade-offs",
+        "explicit-reasoning"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Google interviewers want trade-offs laid out explicitly. Which statement BEST demonstrates explicit trade-off reasoning?",
+      "back": "We choose async replication because it lowers write latency, accepting that readers may briefly see stale data \u2014 Explicit trade-offs name both the benefit and the cost. Claiming universal superiority, random choice, or ignoring trade-offs fails the SA-V4 communication standard."
+    },
+    {
+      "id": "FC-SA-033",
+      "deck": "core",
+      "tags": [
+        "alternatives",
+        "commitment",
+        "iteration"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "The video advises considering multiple solutions, then committing to one and iterating. What is the purpose of the 'commit' step?",
+      "back": "To drive the conversation forward with a concrete design the interviewer can probe, rather than endlessly listing options \u2014 Considering alternatives then committing means making a reasoned choice to deepen the design\u2014not rigid permanence, avoiding alternatives entirely, or uncritical copying."
+    },
+    {
+      "id": "FC-SA-034",
+      "deck": "core",
+      "tags": [
+        "iteration",
+        "refinement"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "After committing to an initial design, the SA-V4 segment expects you to iterate. A strong iteration might include:",
+      "back": "Adding replication or caching after the interviewer introduces a new failure or scale constraint \u2014 Iteration means refining the design when probed with new constraints\u2014adding redundancy, caching, etc. Refusing to adapt or changing interview rounds misses the iterative design process."
+    },
+    {
+      "id": "FC-SA-035",
+      "deck": "core",
+      "tags": [
+        "thought-process",
+        "communication"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "The best-practices segment emphasizes explaining your thought process. This is important because interviewers score:",
+      "back": "Your problem-solving approach and communication, not only raw technical vocabulary \u2014 SA-V5 states that problem-solving approach is scored alongside technical ability. Silent completion, identical diagrams, or coding are not the focus of this round."
+    },
+    {
+      "id": "FC-SA-036",
+      "deck": "core",
+      "tags": [
+        "evaluation",
+        "problem-solving"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "According to the video, your problem-solving approach may be scored separately from your technical ability. Which behavior aligns with a strong problem-solving approach?",
+      "back": "Breaking the problem into requirements, estimates, components, trade-offs, and failure modes in a structured sequence \u2014 Structured decomposition\u2014requirements, estimates, components, trade-offs, failures\u2014demonstrates problem-solving approach. Random tech choices, avoiding math, or passive note-taking do not."
+    },
+    {
+      "id": "FC-SA-037",
+      "deck": "core",
+      "tags": [
+        "open-ended",
+        "clarification"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Systems Architecture questions are open-ended by design. What should you do when a prompt feels vague?",
+      "back": "Ask for clarification on scope, scale, and constraints rather than guessing silently \u2014 Open-ended prompts invite clarification\u2014a best practice explicitly repeated in SA-V5. Extreme assumptions, minimal answers, or disengaging fail the collaborative intent."
+    },
+    {
+      "id": "FC-SA-038",
+      "deck": "core",
+      "tags": [
+        "iteration",
+        "improvement"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "After presenting a first solution, a strong candidate should be prepared to:",
+      "back": "Improve on the initial answer when the interviewer adds constraints or points out gaps \u2014 SA-V5 explicitly recommends improving on your first answer\u2014iteration under feedback is a positive signal, not a failure. Rigidity, quitting, or ignoring probes work against you."
+    },
+    {
+      "id": "FC-SA-039",
+      "deck": "core",
+      "tags": [
+        "practice",
+        "whiteboard",
+        "preparation"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Google recommends practicing Systems Architecture problems on paper or a whiteboard without an IDE. This practice helps you:",
+      "back": "Build fluency in diagramming, estimation, and verbal explanation\u2014the skills actually tested in the interview \u2014 Whiteboard practice builds the communication, diagramming, and estimation skills the round evaluates. Syntax memorization or skipping systems knowledge misses the point; this round is not a coding interview."
+    },
+    {
+      "id": "FC-SA-040",
+      "deck": "core",
+      "tags": [
+        "clarification",
+        "best-practices"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Which prep habit from the SA-V5 best-practices segment most reduces the risk of building the wrong architecture?",
+      "back": "Asking clarifying questions about requirements before committing to component boundaries \u2014 Asking clarifying questions before committing prevents wrong-architecture drift\u2014a capstone best practice in SA-V5 alongside whiteboard practice and iterative improvement. Unlabeled complexity and skipping math are anti-patterns the video warns against."
+    },
+    {
+      "id": "FC-A1-011",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "gca",
+        "problem-solving",
+        "A1"
+      ],
+      "source": "How We Hire video",
+      "front": "General Cognitive Ability (GCA) in Google's hiring model primarily assesses:",
+      "back": "How you approach novel problems, learn, and adapt \u2014 not memorized trivia \u2014 GCA measures learning ability and structured problem-solving on unfamiliar problems \u2014 aligned with Systems Architecture's deliberately underspecified prompts. Raw memorization without reasoning scores poorly across Google's attributes."
+    },
+    {
+      "id": "FC-A1-012",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "sre-swe",
+        "interview-rounds",
+        "A1"
+      ],
+      "source": "Confirmed loop notes; interview prep hub",
+      "front": "For the confirmed SRE-SWE loop, which interview pairing is explicitly listed?",
+      "back": "60-minute Systems Architecture plus 45-minute Googleyness & Leadership (plus other loop rounds such as code review) \u2014 The confirmed SRE-SWE path includes 60-min Systems Architecture and 45-min Googleyness & Leadership \u2014 alongside other loop rounds such as code review instead of live coding. Both named rounds are scored and prep-worthy."
+    },
+    {
+      "id": "FC-A1-013",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "code-review",
+        "no-coding",
+        "A1"
+      ],
+      "source": "Confirmed loop notes; IGotAnOffer code review guide; REDDIT-PLAN",
+      "front": "The confirmed technical code round is code review only \u2014 no live coding. What should you expect?",
+      "back": "Review a code snippet in Google Docs: find bugs, discuss complexity, suggest fixes \u2014 no IDE or writing from scratch \u2014 Google EM/SRE EM loops can use coding or code review; this loop is review-only. Expect a shared doc, manual trace, correctness and design feedback \u2014 same delivery format as many scripting rounds but reviewing existing code."
+    },
+    {
+      "id": "FC-A1-014",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "code-review",
+        "vs-coding",
+        "A1"
+      ],
+      "source": "Google eng-practices; IGotAnOffer",
+      "front": "How does Google's code review interview differ from a standard coding interview?",
+      "back": "You evaluate and improve existing code rather than implementing a new solution from a blank slate \u2014 Coding rounds test implementation from scratch; code review rounds test reading comprehension, defect detection, complexity judgment, and communication \u2014 skills used daily by senior engineers and managers."
+    },
+    {
+      "id": "FC-A1-015",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "code-review",
+        "prioritization",
+        "A1"
+      ],
+      "source": "Google eng-practices looking-for.md",
+      "front": "In a Google code review interview, which issue should you flag first?",
+      "back": "Correctness bugs and production-risk defects before naming/style nits \u2014 Google eng-practices prioritizes functionality, design, and complexity before nits. Interviewers expect you to triage a large snippet: critical bugs and safety first, then structure and style."
+    },
+    {
+      "id": "FC-A1-016",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "code-review",
+        "prep",
+        "A1"
+      ],
+      "source": "REDDIT-PLAN; Exponent L6 EM experience",
+      "front": "Given no live coding in your loop, which prep strategy is most appropriate?",
+      "back": "Practice reviewing buggy snippets for off-by-one, null safety, concurrency, and complexity \u2014 skip LeetCode grinding \u2014 This loop replaces implementation drills with review skills. Practice reading unfamiliar code, stating bugs with test cases, and proposing fixes. LeetCode-heavy prep targets a different round type."
+    },
+    {
+      "id": "FC-A1-017",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "sre-role",
+        "usenix",
+        "treynor-curve",
+        "A1-USENIX"
+      ],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "front": "In the Chris Jones/Todd Underwood/Shylaja Nukala SRE hiring article, the most valuable SRE candidate profile is often:",
+      "back": "A hybrid who trades some single-domain depth for meaningful breadth across software and systems engineering \u2014 The article describes the Treynor Curve: SRE hiring values candidates who bridge SWE and systems engineering, especially those with enough breadth to reason across both disciplines."
+    },
+    {
+      "id": "FC-A1-018",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "systems-engineering",
+        "sre-role",
+        "usenix",
+        "A1-USENIX"
+      ],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "front": "The article's definition of systems engineering in SRE most strongly emphasizes:",
+      "back": "Understanding how many services compose into a larger system with emergent reliability, bottleneck, and resiliency properties \u2014 Jones et al. contrast systems engineering with narrow software internals or traditional system administration: SREs reason about connections between services, monitoring, bottlenecks, replication, and resiliency."
+    },
+    {
+      "id": "FC-A1-019",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "interview-style",
+        "troubleshooting",
+        "usenix",
+        "A1-USENIX"
+      ],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "front": "Why does the article discourage brainteasers and trivia in SRE interviews?",
+      "back": "They provide little signal about how a candidate decomposes unfamiliar production problems and reasons under uncertainty \u2014 The article frames interviews as peer conversations designed to find the edge of knowledge and observe reasoning, assumptions, and systematic troubleshooting \u2014 not memorized trivia."
+    },
+    {
+      "id": "FC-A1-020",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "interview-topics",
+        "usenix",
+        "A1-USENIX"
+      ],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "front": "A structured SRE interview panel assigns each interviewer a topic such as programming, UNIX internals, networks, or troubleshooting primarily to:",
+      "back": "Cover the role's essential skill surface with less duplication and better cross-topic signal \u2014 The paper recommends topic assignment so the loop covers the breadth SRE needs while minimizing repeated assessment. Each interviewer can then probe depth and reasoning in a focused area."
+    },
+    {
+      "id": "FC-A1-021",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "systems-architecture",
+        "nalsd",
+        "usenix",
+        "A1-USENIX"
+      ],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "front": "In the article's non-abstract large-system design example, why is saying \"use Bigtable because Google uses it\" insufficient?",
+      "back": "It hides the real reasoning: throughput, storage, reliability, cost, build difficulty, and how layers fit down to hardware \u2014 The article explicitly rejects magic-technology answers. Strong design answers include estimates and trade-offs for each component, with concrete reasoning through layers of the system."
+    },
+    {
+      "id": "FC-A1-022",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "committee",
+        "bias",
+        "usenix",
+        "A1-USENIX"
+      ],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "front": "Why does the article argue for a hiring committee rather than letting a single prospective manager decide?",
+      "back": "A committee preserves a consistent organization-wide bar, reduces short-term staffing bias, and supports internal mobility \u2014 Jones et al. argue that committee decisions reduce the temptation to fill immediate vacancies with weaker signal, keep standards consistent across offices/teams, and separate hire/no-hire from team allocation."
+    },
+    {
+      "id": "FC-A1-023",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "sre-manager",
+        "technical-bar",
+        "usenix",
+        "A1-USENIX"
+      ],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "front": "For SRE management candidates, the article says the technical bar is:",
+      "back": "The same technical bar as individual contributors, because SRE line managers are usually technical contributors and may join on-call \u2014 The paper states prospective SRE managers must meet the same technical bar as ICs and understand that SRE managers coordinate autonomous contributors while often remaining technical contributors themselves."
+    },
+    {
+      "id": "FC-A1-024",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "interviewer-calibration",
+        "question-bank",
+        "usenix",
+        "A1-USENIX"
+      ],
+      "source": "USENIX ;login: Hiring Site Reliability Engineers",
+      "front": "What is the purpose of maintaining a pool of SRE interview questions with gold-standard responses?",
+      "back": "To calibrate interviewers and provide consistent starting points, while still allowing deeper follow-up discussion \u2014 The article recommends canonical questions and responses for consistency and interviewer development, but stresses that strong interviews refine depth through follow-up rather than checking off trivia."
+    },
+    {
+      "id": "FC-C4-009",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "toil",
+        "automation"
+      ],
+      "source": "SRE book / USENIX hiring SRE",
+      "front": "Which story best demonstrates classic Google SRE impact beyond firefighting?",
+      "back": "You identified repetitive manual work, automated it, and freed N hours per week while improving consistency \u2014 SRE value includes eliminating toil through engineering\u2014automation, self-healing, better tooling\u2014not celebrating manual labor or scaling humans to match repetitive work."
+    },
+    {
+      "id": "FC-C4-010",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "why-google",
+        "motivation"
+      ],
+      "source": "Google SRE interview prep",
+      "front": "A strong 'Why Google?' answer for an SRE candidate should emphasize:",
+      "back": "Specific alignment with Google's scale, SRE principles (SLOs, automation, blameless culture), and problems you want to work on\u2014not generic prestige alone \u2014 Motivation answers should connect your values and skills to Google's SRE mission and scale. Generic prestige or benefits-only answers signal weak preparation and fit."
+    },
+    {
+      "id": "FC-C4-011",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "why-sre",
+        "career-fit"
+      ],
+      "source": "SRE book / hiring guidance",
+      "front": "When asked 'Why SRE instead of pure software engineering?', a compelling answer includes:",
+      "back": "You enjoy balancing reliability and feature work, operating production systems, and using software to solve ops problems at scale \u2014 Why SRE should reflect genuine fit: production ownership, automation mindset, and comfort with reliability trade-offs\u2014not misconceptions that SRE avoids coding or is a fallback role."
+    },
+    {
+      "id": "FC-C4-012",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "global-teams",
+        "diversity"
+      ],
+      "source": "Google careers / SRE culture",
+      "front": "You join a globally distributed SRE rotation spanning US and EU teams. Which behavior best demonstrates readiness?",
+      "back": "You improve handoff docs, overlap hours thoughtfully, and ensure incident context transfers across time zones \u2014 Google SRE operates globally. Strong candidates show follow-the-sun collaboration, documentation, and fair handoffs\u2014not timezone chauvinism or knowledge hoarding."
+    },
+    {
+      "id": "FC-C4-013",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "mitigation-first",
+        "root-cause"
+      ],
+      "source": "Effective Troubleshooting / SRE book",
+      "front": "After mitigating an incident, an interviewer asks when you would pursue root-cause analysis versus closing the incident. The best answer reflects:",
+      "back": "Root-cause work proceeds once users are safe, often in parallel with monitoring; closure requires confidence in mitigation plus a plan for durable fixes \u2014 SRE incident practice separates stabilization from diagnosis. Post-incident, blameless RCA and action items prevent recurrence\u2014without delaying mitigation during the outage."
+    },
+    {
+      "id": "FC-C4-014",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "capacity",
+        "proactive"
+      ],
+      "source": "SRE book Introduction",
+      "front": "Which proactive reliability story aligns well with Google SRE behavioral interviews?",
+      "back": "You forecast capacity needs from traffic growth, prevented an outage by scaling ahead of a launch, and documented the planning process \u2014 SRE includes proactive capacity and planning\u2014not only reactive firefighting. Stories showing prediction, prevention, and structured planning demonstrate role fit."
+    },
+    {
+      "id": "FC-C4-015",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "error-budget",
+        "leadership"
+      ],
+      "source": "SRE book / workbook",
+      "front": "Your team's error budget policy says launches pause when budget is exhausted, but a PM argues an exception for a major marketing event. The strongest SRE leadership response is:",
+      "back": "Quantify risk, explore mitigations (canary, feature flags, extra staffing), document any accepted risk with stakeholders, and define explicit rollback triggers \u2014 Error budgets enable informed trade-offs, not mindless gates. SRE leadership means transparent risk discussion, mitigations, and documented decisions\u2014especially for high-visibility events."
+    },
+    {
+      "id": "FC-C3-011",
+      "deck": "core",
+      "tags": [
+        "behavioral-categories",
+        "conflict"
+      ],
+      "source": "Leadership / STAR prep",
+      "front": "A conflict story for 'How would you handle a disagreement with a teammate about technical direction?' should NOT:",
+      "back": "Frame the teammate as incompetent or malicious without evidence of your attempts to understand their view \u2014 Conflict answers should show professionalism and empathy. Villain narratives and personal attacks are red flags; focus on process, evidence, and commitment to team outcomes."
+    },
+    {
+      "id": "FC-C3-012",
+      "deck": "core",
+      "tags": [
+        "story-bank",
+        "mapping",
+        "initiative"
+      ],
+      "source": "Google behavioral prep",
+      "front": "You have one strong story about automating a toil-heavy on-call task. Which additional questions can it likely cover with reframing?",
+      "back": "Initiative, impact/delivering results, ambiguity (scoping the problem), and possibly failure (if the first automation attempt had issues) \u2014 Versatile stories span multiple dimensions. A toil-reduction story can demonstrate initiative, measurable impact, scoping under ambiguity, and learning from a failed first attempt\u2014classic story-bank efficiency."
+    },
+    {
+      "id": "FC-C3-013",
+      "deck": "core",
+      "tags": [
+        "experience-vs-process",
+        "question-types"
+      ],
+      "source": "Leadership video 2Cr3-et4xkI",
+      "front": "'How do you prioritize when everything is urgent?' is best treated as:",
+      "back": "A process/judgment question\u2014describe your framework, optionally illustrated with a brief example \u2014 Hypothetical prioritization questions test your decision-making approach. A clear framework (impact, urgency, stakeholders, risk) with optional proof from experience is the strongest pattern."
+    },
+    {
+      "id": "FC-C3-014",
+      "deck": "core",
+      "tags": [
+        "star-l",
+        "failure",
+        "learnings"
+      ],
+      "source": "STAR-L guidance",
+      "front": "In a STAR-L failure answer, which Learning statement is strongest?",
+      "back": "I now run pre-mortems before risky rollouts and require automated rollback checks\u2014after a bad deploy taught me gaps in our process \u2014 Learnings must be specific and tied to behavior or process changes you actually adopted. Generic platitudes or blaming others fail the growth test."
+    },
+    {
+      "id": "FC-C3-015",
+      "deck": "core",
+      "tags": [
+        "behavioral-categories",
+        "impact",
+        "ambiguity"
+      ],
+      "source": "Google leadership prep",
+      "front": "An interviewer asks a compound question: 'Tell me about a time you had to deliver results despite ambiguous requirements.' The best approach is:",
+      "back": "Choose a story hitting both ambiguity (unclear requirements) and results (measurable outcome), structured in STAR-L with emphasis on how you drove clarity and delivery \u2014 Compound prompts are common\u2014pick a story that genuinely addresses all parts. Multi-dimensional story-bank entries let you cover ambiguity plus results without forcing a poor fit."
+    },
+    {
+      "id": "FC-C3-016",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "reddit:u889b3",
+        "experience-vs-process"
+      ],
+      "source": "reddit:u889b3 How are Googleyness interviews assessed",
+      "front": "r/cscareerquestionsEU u889b3 asks how Googleyness is assessed. 'Tell me about a time you received critical feedback' is best answered with:",
+      "back": "STAR-L \u2014 specific Situation, your Actions, Result, and what you Learned about receiving feedback \u2014 Reddit G&L prep: experience questions need structured personal stories with learnings \u2014 interviewers score humility and growth, not definitions."
+    },
+    {
+      "id": "FC-C3-017",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "reddit:u889b3",
+        "process"
+      ],
+      "source": "reddit:u889b3; Prepfully Googleyness guide",
+      "front": "'What would you do if a teammate disagreed with your technical approach?' (hypothetical) should be answered as:",
+      "back": "Process/judgment \u2014 listen, align on goals/data, propose experiment or escalation path \u2014 brief example optional \u2014 Prepfully/Reddit nuance: not every Googleyness question is STAR. Process questions reward frameworks; experience questions reward stories."
+    },
+    {
+      "id": "FC-C3-018",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "reddit:1kdf6fn",
+        "conversational"
+      ],
+      "source": "reddit:1kdf6fn Google SRE G&L comments",
+      "front": "Reddit 1kdf6fn passed G&L in ~25 minutes with conversational rapport. What does this suggest about scoring?",
+      "back": "Strong signals can emerge quickly \u2014 quality and authenticity matter more than filling the entire slot \u2014 1kdf6fn comment: finished early with good conversation. Googleyness assesses fit and communication \u2014 efficient, genuine answers beat padded monologues."
+    },
+    {
+      "id": "FC-C3-019",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "reddit:220",
+        "emergent-leadership"
+      ],
+      "source": "reddit:cscareerquestions Google process thread",
+      "front": "Reddit threads on Googleyness skepticism still agree interviewers want emergent leadership. Which example fits?",
+      "back": "You stepped in to unblock a cross-team incident without being the assigned owner \u2014 then stepped back after handoff \u2014 Even skeptical Reddit posts describe Googleyness as collaboration and initiative \u2014 step up when needed, step back when appropriate."
+    },
+    {
+      "id": "FC-C3-020",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "reddit:1kdf6fn",
+        "conflict"
+      ],
+      "source": "reddit:1kdf6fn G&L prep comments",
+      "front": "1kdf6fn comments recommend preparing 'conflict with manager' stories. The strongest conflict answer shows:",
+      "back": "Respectful disagreement, data or user focus, and a constructive outcome \u2014 not winning the argument \u2014 Reddit G&L prep lists conflict with manager as common. Googleyness rewards mature disagreement and user-focused resolution."
+    },
+    {
+      "id": "FC-C3-021",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "reddit:u889b3",
+        "question-detection"
+      ],
+      "source": "reddit:u889b3; leadership video",
+      "front": "How do you detect an experience question vs a process question in Googleyness interviews?",
+      "back": "Experience: 'Tell me about a time\u2026' \u2014 needs your past STAR story; Process: 'How would you\u2026' \u2014 needs framework/judgment \u2014 u889b3 asks about assessment format \u2014 misclassifying question type (story vs framework) is a common prep mistake cited in Googleyness guides."
+    },
+    {
+      "id": "FC-C1-009",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "emergent-leadership",
+        "collaboration"
+      ],
+      "source": "Leadership prep / Google careers",
+      "front": "Emergent leadership at Google is often described as 'step in when needed, step back when not.' Which scenario best illustrates this?",
+      "back": "You facilitate a stuck incident bridge until a clear owner emerges, then support that owner instead of staying in command \u2014 Emergent leadership is situational influence\u2014not a permanent title. Strong candidates know when to drive and when to enable others, avoiding both passivity and habitual commandeering."
+    },
+    {
+      "id": "FC-C1-010",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "do-the-right-thing",
+        "ethics"
+      ],
+      "source": "Google values / Work Rules",
+      "front": "A teammate suggests shipping a quick fix that hides a user-facing error but could misreport billing data. What response best reflects 'do the right thing'?",
+      "back": "Push back, explain the user and business risk, and propose a safer mitigation even if it takes longer \u2014 Doing the right thing means advocating for users and integrity even under pressure\u2014usually through direct, respectful escalation and safer alternatives\u2014not silent compromise or punitive reflexes."
+    },
+    {
+      "id": "FC-C1-011",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "negative-signals",
+        "interview-tactics"
+      ],
+      "source": "Google interview prep community / official guidance",
+      "front": "Which pattern is most likely a negative Googleyness signal in behavioral interviews?",
+      "back": "Consistently describing conflicts where you were always right and others were the problem \u2014 Interviewers watch for lack of humility, blame-shifting, and inability to reflect. Stories where you never contributed to a problem or never needed to change suggest poor self-awareness."
+    },
+    {
+      "id": "FC-C1-012",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "inference",
+        "interview-format"
+      ],
+      "source": "Google leadership prep",
+      "front": "Googleyness is rarely assessed by asking 'Define Googleyness.' How do interviewers typically evaluate it?",
+      "back": "By listening to how you behaved in past situations across multiple behavioral questions \u2014 Googleyness is inferred from patterns in your stories\u2014how you handle ambiguity, conflict, feedback, and collaboration\u2014not from reciting slogans or demonstrating fanboy behavior."
+    },
+    {
+      "id": "FC-C1-013",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "high-standards",
+        "bias-to-action"
+      ],
+      "source": "Work Rules / Google engineering culture",
+      "front": "Your team is debating whether to cut testing to hit a launch date. Which stance best aligns with Googleyness high standards plus bias to action?",
+      "back": "Identify the minimum safe test coverage for launch, automate what you can quickly, and document residual risk with a follow-up plan \u2014 High standards and bias to action coexist: act decisively but don't pretend quality trade-offs disappear. Pragmatic risk framing with follow-through beats both paralysis and reckless speed."
+    },
+    {
+      "id": "FC-C1-014",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "collaboration",
+        "global-teams"
+      ],
+      "source": "Google careers / diversity guidance",
+      "front": "You join a globally distributed team where time zones make synchronous meetings difficult. Which approach best shows collaborative Googleyness?",
+      "back": "Write clear async updates, rotate meeting times fairly, and proactively document decisions for colleagues who cannot attend live \u2014 Collaboration at Google-scale includes making it work across time zones and backgrounds\u2014fairness, clarity, and inclusion in how you communicate\u2014not optimizing only for yourself."
+    },
+    {
+      "id": "FC-C1-015",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "culture-add",
+        "humility",
+        "fun"
+      ],
+      "source": "Work Rules (Bock on 'enjoying fun')",
+      "front": "Work Rules notes that Google looks for people who 'enjoy fun' alongside serious work. In an interview context, this most appropriately means:",
+      "back": "You bring curiosity, playfulness in learning, and energy to hard problems without dismissing rigor or others' contributions \u2014 Bock's 'enjoy fun' signal is about intellectual curiosity and positive engagement with challenging work\u2014not performative humor or avoiding seriousness. Balance enthusiasm with substance."
+    },
+    {
+      "id": "FC-C2-009",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "teamwork",
+        "conflict"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "You disagree with a teammate about a technical approach during a high-stakes project. The leadership video would favor an answer showing:",
+      "back": "You listened to their reasoning, shared data and constraints, sought a principled decision, and committed to the outcome even if your idea was not chosen \u2014 Leadership teamwork includes healthy debate, evidence-based decisions, and disagree-and-commit behavior\u2014not politics, sabotage, or avoidance."
+    },
+    {
+      "id": "FC-C2-010",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "communication",
+        "follow-ups"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "Interviewers in the leadership round often ask deep follow-ups like 'What would you do differently?' What is the best way to handle these?",
+      "back": "Offer specific, thoughtful changes you would make\u2014showing reflection without undermining your overall competence \u2014 Follow-ups test growth and self-awareness. Strong candidates reflect honestly and describe concrete improvements; rigid perfectionism or blame deflection are negative leadership signals."
+    },
+    {
+      "id": "FC-C2-011",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "ambiguity",
+        "prioritization"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "Your team receives three urgent, conflicting requests from different stakeholders with no clear priority. What leadership behavior does the prep video emphasize?",
+      "back": "Clarify impact and constraints with stakeholders, propose a transparent prioritization framework, and communicate trade-offs \u2014 Navigating ambiguity and delivering results often means driving clarity\u2014gathering information, making or facilitating prioritization decisions, and communicating openly."
+    },
+    {
+      "id": "FC-C2-012",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "experience-questions",
+        "process-questions"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "The leadership video describes two broad question types: experience-based and process/judgment-based. 'Tell me about a time you led a project under a tight deadline' is primarily:",
+      "back": "An experience-based question requiring a specific past example with STAR structure \u2014 Experience questions ask for concrete past behavior ('Tell me about a time\u2026'). Process questions ask how you would handle a situation. Recognizing the type helps you structure the answer appropriately."
+    },
+    {
+      "id": "FC-C2-013",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "delivering-results",
+        "scope"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "A strong 'delivering results' story for an SRE candidate might focus on:",
+      "back": "Reducing MTTR by 40% through runbook improvements and automation you built after recurring incidents \u2014 Results stories should tie your actions to measurable reliability or efficiency outcomes. Vague activity or unrelated company metrics do not demonstrate personal leadership impact."
+    },
+    {
+      "id": "FC-C2-014",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "growth-from-failure",
+        "feedback"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "You led a rollout that caused a minor production incident. Which answer best satisfies the leadership video's growth-from-failure expectation?",
+      "back": "You owned your decision, participated in a blameless postmortem, shipped fixes and guardrails, and changed your rollout checklist based on learnings \u2014 Growth from failure requires ownership, learning, and systemic improvement\u2014aligned with blameless culture\u2014not minimization, hiding, or scapegoating."
+    },
+    {
+      "id": "FC-C2-015",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "vision",
+        "team-development"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "The leadership interview assesses whether you help teams grow\u2014not only whether you personally deliver. Which answer element best demonstrates this?",
+      "back": "You mentored teammates, delegated meaningful work, and described how others became more capable because of your leadership \u2014 Leadership at Google includes multiplying team capability\u2014mentorship, delegation, and developing others\u2014not zero-sum knowledge guarding or solo heroics."
     }
   ]
 }
