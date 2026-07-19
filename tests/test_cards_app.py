@@ -141,9 +141,11 @@ class CardBankTests(unittest.TestCase):
             for c in cards
             if c["id"].startswith("FC-CR-") and "```" in c.get("front", "")
         ]
-        self.assertGreaterEqual(len(cr_code), 40, "expected many CR cards with code fences")
-        sample = cr_code[0]["front"]
-        self.assertIn("```python", sample)
+        self.assertGreaterEqual(len(cr_code), 60, "expected many CR cards with code fences")
+        sample = next(c for c in cr_code if "retry" in c["front"].lower() or "backoff" in c["front"].lower() or "timeout" in c["front"].lower())
+        self.assertIn("```python", sample["front"])
+        cr6 = [c for c in cr_code if "CR-6" in (c.get("tags") or [])]
+        self.assertGreaterEqual(len(cr6), 40, "expected SRE production CR-6 cards")
 
     def test_core_deck_size(self):
         registry = json.loads((DATA / "cards.json").read_text(encoding="utf-8"))
