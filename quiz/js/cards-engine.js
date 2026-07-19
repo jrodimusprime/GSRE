@@ -159,6 +159,10 @@ const CardsEngine = (() => {
     return advance();
   }
 
+  function hasProgress() {
+    return mastered.size > 0 || Object.keys(ratings).length > 0;
+  }
+
   function reset() {
     mastered = new Set();
     ratings = {};
@@ -196,6 +200,7 @@ const CardsEngine = (() => {
     advance,
     rate,
     reset,
+    hasProgress,
     insertIndexForRating,
   };
 })();

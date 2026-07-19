@@ -18,11 +18,10 @@ const CardsApp = (() => {
   }
 
   function onReset() {
-    if (
-      CardsEngine.masteredCount() > 0 ||
-      CardsEngine.remainingCount() < CardsEngine.totalCount()
-    ) {
-      const ok = window.confirm('Reset flash card progress and reshuffle the deck?');
+    if (CardsEngine.hasProgress()) {
+      const ok = window.confirm(
+        'Are you sure you want to reset your flash card progress? This will reshuffle the deck.'
+      );
       if (!ok) return;
     }
     CardsEngine.reset();
