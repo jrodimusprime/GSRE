@@ -153,7 +153,7 @@ class CardBankTests(unittest.TestCase):
         core = json.loads((DATA / "cards" / "core.json").read_text(encoding="utf-8"))
         n = len(core["cards"])
         self.assertGreaterEqual(n, 80)
-        self.assertLessEqual(n, 400)
+        self.assertLessEqual(n, 600)
         self.assertEqual(registry["decks"][0]["cardCount"], n)
 
 

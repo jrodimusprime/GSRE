@@ -3931,6 +3931,1285 @@
       "source": "Google eng-practices",
       "front": "Review:\n```python\nif latency_ms > 86400000:\n    alert()\n```\nBest improvement?",
       "back": "Replace 86400000 with a named constant (e.g., MS_PER_DAY) documenting the threshold \u2014 Magic numbers harm readability. Named constants communicate intent and make review/debugging easier \u2014 standard maintainability feedback."
+    },
+    {
+      "id": "FC-B5-015",
+      "deck": "core",
+      "tags": [
+        "NALSD",
+        "reddit-nalsd",
+        "workshop"
+      ],
+      "source": "reddit:c3lrks SRECon workshop comments",
+      "front": "Reddit comments note SRECon NALSD workshop examples feel 'trivial' vs real interviews. Best prep adjustment?",
+      "back": "Practice with a partner on underspecified prompts \u2014 force your own clarifiers and full napkin math beyond workshop slides \u2014 c3lrks: workshop helps framing but real NALSD goes deeper on calculations. Pair practice with different approaches is repeatedly recommended on Reddit."
+    },
+    {
+      "id": "FC-B5-016",
+      "deck": "core",
+      "tags": [
+        "NALSD",
+        "reddit-nalsd",
+        "iteration"
+      ],
+      "source": "reddit:o6ozcj; NALSD ch 12",
+      "front": "r/sre o6ozcj comments say NALSD is guaranteed in Google SRE loops. When iterating design, what order matches NALSD?",
+      "back": "Possible \u2192 better \u2192 feasible (capacity) \u2192 resilient \u2192 better again \u2014 Workbook NALSD phases and Reddit prep threads align: iterate through feasibility and resilience with numbers, not one-shot architecture theater."
+    },
+    {
+      "id": "FC-B5-017",
+      "deck": "core",
+      "tags": [
+        "NALSD",
+        "reddit-nalsd",
+        "storage"
+      ],
+      "source": "reddit:c3lrks; Systems Architecture video",
+      "front": "You estimate 100K writes/sec \u00d7 1 KB \u00d7 86400 sec/day for logs. Reddit NALSD failures often omit:",
+      "back": "Retention multiplier \u2014 daily ingest \u00d7 days retained = total storage (plus replication factor) \u2014 NALSD napkin math must chain: QPS \u2192 daily volume \u2192 retention window \u2192 replication. Missing retention is a common c3lrks-style gap."
+    },
+    {
+      "id": "FC-B5-018",
+      "deck": "core",
+      "tags": [
+        "NALSD",
+        "reddit-nalsd",
+        "resilience"
+      ],
+      "source": "reddit:ExperiencedDevs NALSD; NALSD workbook",
+      "front": "Reddit ExperiencedDevs NALSD confusion thread: when asked 'Is it resilient?', the strongest answer starts with:",
+      "back": "Named failure modes (machine, rack, zone, region) and how SLO/error budget is preserved under each \u2014 NALSD resilience phase expects explicit failure analysis \u2014 Reddit confusion often comes from treating resilience as buzzword vs structured degradation/failover plan."
+    },
+    {
+      "id": "FC-B4-011",
+      "deck": "core",
+      "tags": [
+        "eventual-consistency",
+        "user-experience"
+      ],
+      "source": "AOSA distsys",
+      "front": "Eventual consistency is often acceptable for social media 'like' counts but problematic for bank balances because:",
+      "back": "Users notice incorrect financial balances immediately; stale likes are tolerable briefly \u2014 AOSA notes writes may propagate slowly (eventual consistency); product requirements dictate tolerance\u2014financial correctness needs stronger guarantees than approximate counters."
+    },
+    {
+      "id": "FC-B4-012",
+      "deck": "core",
+      "tags": [
+        "strong-consistency",
+        "latency",
+        "coordination"
+      ],
+      "source": "AOSA distsys",
+      "front": "Strong consistency across replicas typically costs more latency because:",
+      "back": "Reads or writes must coordinate with multiple nodes (quorum/leader acknowledgment) before replying \u2014 Linearizable or serializable behavior requires synchronization\u2014extra RTTs, leader election, or quorum\u2014trading speed for a single coherent view."
+    },
+    {
+      "id": "FC-B4-013",
+      "deck": "core",
+      "tags": [
+        "idempotency",
+        "retries",
+        "at-least-once"
+      ],
+      "source": "AOSA distsys",
+      "front": "Idempotent operations are critical in distributed systems with retries because:",
+      "back": "Duplicate delivery of the same request does not change state beyond the first successful application \u2014 At-least-once delivery plus timeouts means clients retry; idempotent handlers (or dedup keys) prevent double-charging, double-insert, or duplicate side effects."
+    },
+    {
+      "id": "FC-B4-014",
+      "deck": "core",
+      "tags": [
+        "delivery-semantics",
+        "exactly-once",
+        "idempotency"
+      ],
+      "source": "AOSA distsys",
+      "front": "Exactly-once processing semantics in practice are usually achieved by combining:",
+      "back": "At-least-once delivery plus idempotent consumers and deduplication or transactional offsets \u2014 True exactly-once end-to-end is hard; systems approximate it with durable logs, idempotent writes, and dedup\u2014conceptual interview answer, not magic network guarantees."
+    },
+    {
+      "id": "FC-B4-015",
+      "deck": "core",
+      "tags": [
+        "MapReduce",
+        "batch-processing",
+        "architecture"
+      ],
+      "source": "AOSA distsys",
+      "front": "In the MapReduce pattern, the map phase at the architectural level:",
+      "back": "Processes input records in parallel on workers, emitting intermediate key-value pairs \u2014 Map workers apply a function per record in parallel; output is shuffled/sorted by key before reducers aggregate\u2014batch-oriented horizontal scale (NALSD AdWords iteration)."
+    },
+    {
+      "id": "FC-B4-016",
+      "deck": "core",
+      "tags": [
+        "MapReduce",
+        "shuffle",
+        "data-locality"
+      ],
+      "source": "AOSA distsys",
+      "front": "The shuffle phase between map and reduce exists primarily to:",
+      "back": "Group all intermediate values by key so each reducer receives the complete set for its keys \u2014 Shuffle transfers and sorts mapper output by key\u2014often the expensive network step\u2014so reducers can compute aggregates (counts, sums, joins) per key."
+    },
+    {
+      "id": "FC-B4-017",
+      "deck": "core",
+      "tags": [
+        "MapReduce",
+        "streaming",
+        "limitations"
+      ],
+      "source": "AOSA distsys",
+      "front": "NALSD rejects small-batch MapReduce for AdWords CTR freshness because:",
+      "back": "Non-overlapping batches can place a query in one batch and its click in another, preventing joins \u2014 MapReduce excels at large self-contained batches; arbitrary log-arrival ordering breaks join correctness when batches are tiny and non-overlapping\u2014motivating streaming LogJoiner design."
+    },
+    {
+      "id": "FC-B4-018",
+      "deck": "core",
+      "tags": [
+        "graphs",
+        "distributed-traversal",
+        "architecture"
+      ],
+      "source": "AOSA distsys",
+      "front": "At the architectural level, breadth-first graph traversal on a partitioned graph most often:",
+      "back": "Passes messages between workers holding adjacent partitions each superstep/layer \u2014 Distributed BFS (Pregel/Giraph-style thinking): each round exchanges frontier vertices across partition boundaries\u2014communication per layer dominates, matching email graph pipeline topics."
+    },
+    {
+      "id": "FC-B7-009",
+      "deck": "core",
+      "tags": [
+        "thundering-herd",
+        "cache",
+        "stampede",
+        "B7"
+      ],
+      "source": "AOSA distsys caching; email rubric",
+      "front": "A popular cache entry expires and thousands of concurrent requests miss cache simultaneously, overwhelming the database. Which mitigation targets the thundering herd?",
+      "back": "Request coalescing (single-flight), staggered TTL jitter, or soft expiration with background refresh \u2014 Thundering herd occurs when many clients simultaneously regenerate an expired hot key. Single-flight locking, TTL jitter, and proactive refresh spread or eliminate the spike. AOSA's caching chapter treats cache stampedes as an operational failure mode requiring explicit design."
+    },
+    {
+      "id": "FC-B7-010",
+      "deck": "core",
+      "tags": [
+        "detection",
+        "recovery",
+        "defense",
+        "B7"
+      ],
+      "source": "Email rubric \u2014 failure recovery; effective troubleshooting",
+      "front": "In the email rubric's failure framework, arranging activities in the most logical lifecycle order yields:",
+      "back": "Detect (know something is wrong) \u2192 Defend (limit blast radius) \u2192 Recover (restore normal operation) \u2014 The failure-response rubric separates detecting failure, defending against spread, and recovering operation \u2014 mirroring SRE troubleshooting practice. You cannot recover what you haven't detected; defenses (breakers, backpressure, degradation) bridge detection and full recovery."
+    },
+    {
+      "id": "FC-B7-011",
+      "deck": "core",
+      "tags": [
+        "retry-storm",
+        "backpressure",
+        "cascading-failure",
+        "B7"
+      ],
+      "source": "Effective troubleshooting; AOSA distsys",
+      "front": "Clients retry failed requests immediately with no jitter when a backend is overloaded. What failure mode does this create?",
+      "back": "Retry storm: amplified load prevents recovery and deepens the outage \u2014 Unbounded immediate retries turn partial degradation into full outage \u2014 a retry storm. Effective troubleshooting emphasizes exponential backoff, jitter, and retry budgets. This pairs with circuit breakers (B7-004) and thundering herd (B7-009) as related amplification failures."
+    },
+    {
+      "id": "FC-B7-012",
+      "deck": "core",
+      "tags": [
+        "backpressure",
+        "load-shedding",
+        "graceful-degradation",
+        "B7"
+      ],
+      "source": "AOSA distsys; NALSD",
+      "front": "Incoming request rate exceeds sustainable capacity during a traffic spike. Which defense preserves overall system stability?",
+      "back": "Admission control and load shedding: reject or queue excess work with clear client feedback (429/503) \u2014 Backpressure and load shedding are deliberate defenses when detection shows saturation. Shedding low-priority or excess load protects core paths \u2014 preferable to slow failure everywhere. NALSD's resilience iteration expects explicit overload behavior, not hope that capacity magically appears."
+    },
+    {
+      "id": "FC-B7-013",
+      "deck": "core",
+      "tags": [
+        "monitoring",
+        "health-check",
+        "load-balancer",
+        "B7"
+      ],
+      "source": "AOSA distsys redundancy",
+      "front": "A load balancer health check pings `/health` every 5 seconds. The endpoint returns 200 even when the database dependency is down. What failure detection gap exists?",
+      "back": "Shallow health checks mask dependency failure; deep checks or synthetic probes should validate critical paths \u2014 Liveness vs readiness distinction: a process can be 'up' but unable to serve useful traffic. AOSA emphasizes health checks that reflect real serving ability. Deep checks, dependency circuit state, or layered probes improve detection \u2014 the first step in the failure lifecycle."
+    },
+    {
+      "id": "FC-B7-014",
+      "deck": "core",
+      "tags": [
+        "partition",
+        "race-condition",
+        "consistency",
+        "B7"
+      ],
+      "source": "AOSA distsys; Systems Architecture video SA-V4",
+      "front": "During a network partition, two datacenter halves both believe they are primary and accept writes. Which failure response combination is most appropriate to discuss?",
+      "back": "Quorum-based leadership, fencing tokens on writes, and conflict resolution or merge rules for divergent data \u2014 Split-brain under partition is a designed-for failure mode from SA-V4 and distributed systems literature. Quorum election, fencing, and defined conflict handling address detection and recovery \u2014 not pretending partitions won't happen. Operating at scale means failures are normal."
+    },
+    {
+      "id": "FC-B3-011",
+      "deck": "core",
+      "tags": [
+        "caching",
+        "global-cache",
+        "spof"
+      ],
+      "source": "AOSA distsys",
+      "front": "A single global cache shared by all request nodes is effective for some workloads but risks:",
+      "back": "Becoming overwhelmed as client count and request rate grow \u2014 AOSA notes global caches simplify hit rates but one cache can become a bottleneck under many clients\u2014unless specialized hardware or a fixed hot dataset limits pressure."
+    },
+    {
+      "id": "FC-B3-012",
+      "deck": "core",
+      "tags": [
+        "proxy",
+        "collapsed-forwarding",
+        "performance"
+      ],
+      "source": "AOSA distsys",
+      "front": "Collapsed forwarding in a proxy server optimizes data access by:",
+      "back": "Merging identical in-flight requests so origin storage is read only once \u2014 AOSA's proxy section: when many nodes request the same uncached data, the proxy collapses them into one origin read\u2014similar to deduplicating concurrent fetches."
+    },
+    {
+      "id": "FC-B3-013",
+      "deck": "core",
+      "tags": [
+        "proxy",
+        "caching",
+        "architecture"
+      ],
+      "source": "AOSA distsys",
+      "front": "When combining a cache and a proxy, AOSA recommends placing the cache:",
+      "back": "In front of the proxy, because memory-served hits are fastest and tolerate duplicate requests \u2014 The 'marathon' analogy: let the fastest layer (cache in memory) answer first; putting cache behind the proxy adds latency to every miss."
+    },
+    {
+      "id": "FC-B3-014",
+      "deck": "core",
+      "tags": [
+        "replication",
+        "redundancy",
+        "availability"
+      ],
+      "source": "AOSA distsys",
+      "front": "Service redundancy in the image-hosting architecture means:",
+      "back": "Multiple copies of critical components so failure of one does not halt the entire function \u2014 Redundancy duplicates services or data paths so partial failures are survivable\u2014paired with partitions and failure handling in the AOSA basics section."
+    },
+    {
+      "id": "FC-B3-015",
+      "deck": "core",
+      "tags": [
+        "shared-nothing",
+        "horizontal-scaling"
+      ],
+      "source": "AOSA distsys",
+      "front": "A shared-nothing architecture supports horizontal scaling because:",
+      "back": "Each node operates independently without contending for shared mutable state \u2014 AOSA describes shared-nothing as nodes with independent resources\u2014often enabled by load balancers\u2014so adding nodes increases capacity without shared-state bottlenecks."
+    },
+    {
+      "id": "FC-B3-016",
+      "deck": "core",
+      "tags": [
+        "scaling",
+        "vertical",
+        "horizontal"
+      ],
+      "source": "AOSA distsys",
+      "front": "Which pairing correctly distinguishes vertical and horizontal scaling?",
+      "back": "Vertical: add CPU/RAM/disk to one machine; Horizontal: add more machines/nodes \u2014 AOSA defines vertical scaling as making one resource bigger; horizontal scaling adds nodes\u2014ideally with partitioned/shared-nothing design to use them fully."
+    },
+    {
+      "id": "FC-B3-017",
+      "deck": "core",
+      "tags": [
+        "sharding",
+        "partitioning",
+        "trade-offs"
+      ],
+      "source": "AOSA distsys",
+      "front": "Sharding users across independent database shards (as Flickr does) primarily limits blast radius so that:",
+      "back": "An outage on one shard affects only users on that shard, not the entire user base \u2014 AOSA contrasts service-level read/write split (whole-system write outage) with user sharding (localized failures) against the cost of cross-shard operations and search."
+    },
+    {
+      "id": "FC-B3-018",
+      "deck": "core",
+      "tags": [
+        "message-queues",
+        "async",
+        "writes"
+      ],
+      "source": "AOSA distsys",
+      "front": "Message queues help scale write-heavy workloads because they:",
+      "back": "Decouple clients from long-running work\u2014accepting tasks quickly while workers process asynchronously \u2014 AOSA's queue section: synchronous servers block clients when overloaded; queues acknowledge receipt and let workers drain backlog, improving availability and client throughput."
+    },
+    {
+      "id": "FC-B3-019",
+      "deck": "core",
+      "tags": [
+        "spof",
+        "failure",
+        "redundancy"
+      ],
+      "source": "AOSA distsys",
+      "front": "Which component in a naive single-server web stack is a classic single point of failure (SPOF)?",
+      "back": "One monolithic app server that handles all reads and writes with no redundancy \u2014 Without redundancy, partitioning, or failover, one server failure halts the service\u2014motivating replication, load balancing, and shared-nothing expansion in AOSA."
+    },
+    {
+      "id": "FC-B3-020",
+      "deck": "core",
+      "tags": [
+        "manageability",
+        "cost",
+        "design-principles"
+      ],
+      "source": "AOSA distsys",
+      "front": "Manageability in the six principles emphasizes operational ease. Which factor is explicitly included in the 'cost' principle beyond hardware price?",
+      "back": "Developer time to build, operational effort to run, and training required \u2014 AOSA defines cost as total cost of ownership: hardware/software plus engineering, operations, and training\u2014not sticker price alone."
+    },
+    {
+      "id": "FC-B8-011",
+      "deck": "core",
+      "tags": [
+        "notification-system",
+        "async",
+        "architecture",
+        "B8"
+      ],
+      "source": "Email sample topics; AOSA message queues",
+      "front": "A notification system must deliver email, SMS, and push from one API call. Which v1 architecture decouples channels appropriately?",
+      "back": "API enqueues notification events; channel-specific workers consume from queues with retry and dead-letter handling \u2014 Notification systems are canonical async fan-out designs: durable queue, per-channel workers, idempotent delivery. Sync third-party calls on the API path violate latency and reliability goals \u2014 standard message-queue pattern from AOSA."
+    },
+    {
+      "id": "FC-B8-012",
+      "deck": "core",
+      "tags": [
+        "notification-system",
+        "preferences",
+        "architecture",
+        "B8"
+      ],
+      "source": "Email rubric; mock system design",
+      "front": "Users configure per-channel notification preferences and quiet hours. Where should preference evaluation architecturally occur?",
+      "back": "Before enqueue or at a routing service that filters/suppresses before channel workers execute \u2014 Preference routing is an architectural gate between intent and delivery \u2014 typically a dedicated service or pipeline stage reading a preference store. Late filtering wastes provider quota and annoys users; client-only filtering is unreliable."
+    },
+    {
+      "id": "FC-B8-013",
+      "deck": "core",
+      "tags": [
+        "rest-api",
+        "design",
+        "interfaces",
+        "B8"
+      ],
+      "source": "Email rubric \u2014 interfaces/APIs OK",
+      "front": "Designing REST APIs for a large user-generated content service, which principle best supports evolvability?",
+      "back": "Resource-oriented URLs, explicit versioning, pagination cursors, and consistent error schemas \u2014 Email rubric allows API/payload design at pseudocode level. REST best practices for large systems emphasize stable resource models, version headers/paths, cursor pagination at scale, and machine-readable errors \u2014 architectural interface design, not implementation."
+    },
+    {
+      "id": "FC-B8-014",
+      "deck": "core",
+      "tags": [
+        "rest-api",
+        "idempotency",
+        "architecture",
+        "B8"
+      ],
+      "source": "Email rubric; distributed systems fundamentals",
+      "front": "A payment API may receive duplicate POST requests due to client retries. Which architectural API design mitigates double charges?",
+      "back": "Require client-supplied idempotency keys; server deduplicates within a TTL window \u2014 Idempotency keys are standard architectural API design for unreliable networks \u2014 conceptual exactly-once from email topic list. This is an interface contract decision, not a coding exercise about HTTP libraries."
+    },
+    {
+      "id": "FC-B8-015",
+      "deck": "core",
+      "tags": [
+        "metadata-blob",
+        "storage",
+        "architecture",
+        "B8"
+      ],
+      "source": "AOSA image hosting; Systems Architecture video SA-V3",
+      "front": "An image hosting service stores photos up to 20 MB each with searchable tags and upload timestamps. Why separate metadata from blob storage architecturally?",
+      "back": "Metadata needs indexed queries; blobs need cheap durable object storage with CDN delivery \u2014 different access patterns and cost profiles \u2014 SA-V3 mentions separating data vs metadata. AOSA's image hosting example is the canonical reference: SQL/NoSQL for searchable metadata, object store + CDN for bytes. Interviewers test whether you match storage tier to access pattern."
+    },
+    {
+      "id": "FC-B8-016",
+      "deck": "core",
+      "tags": [
+        "evolution",
+        "v1-v3",
+        "scaling",
+        "B8"
+      ],
+      "source": "NALSD; email rubric",
+      "front": "A startup's messaging app evolves: v1 single DB, v2 read replicas, v3 sharded multi-region. What architectural driver most likely triggered v2?",
+      "back": "Read traffic exceeded single-primary capacity; replicas offload reads while writes still hit primary \u2014 v1\u2192v3 evolution under load is a standard interview narrative: vertical scale \u2192 read replicas \u2192 shard/partition \u2192 multi-region. Each step addresses a measured bottleneck. NALSD's iterative design expects you to tie version changes to concrete scaling or reliability triggers."
+    },
+    {
+      "id": "FC-B8-017",
+      "deck": "core",
+      "tags": [
+        "evolution",
+        "search",
+        "index",
+        "B8"
+      ],
+      "source": "Email topic list \u2014 indexes; AOSA distsys",
+      "front": "Autocomplete search over product names must return suggestions within 50 ms for 10M products. Which architectural index choice fits (not a coding question)?",
+      "back": "Prefix index or trie-like structure (or search engine) optimized for prefix queries, possibly sharded by prefix \u2014 Email lists indexes as a systems architecture topic. Autocomplete is an architectural index problem: prefix indexes, dedicated search engines (Elasticsearch), or trie shards \u2014 not linked-list reversal. Choose structure based on query pattern at scale."
+    },
+    {
+      "id": "FC-B8-018",
+      "deck": "core",
+      "tags": [
+        "architecture",
+        "data-structure-choice",
+        "hash-vs-index",
+        "B8"
+      ],
+      "source": "Email rubric \u2014 architectural not coding",
+      "front": "A system needs O(1) lookup of user sessions by session token with no range queries. Which architectural storage choice is most appropriate to discuss?",
+      "back": "Distributed hash/key-value store keyed by session token \u2014 Email explicitly says test *when* hash vs index vs graph is the right architectural choice \u2014 not LeetCode implementations. Pure point lookups by opaque key map to hash/KV designs; B-trees add value for range scans you don't need."
+    },
+    {
+      "id": "FC-B8-019",
+      "deck": "core",
+      "tags": [
+        "evolution",
+        "api-versioning",
+        "architecture",
+        "B8"
+      ],
+      "source": "Email rubric; NALSD iteration",
+      "front": "v2 of your API introduces breaking payload changes while v1 clients still exist. Which evolution strategy preserves operability?",
+      "back": "Run v1 and v2 endpoints concurrently with deprecation timeline; gateway routes by version header or path \u2014 Large-system evolution requires parallel API versions and explicit deprecation \u2014 part of v1\u2192v3 thinking under real-world constraints. NALSD iteration applies to interfaces as well as infrastructure; breaking all clients at once is not viable at scale."
+    },
+    {
+      "id": "FC-B8-020",
+      "deck": "core",
+      "tags": [
+        "synthesis",
+        "architecture",
+        "requirements",
+        "B8"
+      ],
+      "source": "Email rubric; mock system design",
+      "front": "The interviewer asks you to design 'a system like Twitter's home timeline.' Which first architectural fork best separates concerns?",
+      "back": "Clarify read vs write ratio and fan-out strategy (push fan-out on write vs pull on read vs hybrid) \u2014 Canonical social feed design hinges on the fan-out architectural choice \u2014 push, pull, or hybrid \u2014 driven by follower distribution and read/write ratio. This is the high-level fork interviewers expect before storage or API details; it tests architectural judgment, not coding."
+    },
+    {
+      "id": "FC-B6-009",
+      "deck": "core",
+      "tags": [
+        "trade-offs",
+        "consistency",
+        "availability",
+        "B6"
+      ],
+      "source": "AOSA distsys; email rubric",
+      "front": "A collaborative document editor can show a teammate's cursor with a 200 ms delay but must never lose committed text edits. Which trade-off framing is most appropriate?",
+      "back": "Strong consistency/durability for committed edits; eventual consistency acceptable for ephemeral presence data \u2014 Different data within one product carries different consistency requirements. Committed edits need durability and strong guarantees; presence/cursor data is latency-sensitive and tolerates staleness. Splitting requirements avoids a false binary of 'CP vs AP' for the entire\u2026"
+    },
+    {
+      "id": "FC-B6-010",
+      "deck": "core",
+      "tags": [
+        "trade-offs",
+        "documentation",
+        "iteration",
+        "B6"
+      ],
+      "source": "Systems Architecture video SA-V4; NALSD",
+      "front": "You have time to present one v1 architecture and one improvement pass. What best satisfies the 'trade-offs and compromises' expectation from the official Systems Architecture video?",
+      "back": "Present a workable v1, name two systematic shortcomings, propose a concrete v2 change, and state what you traded away \u2014 SA-V4 explicitly asks candidates to identify shortcomings, lay out trade-offs (e.g., disk cost vs latency), consider multiple solutions, commit to one, and iterate. Documenting rejected alternatives and their costs demonstrates the iterative, compromise-aware process Google\u2026"
+    },
+    {
+      "id": "FC-B9-009",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "spanserver",
+        "colossus",
+        "storage",
+        "B9"
+      ],
+      "source": "Spanner OSDI 2012 paper \u2014 Section 2.1 spanserver stack",
+      "front": "Where is a Spanner tablet's state physically stored?",
+      "back": "In B-tree-like files and a write-ahead log on the Colossus distributed file system \u2014 Each spanserver hosts 100\u20131000 tablets whose state lives in B-tree-like files plus a write-ahead log on Colossus (the GFS successor). Spanner layers Paxos, a lock table, and a transaction manager on top of this Bigtable-derived stack."
+    },
+    {
+      "id": "FC-B9-010",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "two-phase-commit",
+        "transactions",
+        "B9"
+      ],
+      "source": "Spanner OSDI 2012 paper \u2014 Section 4.2.1",
+      "front": "When a read-write transaction spans multiple Paxos groups, how does Spanner commit it atomically?",
+      "back": "The groups' leaders run two-phase commit layered over Paxos, with one participant group acting as coordinator \u2014 Single-group transactions bypass the transaction manager (Paxos + lock table suffice). Multi-group transactions use two-phase commit across participant leaders, coordinated by one chosen group, with each phase durably logged through Paxos."
+    },
+    {
+      "id": "FC-B9-011",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "read-only-transaction",
+        "snapshot",
+        "B9"
+      ],
+      "source": "Spanner OSDI 2012 paper \u2014 Section 4.1.4",
+      "front": "Why can Spanner's read-only transactions execute without acquiring locks?",
+      "back": "They run as lock-free snapshot reads at a system-chosen timestamp, so incoming writes are never blocked \u2014 Read-only transactions are predeclared as write-free and execute at a chosen timestamp as snapshot reads on any sufficiently up-to-date replica. This avoids locking and does not block concurrent writes."
+    },
+    {
+      "id": "FC-B9-012",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "read-write-transaction",
+        "concurrency",
+        "B9"
+      ],
+      "source": "Spanner OSDI 2012 paper \u2014 Section 4.2.1",
+      "front": "Which concurrency-control mechanism do Spanner read-write transactions use?",
+      "back": "Pessimistic two-phase locking at the leader, with wound-wait to avoid deadlocks \u2014 Read-write transactions acquire read/write locks at the leader using two-phase locking and use wound-wait to prevent deadlocks. Writes are buffered at the client until commit."
+    },
+    {
+      "id": "FC-B9-013",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "zones",
+        "universe",
+        "organization",
+        "B9"
+      ],
+      "source": "Spanner OSDI 2012 paper \u2014 Section 2 implementation",
+      "front": "How is a Spanner deployment organized at the top level?",
+      "back": "A universe contains zones (units of physical isolation and replication); each zone has a zonemaster and many spanservers \u2014 A Spanner deployment is a universe organized into zones \u2014 the unit of administrative deployment and physical isolation. A zone has a zonemaster (assigns data to spanservers) and 100s\u20131000s of spanservers; a placement driver moves data between zones."
+    },
+    {
+      "id": "FC-B9-014",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "cap",
+        "consistency",
+        "availability",
+        "B9"
+      ],
+      "source": "Spanner OSDI 2012 paper; CAP analysis",
+      "front": "In CAP terms, how is Spanner best characterized?",
+      "back": "A CP system: it preserves consistency during partitions and relies on Paxos majorities plus TrueTime for very high availability in practice \u2014 Spanner chooses consistency over availability under partitions (CP). Because writes need a Paxos majority and external consistency depends on TrueTime, a minority-partitioned replica cannot accept conflicting writes \u2014 but majority quorums keep practical availability very high."
+    },
+    {
+      "id": "FC-B9-015",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "f1",
+        "use-case",
+        "resharding",
+        "B9"
+      ],
+      "source": "Spanner OSDI 2012 paper \u2014 Section 5.4 F1",
+      "front": "Why did Google's F1 advertising backend migrate from sharded MySQL to Spanner?",
+      "back": "To eliminate painful manual resharding while gaining synchronous replication, automatic failover, and strong transactional semantics \u2014 F1's sharded MySQL required multi-year resharding efforts and had risky failover. Spanner removed manual resharding and provided synchronous Paxos replication, automatic failover, and strong transactions across arbitrary data."
+    },
+    {
+      "id": "FC-E3-013",
+      "deck": "core",
+      "tags": [
+        "networking",
+        "tcp",
+        "reddit:wc4ryg",
+        "E3-Net"
+      ],
+      "source": "reddit:wc4ryg IP networking depth",
+      "front": "During TCP three-way handshake, which flag combination does the server send in the second step (SYN-ACK)?",
+      "back": "SYN and ACK both set \u2014 acknowledges client SYN and sends server SYN \u2014 TCP state machine basics appear in Google SRE SE networking depth per Reddit wc4ryg. SYN-ACK is step 2 of handshake."
+    },
+    {
+      "id": "FC-E3-014",
+      "deck": "core",
+      "tags": [
+        "networking",
+        "dns",
+        "E3-Net"
+      ],
+      "source": "Effective Troubleshooting",
+      "front": "Intermittent 'Could not resolve host' errors affect one AZ only. Best first networking check?",
+      "back": "Compare resolver config (/etc/resolv.conf, systemd-resolved) and reachability to DNS servers from affected AZ \u2014 DNS is infrastructure. SRE troubleshooting starts with resolver paths, VPC DNS endpoints, and L3 reachability to nameservers."
+    },
+    {
+      "id": "FC-E3-015",
+      "deck": "core",
+      "tags": [
+        "networking",
+        "firewall",
+        "osi",
+        "E3-Net"
+      ],
+      "source": "reddit:1klu37j troubleshooting format",
+      "front": "curl works to IP:443 but fails to hostname:443. What does this narrow down?",
+      "back": "DNS or hostname resolution problem \u2014 TCP/IP path to the IP is likely fine \u2014 Classic divide: IP works, name fails \u2192 DNS or SNI-related naming. Reddit troubleshooting threads emphasize systematic elimination."
+    },
+    {
+      "id": "FC-E3-016",
+      "deck": "core",
+      "tags": [
+        "networking",
+        "udp",
+        "E3-Net"
+      ],
+      "source": "Networking fundamentals",
+      "front": "Why does DNS commonly use UDP for queries (with TCP fallback for large responses)?",
+      "back": "UDP is lightweight for small request/response \u2014 lower overhead than TCP for simple lookups \u2014 DNS over UDP:53 for typical queries; TCP when truncation occurs. Know transport choice for SRE networking questions."
+    },
+    {
+      "id": "FC-E3-017",
+      "deck": "core",
+      "tags": [
+        "networking",
+        "latency",
+        "reddit:o6ozcj",
+        "E3-Net"
+      ],
+      "source": "reddit:o6ozcj; Brendan Gregg",
+      "front": "High network latency between two hosts in the same region but different subnets. OSI-aware checklist item?",
+      "back": "Trace L3 path (traceroute), check ACLs/security groups (L3/L4), and NIC/driver errors (L1/L2) \u2014 o6ozcj confirms Linux/networking focus for SRE-SE. Same-region latency implicates routing, firewalls, or NIC issues across L1\u2013L4."
+    },
+    {
+      "id": "FC-E3-018",
+      "deck": "core",
+      "tags": [
+        "networking",
+        "linux-internals",
+        "ephemeral-ports",
+        "E3-Net"
+      ],
+      "source": "SRE book; Linux networking",
+      "front": "A busy proxy runs out of ephemeral ports causing connection failures. Linux tuning concept?",
+      "back": "Expand ip_local_port_range and reduce TIME_WAIT duration / enable connection reuse \u2014 exhaustion at L4 \u2014 Ephemeral port exhaustion is L4 (TCP quadruple). SREs know sysctl tuning and connection pooling \u2014 bridges Linux internals and networking."
+    },
+    {
+      "id": "FC-SR-015",
+      "deck": "core",
+      "tags": [
+        "monitoring",
+        "golden-signals",
+        "traffic",
+        "SR-PRIN"
+      ],
+      "source": "SRE Book ch 6",
+      "front": "During a gradual traffic shift from an old to a new API version, error rate stays flat but latency SLI degrades. Which golden-signal analysis is most appropriate first?",
+      "back": "Compare traffic distribution and per-version latency distributions to detect a canary or routing regression \u2014 Traffic and latency must be examined together during rollouts. Chapter 6's golden signals are interdependent: a version receiving disproportionate load or exhibiting tail latency can breach SLOs before error rates move."
+    },
+    {
+      "id": "FC-SR-016",
+      "deck": "core",
+      "tags": [
+        "automation",
+        "hierarchy",
+        "self-service",
+        "SR-PRIN"
+      ],
+      "source": "SRE Book ch 7",
+      "front": "In the SRE automation hierarchy, which level represents the highest maturity?",
+      "back": "Autonomous systems that require no human intervention for routine operation and self-heal within defined bounds \u2014 Chapter 7 describes automation maturity progressing from manual operation through externally owned tools, internally maintained automation, to autonomous systems. The goal is reducing operational toil while preserving human oversight for exceptional cases."
+    },
+    {
+      "id": "FC-SR-017",
+      "deck": "core",
+      "tags": [
+        "automation",
+        "hierarchy",
+        "ownership",
+        "SR-PRIN"
+      ],
+      "source": "SRE Book ch 7",
+      "front": "A team relies on a central platform team's automation that breaks whenever the service changes its deployment model. Per chapter 7, the reliability gap is:",
+      "back": "Dependence on externally maintained automation without internal ownership \u2014 the team should adopt or build internally maintained automation aligned to their service lifecycle \u2014 Chapter 7 ranks internally maintained automation above external tools because service teams can adapt automation to their changing needs. Relying on brittle external dependencies creates toil when the tool and service diverge."
+    },
+    {
+      "id": "FC-SR-018",
+      "deck": "core",
+      "tags": [
+        "automation",
+        "complexity",
+        "maintenance",
+        "SR-PRIN"
+      ],
+      "source": "SRE Book ch 7",
+      "front": "When evaluating whether to automate a rare but complex manual procedure, chapter 7 suggests the decision should weigh:",
+      "back": "Frequency, error rate of manual execution, cost to automate, and cost of automation maintenance over the service lifetime \u2014 Not every rare task merits automation. Chapter 7 advocates weighing execution frequency, human error risk, and long-term maintenance cost \u2014 automation itself can become a reliability burden if over-applied to edge cases."
+    },
+    {
+      "id": "FC-SR-019",
+      "deck": "core",
+      "tags": [
+        "release-engineering",
+        "hermetic",
+        "reproducibility",
+        "SR-PRIN"
+      ],
+      "source": "SRE Book ch 8",
+      "front": "Hermetic build systems in release engineering primarily ensure:",
+      "back": "Builds depend only on declared inputs, producing reproducible artifacts unaffected by ambient machine state \u2014 Chapter 8 emphasizes hermetic, reproducible builds as the foundation of reliable release engineering. Declared inputs eliminate 'works on my machine' drift and enable verifiable, auditable artifacts."
+    },
+    {
+      "id": "FC-SR-020",
+      "deck": "core",
+      "tags": [
+        "release-engineering",
+        "canary",
+        "rollback",
+        "SR-PRIN"
+      ],
+      "source": "SRE Book ch 8",
+      "front": "A canary deployment shows elevated error rate on 5% of traffic while the stable version remains healthy. The release-engineering-aligned response is:",
+      "back": "Automatically halt rollout and roll back the canary, preserving majority traffic on the known-good version while investigating \u2014 Chapter 8 describes progressive rollout with automated rollback on regression signals. Canary analysis limits blast radius; continuing a bad rollout consumes error budget across the full fleet."
+    },
+    {
+      "id": "FC-SR-021",
+      "deck": "core",
+      "tags": [
+        "release-engineering",
+        "configuration",
+        "separation",
+        "SR-PRIN"
+      ],
+      "source": "SRE Book ch 8",
+      "front": "Why does chapter 8 advocate separating release artifacts from configuration?",
+      "back": "The same binary can be promoted across environments with environment-specific config, reducing rebuild risk and enabling faster rollback to a known artifact \u2014 Decoupling immutable artifacts from mutable configuration is core release engineering: promote tested binaries, apply config per environment, and roll back by reverting config or redeploying a prior artifact without rebuilding."
+    },
+    {
+      "id": "FC-SR-022",
+      "deck": "core",
+      "tags": [
+        "simplicity",
+        "complexity",
+        "design",
+        "SR-PRIN"
+      ],
+      "source": "SRE Book ch 9",
+      "front": "Chapter 9 states that simplicity is a prerequisite for reliability because:",
+      "back": "Complex systems have more interaction surfaces where failures emerge unpredictably and are harder to debug under pressure \u2014 Chapter 9 argues complexity is the enemy of reliability: emergent failures, difficult reasoning under incident stress, and higher maintenance burden. Simplicity is intentional design restraint, not minimalism for its own sake."
+    },
+    {
+      "id": "FC-SR-023",
+      "deck": "core",
+      "tags": [
+        "simplicity",
+        "abstraction",
+        "operational-cost",
+        "SR-PRIN"
+      ],
+      "source": "SRE Book ch 9",
+      "front": "A team adds a third overlapping configuration system because the existing two are 'too simple' for edge cases. Chapter 9 would most likely warn that:",
+      "back": "Accrued complexity increases long-term operational burden and incident confusion more than the edge cases justify \u2014 Chapter 9's simplicity principle opposes unnecessary accretion. Each new subsystem adds failure modes, cognitive load, and on-call surface area. Consolidation and deliberate abstraction beat parallel overlapping systems."
+    },
+    {
+      "id": "FC-SR-024",
+      "deck": "core",
+      "tags": [
+        "simplicity",
+        "software-debt",
+        "reliability",
+        "SR-PRIN"
+      ],
+      "source": "SRE Book ch 9",
+      "front": "When prioritizing simplicity work alongside feature requests, chapter 9 aligns with which approach?",
+      "back": "Treat simplification as reliability engineering with measurable reduction in operational toil and incident frequency, not as optional cleanup \u2014 Chapter 9 frames simplicity as operational necessity, not vanity refactoring. Measuring toil reduction, faster incident resolution, and fewer moving parts justifies simplification alongside feature work \u2014 connecting to chapters 5 and 4's error-budget framing."
+    },
+    {
+      "id": "FC-SRS-013",
+      "deck": "core",
+      "tags": [
+        "cascading-failure",
+        "bulkhead",
+        "isolation",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 22",
+      "front": "Bulkhead partitioning in a multi-tenant service primarily prevents:",
+      "back": "One tenant's traffic spike or failure mode from exhausting shared thread pools, connections, or memory used by other tenants \u2014 Chapter 22 bulkheads isolate resource pools per tenant or subsystem \u2014 a cascade-containment pattern distinct from circuit breakers. One tenant's retry storm cannot drain the shared pool that serves everyone."
+    },
+    {
+      "id": "FC-SRS-014",
+      "deck": "core",
+      "tags": [
+        "cascading-failure",
+        "metastable-failure",
+        "recovery",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 22",
+      "front": "A system recovers from an initial trigger but remains in a degraded metastable state because load now exceeds reduced capacity. Chapter 22 recommends:",
+      "back": "Temporarily reduce offered load (shedding, throttling clients) until the system returns to a stable operating point below saturation \u2014 Metastable failures persist after the trigger is gone because the system cannot serve full load at its degraded capacity. Chapter 22 stresses deliberate load reduction \u2014 not just fixing the root trigger \u2014 to exit the bad equilibrium."
+    },
+    {
+      "id": "FC-SRS-015",
+      "deck": "core",
+      "tags": [
+        "cascading-failure",
+        "server-overload",
+        "cpu",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 22",
+      "front": "Chapter 22 notes that server overload protection should trigger before CPU reaches 100% because:",
+      "back": "By the time CPU saturates, queues and latency have already degraded, and recovery requires shedding load not just adding CPU \u2014 Cascade prevention is proactive: overload signals (latency, queue depth, error rate) should trigger shedding before hard resource exhaustion. At 100% CPU the system is often already in a metastable failure mode."
+    },
+    {
+      "id": "FC-SRS-016",
+      "deck": "core",
+      "tags": [
+        "consensus",
+        "paxos",
+        "fault-tolerance",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 23",
+      "front": "Paxos guarantees safety (consistency) with how many replicas tolerating f simultaneous failures in the standard 2f+1 configuration?",
+      "back": "f failures with 2f+1 total replicas \u2014 Chapter 23 explains Paxos requires a quorum majority: 2f+1 replicas tolerate f failures while preserving agreement. This generic consensus foundation underpins many distributed systems without being Spanner-specific."
+    },
+    {
+      "id": "FC-SRS-017",
+      "deck": "core",
+      "tags": [
+        "consensus",
+        "paxos",
+        "leader-election",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 23",
+      "front": "In Multi-Paxos, electing a stable leader primarily reduces:",
+      "back": "The number of round-trip phases required per operation by avoiding full Paxos prepare rounds on every write \u2014 Chapter 23 describes Multi-Paxos optimization: a stable leader skips repeated leader election and prepare phases for steady-state writes, improving throughput while preserving Paxos safety guarantees."
+    },
+    {
+      "id": "FC-SRS-018",
+      "deck": "core",
+      "tags": [
+        "consensus",
+        "paxos",
+        "liveness",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 23",
+      "front": "Paxos can guarantee safety during a network partition but may sacrifice liveness when:",
+      "back": "A quorum cannot be assembled, preventing progress until enough replicas communicate \u2014 Chapter 23 distinguishes safety (never returning inconsistent results) from liveness (eventually making progress). Without quorum, Paxos correctly halts rather than violating consistency \u2014 a key interview distinction."
+    },
+    {
+      "id": "FC-SRS-019",
+      "deck": "core",
+      "tags": [
+        "consensus",
+        "state-machine",
+        "replication",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 23",
+      "front": "Replicated state machines built on consensus logs ensure:",
+      "back": "All non-faulty replicas apply the same ordered operations, producing identical state given deterministic execution \u2014 Chapter 23's replicated state machine pattern: consensus orders a log; each replica applies entries deterministically. Identical inputs and order yield identical state \u2014 the generic model behind many distributed databases."
+    },
+    {
+      "id": "FC-SRS-020",
+      "deck": "core",
+      "tags": [
+        "cron",
+        "thundering-herd",
+        "scheduling",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 24",
+      "front": "Chapter 24's cron at scale problem arises when:",
+      "back": "Many jobs scheduled at the same wall-clock time simultaneously hammer shared dependencies such as databases or lock services \u2014 Chapter 24 describes thundering herd from synchronized cron schedules \u2014 distinct from cache stampede (B7) because the trigger is temporal coordination of batch jobs, not cache expiry."
+    },
+    {
+      "id": "FC-SRS-021",
+      "deck": "core",
+      "tags": [
+        "cron",
+        "thundering-herd",
+        "jitter",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 24",
+      "front": "To mitigate cron-induced thundering herds, chapter 24 recommends:",
+      "back": "Adding randomized jitter to scheduled start times and spreading work across a time window \u2014 Jitter and windowed scheduling spread load over time, preventing synchronized spikes. Chapter 24 also discusses distributed cron systems with leader election and work partitioning."
+    },
+    {
+      "id": "FC-SRS-022",
+      "deck": "core",
+      "tags": [
+        "cron",
+        "distributed",
+        "idempotency",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 24",
+      "front": "In a distributed cron system with at-least-once execution semantics, jobs must be:",
+      "back": "Idempotent or guarded with external locking so duplicate runs do not corrupt state \u2014 Chapter 24's distributed cron designs assume failures and duplicates. Idempotent job design or distributed locks prevent double billing, double emails, or duplicate data mutations."
+    },
+    {
+      "id": "FC-SRS-023",
+      "deck": "core",
+      "tags": [
+        "data-pipeline",
+        "at-least-once",
+        "delivery",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 25",
+      "front": "Most large-scale data pipelines prefer at-least-once delivery with idempotent sinks because:",
+      "back": "Exactly-once end-to-end is often impractical at scale; idempotent processing makes duplicates safe \u2014 Chapter 25 acknowledges delivery guarantees trade-offs. At-least-once with deduplication or idempotent writes is the pragmatic pattern for reliable pipelines when true exactly-once is costly or impossible."
+    },
+    {
+      "id": "FC-SRS-024",
+      "deck": "core",
+      "tags": [
+        "data-pipeline",
+        "monitoring",
+        "freshness",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 25",
+      "front": "Which SLI is most appropriate for a batch analytics pipeline serving daily dashboards?",
+      "back": "Data freshness: proportion of pipeline runs completing within N hours of source data availability \u2014 Chapter 25 applies SRE thinking to pipelines: user-visible SLIs include freshness, completeness, and correctness \u2014 not just infrastructure metrics. Freshness lag directly affects dashboard trust."
+    },
+    {
+      "id": "FC-SRS-025",
+      "deck": "core",
+      "tags": [
+        "data-pipeline",
+        "dead-letter",
+        "quality",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 25",
+      "front": "A pipeline stage rejects malformed records. Chapter 25-aligned handling stores them in a dead-letter path and:",
+      "back": "Alerts on growing dead-letter volume, preserving good records flowing while enabling inspection and replay of bad data \u2014 Pipeline reliability separates poison records from healthy flow. Dead-letter queues with alerting mirror queue hygiene patterns while preserving data quality SLIs for downstream consumers."
+    },
+    {
+      "id": "FC-SRS-026",
+      "deck": "core",
+      "tags": [
+        "data-integrity",
+        "checksum",
+        "verification",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 26",
+      "front": "Chapter 26 advocates continuous data integrity verification because:",
+      "back": "Silent corruption from hardware, software bugs, or migration errors can propagate undetected without proactive checksums and audits \u2014 Chapter 26 treats data integrity as an ongoing SRE responsibility: end-to-end checksums, periodic audits, and repair workflows catch corruption that replication alone may propagate."
+    },
+    {
+      "id": "FC-SRS-027",
+      "deck": "core",
+      "tags": [
+        "data-integrity",
+        "repair",
+        "replication",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 26",
+      "front": "A checksum audit detects bit rot on one replica while others are healthy. The integrity-aligned response is:",
+      "back": "Rebuild the corrupted replica from a verified good copy and investigate root cause before corruption spreads \u2014 Chapter 26 describes detection-and-repair loops: verify, quarantine bad copies, rebuild from golden sources. Proactive repair prevents silent spread through replication and backup chains."
+    },
+    {
+      "id": "FC-SRS-028",
+      "deck": "core",
+      "tags": [
+        "data-integrity",
+        "canary",
+        "migration",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 26",
+      "front": "During a large data migration, chapter 26-style integrity practice includes:",
+      "back": "Dual-write or shadow-read validation comparing checksums and row counts between old and new stores before cutover \u2014 Migration is a high-risk integrity window. Chapter 26 emphasizes verification gates \u2014 compare outputs, validate invariants, maintain rollback \u2014 before declaring migration complete."
+    },
+    {
+      "id": "FC-SRS-029",
+      "deck": "core",
+      "tags": [
+        "launch",
+        "checklist",
+        "readiness",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 27",
+      "front": "Launch readiness reviews in chapter 27 exist primarily to:",
+      "back": "Verify operational preparedness \u2014 monitoring, SLOs, rollback, capacity, and on-call \u2014 before production traffic exposure \u2014 Chapter 27's reliable launches framework ensures services are operable at scale: defined SLOs, alerting, runbooks, capacity plans, and rollback paths \u2014 not just feature completeness."
+    },
+    {
+      "id": "FC-SRS-030",
+      "deck": "core",
+      "tags": [
+        "launch",
+        "progressive-rollout",
+        "error-budget",
+        "SR-SCALE"
+      ],
+      "source": "SRE Book ch 27",
+      "front": "A launch checklist requires staged traffic ramp with automatic rollback hooks tied to SLO burn rate. This connects launch engineering to:",
+      "back": "Error budget policy: stopping a bad launch before it consumes disproportionate budget across the full fleet \u2014 Chapter 27 integrates launches with SRE principles: progressive exposure limits blast radius, SLO-linked rollback preserves error budget, and checklist items ensure the service is observable during ramp."
+    },
+    {
+      "id": "FC-WB-011",
+      "deck": "core",
+      "tags": [
+        "alerting",
+        "burn-rate",
+        "slo",
+        "WB-FOUND"
+      ],
+      "source": "SRE Workbook ch 5",
+      "front": "Burn-rate alerting on SLOs measures:",
+      "back": "How quickly the error budget is being consumed relative to the SLO window \u2014 fast burn warrants faster response \u2014 Chapter 5 introduces multi-window burn-rate alerts: relative budget consumption over short and long windows detects both sudden spikes and slow leaks threatening the SLO."
+    },
+    {
+      "id": "FC-WB-012",
+      "deck": "core",
+      "tags": [
+        "alerting",
+        "burn-rate",
+        "multi-window",
+        "WB-FOUND"
+      ],
+      "source": "SRE Workbook ch 5",
+      "front": "A multi-window burn-rate alert uses a 1-hour window at 14.4\u00d7 burn AND a 5-minute window at 14.4\u00d7 burn to:",
+      "back": "Page for rapid budget consumption while reducing false positives from brief blips that self-resolve within minutes \u2014 Chapter 5's worked examples combine short and long windows at the same burn factor: both must fire, confirming sustained SLO-threatening degradation rather than transient noise."
+    },
+    {
+      "id": "FC-WB-013",
+      "deck": "core",
+      "tags": [
+        "alerting",
+        "burn-rate",
+        "ticket",
+        "WB-FOUND"
+      ],
+      "source": "SRE Workbook ch 5",
+      "front": "Chapter 5 recommends ticket (non-paging) alerts at lower burn rates than page alerts because:",
+      "back": "Slow budget leaks deserve investigation without waking on-call, preserving pager signal-to-noise for user-threatening burns \u2014 Tiered burn-rate responses: high burn pages on-call immediately; moderate burn creates tickets for next-business-day investigation. This aligns operational response with budget impact."
+    },
+    {
+      "id": "FC-WB-014",
+      "deck": "core",
+      "tags": [
+        "alerting",
+        "burn-rate",
+        "availability-slo",
+        "WB-FOUND"
+      ],
+      "source": "SRE Workbook ch 5",
+      "front": "For a 99.9% availability SLO over 30 days, sustained 100% error rate for 1 hour consumes what fraction of the monthly error budget?",
+      "back": "Roughly 14% of the monthly budget (1 hour of total failure against ~43 minutes total budget) \u2014 Chapter 5's burn-rate math: 99.9% monthly allows ~43 min downtime; 60 min at 100% errors \u2248 60/43 \u2248 1.4\u00d7 monthly budget in one hour \u2014 about 14% per hour of total outage at that SLO (workbook uses similar proportional reasoning for alert thresholds)."
+    },
+    {
+      "id": "FC-WB-015",
+      "deck": "core",
+      "tags": [
+        "toil",
+        "workbook",
+        "measurement",
+        "WB-FOUND"
+      ],
+      "source": "SRE Workbook ch 6",
+      "front": "Workbook chapter 6 recommends measuring toil by:",
+      "back": "Tracking the percentage of engineering time spent on manual, repetitive, automatable operational work \u2014 Chapter 6 operationalizes toil measurement so teams can set reduction goals \u2014 typically targeting below ~50% and investing freed capacity in engineering."
+    },
+    {
+      "id": "FC-WB-016",
+      "deck": "core",
+      "tags": [
+        "toil",
+        "workbook",
+        "prioritization",
+        "WB-FOUND"
+      ],
+      "source": "SRE Workbook ch 6",
+      "front": "When prioritizing toil reduction, chapter 6 suggests favoring automation that:",
+      "back": "Eliminates the highest-volume repetitive tasks with clear ROI and reduces on-call burden \u2014 Chapter 6 prioritizes by impact: high-frequency toil and on-call pain first. Interesting-but-rare automation may not repay its maintenance cost."
+    },
+    {
+      "id": "FC-WB-017",
+      "deck": "core",
+      "tags": [
+        "simplicity",
+        "workbook",
+        "operational-cost",
+        "WB-FOUND"
+      ],
+      "source": "SRE Workbook ch 7",
+      "front": "Workbook chapter 7 links simplicity to operational sustainability by arguing that:",
+      "back": "Every component added is a future liability requiring monitoring, upgrades, and incident response \u2014 Chapter 7 extends the SRE book's simplicity principle with workbook case material: component count drives operational load. Restraint in architecture is a reliability investment."
+    },
+    {
+      "id": "FC-WB-018",
+      "deck": "core",
+      "tags": [
+        "simplicity",
+        "workbook",
+        "refactoring",
+        "WB-FOUND"
+      ],
+      "source": "SRE Workbook ch 7",
+      "front": "A workbook simplicity case study consolidates three overlapping deployment pipelines into one. Expected reliability gains include:",
+      "back": "Reduced cognitive load for on-call, fewer failure modes, and clearer rollback paths \u2014 Chapter 7 case studies show consolidation reduces incident confusion and maintenance burden \u2014 operators need one mental model for deploy/rollback during stress."
+    },
+    {
+      "id": "FC-WB-019",
+      "deck": "core",
+      "tags": [
+        "slo-document",
+        "appendix",
+        "error-budget",
+        "WB-FOUND"
+      ],
+      "source": "SRE Workbook appendix",
+      "front": "The workbook's example SLO document includes an error budget policy section that specifies:",
+      "back": "Actions at defined budget consumption thresholds \u2014 such as slowing launches or requiring additional review \u2014 Appendix SLO examples tie metrics to policy: what happens at 25%, 50%, 75%, 100% budget consumption. Without policy, error budgets are numbers without organizational teeth."
+    },
+    {
+      "id": "FC-WB-020",
+      "deck": "core",
+      "tags": [
+        "slo-document",
+        "appendix",
+        "escalation",
+        "WB-FOUND"
+      ],
+      "source": "SRE Workbook appendix",
+      "front": "When an example error budget policy escalates to 'launch freeze' at budget exhaustion, the workbook emphasizes:",
+      "back": "Pre-negotiated agreement between product and SRE so the freeze is a policy outcome, not an arbitrary ops veto \u2014 Appendix templates show error budget policy as a social contract documented upfront. Escalation steps are agreed with stakeholders \u2014 making budget exhaustion a predictable business decision."
+    },
+    {
+      "id": "FC-WB-021",
+      "deck": "core",
+      "tags": [
+        "slo-document",
+        "appendix",
+        "review",
+        "WB-FOUND"
+      ],
+      "source": "SRE Workbook appendix",
+      "front": "Example SLO documents in the workbook recommend periodic review because:",
+      "back": "Services, user expectations, and architecture evolve \u2014 stale SLOs misalign incentives and alerting \u2014 Appendix guidance treats SLO documents as living artifacts reviewed quarterly or after major architecture changes \u2014 keeping SLIs, targets, and policy aligned with reality."
+    },
+    {
+      "id": "FC-WB-022",
+      "deck": "core",
+      "tags": [
+        "slo",
+        "error-budget",
+        "policy",
+        "appendix",
+        "WB-FOUND"
+      ],
+      "source": "SRE Workbook appendix",
+      "front": "An example error budget policy allows 'budget borrowing' from next quarter with executive approval. The workbook uses this to illustrate:",
+      "back": "Error budgets can flex for exceptional business needs when borrowing is explicit, tracked, and repaid \u2014 not silently ignored \u2014 Appendix examples show sophisticated budget governance: borrowing is permitted but visible \u2014 preserving the model's integrity while accommodating rare business imperatives like major launches."
+    },
+    {
+      "id": "FC-BS-009",
+      "deck": "core",
+      "tags": [
+        "fuzzing",
+        "dynamic-analysis",
+        "testing",
+        "BS-IMPL"
+      ],
+      "source": "BSRS ch 13",
+      "front": "Fuzz testing in chapter 13 differs from unit testing primarily because fuzzing:",
+      "back": "Generates malformed or unexpected inputs automatically to explore code paths humans rarely anticipate \u2014 Chapter 13 describes fuzzing as automated adversarial input generation \u2014 finding memory corruption, panics, and logic bugs in parsers and protocol handlers that manual tests miss."
+    },
+    {
+      "id": "FC-BS-010",
+      "deck": "core",
+      "tags": [
+        "fuzzing",
+        "coverage",
+        "continuous",
+        "BS-IMPL"
+      ],
+      "source": "BSRS ch 13",
+      "front": "Continuous fuzzing integrated into the build pipeline primarily provides:",
+      "back": "Ongoing discovery of regressions and new vulnerabilities as code changes, not just one-time pre-release testing \u2014 Chapter 13 advocates continuous fuzzing as code evolves \u2014 new parsers and refactors introduce fresh attack surface. Fuzzing complements static analysis; neither proves absence of all bugs."
+    },
+    {
+      "id": "FC-BS-011",
+      "deck": "core",
+      "tags": [
+        "static-analysis",
+        "sast",
+        "ci",
+        "BS-IMPL"
+      ],
+      "source": "BSRS ch 13",
+      "front": "Static analysis in CI catches vulnerabilities by:",
+      "back": "Examining source or bytecode without execution to flag dangerous patterns such as injection sinks and unsafe API usage \u2014 Chapter 13 covers SAST as pre-deployment analysis: taint tracking, pattern matchers, and type-aware checkers find bug classes before code ships \u2014 complementary to dynamic fuzzing."
+    },
+    {
+      "id": "FC-BS-012",
+      "deck": "core",
+      "tags": [
+        "static-analysis",
+        "false-positives",
+        "triage",
+        "BS-IMPL"
+      ],
+      "source": "BSRS ch 13",
+      "front": "High false-positive rates in static analysis tooling most undermine security when teams:",
+      "back": "Ignore all findings including true positives due to alert fatigue \u2014 chapter 13 recommends tuning, suppression with justification, and prioritization \u2014 Chapter 13 acknowledges SAST limitations. Sustainable programs tune rules, track suppressions, and prioritize reachable vulnerabilities \u2014 otherwise tooling becomes noise and real bugs slip through."
+    },
+    {
+      "id": "FC-BS-013",
+      "deck": "core",
+      "tags": [
+        "provenance",
+        "verifiable-builds",
+        "supply-chain",
+        "BS-IMPL"
+      ],
+      "source": "BSRS ch 14",
+      "front": "Binary provenance in chapter 14 records:",
+      "back": "Cryptographically verifiable metadata linking an artifact to its exact source revision, build configuration, and builder identity \u2014 Chapter 14's provenance model enables verifying that a deployed binary was built from expected source in a trusted environment \u2014 foundational for supply chain security."
+    },
+    {
+      "id": "FC-BS-014",
+      "deck": "core",
+      "tags": [
+        "provenance",
+        "verifiable-builds",
+        "hermetic",
+        "BS-IMPL"
+      ],
+      "source": "BSRS ch 14",
+      "front": "Verifiable builds require hermetic build environments because:",
+      "back": "Non-hermetic builds may incorporate undeclared inputs, making reproducibility and provenance claims unverifiable \u2014 Chapter 14 ties hermeticity to verifiability: only declared inputs participate in the build. Undeclared ambient state breaks reproducibility and allows supply chain tampering to go undetected."
+    },
+    {
+      "id": "FC-BS-015",
+      "deck": "core",
+      "tags": [
+        "provenance",
+        "deployment",
+        "policy",
+        "BS-IMPL"
+      ],
+      "source": "BSRS ch 14",
+      "front": "A deployment policy requiring verified provenance before promotion prevents:",
+      "back": "Running binaries whose origin cannot be traced to an authorized build pipeline and source commit \u2014 Chapter 14 describes policy enforcement at deploy time: reject artifacts lacking valid provenance signatures \u2014 blocking tampered or manually built binaries from production."
     }
   ]
 }
