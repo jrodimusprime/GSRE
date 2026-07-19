@@ -145,6 +145,14 @@ class CardBankTests(unittest.TestCase):
         sample = cr_code[0]["front"]
         self.assertIn("```python", sample)
 
+    def test_core_deck_size(self):
+        registry = json.loads((DATA / "cards.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(registry["decks"]), 1)
+        core = json.loads((DATA / "cards" / "core.json").read_text(encoding="utf-8"))
+        n = len(core["cards"])
+        self.assertGreaterEqual(n, 80)
+        self.assertLessEqual(n, 400)
+        self.assertEqual(registry["decks"][0]["cardCount"], n)
 
 
 class CardsAppTests(unittest.TestCase):
