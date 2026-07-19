@@ -15,7 +15,7 @@ const CardsUI = (() => {
     const detailEl = el('cards-detail');
     remEl.textContent = String(remaining);
     remEl.classList.toggle('has-score', remaining > 0);
-    detailEl.textContent = `${mastered} / ${total} very confident`;
+    detailEl.textContent = `${mastered}/${total} very confident`;
   }
 
   function renderFaceModeBtn() {
