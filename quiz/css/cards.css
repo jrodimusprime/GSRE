@@ -1,0 +1,248 @@
+/* Flash cards — extends quiz.css tokens */
+
+body.cards-page {
+  padding-bottom: 8.5rem;
+  max-width: 820px;
+}
+
+.cards-score-bar {
+  text-align: right;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+}
+
+.cards-score-bar .avg-score {
+  color: var(--google-green);
+}
+
+.face-mode-btn {
+  margin-top: 0.25rem;
+}
+
+.cards-area {
+  margin-bottom: 1.5rem;
+}
+
+.flash-card {
+  display: block;
+  width: 100%;
+  min-height: 280px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  cursor: pointer;
+  perspective: 1200px;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  box-shadow: var(--shadow);
+}
+
+.flash-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.flash-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 280px;
+  transform-style: preserve-3d;
+  transition: transform 0.45s ease;
+}
+
+.flash-card.is-flipped .flash-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flash-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.flash-face-back {
+  transform: rotateY(180deg);
+  background: var(--surface-raised);
+}
+
+.face-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.face-text {
+  flex: 1;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.face-text .question-prose {
+  margin: 0;
+}
+
+.face-source {
+  margin: 1rem 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.flip-hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.cards-done {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.cards-done h2 {
+  margin-bottom: 0.5rem;
+}
+
+.cards-done .btn-primary {
+  margin-top: 1rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-family: inherit;
+  font-weight: 500;
+  background: var(--accent-strong);
+  color: #fff;
+}
+
+.cards-done .btn-primary:hover {
+  background: var(--accent);
+  color: #202124;
+}
+
+.rating-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 0.75rem 1rem 1rem;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.rating-label {
+  margin: 0 auto 0.5rem;
+  max-width: 820px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.rating-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.rating-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  min-height: 3.4rem;
+  padding: 0.45rem 0.35rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, opacity 0.15s;
+}
+
+.rating-btn:hover:not(:disabled) {
+  background: var(--surface-raised);
+  color: var(--text);
+  border-color: var(--border-hover);
+}
+
+.rating-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.rating-num {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.rating-text {
+  font-size: 0.7rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.rating-1:not(:disabled):hover {
+  border-color: var(--error-border);
+  color: var(--error-text);
+}
+
+.rating-2:not(:disabled):hover {
+  border-color: var(--warning);
+  color: var(--warning);
+}
+
+.rating-3:not(:disabled):hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.rating-4:not(:disabled):hover {
+  border-color: var(--success-border);
+  color: var(--success-text);
+}
+
+@media (max-width: 520px) {
+  .flash-card,
+  .flash-card-inner {
+    min-height: 240px;
+  }
+
+  .face-text {
+    font-size: 1.05rem;
+  }
+
+  .rating-text {
+    font-size: 0.62rem;
+  }
+
+  .rating-buttons {
+    gap: 0.35rem;
+  }
+}

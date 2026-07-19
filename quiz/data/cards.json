@@ -1,0 +1,10 @@
+{
+  "decks": [
+    {
+      "id": "core",
+      "title": "Core interview concepts",
+      "dataFile": "cards/core.json",
+      "cardCount": 261
+    }
+  ]
+}

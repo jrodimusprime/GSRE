@@ -1,0 +1,3131 @@
+{
+  "cards": [
+    {
+      "id": "FC-WX-001",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "troubleshooting",
+        "on-call",
+        "glassdoor:igotanoffer"
+      ],
+      "source": "IGotAnOffer; SRE Book Shakespeare example; SRE-INTERVIEW-CASES W-I16",
+      "front": "You are on-call for the Shakespeare search service. A black-box probe alert fires: search for \"the forms of things unknown\" has failed for five minutes. Synthetic checks are red. What should you do FIRST?",
+      "back": "Confirm user impact (real traffic vs probe-only), check recent deploys/changes, and triage search pipeline health before deep debugging \u2014 IGotAnOffer and SRE troubleshooting guidance: start with impact scope, change correlation, and service-level signals \u2014 then narrow to indexing, serving, or dependency failure."
+    },
+    {
+      "id": "FC-WX-002",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "troubleshooting",
+        "observability",
+        "reddit:reddit-plan"
+      ],
+      "source": "REDDIT-PLAN E2; SRE-INTERVIEW-CASES W-I18",
+      "front": "Dashboards show green synthetic probes and \"clean\" error logs, but support tickets report widespread user failures. What is the most likely explanation?",
+      "back": "Synthetic probes or log sampling miss the failing path \u2014 real user traffic hits a different code path, region, or cohort \u2014 A classic unexpected troubleshooting trap: probes test a narrow slice. Interviewers want you to compare synthetic vs real traffic, canary coverage, and client-side failures."
+    },
+    {
+      "id": "FC-WX-003",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "live-debug",
+        "apache",
+        "glassdoor"
+      ],
+      "source": "Glassdoor SRE progressive Apache debug; SRE-INTERVIEW-CASES W-I12",
+      "front": "Live-debug interview: a simple website returns permission errors for a static file. Apache logs show 403. The file exists on disk as a blank text file. What is the most likely fix?",
+      "back": "File ownership or mode is too restrictive for the Apache user \u2014 adjust permissions so the web server can read it \u2014 Glassdoor's progressive Apache gauntlet starts with a basic permissions problem. Read logs, verify path, check owner/mode \u2014 classic page-1 trap."
+    },
+    {
+      "id": "FC-WX-004",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "live-debug",
+        "apache",
+        "glassdoor"
+      ],
+      "source": "Glassdoor SRE Apache debug page 2; SRE-INTERVIEW-CASES W-I13",
+      "front": "Next live-debug page: logs show 404 for `challenge2.shtml` but `ls` in the document root shows no such file. What should you check NEXT?",
+      "back": "Apache configuration \u2014 the URL may map to a different directory than the one you listed \u2014 Page 2 of the Glassdoor escape-room: the file lives elsewhere per Apache config. Candidates who only `ls` the obvious webroot get stuck."
+    },
+    {
+      "id": "FC-WX-005",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "live-debug",
+        "unicode",
+        "glassdoor"
+      ],
+      "source": "Glassdoor SRE Apache debug page 3; SRE-INTERVIEW-CASES W-I14",
+      "front": "Live-debug: a filename looks correct in the terminal (`challenge3.shtml`) but Apache logs show URL-encoded characters and 500 errors. `ls` shows a matching name. What is happening?",
+      "back": "Unicode homoglyphs \u2014 the on-disk name uses look-alike characters; search for the literal ASCII string to find the wrong file \u2014 Glassdoor page 3: Unicode filenames render like ASCII in the terminal. Open/search for the exact expected string \u2014 a memorable \"weird\" SRE debug moment."
+    },
+    {
+      "id": "FC-WX-006",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "live-debug",
+        "gdb",
+        "glassdoor"
+      ],
+      "source": "Glassdoor SRE Apache debug page 4; SRE-INTERVIEW-CASES W-I15",
+      "front": "Final live-debug page: requesting `challenge4.shtml` segfaults Apache. `gdb` on the core dump points to mod_rewrite C source line with `strstr(filename, \"challenge4.shtml\")` followed by `SIGSEGV`. What do you tell the interviewer?",
+      "back": "The module deliberately segfaults when that filename matches \u2014 explain the strstr check triggers intentional SIGSEGV; fixing is not required \u2014 Glassdoor page 4: candidates run gdb, read the C source, and explain intentional crash on a specific filename. They are not asked to fix it \u2014 only diagnose."
+    },
+    {
+      "id": "FC-WX-007",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "hiring",
+        "code-review",
+        "exponent"
+      ],
+      "source": "Exponent L6 EM fd33b1; SRE-INTERVIEW-CASES W-M09",
+      "front": "Exponent reports failing Google's must-pass EM code review round (200+ line Google Doc). What re-interview constraint do some candidates report?",
+      "back": "A long cooldown (often ~12 months) before re-interviewing for the same level after failing a must-pass round \u2014 Exponent L6 EM failure stories note harsh cooldown on must-pass code review \u2014 especially painful when time was lost reading legacy logic, not missing fundamentals."
+    },
+    {
+      "id": "FC-WX-008",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "hiring",
+        "loop-variance",
+        "reddit:1kdf6fn"
+      ],
+      "source": "reddit:1kdf6fn; SRE-INTERVIEW-CASES W-I03",
+      "front": "A Reddit candidate reports only three onsite interviews after phone screens, while blog posts describe four to five. Best takeaway?",
+      "back": "Loop length and round mix vary by level, track, and team \u2014 confirm your schedule with the recruiter \u2014 1kdf6fn is a real variance data point. Prep for your confirmed rounds, not generic blog templates."
+    },
+    {
+      "id": "FC-WX-009",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "hiring",
+        "recruiter-prep",
+        "reddit:da4h29"
+      ],
+      "source": "reddit:da4h29; SRE-INTERVIEW-CASES W-M21",
+      "front": "reddit:da4h29: recruiter prep covered mutex, semaphore, and filesystem basics and felt \"too easy.\" Onsite still felt harder. What explains the gap?",
+      "back": "Prep topics appear inside different round shapes (code review snippets, NALSD math, troubleshooting) \u2014 not as standalone trivia questions \u2014 da4h29 pattern: fundamentals show up embedded in production-style review and design \u2014 the format surprise matters as much as the topic list."
+    },
+    {
+      "id": "FC-WX-010",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "NALSD",
+        "reddit:c3lrks"
+      ],
+      "source": "SRE Workbook NALSD; DEV walkthrough; SRE-INTERVIEW-CASES W-I06",
+      "front": "Many candidates treat Google's NALSD round like \"design Twitter from scratch.\" What is NALSD actually?",
+      "back": "Analyze and incrementally improve an existing large production system under real constraints \u2014 not greenfield boxes \u2014 NALSD = Non-Abstract Large System Design. The \"weird\" surprise is fixing/diagnosing a broken system with napkin math \u2014 c3lrks and workbook materials align."
+    },
+    {
+      "id": "FC-WX-011",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "NALSD",
+        "glassdoor:igotanoffer"
+      ],
+      "source": "IGotAnOffer Glassdoor list; SRE-INTERVIEW-CASES W-I07",
+      "front": "IGotAnOffer aggregates \"Design a snakes game\" alongside AdWords-scale NALSD prompts. How should you respond if you get a toy-sounding design prompt?",
+      "back": "Treat it seriously \u2014 clarify requirements, estimate scale, state SLOs, and iterate; toy prompts still test NALSD process \u2014 Prompt surface area varies; interviewers still score requirements, math, failure modes, and incremental design \u2014 even for game-like scenarios."
+    },
+    {
+      "id": "FC-WX-012",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "NALSD",
+        "sre-manager",
+        "jointaro"
+      ],
+      "source": "Jointaro SRE Manager US; SRE-INTERVIEW-CASES W-M05",
+      "front": "Jointaro reports a Google SRE Manager system-design prompt: \"Design a system to understand trends in a non-structured dataset.\" What should you do FIRST?",
+      "back": "Clarify data volume, sources, latency needs, who consumes trends, privacy, and what \"trend\" means operationally \u2014 Vague product-ish prompts are intentional. Manager-track design still rewards clarifiers before architecture \u2014 same as Systems Architecture prep."
+    },
+    {
+      "id": "FC-WX-013",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "napkin-math",
+        "glassdoor"
+      ],
+      "source": "Glassdoor LinkedIn SRE; SRE-INTERVIEW-CASES W-I34",
+      "front": "Glassdoor: distribute 1 TB from one server to 10,000 nodes; copying to one node takes hours. How do you avoid ~20,000 hours total serial copy time?",
+      "back": "Use tree/broadcast fanout, P2P-style propagation, or staged distribution so nodes help replicate \u2014 plus checksums for corruption detection \u2014 Classic fanout math trap: O(n) serial copies explode. Interviewers want layered distribution and integrity checks \u2014 reported on Glassdoor SRE interviews."
+    },
+    {
+      "id": "FC-WX-014",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "napkin-math",
+        "glassdoor"
+      ],
+      "source": "Glassdoor Google SRE 2015; SRE-INTERVIEW-CASES W-I33",
+      "front": "Glassdoor SRE interview: \"What's 2^32?\" What approach best demonstrates systems thinking?",
+      "back": "Decompose: 2^32 = 2^10 \u00d7 2^10 \u00d7 2^10 \u00d7 2^2 \u2248 1000\u00b3 \u00d7 4 \u2248 4 billion; note unsigned 32-bit overflow boundary \u2014 Glassdoor reports mental-math decomposition, not calculator precision. Connecting to uint32 max is a strong SRE signal."
+    },
+    {
+      "id": "FC-WX-015",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "coding-awareness",
+        "glassdoor"
+      ],
+      "source": "Glassdoor Google SRE; SRE-INTERVIEW-CASES W-I23",
+      "front": "Glassdoor reports: \"Code the tail command for large datasets.\" Which approach is correct?",
+      "back": "Seek near end of file and read backwards in chunks \u2014 do not load the entire file into memory \u2014 Even if your loop is code review, IC-track reports include practical Unix-style tasks. Bounded memory via seek/chunked read is the expected insight."
+    },
+    {
+      "id": "FC-WX-016",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "coding-awareness",
+        "glassdoor"
+      ],
+      "source": "Glassdoor Google SRE; SRE-INTERVIEW-CASES W-I31",
+      "front": "Glassdoor: find the most repeated words in a large text file. What is the core scalable approach?",
+      "back": "Stream the file once, count with a hash map / Counter, track max \u2014 O(n) time, bounded by unique words not file reread \u2014 Practical file-processing question \u2014 tests streaming and aggregation, not graph algorithms."
+    },
+    {
+      "id": "FC-WX-017",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "linux",
+        "glassdoor:igotanoffer"
+      ],
+      "source": "IGotAnOffer Linux list; SRE-INTERVIEW-CASES W-I22",
+      "front": "IGotAnOffer / Glassdoor: \"What is a zombie process?\" What is the accurate answer?",
+      "back": "A child process that exited but whose parent has not called wait() \u2014 still has a PID entry until reaped \u2014 Phone-screen \"basic\" Linux that stumps ops folks. Zombies are about parent/child lifecycle, not CPU usage."
+    },
+    {
+      "id": "FC-WX-018",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "linux",
+        "glassdoor:igotanoffer"
+      ],
+      "source": "IGotAnOffer; SRE-INTERVIEW-CASES W-I21",
+      "front": "What's the difference between a hard link and a soft (symbolic) link in Linux?",
+      "back": "Hard link shares the same inode; symlink is a separate path pointing to another path \u2014 symlinks can cross filesystems, hard links typically cannot \u2014 Foundational but still appears in senior SRE phone screens per IGotAnOffer aggregation."
+    },
+    {
+      "id": "FC-WX-019",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "linux",
+        "glassdoor:igotanoffer"
+      ],
+      "source": "IGotAnOffer trick questions; SRE-INTERVIEW-CASES W-I19",
+      "front": "IGotAnOffer lists: \"Which system call's return value is not zero although it ended successfully?\" Which family of answers is correct?",
+      "back": "Calls like wait()/waitpid() return the child PID (positive), or lseek() may return a non-zero offset \u2014 success \u2260 return 0 \u2014 Classic trick question \u2014 tests whether you know success is not always zero (e.g., wait returns pid, read returns byte count)."
+    },
+    {
+      "id": "FC-WX-020",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "linux",
+        "glassdoor:igotanoffer"
+      ],
+      "source": "IGotAnOffer; SRE-INTERVIEW-CASES W-I20",
+      "front": "When asked \"What happens when you type `ls -l`?\" in a Linux internals interview, what depth is expected FIRST?",
+      "back": "Shell parses input \u2192 fork/exec \u2192 ls binary \u2192 getdents/stat syscalls \u2192 format output \u2014 high-level path before struct trivia \u2014 wc4ryg debate: implications and call chain beat memorizing kernel structs. Walk shell \u2192 fork \u2192 exec \u2192 filesystem syscalls."
+    },
+    {
+      "id": "FC-WX-021",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "networking",
+        "glassdoor:igotanoffer"
+      ],
+      "source": "IGotAnOffer Linux list; SRE-INTERVIEW-CASES",
+      "front": "IGotAnOffer: \"What's the difference between TCP and UDP?\" Which answer fits SRE interviews?",
+      "back": "TCP: connection-oriented, reliable, ordered delivery; UDP: connectionless, no delivery guarantees \u2014 choose based on latency/tolerance for loss \u2014 Basic but frequently listed for Google SRE phone screens \u2014 tie to reliability vs latency trade-offs."
+    },
+    {
+      "id": "FC-WX-022",
+      "deck": "core",
+      "tags": [
+        "weird-unexpected",
+        "troubleshooting",
+        "deployments"
+      ],
+      "source": "SRE-INTERVIEW-CASES \u00a74.3; common on-call pattern",
+      "front": "Latency spikes immediately after a deploy; error rate is rising. Dashboards show CPU is normal. What should you investigate FIRST?",
+      "back": "Correlate deploy timeline, check canary vs full rollout, and compare golden signals / traces for the new binary vs rollback candidate \u2014 Post-deploy regression is a common unexpected troubleshooting narrative \u2014 change correlation before deep kernel dives."
+    },
+    {
+      "id": "FC-A1-001",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "evaluation-attributes",
+        "gca"
+      ],
+      "source": "Google How We Hire; How We Hire video (zhUgaKb0s5A)",
+      "front": "Google evaluates candidates on four attributes throughout the hiring process. Which set is correct?",
+      "back": "General cognitive ability, role-related knowledge, leadership, and Googleyness \u2014 Google's official How We Hire materials and video define four evaluation dimensions: GCA (problem-solving and learning ability), role-related knowledge, leadership (including emergent leadership),\u2026"
+    },
+    {
+      "id": "FC-A1-002",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "process",
+        "pipeline"
+      ],
+      "source": "Google How We Hire; confirmed loop notes",
+      "front": "Which sequence best represents Google's typical hiring pipeline after initial application?",
+      "back": "Initial screen \u2192 phone/video interviews \u2192 onsite loop \u2192 hiring committee \u2192 team matching \u2014 Official How We Hire describes an initial conversation, remote/phone screens, onsite (or virtual onsite) interviews, then a hiring committee that reviews packet feedback holistically, followed by\u2026"
+    },
+    {
+      "id": "FC-A1-003",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "sre-swe",
+        "sre-se",
+        "track"
+      ],
+      "source": "Interview prep hub SRE path; confirmed loop notes",
+      "front": "You are interviewing for SRE Software Engineering (SRE-SWE). How does this track differ from SRE Systems Engineering (SRE-SE)?",
+      "back": "SRE-SWE emphasizes software development, automation, and systems design; SRE-SE leans more toward Linux/systems administration depth \u2014 The interview prep path distinguishes SRE-SWE (software engineering focus) from SRE-SE (heavier Linux/ops loop). Technical rounds differ by track \u2014 e.g., live coding vs code review vs Linux depth \u2014\u2026"
+    },
+    {
+      "id": "FC-A1-004",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "systems-architecture",
+        "no-coding"
+      ],
+      "source": "Confirmed loop notes; Systems Architecture video",
+      "front": "Confirmed guidance describes the 60-minute Systems Architecture interview. Which statement is accurate?",
+      "back": "It is not a coding interview; interfaces, APIs, and pseudocode payloads are acceptable \u2014 Both confirmed loop guidance and the official Systems Architecture video (Gg318hR5JY0) state explicitly: no coding in this round. Defining APIs, data payloads at pseudocode level, whiteboard\u2026"
+    },
+    {
+      "id": "FC-A1-005",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "googleyness",
+        "interview-style"
+      ],
+      "source": "How We Hire video; Google careers",
+      "front": "Google interviews are described as conversations rather than interrogations. What does this imply for candidates?",
+      "back": "Ask clarifying questions, think aloud, and engage collaboratively with the interviewer's hints \u2014 Official prep materials frame interviews as collaborative conversations. Process visibility \u2014 clarifying ambiguity, explaining reasoning, incorporating feedback \u2014 is scored alongside outcomes,\u2026"
+    },
+    {
+      "id": "FC-A1-006",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "committee",
+        "packet"
+      ],
+      "source": "Google How We Hire; USENIX hiring SRE paper",
+      "front": "What does the hiring committee review when deciding on a candidate?",
+      "back": "Written feedback from all interviewers across attributes \u2014 not a single interviewer's vote \u2014 Google's committee model synthesizes structured interviewer feedback against the four attributes. No single interview dominates; the packet includes multiple data points. USENIX hiring paper notes\u2026"
+    },
+    {
+      "id": "FC-A1-007",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "team-matching",
+        "timing"
+      ],
+      "source": "Google How We Hire",
+      "front": "After a candidate receives a hiring committee approval, team matching typically:",
+      "back": "Pairs the candidate with teams based on mutual interest, skills, and organizational needs \u2014 not instant random assignment \u2014 How We Hire describes team matching as a distinct phase after hire decision where candidates and teams explore fit. It can take additional time post-offer and is separate from passing the interview loop."
+    },
+    {
+      "id": "FC-A1-008",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "sre-role",
+        "usenix"
+      ],
+      "source": "USENIX hiring SRE paper; SRE book introduction",
+      "front": "According to Google's SRE hiring philosophy, SRE candidates are expected to demonstrate:",
+      "back": "Both strong software engineering skills and systems engineering intuition \u2014 a higher combined bar than typical ops or pure SWE roles alone \u2014 SRE book intro and USENIX hiring paper emphasize SRE competes for candidates who excel at coding AND systems engineering \u2014 the hiring pool is intentionally narrow. SRE-SWE loops reflect this dual expectation."
+    },
+    {
+      "id": "FC-A1-009",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "leadership",
+        "emergent-leadership"
+      ],
+      "source": "How We Hire video; leadership prep video",
+      "front": "Google assesses 'leadership' in technical interviews even for non-manager roles. What does emergent leadership mean in this context?",
+      "back": "Stepping up to drive impact when needed and stepping back to let others lead when appropriate \u2014 Google's leadership dimension includes emergent leadership \u2014 influence, initiative, and collaboration without formal authority. Leadership prep video covers stepping in/stepping out. ICs are expected\u2026"
+    },
+    {
+      "id": "FC-A1-010",
+      "deck": "core",
+      "tags": [
+        "hiring",
+        "interviewer-matching",
+        "strengths"
+      ],
+      "source": "How We Hire; confirmed loop notes",
+      "front": "Why might Google match specific interviewers to a candidate's stated strengths or background?",
+      "back": "To assess role-related knowledge fairly and allow the candidate to demonstrate depth in relevant areas \u2014 Interview-as-conversation includes aligning interviewers with role relevance where possible, so role-related knowledge is evaluated by someone who can engage deeply \u2014 while still covering all four\u2026"
+    },
+    {
+      "id": "FC-A2-001",
+      "deck": "core",
+      "tags": [
+        "sre",
+        "sli",
+        "slo",
+        "sla"
+      ],
+      "source": "SRE book introduction; SRE workbook TOC",
+      "front": "In SRE vocabulary, which definition correctly distinguishes SLI, SLO, and SLA?",
+      "back": "SLI is a measured indicator; SLO is an internal target for that indicator; SLA is a contractual commitment often with consequences \u2014 SRE book and workbook establish: SLIs are quantified service aspects (latency, availability); SLOs are target ranges for SLIs; SLAs are external agreements, often looser than internal SLOs. This\u2026"
+    },
+    {
+      "id": "FC-A2-002",
+      "deck": "core",
+      "tags": [
+        "sre",
+        "error-budget",
+        "velocity"
+      ],
+      "source": "SRE book introduction \u2014 error budget chapter",
+      "front": "Google's error budget model resolves tension between product development and SRE by:",
+      "back": "Allowing a defined amount of unreliability that can be 'spent' on launches and risk, aligning incentives when budget remains \u2014 SRE book intro: 100% reliability is the wrong target for most services. Error budget = 1 \u2212 SLO target; teams spend it on velocity. When budget is exhausted, focus shifts to stability \u2014 a structured\u2026"
+    },
+    {
+      "id": "FC-A2-003",
+      "deck": "core",
+      "tags": [
+        "sre",
+        "toil",
+        "automation"
+      ],
+      "source": "SRE book \u2014 eliminating toil; workbook TOC",
+      "front": "Which activity best exemplifies SRE 'toil' that should be reduced over time?",
+      "back": "Manually restarting the same failing batch job every morning with no lasting fix \u2014 SRE defines toil as manual, repetitive, automatable work tied to running a service \u2014 not engineering that permanently improves the system. Eliminating toil frees SRE capacity for software-driven\u2026"
+    },
+    {
+      "id": "FC-A2-004",
+      "deck": "core",
+      "tags": [
+        "sre",
+        "blameless-postmortem",
+        "culture"
+      ],
+      "source": "SRE book; SRE role overview",
+      "front": "A blameless postmortem after a production incident primarily aims to:",
+      "back": "Understand systemic causes and prevent recurrence without punishing individuals for honest mistakes \u2014 Blameless postmortems are core SRE culture. Focus is systemic fixes, shared learning, and action items \u2014 not individual blame. This connects to leadership behavioral prep (growth from failure)."
+    },
+    {
+      "id": "FC-A2-005",
+      "deck": "core",
+      "tags": [
+        "sre",
+        "nalsd",
+        "abstract-design"
+      ],
+      "source": "NALSD workbook chapter; SRE workbook",
+      "front": "Non-Abstract Large System Design (NALSD) differs from abstract system design interviews by emphasizing:",
+      "back": "Iterative, concrete designs with capacity planning, failure domains, and operational cost \u2014 not hand-wavy boxes \u2014 NALSD chapter: start with requirements, iterate through designs increasing sophistication until viable, with resource planning and failure defense. SRE-SWE path values this concrete iteration over\u2026"
+    },
+    {
+      "id": "FC-A2-006",
+      "deck": "core",
+      "tags": [
+        "sre",
+        "role",
+        "vs-ops"
+      ],
+      "source": "SRE book introduction",
+      "front": "How does Google SRE differ from traditional operations according to the SRE book?",
+      "back": "SRE engineers use software and automation to solve operations problems and share ownership of reliability with development \u2014 SRE book intro positions SRE as software engineers who apply engineering to operations: automation, SLO-driven decisions, shared responsibility with dev teams. The SRE role overview reflects\u2026"
+    },
+    {
+      "id": "FC-A2-007",
+      "deck": "core",
+      "tags": [
+        "sre",
+        "nalsd",
+        "phases"
+      ],
+      "source": "NALSD workbook chapter",
+      "front": "NALSD iterative design phases are often summarized as moving through:",
+      "back": "Possible \u2192 better \u2192 feasible \u2192 resilient \u2192 better again (with requirements driving each iteration) \u2014 NALSD and QUIZ-PLAN B5 reference this iteration arc: prove a sketch works, refine with numbers, validate feasibility, add resilience, then optimize. Deferring reliability early means fewer features\u2026"
+    },
+    {
+      "id": "FC-A2-008",
+      "deck": "core",
+      "tags": [
+        "sre",
+        "slo",
+        "alerting"
+      ],
+      "source": "SRE workbook \u2014 alerting on SLOs",
+      "front": "SRE best practice for alerting aligns with:",
+      "back": "Paging humans only when SLO-threatening symptoms occur, not on every metric fluctuation \u2014 SRE workbook chapters on SLO-based alerting advocate symptom-based, SLO-aligned pages \u2014 reducing alert fatigue and tying operational response to user-visible reliability. Connects to B7 detection vs noise."
+    },
+    {
+      "id": "FC-A2-009",
+      "deck": "core",
+      "tags": [
+        "sre",
+        "lifecycle",
+        "launch"
+      ],
+      "source": "SRE book; NALSD; SRE role overview",
+      "front": "Which sequence best captures the SRE engagement lifecycle for a new large service?",
+      "back": "Design review \u2192 launch readiness \u2192 operate/monitor \u2192 iterate/refine reliability \u2014 SRE lifecycle spans early design partnership (launch reviews), ongoing operation with SLOs, and continuous refinement \u2014 not bolt-on ops after launch. NALSD embeds reliability iteration during design,\u2026"
+    },
+    {
+      "id": "FC-A2-010",
+      "deck": "core",
+      "tags": [
+        "sre",
+        "error-budget",
+        "policy"
+      ],
+      "source": "SRE book introduction",
+      "front": "If a service has exhausted its error budget mid-quarter, what policy response aligns with SRE principles?",
+      "back": "Freeze risky launches and focus engineering on reliability until budget recovery \u2014 Error budget exhaustion triggers reliability focus \u2014 a negotiated policy between SRE and product. SRE book describes this as resolving the dev/SRE incentive conflict. Secretly moving goalposts undermines the model."
+    },
+    {
+      "id": "FC-B1-001",
+      "deck": "core",
+      "tags": [
+        "interview-format",
+        "email-rubric",
+        "evaluation"
+      ],
+      "source": "systems-architecture-rubric",
+      "front": "According to Google's Systems Architecture interview rubric, which aspect carries the most weight when interviewers evaluate your design?",
+      "back": "Whether you can articulate trade-offs, implications, and a coherent design process \u2014 The Systems Architecture rubric states that trade-offs and their implications matter more than picking a single 'correct' choice, and that interviewers want a coherent design. The official prep video\u2026"
+    },
+    {
+      "id": "FC-B1-002",
+      "deck": "core",
+      "tags": [
+        "interview-format",
+        "time-box",
+        "structure"
+      ],
+      "source": "systems-architecture-rubric",
+      "front": "You have a 60-minute Systems Architecture interview. Based on Google's guidance, how should you allocate the opening portion of the session?",
+      "back": "Spend roughly the first 20 minutes clarifying requirements and presenting an initial high-level solution \u2014 Both the official Systems Architecture prep video and the email rubric emphasize significant time limits, with roughly 20 minutes dedicated to gathering requirements and presenting an initial\u2026"
+    },
+    {
+      "id": "FC-B1-003",
+      "deck": "core",
+      "tags": [
+        "mock-interview",
+        "communication",
+        "practice"
+      ],
+      "source": "mock-interview-video",
+      "front": "When practicing for a Systems Architecture mock interview, which habit most closely mirrors what Google interviewers expect in the real round?",
+      "back": "Narrating your reasoning aloud, asking clarifying questions, and revising your design when given new constraints \u2014 Mock interview guidance and the official prep video both stress think-aloud communication, collaborative clarification, and iterative improvement. Memorized diagrams or algorithm trivia do not\u2026"
+    },
+    {
+      "id": "FC-B1-004",
+      "deck": "core",
+      "tags": [
+        "interview-format",
+        "no-coding",
+        "interfaces"
+      ],
+      "source": "systems-architecture-rubric",
+      "front": "During the Systems Architecture interview, which of the following is explicitly acceptable according to Google's rubric?",
+      "back": "Describing API contracts, interfaces, and pseudocode for message payloads between components \u2014 The Systems Architecture rubric states this is not a coding interview but that interfaces, APIs, and pseudocode payloads are fine. Full implementation, IDE usage, or refusing to discuss component\u2026"
+    },
+    {
+      "id": "FC-B1-005",
+      "deck": "core",
+      "tags": [
+        "whiteboard",
+        "practice",
+        "preparation"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Google's Systems Architecture prep materials recommend practicing designs on paper or a whiteboard without an IDE. What is the primary reason for this advice?",
+      "back": "The interview environment uses a whiteboard and assesses how you reason about scale, estimates, and diagrams\u2014not IDE shortcuts \u2014 The official prep video (SA-V5 segment) recommends practicing on paper or whiteboard without an IDE because the round evaluates communication, quantitative estimates, and architectural diagrams in a\u2026"
+    },
+    {
+      "id": "FC-B2-001",
+      "deck": "core",
+      "tags": [
+        "clarification",
+        "underspecified",
+        "requirements"
+      ],
+      "source": "systems-architecture-rubric",
+      "front": "An interviewer says: 'Design a notification system for our product.' Before drawing any boxes, which question is MOST valuable to ask?",
+      "back": "What are the expected scale, latency targets, and delivery guarantees (at-least-once vs exactly-once)? \u2014 The Systems Architecture rubric prioritizes clarifying underspecified problems \u2014 especially scale, latency, and reliability constraints \u2014 before architecture. Language choice, UI colors, and\u2026"
+    },
+    {
+      "id": "FC-B2-002",
+      "deck": "core",
+      "tags": [
+        "functional-requirements",
+        "non-functional",
+        "requirements"
+      ],
+      "source": "NALSD",
+      "front": "A candidate lists: 'Users must receive email within 5 seconds; system must support 10M daily active users; admins can configure templates.' Which classification is CORRECT?",
+      "back": "The 5-second delivery and 10M DAU are non-functional; template configuration is functional \u2014 NALSD and standard requirements engineering distinguish functional requirements (what the system does\u2014configure templates) from non-functional requirements (quality attributes\u2014latency, scale,\u2026"
+    },
+    {
+      "id": "FC-B2-003",
+      "deck": "core",
+      "tags": [
+        "clarification",
+        "read-write-ratio",
+        "scale"
+      ],
+      "source": "systems-architecture-rubric",
+      "front": "When clarifying requirements for a read-heavy social feed, which follow-up question most directly informs your storage and caching strategy?",
+      "back": "What is the read-to-write ratio, and how fresh must feed items appear to users? \u2014 Read/write ratio and freshness (consistency/latency) directly drive caching, replication, and CDN decisions. The Systems Architecture rubric and AOSA both emphasize probing access patterns and\u2026"
+    },
+    {
+      "id": "FC-B2-004",
+      "deck": "core",
+      "tags": [
+        "decomposition",
+        "SOA",
+        "services"
+      ],
+      "source": "AOSA",
+      "front": "You are decomposing a monolithic e-commerce site into services. According to SOA principles in scalable web architecture literature, what is the BEST initial split criterion?",
+      "back": "Separate bounded contexts with distinct scaling profiles and failure domains (e.g., catalog, cart, payments) \u2014 AOSA and NALSD advocate decomposing by bounded context, scaling needs, and failure isolation\u2014not arbitrary table-per-service splits or language politics. Waiting for an arbitrary LOC threshold delays\u2026"
+    },
+    {
+      "id": "FC-B2-005",
+      "deck": "core",
+      "tags": [
+        "MVP",
+        "scope",
+        "v1-design"
+      ],
+      "source": "NALSD",
+      "front": "An interviewer asks you to design a global metrics pipeline. For a credible v1 within time limits, which scoping decision is MOST appropriate?",
+      "back": "Define an MVP that ingests, stores, and queries recent metrics with stated retention and query latency, deferring ML anomaly detection \u2014 NALSD's requirements phase emphasizes negotiating scope and delivering a feasible v1\u2014core ingest, store, and query\u2014with advanced features deferred. All-or-nothing scope or UI trivia avoid the architectural exercise."
+    },
+    {
+      "id": "FC-B2-006",
+      "deck": "core",
+      "tags": [
+        "constraints",
+        "geography",
+        "compliance"
+      ],
+      "source": "systems-architecture-rubric",
+      "front": "A prompt says: 'Design data storage for a health-records product.' Which clarifying question addresses a constraint that could fundamentally change your architecture?",
+      "back": "Are there geographic residency or compliance requirements (e.g., HIPAA, GDPR) for where data may be stored and processed? \u2014 Geographic and compliance constraints can mandate regional sharding, encryption, and audit architectures. The Systems Architecture rubric treats constraints as a first-class clarification topic;\u2026"
+    },
+    {
+      "id": "FC-B2-007",
+      "deck": "core",
+      "tags": [
+        "decomposition",
+        "read-write-split",
+        "CQRS"
+      ],
+      "source": "AOSA",
+      "front": "A system has a write-heavy ingestion path and a read-heavy analytics path with very different latency requirements. What decomposition approach is MOST justified?",
+      "back": "Separate the write (ingest) path from the read (query/analytics) path, potentially with async propagation between them \u2014 AOSA discusses read/write asymmetry and when to split paths\u2014often via async pipelines or CQRS-like patterns\u2014when access patterns and latency goals diverge. A single synchronous path or eliminating\u2026"
+    },
+    {
+      "id": "FC-B2-008",
+      "deck": "core",
+      "tags": [
+        "API-contract",
+        "interfaces",
+        "decomposition"
+      ],
+      "source": "systems-architecture-rubric",
+      "front": "After decomposing a system into components, what should you define BEFORE deep-diving into internal storage choices for each service?",
+      "back": "The API contracts and data passed between components, including key request/response fields and error semantics \u2014 The Systems Architecture rubric highlights interfaces and APIs as central to the round. Defining component contracts first enables parallel deep-dives and mirrors how Google expects candidates to\u2026"
+    },
+    {
+      "id": "FC-B3-001",
+      "deck": "core",
+      "tags": [
+        "design-principles",
+        "trade-offs",
+        "scalability"
+      ],
+      "source": "AOSA distsys",
+      "front": "In the AOSA chapter's six design principles, adding more servers to handle capacity most directly improves scalability but commonly trades off against which other principles?",
+      "back": "Manageability and cost (more machines to operate and pay for) \u2014 AOSA states that scaling by adding servers improves capacity but increases operational burden (manageability) and hardware/TCO (cost). The principles are often in tension\u2014not mutually exclusive."
+    },
+    {
+      "id": "FC-B3-002",
+      "deck": "core",
+      "tags": [
+        "availability",
+        "redundancy",
+        "failure"
+      ],
+      "source": "AOSA distsys",
+      "front": "High availability in a distributed web architecture primarily requires which combination of strategies?",
+      "back": "Redundancy for key components, rapid partial-failure recovery, and graceful degradation \u2014 AOSA defines availability as uptime through redundancy, fast recovery from partial failures, and graceful degradation\u2014not perfection or a single giant machine."
+    },
+    {
+      "id": "FC-B3-003",
+      "deck": "core",
+      "tags": [
+        "reliability",
+        "data-persistence"
+      ],
+      "source": "AOSA distsys",
+      "front": "Which statement best captures 'reliability' as defined in the scalable web architecture principles?",
+      "back": "A read returns consistent data for the same request, and updates persist for future retrieval \u2014 Reliability in AOSA is about dependable, consistent data: repeated reads return the same value, and stored data remains available after writes."
+    },
+    {
+      "id": "FC-B3-004",
+      "deck": "core",
+      "tags": [
+        "read-write-split",
+        "bottlenecks",
+        "connections"
+      ],
+      "source": "AOSA distsys",
+      "front": "Why does the image-hosting example split read and write paths into separate services?",
+      "back": "Writes hold connections open longer than reads, so a combined endpoint can exhaust connection limits under upload load \u2014 AOSA notes web servers cap simultaneous connections; long-running uploads block slots while reads can be served faster and asynchronously\u2014splitting paths lets each scale independently."
+    },
+    {
+      "id": "FC-B3-005",
+      "deck": "core",
+      "tags": [
+        "CDN",
+        "latency",
+        "caching"
+      ],
+      "source": "AOSA distsys",
+      "front": "A Content Delivery Network (CDN) edge server primarily improves performance by:",
+      "back": "Storing content geographically closer to users so retrieval has lower latency \u2014 CDNs cache content at many edge locations so users fetch from nearby servers\u2014reducing RTT and origin load, as in the image-hosting and Facebook caching examples."
+    },
+    {
+      "id": "FC-B3-006",
+      "deck": "core",
+      "tags": [
+        "load-balancer",
+        "scaling",
+        "health-checks"
+      ],
+      "source": "AOSA distsys",
+      "front": "What is the principal role of a load balancer in a distributed web architecture?",
+      "back": "Distribute incoming requests across a pool of nodes so capacity scales by adding nodes \u2014 Load balancers route connections to backend nodes (round robin, utilization-based, etc.), enabling horizontal scale and health-based removal of bad nodes."
+    },
+    {
+      "id": "FC-B3-007",
+      "deck": "core",
+      "tags": [
+        "load-balancer",
+        "sessions",
+        "failover"
+      ],
+      "source": "AOSA distsys",
+      "front": "Sticky sessions on a load balancer help preserve per-user server state but create tension with which reliability feature?",
+      "back": "Automatic failover\u2014if the sticky node dies, session state may be lost unless replicated elsewhere \u2014 AOSA's shopping-cart example: routing a user to the same node preserves cart data, but failover to another node loses that local state unless externalized (services, cookies, shared store)."
+    },
+    {
+      "id": "FC-B3-008",
+      "deck": "core",
+      "tags": [
+        "load-balancer",
+        "health-checks",
+        "failure"
+      ],
+      "source": "AOSA distsys",
+      "front": "Under high load, a load balancer that removes slow or timing-out nodes can paradoxically worsen an outage because:",
+      "back": "Remaining nodes absorb more traffic and may also become overloaded, shrinking the healthy pool \u2014 AOSA warns that shedding slow nodes under load can cascade: fewer nodes serve more requests, metrics may show lower throughput while survivors max out\u2014requiring careful monitoring."
+    },
+    {
+      "id": "FC-B3-009",
+      "deck": "core",
+      "tags": [
+        "caching",
+        "locality",
+        "load-balancer"
+      ],
+      "source": "AOSA distsys",
+      "front": "If each app server hosts its own local cache but a load balancer randomly distributes requests, what problem arises?",
+      "back": "Increased cache misses because the same key may hit different uncached nodes \u2014 Random LB routing defeats per-node cache locality\u2014the same resource may be requested from many nodes. AOSA recommends global or distributed caches to address this."
+    },
+    {
+      "id": "FC-B3-010",
+      "deck": "core",
+      "tags": [
+        "caching",
+        "consistent-hashing",
+        "distributed-cache"
+      ],
+      "source": "AOSA distsys",
+      "front": "A distributed cache partitions data across nodes using consistent hashing so that:",
+      "back": "A request node can quickly locate which cache peer holds a given key \u2014 AOSA describes consistent hashing in distributed caches: keys map to specific nodes, enabling O(1)-style lookup of which peer to query before falling back to origin."
+    },
+    {
+      "id": "FC-B4-001",
+      "deck": "core",
+      "tags": [
+        "CAP",
+        "partition-tolerance",
+        "distributed-systems"
+      ],
+      "source": "AOSA distsys",
+      "front": "In the CAP theorem framing used in distributed systems interviews, why is partition tolerance (P) treated as non-negotiable at scale?",
+      "back": "Network partitions will happen in real deployments, so the design must continue operating despite split connectivity \u2014 At scale, networks fail partially; systems must handle partitions. The practical trade-off is between consistency (C) and availability (A) while partitioned\u2014not whether partitions occur."
+    },
+    {
+      "id": "FC-B4-002",
+      "deck": "core",
+      "tags": [
+        "CAP",
+        "consistency",
+        "availability"
+      ],
+      "source": "AOSA distsys",
+      "front": "During a network partition, a system that rejects writes on minority partitions to prevent divergence prioritizes:",
+      "back": "Consistency over availability for those partitions \u2014 Choosing not to serve ambiguous writes during a split favors consistency (avoiding conflicting states) at the cost of availability on unreachable segments\u2014classic CP behavior."
+    },
+    {
+      "id": "FC-B4-003",
+      "deck": "core",
+      "tags": [
+        "consistent-hashing",
+        "partitioning",
+        "DHT"
+      ],
+      "source": "AOSA distsys",
+      "front": "Consistent hashing is preferred over naive modulo hashing (key % N) when scaling a cluster because:",
+      "back": "Adding or removing nodes remaps only a fraction of keys instead of nearly all keys \u2014 AOSA uses consistent hashing for caches and shards: modulo redistribution reshuffles most keys when N changes; consistent hashing bounds remapping\u2014foundational to DHT-style lookup."
+    },
+    {
+      "id": "FC-B4-004",
+      "deck": "core",
+      "tags": [
+        "DHT",
+        "decentralized",
+        "lookup"
+      ],
+      "source": "AOSA distsys",
+      "front": "A Distributed Hash Table (DHT) at the architectural level provides:",
+      "back": "Decentralized key-to-node lookup so clients can find which peer stores a key without a central directory \u2014 DHTs combine consistent hashing with peer routing so responsibility for keys is distributed; lookups traverse O(log N) hops rather than one global catalog."
+    },
+    {
+      "id": "FC-B4-005",
+      "deck": "core",
+      "tags": [
+        "replication",
+        "leader-follower",
+        "writes"
+      ],
+      "source": "AOSA distsys",
+      "front": "In leader-follower (primary-replica) replication, writes typically:",
+      "back": "Go to the leader, which replicates to followers for read scaling and failover \u2014 Leader-follower centralizes writes on one node (ordering, conflict avoidance) while followers serve reads or standby for promotion\u2014common in databases and log pipelines."
+    },
+    {
+      "id": "FC-B4-006",
+      "deck": "core",
+      "tags": [
+        "replication",
+        "multi-leader",
+        "conflicts"
+      ],
+      "source": "AOSA distsys",
+      "front": "Multi-leader (multi-primary) replication is often chosen for multi-datacenter writes but introduces:",
+      "back": "Write conflicts that require detection and resolution across leaders \u2014 Multiple writable leaders reduce cross-region write latency but concurrent updates to the same record can conflict\u2014needing LWW, versioning, or application merge rules."
+    },
+    {
+      "id": "FC-B4-007",
+      "deck": "core",
+      "tags": [
+        "replication",
+        "leaderless",
+        "quorum"
+      ],
+      "source": "AOSA distsys",
+      "front": "In leaderless replication (e.g., Dynamo-style), a read quorum of R and write quorum of W over N replicas can provide strong-ish behavior when:",
+      "back": "R + W > N so reads and writes overlap on enough replicas \u2014 Quorum intersection (R + W > N) increases chance reads see latest write; tunable R/W trades latency, availability, and staleness."
+    },
+    {
+      "id": "FC-B4-008",
+      "deck": "core",
+      "tags": [
+        "partitioning",
+        "hash",
+        "hot-partitions"
+      ],
+      "source": "AOSA distsys",
+      "front": "Hash partitioning by user_id spreads load evenly when access is uniform but can still create hot partitions when:",
+      "back": "A few keys receive disproportionate traffic (celebrity users, viral content) \u2014 Hashing balances skewed key distributions in expectation, not in every workload\u2014extreme popularity concentrates load on one partition regardless of hash quality."
+    },
+    {
+      "id": "FC-B4-009",
+      "deck": "core",
+      "tags": [
+        "partitioning",
+        "range",
+        "hot-partitions"
+      ],
+      "source": "AOSA distsys",
+      "front": "Range partitioning (e.g., by timestamp or key range) simplifies range queries but often causes hot partitions because:",
+      "back": "Recent or 'latest' keys cluster on the tail partition receiving most writes/reads \u2014 Time-series and 'newest first' access patterns hammer the high-end range shard\u2014motivating sub-splitting, salting, or hybrid partitioning strategies."
+    },
+    {
+      "id": "FC-B4-010",
+      "deck": "core",
+      "tags": [
+        "hot-partitions",
+        "mitigation",
+        "partitioning"
+      ],
+      "source": "AOSA distsys",
+      "front": "Which mitigation best addresses a hot partition caused by one extremely popular entity?",
+      "back": "Split or replicate that key's traffic across multiple shards (e.g., salted sub-keys) \u2014 When hashing isn't enough, architects fan out hot keys (replica reads, sub-shards, dedicated cache tier) so one partition isn't the sole bottleneck."
+    },
+    {
+      "id": "FC-B5-001",
+      "deck": "core",
+      "tags": [
+        "napkin-math",
+        "QPS",
+        "resource-estimation"
+      ],
+      "source": "NALSD workbook",
+      "front": "NALSD's AdWords example assumes 500,000 search queries per second. For napkin-math capacity planning, this figure is primarily used to:",
+      "back": "Size log ingestion, storage growth, and downstream join/index throughput \u2014 Transaction-rate assumptions drive log volume (~2 KB/query), disk IOPS, RAM for indexes, and worker counts\u2014core NALSD practice of grounding design in quantitative load."
+    },
+    {
+      "id": "FC-B5-002",
+      "deck": "core",
+      "tags": [
+        "napkin-math",
+        "storage",
+        "bandwidth"
+      ],
+      "source": "NALSD workbook",
+      "front": "In the AdWords CTR design, query logs are estimated at ~2 KB per entry and clicks are ~2% of query volume. Rough daily query-log storage is on the order of:",
+      "back": "~80+ TB per day (500K QPS \u00d7 2 KB \u00d7 86,400 s, rounded up aggressively) \u2014 NALSD multiplies QPS \u00d7 entry size \u00d7 seconds/day (rounding up) to expose that single-machine storage is implausible\u2014forcing distributed redesign in the feasibility phase."
+    },
+    {
+      "id": "FC-B5-003",
+      "deck": "core",
+      "tags": [
+        "napkin-math",
+        "bandwidth",
+        "latency-hierarchy"
+      ],
+      "source": "NALSD workbook",
+      "front": "When estimating whether a dashboard can load in under one second, which resource check is most relevant for serving pre-aggregated CTR data from indexes in RAM?",
+      "back": "Memory read latency and index lookup throughput\u2014not cross-continent RTT on every row \u2014 Fast dashboards depend on data locality in memory/SSD with proper indexes; napkin math separates in-process lookups from disk and WAN costs in the latency hierarchy."
+    },
+    {
+      "id": "FC-B5-004",
+      "deck": "core",
+      "tags": [
+        "NALSD",
+        "design-process",
+        "possible"
+      ],
+      "source": "NALSD workbook",
+      "front": "In NALSD's basic design phase, the question 'Is it possible?' means:",
+      "back": "Ignoring hardware limits, what design satisfies requirements in principle (e.g., one machine with SQL indexes)? \u2014 NALSD starts unconstrained\u2014can logic and algorithms meet functional needs?\u2014before 'Can we do better?' optimizes complexity, then feasibility adds real-world limits."
+    },
+    {
+      "id": "FC-B5-005",
+      "deck": "core",
+      "tags": [
+        "NALSD",
+        "design-process",
+        "feasible"
+      ],
+      "source": "NALSD workbook",
+      "front": "The NALSD question 'Is it feasible?' is asked after scaling requirements dramatically. It primarily tests whether:",
+      "back": "The design can meet constraints of money, hardware, bandwidth, and disk IOPS\u2014often requiring distribution \u2014 Feasibility applies napkin math: ~100 TB/day and 500K QPS break single-machine assumptions, pushing toward sharded stores, MapReduce/streaming, and realistic machine counts."
+    },
+    {
+      "id": "FC-B5-006",
+      "deck": "core",
+      "tags": [
+        "NALSD",
+        "design-process",
+        "resilient"
+      ],
+      "source": "NALSD workbook",
+      "front": "When NALSD asks 'Is it resilient?', the recommended mental test is:",
+      "back": "What happens when this component fails\u2014and can we still meet SLOs or degrade gracefully? \u2014 Resilience phase probes SPOFs (power, disk, network, datacenter) and failover\u2014NALSD shows one machine fails SLOs on simple reboot; replication and reprocessing cover disasters."
+    },
+    {
+      "id": "FC-B5-007",
+      "deck": "core",
+      "tags": [
+        "latency-hierarchy",
+        "resource-estimation",
+        "performance"
+      ],
+      "source": "NALSD workbook",
+      "front": "Which ordering correctly reflects the typical latency hierarchy emphasized in Google systems architecture prep?",
+      "back": "Memory read < SSD read < rotating disk read < cross-region network RTT \u2014 Interview prep and NALSD stress orders-of-magnitude: RAM/near-data is fastest; mechanical disk slower; cross-continent RTT often dominates interactive paths if round-tripped per row."
+    },
+    {
+      "id": "FC-B5-008",
+      "deck": "core",
+      "tags": [
+        "SLO",
+        "dashboard",
+        "freshness"
+      ],
+      "source": "NALSD workbook",
+      "front": "NALSD defines AdWords dashboard SLOs including '99.9% of the time, CTR data displayed is less than 5 minutes old.' This SLO primarily drives:",
+      "back": "Streaming/join pipeline design instead of daily batch-only MapReduce \u2014 Freshness SLOs bound end-to-end log join latency\u2014batch MapReduce on huge windows misses 5-minute targets, motivating LogJoiner, QueryMap, ClickMap, and replication."
+    },
+    {
+      "id": "FC-B5-009",
+      "deck": "core",
+      "tags": [
+        "AdWords",
+        "CTR",
+        "data-modeling"
+      ],
+      "source": "NALSD workbook",
+      "front": "In the AdWords CTR example, click logs and query logs are kept separate (joined on query_id) because:",
+      "back": "Click URLs have size limits; query logs hold richer fields needed for many downstream metrics beyond CTR \u2014 NALSD acknowledges adding search_term to click logs might work in a toy scope, but at scale separate logs avoid URL size limits and support multiple analytics products from one query stream."
+    },
+    {
+      "id": "FC-B5-010",
+      "deck": "core",
+      "tags": [
+        "error-budget",
+        "SLO",
+        "reliability"
+      ],
+      "source": "SRE book",
+      "front": "An error budget tied to an SLO (e.g., 99.9% dashboard freshness) is used in design iterations to:",
+      "back": "Quantify acceptable unreliability so teams balance feature velocity against resilience investments \u2014 SRE book Ch. 4: error budgets convert SLOs into allowable failure\u2014NALSD cites them when dual shard loss may briefly show stale CTR while reprocessing stays within budget."
+    },
+    {
+      "id": "FC-B5-011",
+      "deck": "core",
+      "tags": [
+        "NALSD",
+        "reddit-nalsd",
+        "reddit:c3lrks",
+        "requirements"
+      ],
+      "source": "reddit:c3lrks Failed NALSD at Google",
+      "front": "A Reddit candidate failed NALSD because the interviewer disengaged mid-interview. What is the most likely cause?",
+      "back": "Skipped critical requirements or napkin math early \u2014 interviewer concluded the approach would not scale \u2014 c3lrks comments: disengagement often means you missed a key clarifier, capacity estimate, or constraint. NALSD scores process; losing the interviewer early is a signal you went off-track."
+    },
+    {
+      "id": "FC-B5-012",
+      "deck": "core",
+      "tags": [
+        "NALSD",
+        "reddit-nalsd",
+        "reddit:c3lrks",
+        "capacity"
+      ],
+      "source": "reddit:c3lrks; NALSD workbook",
+      "front": "Reddit NALSD failure thread: you must back design choices with numbers. Which estimate is most often missing in failed interviews?",
+      "back": "Machine/storage/bandwidth counts derived from QPS and retention \u2014 not hand-wavy 'we'll shard' \u2014 c3lrks and o6ozcj stress napkin math. Saying 'scale horizontally' without sizing nodes, disks, or network transfer dooms NALSD credibility."
+    },
+    {
+      "id": "FC-B5-013",
+      "deck": "core",
+      "tags": [
+        "NALSD",
+        "reddit-nalsd",
+        "transfer-time"
+      ],
+      "source": "reddit:o6ozcj; HN Google SRE rubric",
+      "front": "You propose replicating 5 PB cross-region over a 10 Gbps link. A Reddit/HN theme in NALSD prep: why might an interviewer push back?",
+      "back": "Transfer at 10 Gbps takes weeks/months \u2014 design must account for physics and recovery time objectives \u2014 Popular NALSD failure pattern: ignoring transfer time and bandwidth reality. Back-of-envelope: 5 PB at 10 Gbps \u2248 40+ days \u2014 unacceptable for many RTOs."
+    },
+    {
+      "id": "FC-B5-014",
+      "deck": "core",
+      "tags": [
+        "NALSD",
+        "reddit-nalsd",
+        "failure-modes"
+      ],
+      "source": "reddit:c3lrks; NALSD resilient phase",
+      "front": "In NALSD, jumping straight to a detailed component diagram without stating user-facing requirements first is weak because:",
+      "back": "Interviewers cannot tell if the design solves the right problem or meets SLOs \u2014 requirements anchor all math \u2014 Reddit failure stories align with official NALSD phases: clarify possible \u2192 quantify \u2192 resilient. Skipping requirements mirrors c3lrks 'interviewer already decided no-hire' pattern."
+    },
+    {
+      "id": "FC-B6-001",
+      "deck": "core",
+      "tags": [
+        "trade-offs",
+        "storage",
+        "latency",
+        "cost"
+      ],
+      "source": "Systems Architecture video (Gg318hR5JY0) SA-V4; AOSA distsys",
+      "front": "You are designing a photo archive where users rarely access images older than one year, but must be able to retrieve them within seconds when requested. Which storage trade-off best matches this access pattern?",
+      "back": "Store hot recent photos in flash/SSD and tier older photos to cheaper rotating disk \u2014 The official Systems Architecture prep video emphasizes that rotating disk offers cheaper storage at higher latency, while flash/memory trade cost for speed. Tiering matches infrequent old access\u2026"
+    },
+    {
+      "id": "FC-B6-002",
+      "deck": "core",
+      "tags": [
+        "trade-offs",
+        "sql",
+        "nosql",
+        "access-patterns"
+      ],
+      "source": "Email rubric; AOSA distsys",
+      "front": "A social feed service needs fast reads of denormalized timelines keyed by user ID, tolerates eventual consistency, and rarely performs cross-user joins. Which database trade-off is most appropriate to discuss first?",
+      "back": "A wide-column or document store optimized for key-based reads over normalized SQL joins \u2014 SQL vs NoSQL is not about 'correctness' but access pattern fit. Timeline reads by user ID map naturally to key-value or wide-column designs with denormalized rows. SQL excels at complex joins and\u2026"
+    },
+    {
+      "id": "FC-B6-003",
+      "deck": "core",
+      "tags": [
+        "trade-offs",
+        "sync",
+        "async",
+        "coupling"
+      ],
+      "source": "AOSA distsys; email rubric",
+      "front": "An e-commerce checkout must confirm payment before showing an order receipt, but sending a confirmation email can wait. How should you frame the sync vs async trade-off?",
+      "back": "Process payment synchronously on the critical path; enqueue email delivery asynchronously \u2014 Sync processing preserves user-visible correctness on the critical path (payment confirmed before receipt). Async decouples non-critical work (email) to improve latency and resilience. The trade-off\u2026"
+    },
+    {
+      "id": "FC-B6-004",
+      "deck": "core",
+      "tags": [
+        "trade-offs",
+        "kafka",
+        "message-queue",
+        "ordering"
+      ],
+      "source": "AOSA distsys; email rubric",
+      "front": "You need a durable work queue for order-fulfillment events that must survive consumer restarts, support replay, and handle high throughput with partition-level ordering. Kafka vs a database-backed queue \u2014 which trade-off favors Kafka?",
+      "back": "Kafka's log-based, partitioned design gives replay and ordering at scale; a DB queue simplifies ops but bottlenecks on DB write throughput \u2014 Kafka trades operational complexity for scalable, ordered, replayable streams. DB queues reuse existing infrastructure but often become write-limited and costly at high volume. The interview answer\u2026"
+    },
+    {
+      "id": "FC-B6-005",
+      "deck": "core",
+      "tags": [
+        "trade-offs",
+        "normalization",
+        "denormalization"
+      ],
+      "source": "AOSA distsys; email rubric",
+      "front": "A read-heavy product catalog page displays product name, price, inventory count, and seller rating together. Queries run thousands of times per second. Which normalization trade-off is most defensible?",
+      "back": "Denormalize frequently co-read fields into a single document or row to avoid joins on every page load \u2014 Normalization reduces update anomalies; denormalization reduces read latency and join cost. For read-heavy, co-displayed data, controlled denormalization with explicit invalidation strategy is a\u2026"
+    },
+    {
+      "id": "FC-B6-006",
+      "deck": "core",
+      "tags": [
+        "trade-offs",
+        "memory",
+        "disk",
+        "estimation"
+      ],
+      "source": "Systems Architecture video SA-V3; AOSA distsys",
+      "front": "Rough latency hierarchy from fastest to slowest for a single random read in a well-provisioned system is typically:",
+      "back": "CPU cache / main memory \u2192 SSD/flash \u2192 rotating disk \u2192 cross-continent network RTT \u2014 The Systems Architecture prep video stresses quantitative intuition: memory reads are orders of magnitude faster than disk, and local network RTT is far cheaper than cross-continental hops. Knowing\u2026"
+    },
+    {
+      "id": "FC-B6-007",
+      "deck": "core",
+      "tags": [
+        "trade-offs",
+        "coherent-design",
+        "email-rubric"
+      ],
+      "source": "Email rubric \u2014 trade-offs section",
+      "front": "During a system design interview, you propose Cassandra for a workload that clearly needs strong relational joins. The interviewer asks why. What demonstrates the strongest trade-off thinking?",
+      "back": "Acknowledge the mismatch, explain why another store fits the access pattern better, and describe what you would sacrifice or gain with each option \u2014 The Systems Architecture rubric states that implications matter more than a single 'correct' choice and that a coherent design beats memorized answers. Acknowledging trade-offs, rejected\u2026"
+    },
+    {
+      "id": "FC-B6-008",
+      "deck": "core",
+      "tags": [
+        "trade-offs",
+        "cdn",
+        "push",
+        "pull"
+      ],
+      "source": "AOSA distsys",
+      "front": "Static assets (JavaScript bundles, images) for a global web app must load quickly worldwide. Which CDN trade-off should you describe?",
+      "back": "Push popular assets to edge caches proactively; use longer TTLs and cache invalidation for updates \u2014 CDN push (or prefetch) vs pull is a latency/freshness trade-off. Static assets with versioned filenames tolerate long TTLs at the edge, reducing origin load and cross-region RTT. Pull-on-miss is\u2026"
+    },
+    {
+      "id": "FC-B7-001",
+      "deck": "core",
+      "tags": [
+        "failover",
+        "redundancy",
+        "availability"
+      ],
+      "source": "AOSA distsys redundancy; email rubric",
+      "front": "A stateless API tier sits behind a load balancer with health checks. One instance stops responding. What failover behavior should you describe for v1?",
+      "back": "The load balancer stops routing to the unhealthy instance; remaining instances absorb traffic automatically \u2014 For stateless tiers, automatic failover via health-checked load balancing is the baseline pattern from AOSA's redundancy discussion. Manual intervention is reserved for stateful components or complex\u2026"
+    },
+    {
+      "id": "FC-B7-002",
+      "deck": "core",
+      "tags": [
+        "failover",
+        "stateful",
+        "manual-vs-automatic"
+      ],
+      "source": "AOSA distsys; NALSD resilience",
+      "front": "Your primary database replica fails. A synchronous standby exists in another zone. Automatic promotion could cause split-brain if the primary is merely partitioned, not dead. What trade-off should you articulate?",
+      "back": "Automatic failover reduces RTO but risks data loss or dual-writer scenarios; manual failover with fencing is safer but slower \u2014 Stateful failover trades recovery time against correctness. Automatic promotion helps RTO; manual promotion with quorum/fencing reduces split-brain risk. NALSD's resilience phase expects you to name\u2026"
+    },
+    {
+      "id": "FC-B7-003",
+      "deck": "core",
+      "tags": [
+        "graceful-degradation",
+        "partial-failure"
+      ],
+      "source": "Email rubric \u2014 failure recovery; AOSA distsys",
+      "front": "A product detail page aggregates inventory, reviews, and recommendations. The recommendations service is down. What graceful degradation strategy best preserves user experience?",
+      "back": "Serve the page without recommendations; show core product and inventory data with a subtle fallback \u2014 Graceful degradation isolates non-critical dependency failures so core functionality continues. The email rubric emphasizes operating at scale where failures are normal \u2014 designing partial responses\u2026"
+    },
+    {
+      "id": "FC-B7-004",
+      "deck": "core",
+      "tags": [
+        "circuit-breaker",
+        "cascading-failure"
+      ],
+      "source": "AOSA distsys; effective troubleshooting",
+      "front": "Service A calls Service B, which is slow and error-prone. A's thread pool fills waiting on B, causing A to fail too. Which defense directly addresses this cascading failure pattern?",
+      "back": "Circuit breaker: stop calling B after error threshold, fail fast, and periodically probe recovery \u2014 Cascading failures propagate load and latency upstream. Circuit breakers fail fast, preserving A's capacity and giving B time to recover \u2014 a core pattern in AOSA and troubleshooting literature.\u2026"
+    },
+    {
+      "id": "FC-B7-005",
+      "deck": "core",
+      "tags": [
+        "monitoring",
+        "observability",
+        "sli"
+      ],
+      "source": "Systems Architecture video SA-V2; SRE book",
+      "front": "You deploy a new sharded storage layer. The official Systems Architecture video asks: 'How do we know the system is working?' What should you propose first?",
+      "back": "Define SLIs (latency, error rate, freshness) with dashboards and alerts tied to user-visible symptoms \u2014 SA-V2 explicitly includes detecting whether the system works. SLI-driven monitoring (latency, errors, throughput, saturation) connects observability to user impact \u2014 not just machine metrics. This\u2026"
+    },
+    {
+      "id": "FC-B7-006",
+      "deck": "core",
+      "tags": [
+        "datacenter-failure",
+        "multi-region",
+        "dr"
+      ],
+      "source": "AOSA distsys; NALSD resilience",
+      "front": "An entire availability zone becomes unavailable. Your service has multi-zone deployment within one region. What failure response should you describe?",
+      "back": "Traffic shifts to healthy zones; stateful components rely on cross-zone replication already in place \u2014 Zone failure is a designed-for scenario in multi-AZ architectures: redundant capacity in sibling zones absorbs traffic. Cross-region failover is a separate, costlier DR tier. Interviewers want\u2026"
+    },
+    {
+      "id": "FC-B7-007",
+      "deck": "core",
+      "tags": [
+        "datacenter-failure",
+        "regional",
+        "rpo-rto"
+      ],
+      "source": "NALSD resilience; AOSA distsys",
+      "front": "Regional disaster destroys your primary region. RPO of 15 minutes and RTO of 1 hour are acceptable for a non-critical analytics pipeline. Which recovery design fits?",
+      "back": "Async replication to a secondary region with periodic backups; rehearsed runbook for regional failover \u2014 Recovery objectives drive architecture. 15-minute RPO tolerates async replication; 1-hour RTO does not require instant automatic global failover. Matching DR investment to business criticality \u2014\u2026"
+    },
+    {
+      "id": "FC-B7-008",
+      "deck": "core",
+      "tags": [
+        "poison-message",
+        "message-queue"
+      ],
+      "source": "AOSA distsys; effective troubleshooting",
+      "front": "A malformed message in a queue causes the consumer to crash on every redelivery, blocking the partition. What recovery pattern addresses poison messages?",
+      "back": "Dead-letter queue after N failed attempts; alert operators; fix or discard with audit trail \u2014 Poison messages are a classic async failure mode: one bad payload blocks progress. Dead-letter queues isolate poison pills, preserve other traffic, and enable investigation \u2014 standard queue hygiene\u2026"
+    },
+    {
+      "id": "FC-B8-001",
+      "deck": "core",
+      "tags": [
+        "url-shortener",
+        "hashing",
+        "architecture"
+      ],
+      "source": "Email sample topics; mock system design",
+      "front": "Designing a URL shortener at architectural level (not coding), what is the primary reason to use a distributed unique ID or hash for short codes instead of sequential integers?",
+      "back": "Avoid predictable/guessable URLs and enable independent ID generation across servers without a single coordination point \u2014 URL shortener interviews test architectural ID strategy: base-62 encoding of distributed IDs (Snowflake, UUID hash) avoids a global counter bottleneck and reduces enumeration attacks. Sequential IDs\u2026"
+    },
+    {
+      "id": "FC-B8-002",
+      "deck": "core",
+      "tags": [
+        "url-shortener",
+        "read-path",
+        "cache"
+      ],
+      "source": "AOSA distsys; email rubric",
+      "front": "A URL shortener receives 100:1 read-to-write ratio. Which v1 read-path architecture is most appropriate to discuss?",
+      "back": "Cache hot mappings in memory/CDN; async write path to durable store with redirect on cache miss \u2014 Read-heavy asymmetry drives cache-first redirect paths \u2014 a canonical pattern from AOSA. Writes are rare enough to tolerate slightly slower persistence; reads need sub-10ms redirects. Architectural\u2026"
+    },
+    {
+      "id": "FC-B8-003",
+      "deck": "core",
+      "tags": [
+        "rate-limiter",
+        "distributed",
+        "architecture"
+      ],
+      "source": "Email sample topics; AOSA distsys",
+      "front": "You need a distributed rate limiter enforcing 1000 requests/minute per API key across hundreds of stateless servers. Which architectural approach scales best?",
+      "back": "Centralized counter store (Redis/Memcached) with atomic increment and TTL windows, or token bucket per key \u2014 Distributed rate limiting requires shared state or approximate coordination. Centralized counters with sliding/fixed windows are the standard architectural pattern. Per-server counters over-allow by\u2026"
+    },
+    {
+      "id": "FC-B8-004",
+      "deck": "core",
+      "tags": [
+        "rate-limiter",
+        "placement",
+        "architecture"
+      ],
+      "source": "AOSA distsys load balancers",
+      "front": "Where should rate limiting sit architecturally for a public API with multiple microservices behind a gateway?",
+      "back": "At the API gateway/edge before routing to backends, with optional finer-grained limits per service \u2014 Edge/gateway placement protects the entire fleet from abuse early, reduces wasted downstream work, and centralizes policy. Per-service limits add nuance but edge enforcement is the architectural\u2026"
+    },
+    {
+      "id": "FC-B8-005",
+      "deck": "core",
+      "tags": [
+        "metrics-pipeline",
+        "ingestion",
+        "architecture"
+      ],
+      "source": "Email sample topics; AOSA distsys",
+      "front": "Designing a metrics/logging pipeline for 500K events/sec, which v1 ingestion architecture should you propose?",
+      "back": "Agents on hosts batch and ship to a partitioned message bus; consumers write to time-series or columnar storage \u2014 High-volume metrics pipelines use async ingestion (Kafka/Pub-Sub), batching, and partitioned consumers \u2014 the MapReduce/streaming pattern from email topic lists. Sync per-event DB writes cannot\u2026"
+    },
+    {
+      "id": "FC-B8-006",
+      "deck": "core",
+      "tags": [
+        "metrics-pipeline",
+        "query",
+        "aggregation"
+      ],
+      "source": "Email rubric; AOSA distsys",
+      "front": "Dashboard queries aggregate metrics over 30-day windows across millions of time series. Which storage/query architectural trade-off fits?",
+      "back": "Pre-aggregate at ingest into rollups (1m, 1h, 1d); query layer selects granularity by time range \u2014 Metrics systems architecturally separate hot raw retention from rolled-up long-term storage. Pre-aggregation at ingest trades write complexity for bounded query cost \u2014 standard in observability\u2026"
+    },
+    {
+      "id": "FC-B8-007",
+      "deck": "core",
+      "tags": [
+        "distributed-cache",
+        "consistency",
+        "architecture"
+      ],
+      "source": "AOSA distsys caching; email topic list",
+      "front": "A distributed cache sits in front of a database. Which cache invalidation architecture handles updated records correctly under concurrent writers?",
+      "back": "Write-through or cache-aside with explicit invalidation/version keys; TTL as safety net \u2014 Cache-aside with explicit invalidation or write-through on mutation is the canonical pattern from AOSA. TTL alone risks stale reads; global flush doesn't scale. Architectural discussion focuses on\u2026"
+    },
+    {
+      "id": "FC-B8-008",
+      "deck": "core",
+      "tags": [
+        "distributed-cache",
+        "partitioning",
+        "architecture"
+      ],
+      "source": "AOSA distsys; email DHT topic",
+      "front": "A distributed cache must scale beyond one machine's memory. Which sharding approach should you describe architecturally?",
+      "back": "Consistent hashing over cache keys across nodes with virtual nodes for even distribution \u2014 Consistent hashing (DHT concept from email topic list) enables horizontal cache scale with minimal remapping on node add/remove. Architectural interviews test why key-based partitioning beats random\u2026"
+    },
+    {
+      "id": "FC-B8-009",
+      "deck": "core",
+      "tags": [
+        "web-crawler",
+        "frontier",
+        "architecture"
+      ],
+      "source": "Email sample topics; AOSA distsys",
+      "front": "Architecturally, what is the core challenge of a polite large-scale web crawler?",
+      "back": "Maintaining a scalable URL frontier with deduplication, per-host rate limits, and prioritized fetch scheduling \u2014 Web crawler system design centers on frontier queue architecture, bloom-filter dedup, politeness per domain, and distributed fetch workers \u2014 not HTML parsing code. Email lists crawlers among\u2026"
+    },
+    {
+      "id": "FC-B8-010",
+      "deck": "core",
+      "tags": [
+        "web-crawler",
+        "storage",
+        "blob-metadata"
+      ],
+      "source": "AOSA image hosting example",
+      "front": "A crawler stores billions of fetched pages. Separating metadata from content architecturally means:",
+      "back": "Index URL, checksum, fetch time, and size in a queryable store; store raw page bytes in object/blob storage \u2014 Metadata/blob separation (from AOSA image-hosting and email rubric) lets you scale cheap object storage for bytes and fast indexes for lookup. This pattern recurs across crawlers, photo apps, and\u2026"
+    },
+    {
+      "id": "FC-B9-001",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "overview",
+        "newsql"
+      ],
+      "source": "Spanner OSDI 2012 paper (Corbett et al.)",
+      "front": "Which description best characterizes Google Spanner?",
+      "back": "A scalable, multi-version, globally distributed, synchronously replicated database with SQL and externally consistent transactions \u2014 The Spanner paper defines it as a multi-version, globally distributed, synchronously replicated database that shards data across Paxos state machines and supports externally consistent distributed\u2026"
+    },
+    {
+      "id": "FC-B9-002",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "truetime",
+        "clocks"
+      ],
+      "source": "Spanner OSDI 2012 paper \u2014 Section 3 TrueTime",
+      "front": "What makes the TrueTime API different from a normal system clock?",
+      "back": "TT.now() returns an interval [earliest, latest] that is guaranteed to contain the true absolute time, explicitly exposing clock uncertainty \u2014 TrueTime reifies uncertainty: TT.now() yields a bounded interval guaranteed to contain the real time. Spanner reasons about ordering using these bounds instead of trusting a single clock reading."
+    },
+    {
+      "id": "FC-B9-003",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "truetime",
+        "hardware"
+      ],
+      "source": "Spanner OSDI 2012 paper \u2014 TrueTime implementation",
+      "front": "TrueTime keeps its uncertainty bound small (generally under ~10 ms) by relying on which time references?",
+      "back": "GPS receivers and atomic clocks, which have uncorrelated failure modes \u2014 Time-master machines use GPS and atomic clocks precisely because their failure modes are uncorrelated. Daemons poll multiple masters and apply a Marzullo-style algorithm to reject outliers, keeping\u2026"
+    },
+    {
+      "id": "FC-B9-004",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "external-consistency",
+        "linearizability"
+      ],
+      "source": "Spanner OSDI 2012 paper \u2014 external consistency invariant",
+      "front": "Spanner's external consistency guarantee states that:",
+      "back": "If transaction T1 commits before T2 starts, then T1's commit timestamp is less than T2's commit timestamp \u2014 External consistency (equivalent to linearizability) means the commit-timestamp order matches real-time order: a transaction that commits before another starts is assigned an earlier timestamp."
+    },
+    {
+      "id": "FC-B9-005",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "commit-wait",
+        "truetime"
+      ],
+      "source": "Spanner OSDI 2012 paper \u2014 Section 4.1.2 commit wait",
+      "front": "How does Spanner's 'commit wait' use TrueTime to preserve external consistency?",
+      "back": "The coordinator waits until TT.after(s) is true \u2014 until the commit timestamp s is guaranteed to be in the past \u2014 before making the write visible \u2014 After choosing commit timestamp s from TT.now().latest, the coordinator waits out the uncertainty until TT.after(s) holds. This guarantees s is in the absolute past, so later transactions get\u2026"
+    },
+    {
+      "id": "FC-B9-006",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "paxos",
+        "replication"
+      ],
+      "source": "Spanner OSDI 2012 paper \u2014 Section 2.1",
+      "front": "How does Spanner replicate a split (tablet) across failure domains?",
+      "back": "Each split is managed by a Paxos group; a majority of voting replicas must agree, and one replica is elected leader to handle writes \u2014 Spanner runs a Paxos state machine per tablet. As long as a majority of voting replicas are up, a leader is elected to process writes while sufficiently up-to-date replicas can serve reads."
+    },
+    {
+      "id": "FC-B9-007",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "leader-lease",
+        "availability"
+      ],
+      "source": "Spanner OSDI 2012 paper \u2014 Paxos leader leases",
+      "front": "Spanner's Paxos leaders hold time-based leader leases (10 seconds by default). What is the key invariant these leases enforce?",
+      "back": "Disjointness: each Paxos leader's lease interval is disjoint from every other leader's, so timestamp assignment stays monotonic across leaders \u2014 Long-lived leases make leadership stable and enforce the disjointness invariant: no two leaders' lease intervals overlap. This lets Spanner assign monotonically increasing timestamps even across leader changes."
+    },
+    {
+      "id": "FC-B9-008",
+      "deck": "core",
+      "tags": [
+        "spanner",
+        "directory",
+        "data-placement"
+      ],
+      "source": "Spanner OSDI 2012 paper \u2014 Section 2.2 directories",
+      "front": "In Spanner, what is a 'directory' (bucket)?",
+      "back": "A set of contiguous keys sharing a common prefix \u2014 the unit of data placement and movement between Paxos groups \u2014 A directory is a bucket of contiguous keys with a shared prefix. It is the smallest unit whose placement and geographic replication can be specified, and Movedir relocates data directory-by-directory\u2026"
+    },
+    {
+      "id": "FC-C1-001",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "ambiguity",
+        "official-traits"
+      ],
+      "source": "Google careers / How We Hire video",
+      "front": "Google's official Googleyness guidance highlights three core traits interviewers look for. Which set matches those three?",
+      "back": "Comfort with ambiguity, collaboration, and bias to action \u2014 Google's careers materials consistently name comfort with ambiguity, collaboration, and bias to action as the top three Googleyness traits. Interviewers infer these from your stories\u2014not from reciting definitions."
+    },
+    {
+      "id": "FC-C1-002",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "ambiguity",
+        "signals"
+      ],
+      "source": "Work Rules (Laszlo Bock)",
+      "front": "An interviewer asks: 'Tell me about a time requirements changed late in a project.' Which response best signals comfort with ambiguity?",
+      "back": "You describe how you reframed goals with stakeholders, made a reasonable decision with incomplete data, and communicated trade-offs clearly \u2014 Strong ambiguity signals: staying productive without perfect information, collaborating to clarify what matters, and acting with judgment. Waiting for total certainty or blaming others are negative signals."
+    },
+    {
+      "id": "FC-C1-003",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "collaboration",
+        "teamwork"
+      ],
+      "source": "Google careers / leadership prep",
+      "front": "Which behavior best demonstrates Googleyness collaboration in a cross-functional project?",
+      "back": "Sharing credit, actively seeking input from partners, and helping unblock others even outside your lane \u2014 Google values collaborative problem-solving\u2014listening, integrating diverse perspectives, and making the team successful. Individual heroics or credit-hoarding undermine the culture Google screens for."
+    },
+    {
+      "id": "FC-C1-004",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "bias-to-action",
+        "ownership"
+      ],
+      "source": "Google careers video",
+      "front": "You notice a production metric degrading slightly on a service you don't own. Nobody has assigned you the work. What best reflects bias to action with appropriate ownership?",
+      "back": "Investigate enough to understand impact, notify the owning team with useful context, and offer to help mitigate if needed \u2014 Bias to action means stepping up when something matters\u2014not waiting for permission\u2014while respecting boundaries. Useful investigation plus collaborative handoff beats silent inaction or reckless unilateral changes."
+    },
+    {
+      "id": "FC-C1-005",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "humility",
+        "feedback"
+      ],
+      "source": "Work Rules",
+      "front": "Laszlo Bock describes 'intellectual humility' as a key hiring signal. In an interview answer, this most often appears as:",
+      "back": "Acknowledging what you did not know, how you learned, and how others' input improved the outcome \u2014 Intellectual humility shows up as openness to being wrong, crediting others, and describing growth. Candidates who present themselves as infallible raise red flags in Googleyness interviews."
+    },
+    {
+      "id": "FC-C1-006",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "feedback",
+        "growth"
+      ],
+      "source": "Work Rules / Google leadership prep",
+      "front": "You receive critical feedback that your design docs are hard to follow. What is the strongest Googleyness-aligned response?",
+      "back": "Thank the reviewer, ask for specific examples, iterate on the next doc, and check whether the improvement stuck \u2014 Google looks for candidates who treat feedback as data\u2014especially uncomfortable feedback\u2014and convert it into sustained behavior change. Defensiveness or deflection are common negative signals."
+    },
+    {
+      "id": "FC-C1-007",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "ownership",
+        "high-standards"
+      ],
+      "source": "Google careers / SRE culture",
+      "front": "Which example best demonstrates end-to-end ownership with high standards?",
+      "back": "You shipped a feature, monitored its production behavior, fixed a latent bug, and updated runbooks so on-call could handle it \u2014 Ownership at Google extends beyond your immediate task\u2014you care about outcomes in production, operability, and lasting quality. 'Throw it over the wall' behaviors conflict with high standards."
+    },
+    {
+      "id": "FC-C1-008",
+      "deck": "core",
+      "tags": [
+        "googleyness",
+        "culture-add",
+        "culture-fit"
+      ],
+      "source": "Google hiring philosophy",
+      "front": "Google interviewers often discuss 'culture add' rather than 'culture fit.' What does culture add mean in practice?",
+      "back": "Hiring people who bring diverse perspectives and strengthen the team while sharing core values like collaboration and integrity \u2014 Culture add emphasizes diversity of thought and background while maintaining shared values (Googleyness). Pure 'fit' can mean homogeneity; Google wants people who expand what the team can do."
+    },
+    {
+      "id": "FC-C2-001",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "communication",
+        "interview-format"
+      ],
+      "source": "2Cr3-et4xkI \u2014 Preparing for your leadership interview",
+      "front": "According to Google's leadership interview prep video, what is the primary purpose of the leadership round?",
+      "back": "To understand how you influence, communicate, and deliver results through others\u2014not to test management title or headcount \u2014 The official leadership video emphasizes that leadership at Google is about behaviors and impact, not formal management experience. Interviewers probe how you work with teams, navigate ambiguity, and drive outcomes."
+    },
+    {
+      "id": "FC-C2-002",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "communication-style",
+        "behavioral"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "The leadership video advises candidates on communication style during behavioral answers. Which approach is strongest?",
+      "back": "Structured, concise stories with clear context, your specific actions, and measurable outcomes\u2014while leaving room for follow-up questions \u2014 Strong communication in leadership interviews means clarity and structure (often STAR/STAR-L), focusing on your contributions, and engaging collaboratively\u2014not filibustering or being so terse that impact is invisible."
+    },
+    {
+      "id": "FC-C2-003",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "ambiguity",
+        "navigating-complexity"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "When asked about navigating ambiguity, which story element does the leadership video imply interviewers weight most heavily?",
+      "back": "How you made progress despite incomplete information, aligned stakeholders, and adjusted as facts emerged \u2014 Leadership in ambiguous situations requires judgment, communication, and adaptability. Waiting forever or rigidly ignoring new information are weak signals for Google's leadership dimension."
+    },
+    {
+      "id": "FC-C2-004",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "teamwork",
+        "influence"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "Google's leadership prep describes influence without authority as a core teamwork signal. Which example best demonstrates it?",
+      "back": "You convinced a partner team to adopt a reliability practice by showing data on incidents and offering to share implementation work \u2014 Influence without authority relies on trust, evidence, and collaboration\u2014not escalation as a first move or unilateral action. This is especially relevant for SREs working with product engineering teams."
+    },
+    {
+      "id": "FC-C2-005",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "vision",
+        "execution"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "The leadership video distinguishes vision from execution. Which answer best balances both when describing a project you led?",
+      "back": "You explain the long-term goal you aligned the team on and the concrete milestones, trade-offs, and metrics that tracked progress \u2014 Google leadership assesses whether you can connect direction to delivery\u2014setting or understanding goals and driving tangible progress\u2014not pure rhetoric or pure task execution in isolation."
+    },
+    {
+      "id": "FC-C2-006",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "delivering-results",
+        "metrics"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "When demonstrating 'delivering results,' the leadership video encourages candidates to:",
+      "back": "Quantify impact where possible\u2014latency reduced, incidents prevented, revenue protected, time saved\u2014and clarify your personal contribution \u2014 Delivering results means evidence of impact. Interviewers expect measurable outcomes and clarity about what you personally drove, while still acknowledging team context appropriately."
+    },
+    {
+      "id": "FC-C2-007",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "growth-from-failure",
+        "behavioral"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "The leadership prep video states that growth from failure is important for strong answers. What should a failure story include?",
+      "back": "A honest description of what went wrong, your role, what you learned, and how you changed behavior afterward \u2014 Google leadership interviewers expect authentic failure stories with learning and changed behavior. Claiming perfection or blame-shifting misses the growth dimension the video highlights."
+    },
+    {
+      "id": "FC-C2-008",
+      "deck": "core",
+      "tags": [
+        "leadership",
+        "emergent-leadership",
+        "step-in-step-back"
+      ],
+      "source": "2Cr3-et4xkI",
+      "front": "Which scenario best matches emergent leadership as described in Google's leadership interview guidance?",
+      "back": "During a critical outage you coordinate communication and mitigation until the designated incident commander arrives, then shift to a supporting role \u2014 Emergent leadership means stepping up when the situation needs it and yielding when someone better suited takes over\u2014situational influence rather than permanent command."
+    },
+    {
+      "id": "FC-C3-001",
+      "deck": "core",
+      "tags": [
+        "star",
+        "star-l",
+        "structure"
+      ],
+      "source": "Leadership video / Googleyness STAR prep",
+      "front": "What does the STAR method stand for in behavioral interview answers?",
+      "back": "Situation, Task, Action, Result \u2014 STAR is the standard behavioral structure: set the Situation, clarify your Task, describe your Actions, and state the Result. Google interview prep builds on this framework extensively."
+    },
+    {
+      "id": "FC-C3-002",
+      "deck": "core",
+      "tags": [
+        "star-l",
+        "learnings",
+        "growth"
+      ],
+      "source": "Google leadership / STAR-L guidance",
+      "front": "STAR-L extends STAR by adding 'Learnings' at the end. When is STAR-L especially valuable?",
+      "back": "When answering failure, conflict, or feedback questions where reflection and changed behavior matter \u2014 Learnings show growth\u2014critical for Google's leadership and Googleyness rounds. Failure and feedback stories are stronger when you articulate what you would do differently and how you actually changed."
+    },
+    {
+      "id": "FC-C3-003",
+      "deck": "core",
+      "tags": [
+        "star",
+        "experience-questions",
+        "structure"
+      ],
+      "source": "Leadership video 2Cr3-et4xkI",
+      "front": "For the question 'Tell me about a time you resolved a conflict with a teammate,' which opening is strongest?",
+      "back": "Briefly set context (team, stakes), then move quickly to your specific actions and the outcome \u2014 Experience questions need concise Situation/Task framing\u2014enough context to understand stakes, then emphasis on Actions and Results. Long preambles or avoiding the question waste limited interview time."
+    },
+    {
+      "id": "FC-C3-004",
+      "deck": "core",
+      "tags": [
+        "process-questions",
+        "hypothetical",
+        "structure"
+      ],
+      "source": "Leadership video / Google interview prep",
+      "front": "For a process question like 'How would you handle a disagreement about technical direction?', the best structure is:",
+      "back": "Outline your step-by-step approach (listen, gather data, align on goals, decide, commit) optionally anchored by a brief real example \u2014 Process/judgment questions test how you think and behave in novel situations. A clear framework plus optional real-world anchor beats vague platitudes or deflecting to others."
+    },
+    {
+      "id": "FC-C3-005",
+      "deck": "core",
+      "tags": [
+        "behavioral-categories",
+        "story-bank"
+      ],
+      "source": "Google behavioral prep",
+      "front": "Google prep commonly recommends maintaining a story bank of 6\u20138 versatile stories. Why that number range?",
+      "back": "Most behavioral questions map to recurring themes (conflict, failure, leadership, ambiguity) so a small set of deep stories can be adapted with different emphasis \u2014 A compact story bank of well-prepared, multi-dimensional examples covers conflict, failure, feedback, impact, and initiative questions\u2014you reframe the same story for different prompts rather than memorizing dozens."
+    },
+    {
+      "id": "FC-C3-006",
+      "deck": "core",
+      "tags": [
+        "measurable-results",
+        "impact"
+      ],
+      "source": "Leadership video / STAR prep",
+      "front": "Which 'Result' statement is strongest in a STAR answer for an SRE behavioral question?",
+      "back": "P99 latency dropped from 800ms to 320ms and related pages dropped 60% over the next quarter after my caching change \u2014 Measurable, specific results (latency, error rates, incident counts, time saved) make your impact credible. Vague or effort-only results are weak in Google behavioral interviews."
+    },
+    {
+      "id": "FC-C3-007",
+      "deck": "core",
+      "tags": [
+        "i-vs-we",
+        "ownership",
+        "pronouns"
+      ],
+      "source": "Google interview coaching",
+      "front": "When describing team projects in STAR answers, Google guidance on 'I' vs 'we' suggests:",
+      "back": "Use 'we' for shared context but clearly use 'I' for your specific decisions, actions, and contributions \u2014 Interviewers need to assess your individual contribution. Overusing 'we' hides your role; overusing 'I' can misrepresent team work. Balance team context with clear personal ownership."
+    },
+    {
+      "id": "FC-C3-008",
+      "deck": "core",
+      "tags": [
+        "behavioral-categories",
+        "failure"
+      ],
+      "source": "Leadership video",
+      "front": "Which behavioral category does 'Tell me about a time you missed a deadline or made a significant mistake' primarily test?",
+      "back": "Failure and growth\u2014ownership, learning, and changed behavior \u2014 Failure questions assess honesty, accountability, and learning (STAR-L). They are not trick questions\u2014strong candidates share real mistakes with concrete improvements."
+    },
+    {
+      "id": "FC-C3-009",
+      "deck": "core",
+      "tags": [
+        "behavioral-categories",
+        "feedback"
+      ],
+      "source": "Googleyness prep",
+      "front": "For 'Tell me about a time you received difficult feedback,' what should the Action section emphasize?",
+      "back": "How you listened, validated or investigated the feedback, and changed specific behaviors\u2014not just that you felt bad \u2014 Feedback stories should show humility and behavior change. Defensiveness, dismissal, or avoidance are negative Googleyness signals."
+    },
+    {
+      "id": "FC-C3-010",
+      "deck": "core",
+      "tags": [
+        "timing",
+        "two-minute-discipline"
+      ],
+      "source": "Google interview prep",
+      "front": "Why do coaches recommend keeping initial STAR answers to roughly two minutes?",
+      "back": "It leaves time for follow-up questions where interviewers probe depth, judgment, and authenticity \u2014 Concise initial answers respect interview time and invite follow-ups\u2014these probes often reveal more than a ten-minute monologue. Depth emerges in dialogue, not filibustering."
+    },
+    {
+      "id": "FC-C4-001",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "incident-command",
+        "mitigation-first"
+      ],
+      "source": "SRE book / Effective Troubleshooting",
+      "front": "During a major production incident, Google's SRE culture emphasizes mitigation-first response. What does that mean in practice?",
+      "back": "Restore user-visible service quickly\u2014even via temporary fixes\u2014then investigate root cause after impact is contained \u2014 Mitigation-first means stopping user pain as the priority: roll back, drain traffic, fail over\u2014then diagnose. Root-cause work follows stabilization, aligning with Google's incident response norms."
+    },
+    {
+      "id": "FC-C4-002",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "incident-command",
+        "communication"
+      ],
+      "source": "SRE book / incident management practices",
+      "front": "You are incident commander for a Sev-1 outage. Which behavior best demonstrates strong incident leadership?",
+      "back": "Maintain a clear status channel, assign owners for mitigation vs investigation, and provide regular updates to stakeholders \u2014 Incident command is about coordination, communication, and clear roles\u2014not solo heroics. Structured updates and parallel workstreams are core SRE behavioral signals."
+    },
+    {
+      "id": "FC-C4-003",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "blameless-postmortem"
+      ],
+      "source": "SRE book Introduction",
+      "front": "What is the primary goal of a blameless postmortem in Google SRE culture?",
+      "back": "Understand systemic causes and improve reliability\u2014not assign personal blame for honest mistakes \u2014 Blameless postmortems focus on learning and systemic fixes\u2014guardrails, automation, better tests\u2014because punishing individuals hides failures and reduces reporting."
+    },
+    {
+      "id": "FC-C4-004",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "postmortem",
+        "action-items"
+      ],
+      "source": "SRE book / workbook",
+      "front": "In a postmortem interview story, which element strongest demonstrates SRE maturity?",
+      "back": "You drove actionable follow-ups (automation, alerts, runbooks) with owners and tracked them to completion \u2014 Strong SRE stories show postmortems producing durable improvements\u2014error budgets, automation, design changes\u2014not stopping at 'human error' or treating recovery as sufficient."
+    },
+    {
+      "id": "FC-C4-005",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "on-call",
+        "ownership"
+      ],
+      "source": "SRE book / hiring SRE USENIX",
+      "front": "Which on-call story best fits Google's SRE behavioral expectations?",
+      "back": "You reduced alert noise by fixing flaky monitors, documented triage steps, and improved handoff notes for the next rotation \u2014 On-call ownership includes sustainable operations\u2014meaningful alerts, runbooks, and handoffs\u2014not alert suppression or refusing responsibility during rotations."
+    },
+    {
+      "id": "FC-C4-006",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "error-budget",
+        "feature-velocity"
+      ],
+      "source": "SRE book Introduction / error budgets",
+      "front": "A product team wants to launch a risky feature while your service's error budget is nearly exhausted. How should an SRE frame the conversation?",
+      "back": "Share SLO/error budget data, explain reliability risk to users, and collaborate on launch guards, canarying, or deferral \u2014 Error budgets exist to balance velocity and reliability with data-driven conversation. SRE influence comes from shared metrics and collaborative risk management\u2014not reflexive blocking or silent approval."
+    },
+    {
+      "id": "FC-C4-007",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "error-budget",
+        "slo"
+      ],
+      "source": "SRE book",
+      "front": "When pushing back on feature velocity using error budgets, the most persuasive argument is:",
+      "back": "User-facing SLO breaches and remaining budget directly tie unreliability to business and user impact \u2014 Error budget discussions should be objective\u2014SLOs, burn rate, user impact\u2014not personal convenience. This is how SREs influence product teams without authority."
+    },
+    {
+      "id": "FC-C4-008",
+      "deck": "core",
+      "tags": [
+        "sre-behavioral",
+        "cross-team",
+        "slo-adoption"
+      ],
+      "source": "SRE workbook / NALSD culture",
+      "front": "A development team resists adopting SLOs, calling them bureaucratic. What cross-team influence approach is strongest?",
+      "back": "Start with their pain points (alert fatigue, unclear priorities), show how SLOs reduce thrash, and pilot on one service with their input \u2014 SRE cross-team influence works through empathy, small pilots, and demonstrating value\u2014not mandates or public shaming. Meet teams where their problems are."
+    },
+    {
+      "id": "FC-C5-001",
+      "deck": "core",
+      "tags": [
+        "sre-manager",
+        "people-management",
+        "reddit:da4h29"
+      ],
+      "source": "reddit:da4h29; Jointaro SRE Manager reports",
+      "front": "A Reddit candidate asked whether SRE Manager interviews are less technical than IC loops. What is the best answer for your prep?",
+      "back": "Manager loops stay technical (e.g., code review, NALSD) plus leadership scenarios \u2014 not a reduced technical bar \u2014 r/devops da4h29 and Jointaro SRE Manager experiences report leadership fundamentals, code review, NALSD, troubleshooting, and Googleyness \u2014 technical depth plus people leadership."
+    },
+    {
+      "id": "FC-C5-002",
+      "deck": "core",
+      "tags": [
+        "sre-manager",
+        "performance-management",
+        "reddit:jointaro"
+      ],
+      "source": "reddit:da4h29; Jointaro Google SRE Manager",
+      "front": "Jointaro reports a Google SRE Manager question: 'How do you manage a high performer versus a low performer?' What demonstrates SRE manager maturity?",
+      "back": "High performers: stretch goals and visibility; low performers: clear expectations, coaching plan, timely feedback \u2014 not identical treatment \u2014 Reddit-adjacent manager loop questions test differentiated coaching: amplify high performers while giving low performers structured support, documentation, and clear improvement paths."
+    },
+    {
+      "id": "FC-C5-003",
+      "deck": "core",
+      "tags": [
+        "sre-manager",
+        "error-budget",
+        "reddit:140ma5t"
+      ],
+      "source": "reddit:140ma5t; SRE book",
+      "front": "Your product partner wants to ship during an exhausted error budget. As SRE manager, what is the strongest response?",
+      "back": "Frame trade-offs with data: budget burn, user impact, and options (freeze, canary, rollback plan) \u2014 negotiate don\u2019t just block \u2014 r/sre 140ma5t and SRE culture expect managers to partner on velocity vs reliability using error budgets as a decision tool, not a bureaucratic veto."
+    },
+    {
+      "id": "FC-C5-004",
+      "deck": "core",
+      "tags": [
+        "sre-manager",
+        "on-call",
+        "reddit:raabnp"
+      ],
+      "source": "reddit:raabnp; DEV SRE hiring guide",
+      "front": "Reddit r/sre thread on walking away from bad SRE jobs flags on-call burnout. As manager, what systemic fix best prevents burnout?",
+      "back": "Alert hygiene, fair rotation, track incident load per engineer, and reduce toil \u2014 not heroics culture \u2014 raabnp and hiring guides emphasize maturity signals: SLOs, alert quality, and sustainable rotations \u2014 managers own the system, not individual heroics."
+    },
+    {
+      "id": "FC-C5-005",
+      "deck": "core",
+      "tags": [
+        "sre-manager",
+        "influence",
+        "reddit:1346wln"
+      ],
+      "source": "reddit:1346wln SRE interviewer perspective",
+      "front": "An SRE interviewer on r/ITCareerQuestions stresses revenue-center vs cost-center SRE teams. As manager pitching reliability work, what resonates with product leadership?",
+      "back": "Tie reliability investments to user-visible outcomes and revenue risk \u2014 not 'ops purity' \u2014 1346wln notes hiring teams care whether candidates understand business context. Managers must translate SLOs and error budgets into product and revenue language."
+    },
+    {
+      "id": "FC-C5-006",
+      "deck": "core",
+      "tags": [
+        "sre-manager",
+        "code-review-culture",
+        "reddit:da4h29"
+      ],
+      "source": "reddit:da4h29; Google eng-practices",
+      "front": "Your team\u2019s code reviews bottleneck on you. What is the best manager intervention?",
+      "back": "Train reviewers on eng-practices standards, rotate review load, and clarify what requires manager sign-off vs peer review \u2014 Manager code-review rounds test whether you scale quality through culture and standards \u2014 da4h29\u2019s manager track includes code review as a technical signal."
+    },
+    {
+      "id": "FC-C5-007",
+      "deck": "core",
+      "tags": [
+        "sre-manager",
+        "hiring",
+        "reddit:1346wln"
+      ],
+      "source": "reddit:1346wln; USENIX hiring SRE",
+      "front": "When hiring SRE ICs, r/ITCareerQuestions SRE interviewer post emphasizes practical signals over resume keywords. What should you prioritize?",
+      "back": "Systems thinking, debugging approach, automation mindset, and communication under ambiguity \u2014 1346wln hiring perspective: teams want engineers who can operate at scale with software skills \u2014 aligned with USENIX/Google SRE hiring bar."
+    },
+    {
+      "id": "FC-C5-008",
+      "deck": "core",
+      "tags": [
+        "sre-manager",
+        "incident-comms",
+        "reddit:1kdf6fn"
+      ],
+      "source": "reddit:1kdf6fn G&L comments; C4 behavioral",
+      "front": "During a Sev-1 during an exec demo, Reddit G&L prep (1kdf6fn) suggests staying conversational under pressure. As manager, first priority?",
+      "back": "Assign incident commander, communicate status to stakeholders, and drive mitigation \u2014 stay factual and calm \u2014 G&L comments emphasize composure and communication. Managers model mitigation-first incident leadership while keeping stakeholders informed."
+    },
+    {
+      "id": "FC-D1-001",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "clarify",
+        "requirements"
+      ],
+      "source": "Systems Architecture video Gg318hR5JY0 / email rubric",
+      "front": "Your interviewer says: 'Design a URL shortener.' You have 60 minutes total and the first ~20 minutes should cover requirements and an initial solution. What should you do FIRST?",
+      "back": "Ask clarifying questions about scale, read/write ratio, TTL, custom aliases, and latency requirements \u2014 Google's Systems Architecture prep explicitly recommends spending early time on requirements. Underspecified prompts are intentional\u2014clarifying scope, scale, and constraints precedes architecture and math."
+    },
+    {
+      "id": "FC-D1-002",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "high-level",
+        "decomposition"
+      ],
+      "source": "Email rubric / NALSD",
+      "front": "After clarifying requirements for a photo-sharing service, the interviewer nods and waits. You have confirmed 500M DAU and global users. What is the best NEXT step?",
+      "back": "Sketch a high-level architecture (clients, API, storage, CDN, metadata DB) and walk through the upload and read paths \u2014 After requirements, decompose at high level\u2014major components and data flows\u2014before deep-diving individual pieces. This matches Google's evaluate-communication-then-scale interview flow."
+    },
+    {
+      "id": "FC-D1-003",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "estimation",
+        "quantitative"
+      ],
+      "source": "Systems Architecture video SA-V3",
+      "front": "You have a high-level design for a Twitter-like feed reader. The interviewer asks: 'How many read requests per second at peak?' You have user counts and average reads per day. What should you do FIRST?",
+      "back": "Show explicit back-of-envelope math with stated assumptions and sanity-check the order of magnitude \u2014 The official video emphasizes concrete, quantitative estimates with justified assumptions. Order-of-magnitude reasoning proves you understand scale\u2014not vague hand-waving."
+    },
+    {
+      "id": "FC-D1-004",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "deep-dive",
+        "bottleneck"
+      ],
+      "source": "Systems Architecture video SA-V2",
+      "front": "Your high-level design for a rate limiter includes API servers, a Redis cluster, and a config service. The interviewer says: 'Let's focus on the hot path for enforcing limits.' What is the best NEXT step?",
+      "back": "Deep-dive that component: algorithm choice (token bucket vs sliding window), Redis key design, and failure behavior \u2014 Interviewers often zoom into one component after the high-level pass. Follow their lead\u2014deep-dive the requested area with APIs, data structures, and trade-offs."
+    },
+    {
+      "id": "FC-D1-005",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "trade-offs",
+        "storage"
+      ],
+      "source": "Systems Architecture video SA-V4",
+      "front": "You propose storing thumbnails on SSD and full images on HDD for a image host. The interviewer asks about trade-offs. What should you do FIRST?",
+      "back": "Explicitly compare latency, cost, and durability implications for each tier and when you would reconsider the split \u2014 Google interviewers score trade-off articulation heavily. Lay out costs and benefits of your choices (flash vs disk, sync vs async replication) rather than defending one answer as universally optimal."
+    },
+    {
+      "id": "FC-D1-006",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "clarify",
+        "scope"
+      ],
+      "source": "Email rubric \u2014 clarify the problem",
+      "front": "Prompt: 'Design Google Drive.' Which clarifying question is MOST important before estimating storage?",
+      "back": "What types of files and typical sizes, and whether strong consistency is required for metadata vs blobs \u2014 Clarifications should probe functional scope, consistency needs, and access patterns\u2014inputs that drive architecture and estimates. UI colors and trivia do not shape the system design."
+    },
+    {
+      "id": "FC-D1-007",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "failure-modes",
+        "recovery"
+      ],
+      "source": "Email rubric / SA-V4",
+      "front": "You finish a high-level design for a distributed cache. The interviewer asks: 'What happens when a cache node dies?' What is the best FIRST response?",
+      "back": "Explain detection (health checks), user impact, failover/replication behavior, and how the system returns to steady state \u2014 Failure response is a core evaluation criterion. Address detect \u2192 mitigate \u2192 recover for the component in question before expanding scope."
+    },
+    {
+      "id": "FC-D1-008",
+      "deck": "core",
+      "tags": [
+        "scenarios",
+        "estimation",
+        "latency"
+      ],
+      "source": "Systems Architecture video SA-V3",
+      "front": "Your design spans US and Europe users. The interviewer asks about read latency for European users if the primary database is US-only. What should you do FIRST?",
+      "back": "Reason about cross-continental RTT (~100ms+) and propose mitigation (regional replicas, CDN, caching) with trade-offs \u2014 The official video highlights relative latencies\u2014memory vs LAN vs cross-continent RTT. Geographic distance is a first-class design constraint requiring explicit mitigation."
+    },
+    {
+      "id": "FC-D2-001",
+      "deck": "core",
+      "tags": [
+        "flaws",
+        "spof",
+        "availability"
+      ],
+      "source": "AOSA distsys / failure modes",
+      "front": "Architecture: A single load balancer terminates TLS and forwards to 50 stateless app servers. All app servers connect to one primary MySQL instance (no replicas). What is the most critical flaw?",
+      "back": "The database is a single point of failure\u2014its outage takes down the entire service despite scaled app tier \u2014 Scaling the app tier does not help if all state lives in one DB with no failover. The SPOF dominates availability. LB TLS termination and server count are distractors."
+    },
+    {
+      "id": "FC-D2-002",
+      "deck": "core",
+      "tags": [
+        "flaws",
+        "bottleneck",
+        "hot-partition"
+      ],
+      "source": "AOSA / sharding patterns",
+      "front": "Architecture: A social feed service shards posts by user_id across 100 databases. Celebrity users with millions of followers have all fan-out reads hitting their home shard. What flaw will appear first at scale?",
+      "back": "Hot partition / skewed shard bottleneck on high-follower users despite uniform sharding by user_id \u2014 Uniform hash/user sharding does not solve hot keys. Celebrity traffic concentrates on one shard, causing latency spikes\u2014a classic bottleneck distractors ignore."
+    },
+    {
+      "id": "FC-D2-003",
+      "deck": "core",
+      "tags": [
+        "flaws",
+        "consistency",
+        "cache"
+      ],
+      "source": "AOSA cache patterns / DDIA concepts",
+      "front": "Architecture: Writes update the database synchronously but cache invalidation is async via a queue with multi-second lag. Reads always go to cache first. What user-visible bug is most likely?",
+      "back": "Stale reads\u2014clients see outdated data for seconds after a successful write \u2014 Read-through cache with delayed invalidation creates a consistency window where users read old values after updates. This is a classic cache coherency flaw."
+    },
+    {
+      "id": "FC-D2-004",
+      "deck": "core",
+      "tags": [
+        "flaws",
+        "observability",
+        "monitoring"
+      ],
+      "source": "Effective Troubleshooting / email rubric",
+      "front": "Architecture: A payment pipeline with 12 microservices, each logging locally to disk. No centralized metrics, tracing, or SLO dashboards. On-call relies on customer complaints. What critical flaw is missing?",
+      "back": "Observability\u2014you cannot detect degradation or localize failures before users report them \u2014 Without metrics, tracing, or alerting, operators lack detection\u2014violating Google's 'how do we know the system is working' criterion. Service count alone is not inherently fatal."
+    },
+    {
+      "id": "FC-D2-005",
+      "deck": "core",
+      "tags": [
+        "flaws",
+        "spof",
+        "dns"
+      ],
+      "source": "AOSA / robustness",
+      "front": "Architecture: Global service uses one DNS A record pointing to a single anycast IP in one region. No health checks or failover DNS. The region suffers a network partition. What happens?",
+      "back": "Total outage for users worldwide until manual DNS change\u2014regional SPOF at the routing layer \u2014 Single-region DNS with no failover creates a global SPOF. Anycast does not magically solve partition without multi-region deployment and health-checked routing."
+    },
+    {
+      "id": "FC-D2-006",
+      "deck": "core",
+      "tags": [
+        "flaws",
+        "bottleneck",
+        "sync-processing"
+      ],
+      "source": "NALSD / scalable patterns",
+      "front": "Architecture: Video uploads go to API servers that synchronously transcode 4K video before returning HTTP 200. Average transcode takes 8 minutes. Traffic is growing 10\u00d7. What bottleneck breaks first?",
+      "back": "Synchronous long-running work ties up API workers and destroys throughput/latency under load \u2014 Blocking API threads on minutes-long work creates a severe bottleneck. The fix is async job queues and polling/webhooks\u2014not faster CPUs alone."
+    },
+    {
+      "id": "FC-D2-007",
+      "deck": "core",
+      "tags": [
+        "flaws",
+        "consistency",
+        "leader-election"
+      ],
+      "source": "Distributed systems fundamentals",
+      "front": "Architecture: Two datacenters each run a cron job nightly to aggregate billing. Both read the same DB and write totals without coordination or idempotency keys. Clock skew can cause both to run 'simultaneously.' What bug appears?",
+      "back": "Double-counting or conflicting writes\u2014lack of distributed coordination/idempotency causes inconsistent aggregates \u2014 Uncoordinated duplicate workers produce consistency bugs (double processing). Needs leader election, distributed locks, or idempotent write semantics."
+    },
+    {
+      "id": "FC-D2-008",
+      "deck": "core",
+      "tags": [
+        "flaws",
+        "bottleneck",
+        "database"
+      ],
+      "source": "AOSA / resource estimation",
+      "front": "Architecture: A read-heavy product catalog serves 500K QPS from a single PostgreSQL primary with no read replicas and no cache. All queries are simple primary-key lookups. What fails first?",
+      "back": "The database becomes the throughput bottleneck\u2014500K QPS exceeds practical single-node read capacity \u2014 Even simple queries at hundreds of thousands of QPS overwhelm one DB node. Caching and read replicas address read scaling\u2014a missing layer here."
+    },
+    {
+      "id": "FC-E3-001",
+      "deck": "core",
+      "tags": [
+        "osi",
+        "networking",
+        "linux-internals"
+      ],
+      "source": "reddit:wc4ryg; reddit:z5c3m7; TCP/IP fundamentals",
+      "front": "At which OSI layer does TCP operate, and what is its primary responsibility?",
+      "back": "Layer 4 (Transport) \u2014 reliable end-to-end delivery, sequencing, and retransmission between hosts \u2014 TCP is Transport layer (L4). SRE troubleshooting maps symptoms to layers: L4 issues include connection resets, retransmits, and port reachability."
+    },
+    {
+      "id": "FC-E3-002",
+      "deck": "core",
+      "tags": [
+        "osi",
+        "networking"
+      ],
+      "source": "reddit:wc4ryg Google SRE Linux/networking interview",
+      "front": "You can ping a host but HTTPS fails with connection timeout. Which OSI layers are most relevant to investigate first?",
+      "back": "Layer 3 (routing/IP) and Layer 4 (TCP/443) \u2014 ICMP may work while TCP to port 443 is blocked or filtered \u2014 Ping uses ICMP (L3). HTTPS needs TCP L4 to 443 plus TLS/app above. Reddit wc4ryg notes networking depth beyond kernel trivia \u2014 layer thinking is core."
+    },
+    {
+      "id": "FC-E3-003",
+      "deck": "core",
+      "tags": [
+        "osi",
+        "dns",
+        "networking"
+      ],
+      "source": "Effective Troubleshooting; OSI model",
+      "front": "DNS resolution failures most directly map to which OSI layer in troubleshooting frameworks?",
+      "back": "Layer 7 (Application) \u2014 name-to-address mapping service, though it sits above UDP/TCP (L4) \u2014 DNS is an application-layer service (L7) using UDP/TCP transport. SRE interviews expect you to connect DNS symptoms to resolver config, TTL, and upstream connectivity."
+    },
+    {
+      "id": "FC-E3-004",
+      "deck": "core",
+      "tags": [
+        "osi",
+        "networking",
+        "mtu"
+      ],
+      "source": "reddit:wc4ryg networking depth",
+      "front": "Path MTU black holes often cause TLS handshakes to hang mid-connection. Which layers are involved?",
+      "back": "Layer 3 IP fragmentation and Layer 2 MTU \u2014 large packets dropped without ICMP 'fragmentation needed' \u2014 PMTUD spans L3/L2. Symptoms look like app hangs (L7) but root cause is MTU/fragmentation \u2014 classic SRE layer separation skill."
+    },
+    {
+      "id": "FC-E3-005",
+      "deck": "core",
+      "tags": [
+        "osi",
+        "networking"
+      ],
+      "source": "Networking fundamentals",
+      "front": "Which OSI layer does a load balancer performing TCP connection termination primarily operate at?",
+      "back": "Layer 4 (Transport) \u2014 accepts TCP connections and forwards to backends \u2014 L4 LB works on IP+port (TCP/UDP). L7 LB inspects HTTP headers. Knowing the distinction is standard systems/network interview material."
+    },
+    {
+      "id": "FC-E3-006",
+      "deck": "core",
+      "tags": [
+        "osi",
+        "troubleshooting"
+      ],
+      "source": "Brendan Gregg USE method; OSI",
+      "front": "When troubleshooting latency, mapping 'high TCP retransmit rate' to OSI helps because retransmits are primarily a:",
+      "back": "Layer 4 transport symptom \u2014 may indicate loss, congestion, or middlebox interference on the path \u2014 Retransmits are observed at L4 (TCP). SREs correlate with L3 routing, L2 errors, or upstream congestion \u2014 not jump straight to app code."
+    },
+    {
+      "id": "FC-E3-007",
+      "deck": "core",
+      "tags": [
+        "linux-internals",
+        "process",
+        "reddit:z5c3m7"
+      ],
+      "source": "reddit:z5c3m7; LPI; Google SRE SE prep",
+      "front": "What happens when a parent process calls fork() and the child calls exec()?",
+      "back": "fork() clones the process; exec() replaces the child's memory image with a new program \u2014 classic spawn pattern \u2014 Reddit z5c3m7 recommends process lifecycle fundamentals over kernel struct trivia. fork+exec is the Unix spawn model every SRE-SE candidate should explain."
+    },
+    {
+      "id": "FC-E3-008",
+      "deck": "core",
+      "tags": [
+        "linux-internals",
+        "signals",
+        "reddit:wc4ryg"
+      ],
+      "source": "reddit:wc4ryg; APUE",
+      "front": "A process stuck in uninterruptible sleep (D state) usually indicates:",
+      "back": "Waiting on I/O (often disk) \u2014 cannot be killed until kernel completes the I/O operation \u2014 D-state processes block in kernel on I/O. Reddit/HN SRE rubrics cite checking D-state when CPU looks idle but workloads hang \u2014 storage or NFS issues."
+    },
+    {
+      "id": "FC-E3-009",
+      "deck": "core",
+      "tags": [
+        "linux-internals",
+        "memory"
+      ],
+      "source": "reddit:1fkwupo Linux for Google SRE",
+      "front": "What is the main difference between virtual memory and physical RAM from an application\u2019s perspective?",
+      "back": "Each process sees a private virtual address space mapped by the MMU to physical frames \u2014 enabling isolation and overcommit \u2014 Reddit 1fkwupo stresses fundamentals over tools. Virtual memory + page faults explain OOM, swap thrashing, and mmap behavior in interviews."
+    },
+    {
+      "id": "FC-E3-010",
+      "deck": "core",
+      "tags": [
+        "linux-internals",
+        "filesystem"
+      ],
+      "source": "reddit:z5c3m7; LPI",
+      "front": "A disk reports 100% full but `df` shows space available. What Linux filesystem concept explains inode exhaustion?",
+      "back": "All inodes are allocated \u2014 many small files can fill inode table while bytes remain \u2014 Inode vs block exhaustion is classic Linux internals. SRE interviews expect you to check `df -i` and know implications for apps creating millions of small files."
+    },
+    {
+      "id": "FC-E3-011",
+      "deck": "core",
+      "tags": [
+        "linux-internals",
+        "syscalls"
+      ],
+      "source": "reddit:wc4ryg user-space implications",
+      "front": "Why might strace show a process repeatedly calling futex() with high latency?",
+      "back": "Lock contention \u2014 futex backs userspace mutexes; threads block waiting for a contended lock \u2014 wc4ryg: explain implications, not memorizing struct fields. futex + lock contention connects syscalls to performance debugging."
+    },
+    {
+      "id": "FC-E3-012",
+      "deck": "core",
+      "tags": [
+        "linux-internals",
+        "cgroups"
+      ],
+      "source": "Google SRE; Linux cgroups",
+      "front": "A container hits OOMKilled despite the host having free RAM. Most likely Linux mechanism?",
+      "back": "cgroup memory limit enforced by the kernel \u2014 container exceeded its cgroup max, not host RAM \u2014 cgroup v1/v2 memory limits cause OOM kill inside the group. SRE-SE candidates tie Linux internals to Kubernetes/production symptoms."
+    },
+    {
+      "id": "FC-SR-001",
+      "deck": "core",
+      "tags": [
+        "risk",
+        "availability-target",
+        "cost"
+      ],
+      "source": "SRE Book ch 3",
+      "front": "The SRE book argues that pursuing 100% availability for most user-facing services is economically irrational because:",
+      "back": "The marginal cost of each additional nine of reliability grows superlinearly while user-perceived benefit flattens \u2014 Chapter 3 frames reliability as a risk-management problem: each nine costs disproportionately more in redundancy, testing, and operational overhead, while users rarely notice differences beyond a\u2026"
+    },
+    {
+      "id": "FC-SR-002",
+      "deck": "core",
+      "tags": [
+        "risk",
+        "error-budget",
+        "product-tradeoff"
+      ],
+      "source": "SRE Book ch 3",
+      "front": "A product team proposes raising an API's availability SLO from 99.9% to 99.99% without additional engineering investment. From an SRE risk perspective, the strongest objection is:",
+      "back": "Tighter SLOs shrink the error budget, reducing permissible launch risk and requiring costly reliability work to remain achievable \u2014 Embracing risk means choosing an SLO that balances user benefit and engineering cost. Tightening the target without investment makes the error budget vanish, forcing either missed SLOs or frozen\u2026"
+    },
+    {
+      "id": "FC-SR-003",
+      "deck": "core",
+      "tags": [
+        "risk",
+        "availability",
+        "nines"
+      ],
+      "source": "SRE Book ch 3",
+      "front": "A service targets 99.95% monthly availability. Approximately how much downtime budget does that allow per 30-day month?",
+      "back": "About 22 minutes \u2014 99.95% permits 0.05% unavailability: 0.0005 \u00d7 30 \u00d7 24 \u00d7 60 \u2248 21.6 minutes per month. SRE candidates should fluently translate nines into error budgets \u2014 the quantitative foundation for launch and\u2026"
+    },
+    {
+      "id": "FC-SR-004",
+      "deck": "core",
+      "tags": [
+        "sli",
+        "slo",
+        "measurement-window"
+      ],
+      "source": "SRE Book ch 4",
+      "front": "When defining an availability SLI as 'successful responses / valid requests,' which request class should typically be excluded from the denominator?",
+      "back": "Requests that fail due to client-side errors such as malformed input the service correctly rejects with 4xx \u2014 Chapter 4 stresses SLIs that reflect user-perceived reliability. Client-caused 4xx errors are often excluded because they do not indicate service failure. The exact policy must be documented, but\u2026"
+    },
+    {
+      "id": "FC-SR-005",
+      "deck": "core",
+      "tags": [
+        "sli",
+        "latency",
+        "percentile"
+      ],
+      "source": "SRE Book ch 4",
+      "front": "For a latency SLI on a search API, which formulation best aligns with SRE practice?",
+      "back": "Proportion of queries completing within 500 ms at the 95th percentile over a rolling 28-day window \u2014 Chapter 4 recommends distribution-aware SLIs \u2014 typically tail percentiles over meaningful windows \u2014 because averages hide outliers that degrade user experience. Rolling windows smooth noise while\u2026"
+    },
+    {
+      "id": "FC-SR-006",
+      "deck": "core",
+      "tags": [
+        "slo",
+        "error-budget",
+        "policy"
+      ],
+      "source": "SRE Book ch 4",
+      "front": "An error budget policy states that when 75% of the quarterly budget is consumed with six weeks remaining, the team should:",
+      "back": "Treat this as an early warning: increase reliability focus, review recent changes, and tighten launch criteria before budget exhaustion \u2014 Error budgets are leading indicators, not binary switches. Chapter 4 describes tiered responses as burn rate accelerates \u2014 early intervention preserves remaining budget and avoids emergency freezes.\u2026"
+    },
+    {
+      "id": "FC-SR-007",
+      "deck": "core",
+      "tags": [
+        "slo",
+        "composite",
+        "dependency"
+      ],
+      "source": "SRE Book ch 4",
+      "front": "A composite service depends on three backends each with independent 99.9% SLOs. Without redundancy, what is the approximate theoretical ceiling on end-to-end availability?",
+      "back": "Roughly 99.7% (product of individual availabilities) \u2014 Serial dependency availability multiplies: 0.999\u00b3 \u2248 0.997. Chapter 4's SLI/SLO material implies composite services need stricter component targets or redundancy to meet user-facing goals \u2014 a common\u2026"
+    },
+    {
+      "id": "FC-SR-008",
+      "deck": "core",
+      "tags": [
+        "slo",
+        "sla",
+        "stakeholder"
+      ],
+      "source": "SRE Book ch 4",
+      "front": "Why do SRE teams typically set internal SLOs slightly stricter than external SLAs?",
+      "back": "To consume the SLA margin as an error budget buffer, reducing contractual breach risk while preserving a measurable internal target \u2014 Chapter 4 explains the SLO-as-buffer pattern: internal targets tighter than customer-facing SLAs give teams measurable budget to spend on velocity while maintaining contractual headroom. Breaching an\u2026"
+    },
+    {
+      "id": "FC-SR-009",
+      "deck": "core",
+      "tags": [
+        "toil",
+        "definition",
+        "operational-work"
+      ],
+      "source": "SRE Book ch 5",
+      "front": "Which characteristic is NOT part of the SRE book's definition of toil?",
+      "back": "Work that permanently improves the system's architecture on first execution \u2014 Chapter 5 defines toil as manual, repetitive, automatable operational work that scales with service size \u2014 not engineering that durably improves the system. One-time architectural improvements are\u2026"
+    },
+    {
+      "id": "FC-SR-010",
+      "deck": "core",
+      "tags": [
+        "toil",
+        "automation",
+        "capacity"
+      ],
+      "source": "SRE Book ch 5",
+      "front": "An SRE team tracks toil as 45% of time. Leadership asks why not automate the remaining ticket queue immediately. The principled response is:",
+      "back": "Automation itself requires engineering capacity; prioritize highest-volume toil with best ROI while preserving time for SLO work, launches, and on-call \u2014 Chapter 5 recommends capping toil (commonly ~50%) and investing remaining capacity in automation \u2014 but automation is not free. Prioritization by impact, balancing on-call and project work, reflects\u2026"
+    },
+    {
+      "id": "FC-SR-011",
+      "deck": "core",
+      "tags": [
+        "toil",
+        "ticket-rotation",
+        "on-call"
+      ],
+      "source": "SRE Book ch 5",
+      "front": "Rotating through the same manual remediation playbook every on-call shift without automating the underlying fix primarily increases:",
+      "back": "Ongoing toil that scales with incident frequency and prevents engineering investment in durable reliability improvements \u2014 Repeated manual remediation is textbook toil: it returns each shift, grows with traffic, and crowds out project work. Chapter 5 argues each toil instance should either be automated or eliminated at the source."
+    },
+    {
+      "id": "FC-SR-012",
+      "deck": "core",
+      "tags": [
+        "monitoring",
+        "golden-signals",
+        "latency"
+      ],
+      "source": "SRE Book ch 6",
+      "front": "In the four golden signals framework, 'latency' specifically refers to:",
+      "back": "The time to service a request, distinguishing successful request duration from failed or slow-error paths \u2014 Chapter 6 defines latency as time to serve a request, emphasizing that failed requests can return quickly (e.g., 500 errors) and must be tracked separately from successful-path latency to avoid misleading dashboards."
+    },
+    {
+      "id": "FC-SR-013",
+      "deck": "core",
+      "tags": [
+        "monitoring",
+        "golden-signals",
+        "saturation"
+      ],
+      "source": "SRE Book ch 6",
+      "front": "A service shows low CPU utilization but rising request queue depth and growing p99 latency. Which golden signal best explains the user-visible degradation?",
+      "back": "Saturation: a resource limit (threads, connections, or I/O) is exhausted even though CPU appears idle \u2014 Saturation captures how 'full' a service is \u2014 thread pools, connection limits, disk I/O. Chapter 6 warns that CPU alone misleads; queue buildup with tail latency growth is classic saturation even at moderate CPU."
+    },
+    {
+      "id": "FC-SR-014",
+      "deck": "core",
+      "tags": [
+        "monitoring",
+        "alerting",
+        "symptoms"
+      ],
+      "source": "SRE Book ch 6",
+      "front": "Chapter 6 recommends alerting on symptoms rather than causes. Which alert rule best follows this principle?",
+      "back": "Page when user-visible error rate exceeds SLO budget burn threshold for 15 minutes \u2014 Symptom-based alerting ties pages to user impact \u2014 error rate threatening SLOs \u2014 rather than low-level causes that may not affect users. Cause-based alerts belong in tickets or dashboards, not wake-up pages."
+    },
+    {
+      "id": "FC-SRS-001",
+      "deck": "core",
+      "tags": [
+        "frontend-lb",
+        "dns",
+        "anycast"
+      ],
+      "source": "SRE Book ch 19",
+      "front": "Frontend load balancing at global scale typically combines DNS-based distribution with:",
+      "back": "Anycast or geo-proximity routing so clients reach nearby healthy points of presence \u2014 Chapter 19 describes layered frontend LB: DNS directs clients toward regional entry points, often via anycast or geo-DNS, with health-aware routing to avoid sending users to failed locations."
+    },
+    {
+      "id": "FC-SRS-002",
+      "deck": "core",
+      "tags": [
+        "frontend-lb",
+        "dns-ttl",
+        "failover"
+      ],
+      "source": "SRE Book ch 19",
+      "front": "During a regional outage, DNS TTL of 300 seconds delays traffic shift. Which mitigation does chapter 19 discuss?",
+      "back": "Combine low TTLs where feasible with anycast or proxy layers that can redirect traffic faster than DNS propagation alone \u2014 DNS caching limits failover speed. Chapter 19 advocates layered approaches \u2014 anycast, GFE/proxy tiers, controlled TTLs \u2014 because DNS alone cannot instantly drain a failed region."
+    },
+    {
+      "id": "FC-SRS-003",
+      "deck": "core",
+      "tags": [
+        "frontend-lb",
+        "capacity",
+        "health"
+      ],
+      "source": "SRE Book ch 19",
+      "front": "A frontend load balancer receives health signals indicating one cluster is degraded but not fully down. Capacity-aware routing should:",
+      "back": "Reduce traffic sent to the degraded cluster proportionally while maintaining service via healthier clusters \u2014 Chapter 19 emphasizes health- and capacity-aware frontend routing: steer away from struggling clusters before they fail completely, preserving user experience across the global footprint."
+    },
+    {
+      "id": "FC-SRS-004",
+      "deck": "core",
+      "tags": [
+        "datacenter-lb",
+        "consistent-hashing",
+        "session"
+      ],
+      "source": "SRE Book ch 20",
+      "front": "Datacenter load balancers often use consistent hashing for stateful connection affinity because:",
+      "back": "It minimizes remapping when backend servers are added or removed compared to naive modulo hashing \u2014 Chapter 20 covers datacenter LB algorithms. Consistent hashing limits disruption when the backend set changes \u2014 only keys near the changed node remap \u2014 important for caches and connection state."
+    },
+    {
+      "id": "FC-SRS-005",
+      "deck": "core",
+      "tags": [
+        "datacenter-lb",
+        "connection-pooling",
+        "latency"
+      ],
+      "source": "SRE Book ch 20",
+      "front": "A proxy load balancer maintains persistent connections to backends while clients use short-lived HTTP requests. The primary reliability benefit is:",
+      "back": "Amortizing connection setup cost and enabling better backend load visibility without per-request TCP handshakes \u2014 Chapter 20 describes connection management at the datacenter LB layer: pooling reduces latency and CPU overhead, while the proxy observes backend health and distributes load with full connection context."
+    },
+    {
+      "id": "FC-SRS-006",
+      "deck": "core",
+      "tags": [
+        "datacenter-lb",
+        "subset-selection",
+        "fan-out"
+      ],
+      "source": "SRE Book ch 20",
+      "front": "When a frontend must fan out to thousands of backend tasks, subset selection in the load balancer addresses:",
+      "back": "Limiting each client proxy to a manageable backend subset, reducing connection state and health-check overhead while preserving load spread \u2014 Chapter 20's subsetting pattern trades perfect global optimality for scalability: each LB instance tracks a subset of backends, avoiding O(n) connection and health-check costs at massive scale."
+    },
+    {
+      "id": "FC-SRS-007",
+      "deck": "core",
+      "tags": [
+        "overload",
+        "load-shedding",
+        "priority"
+      ],
+      "source": "SRE Book ch 21",
+      "front": "Under overload, chapter 21 recommends load shedding based on:",
+      "back": "Request priority and criticality, dropping or degrading low-priority work before core user paths fail entirely \u2014 Chapter 21 on handling overload advocates deliberate shedding with priority classes \u2014 protect revenue-critical and user-visible paths, drop deferrable work \u2014 rather than uncontrolled collapse."
+    },
+    {
+      "id": "FC-SRS-008",
+      "deck": "core",
+      "tags": [
+        "overload",
+        "admission-control",
+        "graceful-degradation"
+      ],
+      "source": "SRE Book ch 21",
+      "front": "A service detects queue wait time exceeding its SLO-derived threshold. The overload response aligned with chapter 21 is:",
+      "back": "Reject new requests early with explicit error codes rather than accepting work that will miss latency targets \u2014 Graceful degradation under overload means failing fast with clear signals (429/503). Chapter 21 contrasts this with slow failure where queues grow, memory exhausts, and cascading outages follow."
+    },
+    {
+      "id": "FC-SRS-009",
+      "deck": "core",
+      "tags": [
+        "overload",
+        "utilization-target",
+        "headroom"
+      ],
+      "source": "SRE Book ch 21",
+      "front": "Why does chapter 21 argue against running services at 100% utilization under steady state?",
+      "back": "Zero headroom eliminates capacity to absorb latency variance and traffic spikes, turning minor perturbations into SLO breaches \u2014 Operating at maximum utilization removes buffer for bursts and dependency slowdowns. Chapter 21 ties overload design to deliberate headroom and shedding policies rather than running hot continuously."
+    },
+    {
+      "id": "FC-SRS-010",
+      "deck": "core",
+      "tags": [
+        "overload",
+        "client-feedback",
+        "retry"
+      ],
+      "source": "SRE Book ch 21",
+      "front": "When shedding load, returning Retry-After headers alongside 503 responses primarily helps:",
+      "back": "Signal clients to back off cooperatively, reducing retry amplification during partial overload recovery \u2014 Chapter 21 emphasizes cooperative degradation: explicit backoff signals help well-behaved clients avoid retry storms that would prevent recovery \u2014 linking overload handling to cascading-failure prevention."
+    },
+    {
+      "id": "FC-SRS-011",
+      "deck": "core",
+      "tags": [
+        "cascading-failure",
+        "positive-feedback",
+        "metastable"
+      ],
+      "source": "SRE Book ch 22",
+      "front": "Chapter 22 defines a cascading failure as:",
+      "back": "A failure in one component triggering overload or errors in dependents, propagating through positive feedback until the system reaches a new stable failure state \u2014 Chapter 22 distinguishes ordinary single-component failure from cascades: positive feedback loops (retries, queue growth, resource exhaustion) spread failure across otherwise healthy components."
+    },
+    {
+      "id": "FC-SRS-012",
+      "deck": "core",
+      "tags": [
+        "cascading-failure",
+        "retry-budget",
+        "amplification"
+      ],
+      "source": "SRE Book ch 22",
+      "front": "A retry budget limits the fraction of backend capacity that may be consumed by retries. Its purpose in cascade prevention is:",
+      "back": "Capping retry amplification so recovery attempts cannot multiply load beyond what the degraded system can sustain \u2014 Chapter 22's retry budgets address a distinct angle from generic backoff: even well-jittered retries can overwhelm a recovering backend. Budgets enforce a hard ceiling on retry traffic as a fraction of total capacity."
+    },
+    {
+      "id": "FC-WB-001",
+      "deck": "core",
+      "tags": [
+        "devops",
+        "sre",
+        "culture"
+      ],
+      "source": "SRE Workbook ch 1",
+      "front": "The SRE Workbook distinguishes DevOps from SRE by noting that SRE:",
+      "back": "Codifies DevOps-aligned principles with explicit engineering practices such as SLOs, error budgets, and a defined SRE role \u2014 Workbook chapter 1 positions SRE as Google's implementation of DevOps ideals \u2014 concrete practices (SLO/error budget, toil limits, blameless postmortems) rather than culture alone."
+    },
+    {
+      "id": "FC-WB-002",
+      "deck": "core",
+      "tags": [
+        "devops",
+        "sre",
+        "implementation"
+      ],
+      "source": "SRE Workbook ch 1",
+      "front": "An organization adopts DevOps slogans but lacks measurable reliability targets or error budget policy. The workbook would classify this as:",
+      "back": "Cultural adoption without the quantifiable accountability mechanisms that make SRE/DevOps sustainable \u2014 Chapter 1 stresses that DevOps without measurable outcomes \u2014 SLOs, budgets, toil tracking \u2014 lacks the feedback loops SRE uses to balance velocity and reliability."
+    },
+    {
+      "id": "FC-WB-003",
+      "deck": "core",
+      "tags": [
+        "slo",
+        "implementation",
+        "stakeholders"
+      ],
+      "source": "SRE Workbook ch 2",
+      "front": "When implementing SLOs, workbook chapter 2 recommends starting with:",
+      "back": "User journeys and critical workflows, then selecting SLIs that reflect user-perceived reliability for those journeys \u2014 Chapter 2's implementation guide begins with what users care about \u2014 journeys and workflows \u2014 then derives measurable SLIs and negotiated SLO targets, avoiding metric-driven SLOs disconnected from user impact."
+    },
+    {
+      "id": "FC-WB-004",
+      "deck": "core",
+      "tags": [
+        "slo",
+        "implementation",
+        "window"
+      ],
+      "source": "SRE Workbook ch 2",
+      "front": "A team proposes a 1-hour rolling SLO window for a monthly billing batch job that runs once daily. The workbook-aligned critique is:",
+      "back": "The measurement window should match the user expectation cycle \u2014 a monthly or daily window aligns better than hourly noise for batch workloads \u2014 Chapter 2 emphasizes aligning SLO windows with how users experience the service. Hourly windows on daily batch jobs create false precision and alert noise."
+    },
+    {
+      "id": "FC-WB-005",
+      "deck": "core",
+      "tags": [
+        "slo",
+        "implementation",
+        "documentation"
+      ],
+      "source": "SRE Workbook ch 2",
+      "front": "An SLO document should explicitly record which of the following per workbook guidance?",
+      "back": "SLI definition, measurement method, exclusion rules, target, window, and owners \u2014 so ambiguity does not drift over time \u2014 Chapter 2 and appendix examples stress precise SLI specifications: what counts as valid/invalid, how latency is aggregated, who owns the SLO. Undocumented assumptions cause SLO debates during incidents."
+    },
+    {
+      "id": "FC-WB-006",
+      "deck": "core",
+      "tags": [
+        "slo",
+        "case-study",
+        "tiering"
+      ],
+      "source": "SRE Workbook ch 3",
+      "front": "SLO case studies in chapter 3 demonstrate that different service tiers should have:",
+      "back": "Different SLO targets and error budget policies reflecting business criticality, not identical nines for every system \u2014 Chapter 3 case studies show tiered SLO design: critical user paths get tighter targets and stricter budget policy; best-effort internal tools get looser targets \u2014 rational risk allocation."
+    },
+    {
+      "id": "FC-WB-007",
+      "deck": "core",
+      "tags": [
+        "slo",
+        "case-study",
+        "iteration"
+      ],
+      "source": "SRE Workbook ch 3",
+      "front": "A case study team discovers their availability SLI counts dependency failures as service errors. The corrective action is:",
+      "back": "Refine SLI scope and exclusion rules to measure what the service controls, then recalibrate the SLO target if needed \u2014 Chapter 3 case studies show SLO implementation is iterative. SLI definitions must be refined when they misrepresent user experience \u2014 with documented changes and target adjustments."
+    },
+    {
+      "id": "FC-WB-008",
+      "deck": "core",
+      "tags": [
+        "monitoring",
+        "use-method",
+        "resources"
+      ],
+      "source": "SRE Workbook ch 4",
+      "front": "The USE method (Utilization, Saturation, Errors) from workbook chapter 4 applies best to:",
+      "back": "Infrastructure resources such as CPU, memory, and I/O subsystems \u2014 Chapter 4 presents USE for resource-oriented monitoring \u2014 how full, how saturated, how error-prone each resource is. It complements RED/ golden signals for services."
+    },
+    {
+      "id": "FC-WB-009",
+      "deck": "core",
+      "tags": [
+        "monitoring",
+        "red-method",
+        "services"
+      ],
+      "source": "SRE Workbook ch 4",
+      "front": "For a request-driven microservice, the RED method captures:",
+      "back": "Rate, Errors, and Duration of requests \u2014 Chapter 4's RED method \u2014 Rate, Errors, Duration \u2014 provides a service-centric monitoring checklist aligned with the four golden signals but framed for microservice dashboards."
+    },
+    {
+      "id": "FC-WB-010",
+      "deck": "core",
+      "tags": [
+        "monitoring",
+        "use",
+        "saturation"
+      ],
+      "source": "SRE Workbook ch 4",
+      "front": "A disk shows 40% utilization but I/O wait queue length is climbing. Under USE, the saturation signal indicates:",
+      "back": "The resource has queued work beyond immediate capacity \u2014 a leading indicator of latency growth even at moderate utilization \u2014 Chapter 4 defines saturation as the degree of queued work. Utilization alone misleads \u2014 queue depth reveals contention that will soon affect service latency."
+    },
+    {
+      "id": "FC-BS-001",
+      "deck": "core",
+      "tags": [
+        "pki",
+        "ca",
+        "trust-chain"
+      ],
+      "source": "BSRS ch 11",
+      "front": "In a PKI hierarchy, the root CA's primary role is to:",
+      "back": "Anchor trust by signing intermediate CA certificates whose keys issue end-entity certificates \u2014 BSRS chapter 11 describes PKI as a chain of trust: closely guarded root CAs sign intermediates, which issue leaf certificates. Keeping roots offline limits blast radius if an issuing CA is compromised."
+    },
+    {
+      "id": "FC-BS-002",
+      "deck": "core",
+      "tags": [
+        "pki",
+        "ca",
+        "rotation"
+      ],
+      "source": "BSRS ch 11",
+      "front": "Google's PKI lessons in chapter 11 emphasize automated certificate rotation because:",
+      "back": "Short-lived certificates reduce the window of abuse if a key is compromised and avoid manual renewal outages \u2014 Chapter 11 documents moving from long-lived manual certs to automated issuance and frequent rotation \u2014 shrinking compromise impact and removing human error from renewal."
+    },
+    {
+      "id": "FC-BS-003",
+      "deck": "core",
+      "tags": [
+        "pki",
+        "ca",
+        "incident-response"
+      ],
+      "source": "BSRS ch 11",
+      "front": "If an intermediate CA private key is suspected compromised, chapter 11's response priority includes:",
+      "back": "Revoke affected certificates, rotate the compromised CA, and re-issue downstream certs while preserving trust chain integrity \u2014 Chapter 11 CA lessons cover incident playbooks: rapid revocation, CA rotation, and fleet-wide re-issuance. PKI incidents are high-severity because trust anchor compromise affects all dependents."
+    },
+    {
+      "id": "FC-BS-004",
+      "deck": "core",
+      "tags": [
+        "pki",
+        "ca",
+        "certificate-transparency"
+      ],
+      "source": "BSRS ch 11",
+      "front": "Certificate Transparency logs help detect mis-issued certificates by:",
+      "back": "Providing publicly auditable records of issued certs so domain owners can detect unauthorized issuance \u2014 Chapter 11 discusses CT as a detective control: append-only public logs enable monitoring for certs issued without authorization \u2014 complementing preventive CA access controls."
+    },
+    {
+      "id": "FC-BS-005",
+      "deck": "core",
+      "tags": [
+        "secure-coding",
+        "sql-injection",
+        "parameterization"
+      ],
+      "source": "BSRS ch 12",
+      "front": "The primary defense against SQL injection in chapter 12's secure coding guidance is:",
+      "back": "Parameterized queries or prepared statements that separate query structure from user-supplied data \u2014 Chapter 12 treats parameterization as the canonical SQLi defense: the database driver binds data separately from SQL structure, preventing attacker-controlled input from altering query semantics."
+    },
+    {
+      "id": "FC-BS-006",
+      "deck": "core",
+      "tags": [
+        "secure-coding",
+        "sql-injection",
+        "orm"
+      ],
+      "source": "BSRS ch 12",
+      "front": "An ORM query builder concatenates user input into a raw SQL fragment via string interpolation. Chapter 12 would classify this as:",
+      "back": "Still vulnerable to SQL injection because ORM use does not automatically parameterize unsafe raw fragments \u2014 Chapter 12 warns that ORMs provide safe APIs only when used correctly. Raw SQL fragments with interpolated user data reintroduce injection regardless of the surrounding framework."
+    },
+    {
+      "id": "FC-BS-007",
+      "deck": "core",
+      "tags": [
+        "secure-coding",
+        "xss",
+        "encoding"
+      ],
+      "source": "BSRS ch 12",
+      "front": "To prevent stored XSS when rendering user comments in HTML, chapter 12 recommends:",
+      "back": "Context-appropriate output encoding or sanitization before insertion into the DOM \u2014 Chapter 12's XSS defenses center on encoding for the specific output context (HTML body, attribute, JavaScript). TLS protects transport, not stored script execution in browsers."
+    },
+    {
+      "id": "FC-BS-008",
+      "deck": "core",
+      "tags": [
+        "secure-coding",
+        "xss",
+        "csp"
+      ],
+      "source": "BSRS ch 12",
+      "front": "Content Security Policy (CSP) serves as a defense-in-depth measure against XSS by:",
+      "back": "Restricting which script sources may execute, limiting damage when an injection point exists \u2014 Chapter 12 positions CSP as layered defense: even if encoding fails, a strict CSP can block inline script execution. It complements \u2014 not replaces \u2014 secure coding practices."
+    },
+    {
+      "id": "FC-CR-001",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "bug-finding",
+        "off-by-one"
+      ],
+      "source": "Google eng-practices; IGotAnOffer code review guide",
+      "front": "Review this loop:\n```python\nfor i in range(len(items) + 1):\n    process(items[i])\n```\nWhat is the most critical bug?",
+      "back": "IndexError on the final iteration \u2014 range goes one past the last valid index \u2014 range(len(items) + 1) produces indices 0..len(items), but valid indices are 0..len(items)-1. The last iteration accesses items[len(items)] and raises IndexError. Use range(len(items)) or iterate items directly."
+    },
+    {
+      "id": "FC-CR-002",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "bug-finding",
+        "null-check"
+      ],
+      "source": "Google eng-practices looking-for.md",
+      "front": "Review:\n```python\ndef label(user):\n    return user.profile.display_name.upper()\n```\nWhich review comment addresses the highest-severity issue first?",
+      "back": "Guard against None \u2014 if user, profile, or display_name is missing, this raises AttributeError at runtime \u2014 Google code review prioritizes correctness. Chained attribute access without None guards crashes in production when data is partial. Style and naming matter after functional defects are addressed."
+    },
+    {
+      "id": "FC-CR-003",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "bug-finding",
+        "logic"
+      ],
+      "source": "Exponent L6 EM code review experience",
+      "front": "Review interval-merge logic:\n```python\ndef overlaps(a, b):\n    return a.start <= b.end and b.start <= a.end\n\ndef merge(intervals):\n    merged = []\n    for iv in intervals:\n        if not merged or not overlaps(merged[-1], iv):\n            merged.append(iv)\n        else:\n     \u2026",
+      "back": "Non-adjacent overlapping intervals may not merge \u2014 algorithm assumes sorted input but does not sort \u2014 Classic code-review trap: merge logic often assumes sorted intervals. Unsorted input like [3,6], [1,4] leaves two entries instead of one. Either sort first or document/enforce preconditions."
+    },
+    {
+      "id": "FC-CR-004",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "bug-finding",
+        "comparison"
+      ],
+      "source": "Google eng-practices",
+      "front": "Review:\n```python\nif user.role = \"admin\":\n    grant_access()\n```\nWhat is wrong?",
+      "back": "Single = is assignment, not comparison \u2014 use == for equality test \u2014 In Python, = assigns; == compares. This snippet raises SyntaxError (in if) or would assign incorrectly in languages that allow it. Basic syntax/convention bugs are fair game in Google Doc reviews."
+    },
+    {
+      "id": "FC-CR-005",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "complexity",
+        "design"
+      ],
+      "source": "IGotAnOffer code review guide",
+      "front": "Review: A 200-line function `handle_request()` parses HTTP, queries DB, formats JSON, and sends email alerts. What design review comment is most appropriate?",
+      "back": "Split into focused functions/modules \u2014 single function violates separation of concerns and hinders testing \u2014 Large monolithic functions are a design smell. Google reviewers evaluate whether code is 'more complex than it needs to be' and suggest decomposition for readability and testability."
+    },
+    {
+      "id": "FC-CR-006",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "complexity",
+        "premature-abstraction"
+      ],
+      "source": "Google eng-practices looking-for.md",
+      "front": "Review adds a generic `AbstractFactoryProviderManager` for a feature used in one place with no planned second implementation. Which eng-practices principle applies?",
+      "back": "Developer may be over-engineering for hypothetical future needs \u2014 simplify until a second use case exists \u2014 eng-practices: don't implement things you might need in the future but don't need now. Reviewers push back on unnecessary abstraction that increases complexity without current benefit."
+    },
+    {
+      "id": "FC-CR-007",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "readability",
+        "naming"
+      ],
+      "source": "Google eng-practices looking-for.md",
+      "front": "Review variable names: `int d; int t; int x;` in a payment reconciliation module. Best feedback?",
+      "back": "Use descriptive names (e.g., days_since_settlement, total_cents) \u2014 names should reveal intent \u2014 eng-practices includes clarity and maintainability. Good names reduce need for comments and help future readers \u2014 especially in shared Google Doc review snippets."
+    },
+    {
+      "id": "FC-CR-008",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "maintainability",
+        "consistency"
+      ],
+      "source": "Google eng-practices looking-for.md",
+      "front": "A CL mixes camelCase and snake_case in the same Python module, diverging from the repo's existing snake_case convention. What should the reviewer prioritize?",
+      "back": "Flag style inconsistency \u2014 CLs should follow established project conventions for consistency \u2014 eng-practices: consistency with existing code style in the file/repo. Style nits come after correctness but still improve code health when they reduce cognitive load."
+    },
+    {
+      "id": "FC-CR-009",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "process",
+        "prioritization"
+      ],
+      "source": "IGotAnOffer; Exponent L6 EM experience",
+      "front": "You have 45 minutes to review a 180-line Google Doc snippet with a known logic bug, several style nits, and a missing null check. What should you tackle first?",
+      "back": "Trace core logic and fix correctness bugs (logic + null safety) before style suggestions \u2014 EM/SRE code review interviews reward triage: correctness and functional defects first, then complexity/design, then style. Exponent reports failing when spending too long understanding logic without\u2026"
+    },
+    {
+      "id": "FC-CR-010",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "process",
+        "format"
+      ],
+      "source": "IGotAnOffer code review guide",
+      "front": "Google's code review interview typically uses which format?",
+      "back": "A code snippet in Google Docs \u2014 no IDE, no compiler; manual trace and suggested fixes \u2014 Official EM prep and candidate reports describe a shared Google Doc with problematic code, ~45 minutes, manual debugging \u2014 the alternative to a live coding round for manager tracks."
+    },
+    {
+      "id": "FC-CR-011",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "process",
+        "scope"
+      ],
+      "source": "Google eng-practices standard of code review",
+      "front": "During review, you notice the CL fixes a bug but also refactors three unrelated modules. Best process feedback?",
+      "back": "Ask to split \u2014 bug fix and unrelated refactors should be separate CLs for easier review and rollback \u2014 Google's standard of code review: each CL should be a self-contained incremental improvement. Mixed concerns make review harder and increase rollback risk \u2014 valid process signal in interviews."
+    },
+    {
+      "id": "FC-CR-012",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "process",
+        "communication"
+      ],
+      "source": "Google eng-practices; Google code review interview prep",
+      "front": "After identifying a subtle bug, what demonstrates strong code review communication in the interview?",
+      "back": "Walk through a concrete failing input, explain impact, and propose a specific fix with trade-offs \u2014 Interviewers score communication and judgment, not just bug count. Strong candidates use manual test cases, explain user/system impact, and collaborate on fixes \u2014 mirroring real CL review culture."
+    },
+    {
+      "id": "FC-SA-001",
+      "deck": "core",
+      "tags": [
+        "interview-format",
+        "no-coding"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "According to Google's official Systems Architecture prep video, what should you NOT expect during this interview round?",
+      "back": "Writing and debugging production code on a laptop \u2014 The video opens by stating there is no coding in the Systems Architecture interview. Candidates may discuss APIs, draw diagrams, and provide quantitative estimates\u2014but not implement code."
+    },
+    {
+      "id": "FC-SA-002",
+      "deck": "core",
+      "tags": [
+        "time-box",
+        "requirements",
+        "v1-design"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Google recommends spending approximately how much of the Systems Architecture interview on gathering requirements and presenting an initial solution?",
+      "back": "About 20 minutes \u2014 The official video notes significant time limits and advises using roughly the first 20 minutes to clarify requirements and present an initial high-level solution before iterating deeper."
+    },
+    {
+      "id": "FC-SA-003",
+      "deck": "core",
+      "tags": [
+        "time-box",
+        "interview-format"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Why does the Systems Architecture prep video emphasize that time limits are 'significant'?",
+      "back": "Interviewers want to see how you prioritize, scope an MVP, and communicate under realistic constraints \u2014 The video stresses significant time limits because the round evaluates prioritization, scoping, and communication\u2014not exhaustive perfection. It is not about finishing early or banning clarification."
+    },
+    {
+      "id": "FC-SA-004",
+      "deck": "core",
+      "tags": [
+        "whiteboard",
+        "estimation",
+        "diagrams"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "For quantitative estimates and architecture diagrams in the Systems Architecture interview, Google expects you to use:",
+      "back": "A whiteboard (or paper) rather than relying on an IDE \u2014 The SA-V0 segment describes using the whiteboard for estimates and diagrams. The round is not an IDE coding session, and visual communication on the whiteboard is expected\u2014not prohibited or replaced\u2026"
+    },
+    {
+      "id": "FC-SA-005",
+      "deck": "core",
+      "tags": [
+        "communication",
+        "think-aloud"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "The official prep video advises candidates to 'think out loud' during the Systems Architecture interview. What does this primarily help interviewers assess?",
+      "back": "Your reasoning process and how you approach ambiguous problems collaboratively \u2014 The SA-V1 segment states that interviewers evaluate communication and process\u2014not just the final diagram. Thinking aloud reveals reasoning, not memorization, typing speed, or internal trivia."
+    },
+    {
+      "id": "FC-SA-006",
+      "deck": "core",
+      "tags": [
+        "communication",
+        "evaluation",
+        "process"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Google interviewers in the Systems Architecture round care about your process in addition to your final answer because:",
+      "back": "Real design work is iterative and collaborative; they need to see how you think, not just what you draw last \u2014 The video explicitly says process matters, not just the final answer. Interviewers simulate collaborative design work where reasoning and iteration are as important as the endpoint."
+    },
+    {
+      "id": "FC-SA-007",
+      "deck": "core",
+      "tags": [
+        "underspecified",
+        "clarification"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "Systems Architecture problems at Google are deliberately underspecified. What is the intended purpose of this?",
+      "back": "To test whether you ask clarifying questions and define scope before committing to architecture \u2014 The video states problems are deliberately underspecified so interviewers can observe whether candidates clarify requirements\u2014a core communication skill\u2014not to trap them or force identical answers."
+    },
+    {
+      "id": "FC-SA-008",
+      "deck": "core",
+      "tags": [
+        "clarification",
+        "requirements"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "When faced with an underspecified design prompt, what does Google's prep video recommend as a strong first move?",
+      "back": "Ask clarifying questions about scale, constraints, and use cases before drawing architecture \u2014 The SA-V1 segment highlights asking clarifying questions as essential. Jumping to architecture, staying silent, or refusing to engage miss the collaborative clarification phase the interview is designed to test."
+    },
+    {
+      "id": "FC-SA-009",
+      "deck": "core",
+      "tags": [
+        "multiple-solutions",
+        "trade-offs"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "The official video notes there are often multiple valid solutions to a Systems Architecture problem. What does this imply for candidates?",
+      "back": "You should explain trade-offs among reasonable approaches rather than hunting for one secretly 'correct' design \u2014 Multiple valid solutions means interviewers evaluate trade-off reasoning and coherence\u2014not whether you guessed a single right answer or copied an internal Google system."
+    },
+    {
+      "id": "FC-SA-010",
+      "deck": "core",
+      "tags": [
+        "collaborative",
+        "communication"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "The Systems Architecture interview is described as collaborative problem-solving. Which behavior best reflects this?",
+      "back": "Engaging the interviewer in a dialogue\u2014confirming assumptions, responding to hints, and refining the design together \u2014 Collaborative problem-solving means dialogue throughout\u2014clarifying, iterating, and responding to the interviewer\u2014not monologue, delegation, or rigid adherence to a first draft."
+    },
+    {
+      "id": "FC-SA-011",
+      "deck": "core",
+      "tags": [
+        "planet-scale",
+        "global-users"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "When Google asks you to design a system for 'planet-scale' or 'global users,' they are primarily testing whether you can:",
+      "back": "Reason about worldwide distribution, capacity, and cross-region constraints\u2014not just a single-datacenter deployment \u2014 The SA-V2 segment introduces planet-scale and global users as core evaluation themes\u2014requiring geographic distribution, capacity planning, and latency awareness beyond single-machine thinking."
+    },
+    {
+      "id": "FC-SA-012",
+      "deck": "core",
+      "tags": [
+        "reliability",
+        "efficiency",
+        "scale"
+      ],
+      "source": "Gg318hR5JY0",
+      "front": "At scale, Google expects your design to address both reliability and efficient use of resources. Which approach best satisfies both goals?",
+      "back": "Eliminate single points of failure while right-sizing components and avoiding over-provisioning without redundancy \u2014 The video pairs reliability with efficient resource use\u2014redundancy and fault tolerance without wasteful over-engineering. Extreme redundancy without cost awareness or eliminating redundancy/monitoring fail both goals."
+    }
+  ]
+}

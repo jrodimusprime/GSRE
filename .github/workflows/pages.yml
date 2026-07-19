@@ -24,6 +24,9 @@ jobs:
       - name: Run quiz app tests
         run: python3 tests/test_quiz_app.py
 
+      - name: Run flash cards tests
+        run: python3 tests/test_cards_app.py
+
   deploy:
     needs: test
     environment:
