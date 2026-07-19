@@ -284,7 +284,7 @@
       ],
       "source": "Google How We Hire; How We Hire video (zhUgaKb0s5A)",
       "front": "Google evaluates candidates on four attributes throughout the hiring process. Which set is correct?",
-      "back": "General cognitive ability, role-related knowledge, leadership, and Googleyness \u2014 Google's official How We Hire materials and video define four evaluation dimensions: GCA (problem-solving and learning ability), role-related knowledge, leadership (including emergent leadership),\u2026"
+      "back": "General cognitive ability, role-related knowledge, leadership, and Googleyness \u2014 Google's official How We Hire materials and video define four evaluation dimensions: GCA (problem-solving and learning ability), role-related knowledge, leadership (including emergent leadership), and Googleyness. All interview rounds feed evidence into these attributes."
     },
     {
       "id": "FC-A1-002",
@@ -296,7 +296,7 @@
       ],
       "source": "Google How We Hire; confirmed loop notes",
       "front": "Which sequence best represents Google's typical hiring pipeline after initial application?",
-      "back": "Initial screen \u2192 phone/video interviews \u2192 onsite loop \u2192 hiring committee \u2192 team matching \u2014 Official How We Hire describes an initial conversation, remote/phone screens, onsite (or virtual onsite) interviews, then a hiring committee that reviews packet feedback holistically, followed by\u2026"
+      "back": "Initial screen \u2192 phone/video interviews \u2192 onsite loop \u2192 hiring committee \u2192 team matching \u2014 Official How We Hire describes an initial conversation, remote/phone screens, onsite (or virtual onsite) interviews, then a hiring committee that reviews packet feedback holistically, followed by team matching for accepted candidates \u2014 not instant placement."
     },
     {
       "id": "FC-A1-003",
@@ -309,7 +309,7 @@
       ],
       "source": "Interview prep hub SRE path; confirmed loop notes",
       "front": "You are interviewing for SRE Software Engineering (SRE-SWE). How does this track differ from SRE Systems Engineering (SRE-SE)?",
-      "back": "SRE-SWE emphasizes software development, automation, and systems design; SRE-SE leans more toward Linux/systems administration depth \u2014 The interview prep path distinguishes SRE-SWE (software engineering focus) from SRE-SE (heavier Linux/ops loop). Technical rounds differ by track \u2014 e.g., live coding vs code review vs Linux depth \u2014\u2026"
+      "back": "SRE-SWE emphasizes software development, automation, and systems design; SRE-SE leans more toward Linux/systems administration depth \u2014 The interview prep path distinguishes SRE-SWE (software engineering focus) from SRE-SE (heavier Linux/ops loop). Technical rounds differ by track \u2014 e.g., live coding vs code review vs Linux depth \u2014 plus shared rounds like Systems Architecture for SRE-SWE."
     },
     {
       "id": "FC-A1-004",
@@ -321,7 +321,7 @@
       ],
       "source": "Confirmed loop notes; Systems Architecture video",
       "front": "Confirmed guidance describes the 60-minute Systems Architecture interview. Which statement is accurate?",
-      "back": "It is not a coding interview; interfaces, APIs, and pseudocode payloads are acceptable \u2014 Both confirmed loop guidance and the official Systems Architecture video (Gg318hR5JY0) state explicitly: no coding in this round. Defining APIs, data payloads at pseudocode level, whiteboard\u2026"
+      "back": "It is not a coding interview; interfaces, APIs, and pseudocode payloads are acceptable \u2014 Both confirmed loop guidance and the official Systems Architecture video (Gg318hR5JY0) state explicitly: no coding in this round. Defining APIs, data payloads at pseudocode level, whiteboard diagrams, and numeric estimates are in scope and encouraged."
     },
     {
       "id": "FC-A1-005",
@@ -333,7 +333,7 @@
       ],
       "source": "How We Hire video; Google careers",
       "front": "Google interviews are described as conversations rather than interrogations. What does this imply for candidates?",
-      "back": "Ask clarifying questions, think aloud, and engage collaboratively with the interviewer's hints \u2014 Official prep materials frame interviews as collaborative conversations. Process visibility \u2014 clarifying ambiguity, explaining reasoning, incorporating feedback \u2014 is scored alongside outcomes,\u2026"
+      "back": "Ask clarifying questions, think aloud, and engage collaboratively with the interviewer's hints \u2014 Official prep materials frame interviews as collaborative conversations. Process visibility \u2014 clarifying ambiguity, explaining reasoning, incorporating feedback \u2014 is scored alongside outcomes, especially in Systems Architecture and Googleyness rounds."
     },
     {
       "id": "FC-A1-006",
@@ -345,7 +345,7 @@
       ],
       "source": "Google How We Hire; USENIX hiring SRE paper",
       "front": "What does the hiring committee review when deciding on a candidate?",
-      "back": "Written feedback from all interviewers across attributes \u2014 not a single interviewer's vote \u2014 Google's committee model synthesizes structured interviewer feedback against the four attributes. No single interview dominates; the packet includes multiple data points. USENIX hiring paper notes\u2026"
+      "back": "Written feedback from all interviewers across attributes \u2014 not a single interviewer's vote \u2014 Google's committee model synthesizes structured interviewer feedback against the four attributes. No single interview dominates; the packet includes multiple data points. USENIX hiring paper notes SRE bar includes both coding and systems engineering depth."
     },
     {
       "id": "FC-A1-007",
@@ -381,7 +381,7 @@
       ],
       "source": "How We Hire video; leadership prep video",
       "front": "Google assesses 'leadership' in technical interviews even for non-manager roles. What does emergent leadership mean in this context?",
-      "back": "Stepping up to drive impact when needed and stepping back to let others lead when appropriate \u2014 Google's leadership dimension includes emergent leadership \u2014 influence, initiative, and collaboration without formal authority. Leadership prep video covers stepping in/stepping out. ICs are expected\u2026"
+      "back": "Stepping up to drive impact when needed and stepping back to let others lead when appropriate \u2014 Google's leadership dimension includes emergent leadership \u2014 influence, initiative, and collaboration without formal authority. Leadership prep video covers stepping in/stepping out. ICs are expected to demonstrate this through examples, not titles."
     },
     {
       "id": "FC-A1-010",
@@ -393,7 +393,7 @@
       ],
       "source": "How We Hire; confirmed loop notes",
       "front": "Why might Google match specific interviewers to a candidate's stated strengths or background?",
-      "back": "To assess role-related knowledge fairly and allow the candidate to demonstrate depth in relevant areas \u2014 Interview-as-conversation includes aligning interviewers with role relevance where possible, so role-related knowledge is evaluated by someone who can engage deeply \u2014 while still covering all four\u2026"
+      "back": "To assess role-related knowledge fairly and allow the candidate to demonstrate depth in relevant areas \u2014 Interview-as-conversation includes aligning interviewers with role relevance where possible, so role-related knowledge is evaluated by someone who can engage deeply \u2014 while still covering all four attributes across the loop."
     },
     {
       "id": "FC-A2-001",
@@ -406,7 +406,7 @@
       ],
       "source": "SRE book introduction; SRE workbook TOC",
       "front": "In SRE vocabulary, which definition correctly distinguishes SLI, SLO, and SLA?",
-      "back": "SLI is a measured indicator; SLO is an internal target for that indicator; SLA is a contractual commitment often with consequences \u2014 SRE book and workbook establish: SLIs are quantified service aspects (latency, availability); SLOs are target ranges for SLIs; SLAs are external agreements, often looser than internal SLOs. This\u2026"
+      "back": "SLI is a measured indicator; SLO is an internal target for that indicator; SLA is a contractual commitment often with consequences \u2014 SRE book and workbook establish: SLIs are quantified service aspects (latency, availability); SLOs are target ranges for SLIs; SLAs are external agreements, often looser than internal SLOs. This hierarchy drives error budgets and alerting design."
     },
     {
       "id": "FC-A2-002",
@@ -418,7 +418,7 @@
       ],
       "source": "SRE book introduction \u2014 error budget chapter",
       "front": "Google's error budget model resolves tension between product development and SRE by:",
-      "back": "Allowing a defined amount of unreliability that can be 'spent' on launches and risk, aligning incentives when budget remains \u2014 SRE book intro: 100% reliability is the wrong target for most services. Error budget = 1 \u2212 SLO target; teams spend it on velocity. When budget is exhausted, focus shifts to stability \u2014 a structured\u2026"
+      "back": "Allowing a defined amount of unreliability that can be 'spent' on launches and risk, aligning incentives when budget remains \u2014 SRE book intro: 100% reliability is the wrong target for most services. Error budget = 1 \u2212 SLO target; teams spend it on velocity. When budget is exhausted, focus shifts to stability \u2014 a structured trade-off SRE-SWE candidates should articulate."
     },
     {
       "id": "FC-A2-003",
@@ -430,7 +430,7 @@
       ],
       "source": "SRE book \u2014 eliminating toil; workbook TOC",
       "front": "Which activity best exemplifies SRE 'toil' that should be reduced over time?",
-      "back": "Manually restarting the same failing batch job every morning with no lasting fix \u2014 SRE defines toil as manual, repetitive, automatable work tied to running a service \u2014 not engineering that permanently improves the system. Eliminating toil frees SRE capacity for software-driven\u2026"
+      "back": "Manually restarting the same failing batch job every morning with no lasting fix \u2014 SRE defines toil as manual, repetitive, automatable work tied to running a service \u2014 not engineering that permanently improves the system. Eliminating toil frees SRE capacity for software-driven reliability improvements."
     },
     {
       "id": "FC-A2-004",
@@ -454,7 +454,7 @@
       ],
       "source": "NALSD workbook chapter; SRE workbook",
       "front": "Non-Abstract Large System Design (NALSD) differs from abstract system design interviews by emphasizing:",
-      "back": "Iterative, concrete designs with capacity planning, failure domains, and operational cost \u2014 not hand-wavy boxes \u2014 NALSD chapter: start with requirements, iterate through designs increasing sophistication until viable, with resource planning and failure defense. SRE-SWE path values this concrete iteration over\u2026"
+      "back": "Iterative, concrete designs with capacity planning, failure domains, and operational cost \u2014 not hand-wavy boxes \u2014 NALSD chapter: start with requirements, iterate through designs increasing sophistication until viable, with resource planning and failure defense. SRE-SWE path values this concrete iteration over abstract diagrams \u2014 closely aligned with the 60-min Systems Architecture rubric."
     },
     {
       "id": "FC-A2-006",
@@ -466,7 +466,7 @@
       ],
       "source": "SRE book introduction",
       "front": "How does Google SRE differ from traditional operations according to the SRE book?",
-      "back": "SRE engineers use software and automation to solve operations problems and share ownership of reliability with development \u2014 SRE book intro positions SRE as software engineers who apply engineering to operations: automation, SLO-driven decisions, shared responsibility with dev teams. The SRE role overview reflects\u2026"
+      "back": "SRE engineers use software and automation to solve operations problems and share ownership of reliability with development \u2014 SRE book intro positions SRE as software engineers who apply engineering to operations: automation, SLO-driven decisions, shared responsibility with dev teams. The SRE role overview reflects availability, automation, capacity, and postmortems."
     },
     {
       "id": "FC-A2-007",
@@ -478,7 +478,7 @@
       ],
       "source": "NALSD workbook chapter",
       "front": "NALSD iterative design phases are often summarized as moving through:",
-      "back": "Possible \u2192 better \u2192 feasible \u2192 resilient \u2192 better again (with requirements driving each iteration) \u2014 NALSD and QUIZ-PLAN B5 reference this iteration arc: prove a sketch works, refine with numbers, validate feasibility, add resilience, then optimize. Deferring reliability early means fewer features\u2026"
+      "back": "Possible \u2192 better \u2192 feasible \u2192 resilient \u2192 better again (with requirements driving each iteration) \u2014 NALSD and QUIZ-PLAN B5 reference this iteration arc: prove a sketch works, refine with numbers, validate feasibility, add resilience, then optimize. Deferring reliability early means fewer features at higher cost later \u2014 a key SRE design principle."
     },
     {
       "id": "FC-A2-008",
@@ -502,7 +502,7 @@
       ],
       "source": "SRE book; NALSD; SRE role overview",
       "front": "Which sequence best captures the SRE engagement lifecycle for a new large service?",
-      "back": "Design review \u2192 launch readiness \u2192 operate/monitor \u2192 iterate/refine reliability \u2014 SRE lifecycle spans early design partnership (launch reviews), ongoing operation with SLOs, and continuous refinement \u2014 not bolt-on ops after launch. NALSD embeds reliability iteration during design,\u2026"
+      "back": "Design review \u2192 launch readiness \u2192 operate/monitor \u2192 iterate/refine reliability \u2014 SRE lifecycle spans early design partnership (launch reviews), ongoing operation with SLOs, and continuous refinement \u2014 not bolt-on ops after launch. NALSD embeds reliability iteration during design, not as an afterthought."
     },
     {
       "id": "FC-A2-010",
@@ -526,7 +526,7 @@
       ],
       "source": "systems-architecture-rubric",
       "front": "According to Google's Systems Architecture interview rubric, which aspect carries the most weight when interviewers evaluate your design?",
-      "back": "Whether you can articulate trade-offs, implications, and a coherent design process \u2014 The Systems Architecture rubric states that trade-offs and their implications matter more than picking a single 'correct' choice, and that interviewers want a coherent design. The official prep video\u2026"
+      "back": "Whether you can articulate trade-offs, implications, and a coherent design process \u2014 The Systems Architecture rubric states that trade-offs and their implications matter more than picking a single 'correct' choice, and that interviewers want a coherent design. The official prep video reinforces that process and\u2026"
     },
     {
       "id": "FC-B1-002",
@@ -538,7 +538,7 @@
       ],
       "source": "systems-architecture-rubric",
       "front": "You have a 60-minute Systems Architecture interview. Based on Google's guidance, how should you allocate the opening portion of the session?",
-      "back": "Spend roughly the first 20 minutes clarifying requirements and presenting an initial high-level solution \u2014 Both the official Systems Architecture prep video and the email rubric emphasize significant time limits, with roughly 20 minutes dedicated to gathering requirements and presenting an initial\u2026"
+      "back": "Spend roughly the first 20 minutes clarifying requirements and presenting an initial high-level solution \u2014 Both the official Systems Architecture prep video and the email rubric emphasize significant time limits, with roughly 20 minutes dedicated to gathering requirements and presenting an initial solution. Deep implementation and silent work miss what interviewers are evaluating."
     },
     {
       "id": "FC-B1-003",
@@ -550,7 +550,7 @@
       ],
       "source": "mock-interview-video",
       "front": "When practicing for a Systems Architecture mock interview, which habit most closely mirrors what Google interviewers expect in the real round?",
-      "back": "Narrating your reasoning aloud, asking clarifying questions, and revising your design when given new constraints \u2014 Mock interview guidance and the official prep video both stress think-aloud communication, collaborative clarification, and iterative improvement. Memorized diagrams or algorithm trivia do not\u2026"
+      "back": "Narrating your reasoning aloud, asking clarifying questions, and revising your design when given new constraints \u2014 Mock interview guidance and the official prep video both stress think-aloud communication, collaborative clarification, and iterative improvement. Memorized diagrams or algorithm trivia do not reflect the open-ended, process-oriented nature of the Systems Architecture round."
     },
     {
       "id": "FC-B1-004",
@@ -562,7 +562,7 @@
       ],
       "source": "systems-architecture-rubric",
       "front": "During the Systems Architecture interview, which of the following is explicitly acceptable according to Google's rubric?",
-      "back": "Describing API contracts, interfaces, and pseudocode for message payloads between components \u2014 The Systems Architecture rubric states this is not a coding interview but that interfaces, APIs, and pseudocode payloads are fine. Full implementation, IDE usage, or refusing to discuss component\u2026"
+      "back": "Describing API contracts, interfaces, and pseudocode for message payloads between components \u2014 The Systems Architecture rubric states this is not a coding interview but that interfaces, APIs, and pseudocode payloads are fine. Full implementation, IDE usage, or refusing to discuss component boundaries all miss the intended format."
     },
     {
       "id": "FC-B1-005",
@@ -574,7 +574,7 @@
       ],
       "source": "Gg318hR5JY0",
       "front": "Google's Systems Architecture prep materials recommend practicing designs on paper or a whiteboard without an IDE. What is the primary reason for this advice?",
-      "back": "The interview environment uses a whiteboard and assesses how you reason about scale, estimates, and diagrams\u2014not IDE shortcuts \u2014 The official prep video (SA-V5 segment) recommends practicing on paper or whiteboard without an IDE because the round evaluates communication, quantitative estimates, and architectural diagrams in a\u2026"
+      "back": "The interview environment uses a whiteboard and assesses how you reason about scale, estimates, and diagrams\u2014not IDE shortcuts \u2014 The official prep video (SA-V5 segment) recommends practicing on paper or whiteboard without an IDE because the round evaluates communication, quantitative estimates, and architectural diagrams in a whiteboard setting\u2014not coding tooling proficiency."
     },
     {
       "id": "FC-B2-001",
@@ -586,7 +586,7 @@
       ],
       "source": "systems-architecture-rubric",
       "front": "An interviewer says: 'Design a notification system for our product.' Before drawing any boxes, which question is MOST valuable to ask?",
-      "back": "What are the expected scale, latency targets, and delivery guarantees (at-least-once vs exactly-once)? \u2014 The Systems Architecture rubric prioritizes clarifying underspecified problems \u2014 especially scale, latency, and reliability constraints \u2014 before architecture. Language choice, UI colors, and\u2026"
+      "back": "What are the expected scale, latency targets, and delivery guarantees (at-least-once vs exactly-once)? \u2014 The Systems Architecture rubric prioritizes clarifying underspecified problems \u2014 especially scale, latency, and reliability constraints \u2014 before architecture. Language choice, UI colors, and micro-algorithm trivia do not unblock a meaningful v1 design."
     },
     {
       "id": "FC-B2-002",
@@ -598,7 +598,7 @@
       ],
       "source": "NALSD",
       "front": "A candidate lists: 'Users must receive email within 5 seconds; system must support 10M daily active users; admins can configure templates.' Which classification is CORRECT?",
-      "back": "The 5-second delivery and 10M DAU are non-functional; template configuration is functional \u2014 NALSD and standard requirements engineering distinguish functional requirements (what the system does\u2014configure templates) from non-functional requirements (quality attributes\u2014latency, scale,\u2026"
+      "back": "The 5-second delivery and 10M DAU are non-functional; template configuration is functional \u2014 NALSD and standard requirements engineering distinguish functional requirements (what the system does\u2014configure templates) from non-functional requirements (quality attributes\u2014latency, scale, availability). Numeric values do not\u2026"
     },
     {
       "id": "FC-B2-003",
@@ -610,7 +610,7 @@
       ],
       "source": "systems-architecture-rubric",
       "front": "When clarifying requirements for a read-heavy social feed, which follow-up question most directly informs your storage and caching strategy?",
-      "back": "What is the read-to-write ratio, and how fresh must feed items appear to users? \u2014 Read/write ratio and freshness (consistency/latency) directly drive caching, replication, and CDN decisions. The Systems Architecture rubric and AOSA both emphasize probing access patterns and\u2026"
+      "back": "What is the read-to-write ratio, and how fresh must feed items appear to users? \u2014 Read/write ratio and freshness (consistency/latency) directly drive caching, replication, and CDN decisions. The Systems Architecture rubric and AOSA both emphasize probing access patterns and consistency needs before committing to architecture."
     },
     {
       "id": "FC-B2-004",
@@ -622,7 +622,7 @@
       ],
       "source": "AOSA",
       "front": "You are decomposing a monolithic e-commerce site into services. According to SOA principles in scalable web architecture literature, what is the BEST initial split criterion?",
-      "back": "Separate bounded contexts with distinct scaling profiles and failure domains (e.g., catalog, cart, payments) \u2014 AOSA and NALSD advocate decomposing by bounded context, scaling needs, and failure isolation\u2014not arbitrary table-per-service splits or language politics. Waiting for an arbitrary LOC threshold delays\u2026"
+      "back": "Separate bounded contexts with distinct scaling profiles and failure domains (e.g., catalog, cart, payments) \u2014 AOSA and NALSD advocate decomposing by bounded context, scaling needs, and failure isolation\u2014not arbitrary table-per-service splits or language politics. Waiting for an arbitrary LOC threshold delays addressing real operational boundaries."
     },
     {
       "id": "FC-B2-005",
@@ -646,7 +646,7 @@
       ],
       "source": "systems-architecture-rubric",
       "front": "A prompt says: 'Design data storage for a health-records product.' Which clarifying question addresses a constraint that could fundamentally change your architecture?",
-      "back": "Are there geographic residency or compliance requirements (e.g., HIPAA, GDPR) for where data may be stored and processed? \u2014 Geographic and compliance constraints can mandate regional sharding, encryption, and audit architectures. The Systems Architecture rubric treats constraints as a first-class clarification topic;\u2026"
+      "back": "Are there geographic residency or compliance requirements (e.g., HIPAA, GDPR) for where data may be stored and processed? \u2014 Geographic and compliance constraints can mandate regional sharding, encryption, and audit architectures. The Systems Architecture rubric treats constraints as a first-class clarification topic; formatting preferences do not change system topology."
     },
     {
       "id": "FC-B2-007",
@@ -658,7 +658,7 @@
       ],
       "source": "AOSA",
       "front": "A system has a write-heavy ingestion path and a read-heavy analytics path with very different latency requirements. What decomposition approach is MOST justified?",
-      "back": "Separate the write (ingest) path from the read (query/analytics) path, potentially with async propagation between them \u2014 AOSA discusses read/write asymmetry and when to split paths\u2014often via async pipelines or CQRS-like patterns\u2014when access patterns and latency goals diverge. A single synchronous path or eliminating\u2026"
+      "back": "Separate the write (ingest) path from the read (query/analytics) path, potentially with async propagation between them \u2014 AOSA discusses read/write asymmetry and when to split paths\u2014often via async pipelines or CQRS-like patterns\u2014when access patterns and latency goals diverge. A single synchronous path or eliminating reads ignores the stated asymmetry."
     },
     {
       "id": "FC-B2-008",
@@ -670,7 +670,7 @@
       ],
       "source": "systems-architecture-rubric",
       "front": "After decomposing a system into components, what should you define BEFORE deep-diving into internal storage choices for each service?",
-      "back": "The API contracts and data passed between components, including key request/response fields and error semantics \u2014 The Systems Architecture rubric highlights interfaces and APIs as central to the round. Defining component contracts first enables parallel deep-dives and mirrors how Google expects candidates to\u2026"
+      "back": "The API contracts and data passed between components, including key request/response fields and error semantics \u2014 The Systems Architecture rubric highlights interfaces and APIs as central to the round. Defining component contracts first enables parallel deep-dives and mirrors how Google expects candidates to decompose before optimizing internals."
     },
     {
       "id": "FC-B3-001",
@@ -1092,7 +1092,7 @@
       ],
       "source": "Systems Architecture video (Gg318hR5JY0) SA-V4; AOSA distsys",
       "front": "You are designing a photo archive where users rarely access images older than one year, but must be able to retrieve them within seconds when requested. Which storage trade-off best matches this access pattern?",
-      "back": "Store hot recent photos in flash/SSD and tier older photos to cheaper rotating disk \u2014 The official Systems Architecture prep video emphasizes that rotating disk offers cheaper storage at higher latency, while flash/memory trade cost for speed. Tiering matches infrequent old access\u2026"
+      "back": "Store hot recent photos in flash/SSD and tier older photos to cheaper rotating disk \u2014 The official Systems Architecture prep video emphasizes that rotating disk offers cheaper storage at higher latency, while flash/memory trade cost for speed. Tiering matches infrequent old access with cost efficiency while keeping recent\u2026"
     },
     {
       "id": "FC-B6-002",
@@ -1105,7 +1105,7 @@
       ],
       "source": "Email rubric; AOSA distsys",
       "front": "A social feed service needs fast reads of denormalized timelines keyed by user ID, tolerates eventual consistency, and rarely performs cross-user joins. Which database trade-off is most appropriate to discuss first?",
-      "back": "A wide-column or document store optimized for key-based reads over normalized SQL joins \u2014 SQL vs NoSQL is not about 'correctness' but access pattern fit. Timeline reads by user ID map naturally to key-value or wide-column designs with denormalized rows. SQL excels at complex joins and\u2026"
+      "back": "A wide-column or document store optimized for key-based reads over normalized SQL joins \u2014 SQL vs NoSQL is not about 'correctness' but access pattern fit. Timeline reads by user ID map naturally to key-value or wide-column designs with denormalized rows. SQL excels at complex joins and strong consistency \u2014 less critical here.\u2026"
     },
     {
       "id": "FC-B6-003",
@@ -1118,7 +1118,7 @@
       ],
       "source": "AOSA distsys; email rubric",
       "front": "An e-commerce checkout must confirm payment before showing an order receipt, but sending a confirmation email can wait. How should you frame the sync vs async trade-off?",
-      "back": "Process payment synchronously on the critical path; enqueue email delivery asynchronously \u2014 Sync processing preserves user-visible correctness on the critical path (payment confirmed before receipt). Async decouples non-critical work (email) to improve latency and resilience. The trade-off\u2026"
+      "back": "Process payment synchronously on the critical path; enqueue email delivery asynchronously \u2014 Sync processing preserves user-visible correctness on the critical path (payment confirmed before receipt). Async decouples non-critical work (email) to improve latency and resilience. The trade-off is coupling vs responsiveness \u2014 a\u2026"
     },
     {
       "id": "FC-B6-004",
@@ -1131,7 +1131,7 @@
       ],
       "source": "AOSA distsys; email rubric",
       "front": "You need a durable work queue for order-fulfillment events that must survive consumer restarts, support replay, and handle high throughput with partition-level ordering. Kafka vs a database-backed queue \u2014 which trade-off favors Kafka?",
-      "back": "Kafka's log-based, partitioned design gives replay and ordering at scale; a DB queue simplifies ops but bottlenecks on DB write throughput \u2014 Kafka trades operational complexity for scalable, ordered, replayable streams. DB queues reuse existing infrastructure but often become write-limited and costly at high volume. The interview answer\u2026"
+      "back": "Kafka's log-based, partitioned design gives replay and ordering at scale; a DB queue simplifies ops but bottlenecks on DB write throughput \u2014 Kafka trades operational complexity for scalable, ordered, replayable streams. DB queues reuse existing infrastructure but often become write-limited and costly at high volume. The interview answer is not 'always Kafka' \u2014 it is explaining\u2026"
     },
     {
       "id": "FC-B6-005",
@@ -1143,7 +1143,7 @@
       ],
       "source": "AOSA distsys; email rubric",
       "front": "A read-heavy product catalog page displays product name, price, inventory count, and seller rating together. Queries run thousands of times per second. Which normalization trade-off is most defensible?",
-      "back": "Denormalize frequently co-read fields into a single document or row to avoid joins on every page load \u2014 Normalization reduces update anomalies; denormalization reduces read latency and join cost. For read-heavy, co-displayed data, controlled denormalization with explicit invalidation strategy is a\u2026"
+      "back": "Denormalize frequently co-read fields into a single document or row to avoid joins on every page load \u2014 Normalization reduces update anomalies; denormalization reduces read latency and join cost. For read-heavy, co-displayed data, controlled denormalization with explicit invalidation strategy is a standard trade-off. Interviewers score\u2026"
     },
     {
       "id": "FC-B6-006",
@@ -1156,7 +1156,7 @@
       ],
       "source": "Systems Architecture video SA-V3; AOSA distsys",
       "front": "Rough latency hierarchy from fastest to slowest for a single random read in a well-provisioned system is typically:",
-      "back": "CPU cache / main memory \u2192 SSD/flash \u2192 rotating disk \u2192 cross-continent network RTT \u2014 The Systems Architecture prep video stresses quantitative intuition: memory reads are orders of magnitude faster than disk, and local network RTT is far cheaper than cross-continental hops. Knowing\u2026"
+      "back": "CPU cache / main memory \u2192 SSD/flash \u2192 rotating disk \u2192 cross-continent network RTT \u2014 The Systems Architecture prep video stresses quantitative intuition: memory reads are orders of magnitude faster than disk, and local network RTT is far cheaper than cross-continental hops. Knowing this hierarchy lets you justify caching,\u2026"
     },
     {
       "id": "FC-B6-007",
@@ -1168,7 +1168,7 @@
       ],
       "source": "Email rubric \u2014 trade-offs section",
       "front": "During a system design interview, you propose Cassandra for a workload that clearly needs strong relational joins. The interviewer asks why. What demonstrates the strongest trade-off thinking?",
-      "back": "Acknowledge the mismatch, explain why another store fits the access pattern better, and describe what you would sacrifice or gain with each option \u2014 The Systems Architecture rubric states that implications matter more than a single 'correct' choice and that a coherent design beats memorized answers. Acknowledging trade-offs, rejected\u2026"
+      "back": "Acknowledge the mismatch, explain why another store fits the access pattern better, and describe what you would sacrifice or gain with each option \u2014 The Systems Architecture rubric states that implications matter more than a single 'correct' choice and that a coherent design beats memorized answers. Acknowledging trade-offs, rejected alternatives, and consistency with requirements\u2026"
     },
     {
       "id": "FC-B6-008",
@@ -1181,7 +1181,7 @@
       ],
       "source": "AOSA distsys",
       "front": "Static assets (JavaScript bundles, images) for a global web app must load quickly worldwide. Which CDN trade-off should you describe?",
-      "back": "Push popular assets to edge caches proactively; use longer TTLs and cache invalidation for updates \u2014 CDN push (or prefetch) vs pull is a latency/freshness trade-off. Static assets with versioned filenames tolerate long TTLs at the edge, reducing origin load and cross-region RTT. Pull-on-miss is\u2026"
+      "back": "Push popular assets to edge caches proactively; use longer TTLs and cache invalidation for updates \u2014 CDN push (or prefetch) vs pull is a latency/freshness trade-off. Static assets with versioned filenames tolerate long TTLs at the edge, reducing origin load and cross-region RTT. Pull-on-miss is simpler for highly dynamic content.\u2026"
     },
     {
       "id": "FC-B7-001",
@@ -1193,7 +1193,7 @@
       ],
       "source": "AOSA distsys redundancy; email rubric",
       "front": "A stateless API tier sits behind a load balancer with health checks. One instance stops responding. What failover behavior should you describe for v1?",
-      "back": "The load balancer stops routing to the unhealthy instance; remaining instances absorb traffic automatically \u2014 For stateless tiers, automatic failover via health-checked load balancing is the baseline pattern from AOSA's redundancy discussion. Manual intervention is reserved for stateful components or complex\u2026"
+      "back": "The load balancer stops routing to the unhealthy instance; remaining instances absorb traffic automatically \u2014 For stateless tiers, automatic failover via health-checked load balancing is the baseline pattern from AOSA's redundancy discussion. Manual intervention is reserved for stateful components or complex promotion logic. Interviewers expect\u2026"
     },
     {
       "id": "FC-B7-002",
@@ -1205,7 +1205,7 @@
       ],
       "source": "AOSA distsys; NALSD resilience",
       "front": "Your primary database replica fails. A synchronous standby exists in another zone. Automatic promotion could cause split-brain if the primary is merely partitioned, not dead. What trade-off should you articulate?",
-      "back": "Automatic failover reduces RTO but risks data loss or dual-writer scenarios; manual failover with fencing is safer but slower \u2014 Stateful failover trades recovery time against correctness. Automatic promotion helps RTO; manual promotion with quorum/fencing reduces split-brain risk. NALSD's resilience phase expects you to name\u2026"
+      "back": "Automatic failover reduces RTO but risks data loss or dual-writer scenarios; manual failover with fencing is safer but slower \u2014 Stateful failover trades recovery time against correctness. Automatic promotion helps RTO; manual promotion with quorum/fencing reduces split-brain risk. NALSD's resilience phase expects you to name failure modes (network partition vs\u2026"
     },
     {
       "id": "FC-B7-003",
@@ -1216,7 +1216,7 @@
       ],
       "source": "Email rubric \u2014 failure recovery; AOSA distsys",
       "front": "A product detail page aggregates inventory, reviews, and recommendations. The recommendations service is down. What graceful degradation strategy best preserves user experience?",
-      "back": "Serve the page without recommendations; show core product and inventory data with a subtle fallback \u2014 Graceful degradation isolates non-critical dependency failures so core functionality continues. The email rubric emphasizes operating at scale where failures are normal \u2014 designing partial responses\u2026"
+      "back": "Serve the page without recommendations; show core product and inventory data with a subtle fallback \u2014 Graceful degradation isolates non-critical dependency failures so core functionality continues. The email rubric emphasizes operating at scale where failures are normal \u2014 designing partial responses beats all-or-nothing failure. Timeouts\u2026"
     },
     {
       "id": "FC-B7-004",
@@ -1227,7 +1227,7 @@
       ],
       "source": "AOSA distsys; effective troubleshooting",
       "front": "Service A calls Service B, which is slow and error-prone. A's thread pool fills waiting on B, causing A to fail too. Which defense directly addresses this cascading failure pattern?",
-      "back": "Circuit breaker: stop calling B after error threshold, fail fast, and periodically probe recovery \u2014 Cascading failures propagate load and latency upstream. Circuit breakers fail fast, preserving A's capacity and giving B time to recover \u2014 a core pattern in AOSA and troubleshooting literature.\u2026"
+      "back": "Circuit breaker: stop calling B after error threshold, fail fast, and periodically probe recovery \u2014 Cascading failures propagate load and latency upstream. Circuit breakers fail fast, preserving A's capacity and giving B time to recover \u2014 a core pattern in AOSA and troubleshooting literature. Unbounded threads and retry storms (see B7-011) worsen the cascade."
     },
     {
       "id": "FC-B7-005",
@@ -1239,7 +1239,7 @@
       ],
       "source": "Systems Architecture video SA-V2; SRE book",
       "front": "You deploy a new sharded storage layer. The official Systems Architecture video asks: 'How do we know the system is working?' What should you propose first?",
-      "back": "Define SLIs (latency, error rate, freshness) with dashboards and alerts tied to user-visible symptoms \u2014 SA-V2 explicitly includes detecting whether the system works. SLI-driven monitoring (latency, errors, throughput, saturation) connects observability to user impact \u2014 not just machine metrics. This\u2026"
+      "back": "Define SLIs (latency, error rate, freshness) with dashboards and alerts tied to user-visible symptoms \u2014 SA-V2 explicitly includes detecting whether the system works. SLI-driven monitoring (latency, errors, throughput, saturation) connects observability to user impact \u2014 not just machine metrics. This detection layer precedes defense and\u2026"
     },
     {
       "id": "FC-B7-006",
@@ -1251,7 +1251,7 @@
       ],
       "source": "AOSA distsys; NALSD resilience",
       "front": "An entire availability zone becomes unavailable. Your service has multi-zone deployment within one region. What failure response should you describe?",
-      "back": "Traffic shifts to healthy zones; stateful components rely on cross-zone replication already in place \u2014 Zone failure is a designed-for scenario in multi-AZ architectures: redundant capacity in sibling zones absorbs traffic. Cross-region failover is a separate, costlier DR tier. Interviewers want\u2026"
+      "back": "Traffic shifts to healthy zones; stateful components rely on cross-zone replication already in place \u2014 Zone failure is a designed-for scenario in multi-AZ architectures: redundant capacity in sibling zones absorbs traffic. Cross-region failover is a separate, costlier DR tier. Interviewers want layered resilience \u2014 zone loss handled\u2026"
     },
     {
       "id": "FC-B7-007",
@@ -1263,7 +1263,7 @@
       ],
       "source": "NALSD resilience; AOSA distsys",
       "front": "Regional disaster destroys your primary region. RPO of 15 minutes and RTO of 1 hour are acceptable for a non-critical analytics pipeline. Which recovery design fits?",
-      "back": "Async replication to a secondary region with periodic backups; rehearsed runbook for regional failover \u2014 Recovery objectives drive architecture. 15-minute RPO tolerates async replication; 1-hour RTO does not require instant automatic global failover. Matching DR investment to business criticality \u2014\u2026"
+      "back": "Async replication to a secondary region with periodic backups; rehearsed runbook for regional failover \u2014 Recovery objectives drive architecture. 15-minute RPO tolerates async replication; 1-hour RTO does not require instant automatic global failover. Matching DR investment to business criticality \u2014 rather than defaulting to maximum redundancy \u2014 is NALSD-style resilience thinking."
     },
     {
       "id": "FC-B7-008",
@@ -1274,7 +1274,7 @@
       ],
       "source": "AOSA distsys; effective troubleshooting",
       "front": "A malformed message in a queue causes the consumer to crash on every redelivery, blocking the partition. What recovery pattern addresses poison messages?",
-      "back": "Dead-letter queue after N failed attempts; alert operators; fix or discard with audit trail \u2014 Poison messages are a classic async failure mode: one bad payload blocks progress. Dead-letter queues isolate poison pills, preserve other traffic, and enable investigation \u2014 standard queue hygiene\u2026"
+      "back": "Dead-letter queue after N failed attempts; alert operators; fix or discard with audit trail \u2014 Poison messages are a classic async failure mode: one bad payload blocks progress. Dead-letter queues isolate poison pills, preserve other traffic, and enable investigation \u2014 standard queue hygiene from distributed systems practice and troubleshooting guides."
     },
     {
       "id": "FC-B8-001",
@@ -1286,7 +1286,7 @@
       ],
       "source": "Email sample topics; mock system design",
       "front": "Designing a URL shortener at architectural level (not coding), what is the primary reason to use a distributed unique ID or hash for short codes instead of sequential integers?",
-      "back": "Avoid predictable/guessable URLs and enable independent ID generation across servers without a single coordination point \u2014 URL shortener interviews test architectural ID strategy: base-62 encoding of distributed IDs (Snowflake, UUID hash) avoids a global counter bottleneck and reduces enumeration attacks. Sequential IDs\u2026"
+      "back": "Avoid predictable/guessable URLs and enable independent ID generation across servers without a single coordination point \u2014 URL shortener interviews test architectural ID strategy: base-62 encoding of distributed IDs (Snowflake, UUID hash) avoids a global counter bottleneck and reduces enumeration attacks. Sequential IDs are simpler but expose predictability and coordination costs at scale."
     },
     {
       "id": "FC-B8-002",
@@ -1298,7 +1298,7 @@
       ],
       "source": "AOSA distsys; email rubric",
       "front": "A URL shortener receives 100:1 read-to-write ratio. Which v1 read-path architecture is most appropriate to discuss?",
-      "back": "Cache hot mappings in memory/CDN; async write path to durable store with redirect on cache miss \u2014 Read-heavy asymmetry drives cache-first redirect paths \u2014 a canonical pattern from AOSA. Writes are rare enough to tolerate slightly slower persistence; reads need sub-10ms redirects. Architectural\u2026"
+      "back": "Cache hot mappings in memory/CDN; async write path to durable store with redirect on cache miss \u2014 Read-heavy asymmetry drives cache-first redirect paths \u2014 a canonical pattern from AOSA. Writes are rare enough to tolerate slightly slower persistence; reads need sub-10ms redirects. Architectural choice centers on cache placement and invalidation, not linked-list algorithms."
     },
     {
       "id": "FC-B8-003",
@@ -1310,7 +1310,7 @@
       ],
       "source": "Email sample topics; AOSA distsys",
       "front": "You need a distributed rate limiter enforcing 1000 requests/minute per API key across hundreds of stateless servers. Which architectural approach scales best?",
-      "back": "Centralized counter store (Redis/Memcached) with atomic increment and TTL windows, or token bucket per key \u2014 Distributed rate limiting requires shared state or approximate coordination. Centralized counters with sliding/fixed windows are the standard architectural pattern. Per-server counters over-allow by\u2026"
+      "back": "Centralized counter store (Redis/Memcached) with atomic increment and TTL windows, or token bucket per key \u2014 Distributed rate limiting requires shared state or approximate coordination. Centralized counters with sliding/fixed windows are the standard architectural pattern. Per-server counters over-allow by N\u00d7; DB row locks don't scale to request-rate granularity."
     },
     {
       "id": "FC-B8-004",
@@ -1322,7 +1322,7 @@
       ],
       "source": "AOSA distsys load balancers",
       "front": "Where should rate limiting sit architecturally for a public API with multiple microservices behind a gateway?",
-      "back": "At the API gateway/edge before routing to backends, with optional finer-grained limits per service \u2014 Edge/gateway placement protects the entire fleet from abuse early, reduces wasted downstream work, and centralizes policy. Per-service limits add nuance but edge enforcement is the architectural\u2026"
+      "back": "At the API gateway/edge before routing to backends, with optional finer-grained limits per service \u2014 Edge/gateway placement protects the entire fleet from abuse early, reduces wasted downstream work, and centralizes policy. Per-service limits add nuance but edge enforcement is the architectural first line \u2014 consistent with AOSA's reverse proxy and load balancer patterns."
     },
     {
       "id": "FC-B8-005",
@@ -1334,7 +1334,7 @@
       ],
       "source": "Email sample topics; AOSA distsys",
       "front": "Designing a metrics/logging pipeline for 500K events/sec, which v1 ingestion architecture should you propose?",
-      "back": "Agents on hosts batch and ship to a partitioned message bus; consumers write to time-series or columnar storage \u2014 High-volume metrics pipelines use async ingestion (Kafka/Pub-Sub), batching, and partitioned consumers \u2014 the MapReduce/streaming pattern from email topic lists. Sync per-event DB writes cannot\u2026"
+      "back": "Agents on hosts batch and ship to a partitioned message bus; consumers write to time-series or columnar storage \u2014 High-volume metrics pipelines use async ingestion (Kafka/Pub-Sub), batching, and partitioned consumers \u2014 the MapReduce/streaming pattern from email topic lists. Sync per-event DB writes cannot sustain hundreds of thousands of events/sec architecturally."
     },
     {
       "id": "FC-B8-006",
@@ -1346,7 +1346,7 @@
       ],
       "source": "Email rubric; AOSA distsys",
       "front": "Dashboard queries aggregate metrics over 30-day windows across millions of time series. Which storage/query architectural trade-off fits?",
-      "back": "Pre-aggregate at ingest into rollups (1m, 1h, 1d); query layer selects granularity by time range \u2014 Metrics systems architecturally separate hot raw retention from rolled-up long-term storage. Pre-aggregation at ingest trades write complexity for bounded query cost \u2014 standard in observability\u2026"
+      "back": "Pre-aggregate at ingest into rollups (1m, 1h, 1d); query layer selects granularity by time range \u2014 Metrics systems architecturally separate hot raw retention from rolled-up long-term storage. Pre-aggregation at ingest trades write complexity for bounded query cost \u2014 standard in observability pipeline design, not LeetCode-style data structure tricks."
     },
     {
       "id": "FC-B8-007",
@@ -1358,7 +1358,7 @@
       ],
       "source": "AOSA distsys caching; email topic list",
       "front": "A distributed cache sits in front of a database. Which cache invalidation architecture handles updated records correctly under concurrent writers?",
-      "back": "Write-through or cache-aside with explicit invalidation/version keys; TTL as safety net \u2014 Cache-aside with explicit invalidation or write-through on mutation is the canonical pattern from AOSA. TTL alone risks stale reads; global flush doesn't scale. Architectural discussion focuses on\u2026"
+      "back": "Write-through or cache-aside with explicit invalidation/version keys; TTL as safety net \u2014 Cache-aside with explicit invalidation or write-through on mutation is the canonical pattern from AOSA. TTL alone risks stale reads; global flush doesn't scale. Architectural discussion focuses on consistency window acceptance, not implementing LRU in code."
     },
     {
       "id": "FC-B8-008",
@@ -1370,7 +1370,7 @@
       ],
       "source": "AOSA distsys; email DHT topic",
       "front": "A distributed cache must scale beyond one machine's memory. Which sharding approach should you describe architecturally?",
-      "back": "Consistent hashing over cache keys across nodes with virtual nodes for even distribution \u2014 Consistent hashing (DHT concept from email topic list) enables horizontal cache scale with minimal remapping on node add/remove. Architectural interviews test why key-based partitioning beats random\u2026"
+      "back": "Consistent hashing over cache keys across nodes with virtual nodes for even distribution \u2014 Consistent hashing (DHT concept from email topic list) enables horizontal cache scale with minimal remapping on node add/remove. Architectural interviews test why key-based partitioning beats random or full replication for large working sets."
     },
     {
       "id": "FC-B8-009",
@@ -1382,7 +1382,7 @@
       ],
       "source": "Email sample topics; AOSA distsys",
       "front": "Architecturally, what is the core challenge of a polite large-scale web crawler?",
-      "back": "Maintaining a scalable URL frontier with deduplication, per-host rate limits, and prioritized fetch scheduling \u2014 Web crawler system design centers on frontier queue architecture, bloom-filter dedup, politeness per domain, and distributed fetch workers \u2014 not HTML parsing code. Email lists crawlers among\u2026"
+      "back": "Maintaining a scalable URL frontier with deduplication, per-host rate limits, and prioritized fetch scheduling \u2014 Web crawler system design centers on frontier queue architecture, bloom-filter dedup, politeness per domain, and distributed fetch workers \u2014 not HTML parsing code. Email lists crawlers among canonical large-system topics."
     },
     {
       "id": "FC-B8-010",
@@ -1394,7 +1394,7 @@
       ],
       "source": "AOSA image hosting example",
       "front": "A crawler stores billions of fetched pages. Separating metadata from content architecturally means:",
-      "back": "Index URL, checksum, fetch time, and size in a queryable store; store raw page bytes in object/blob storage \u2014 Metadata/blob separation (from AOSA image-hosting and email rubric) lets you scale cheap object storage for bytes and fast indexes for lookup. This pattern recurs across crawlers, photo apps, and\u2026"
+      "back": "Index URL, checksum, fetch time, and size in a queryable store; store raw page bytes in object/blob storage \u2014 Metadata/blob separation (from AOSA image-hosting and email rubric) lets you scale cheap object storage for bytes and fast indexes for lookup. This pattern recurs across crawlers, photo apps, and notification attachments."
     },
     {
       "id": "FC-B9-001",
@@ -1406,7 +1406,7 @@
       ],
       "source": "Spanner OSDI 2012 paper (Corbett et al.)",
       "front": "Which description best characterizes Google Spanner?",
-      "back": "A scalable, multi-version, globally distributed, synchronously replicated database with SQL and externally consistent transactions \u2014 The Spanner paper defines it as a multi-version, globally distributed, synchronously replicated database that shards data across Paxos state machines and supports externally consistent distributed\u2026"
+      "back": "A scalable, multi-version, globally distributed, synchronously replicated database with SQL and externally consistent transactions \u2014 The Spanner paper defines it as a multi-version, globally distributed, synchronously replicated database that shards data across Paxos state machines and supports externally consistent distributed transactions with a SQL query language."
     },
     {
       "id": "FC-B9-002",
@@ -1430,7 +1430,7 @@
       ],
       "source": "Spanner OSDI 2012 paper \u2014 TrueTime implementation",
       "front": "TrueTime keeps its uncertainty bound small (generally under ~10 ms) by relying on which time references?",
-      "back": "GPS receivers and atomic clocks, which have uncorrelated failure modes \u2014 Time-master machines use GPS and atomic clocks precisely because their failure modes are uncorrelated. Daemons poll multiple masters and apply a Marzullo-style algorithm to reject outliers, keeping\u2026"
+      "back": "GPS receivers and atomic clocks, which have uncorrelated failure modes \u2014 Time-master machines use GPS and atomic clocks precisely because their failure modes are uncorrelated. Daemons poll multiple masters and apply a Marzullo-style algorithm to reject outliers, keeping uncertainty (epsilon) small."
     },
     {
       "id": "FC-B9-004",
@@ -1454,7 +1454,7 @@
       ],
       "source": "Spanner OSDI 2012 paper \u2014 Section 4.1.2 commit wait",
       "front": "How does Spanner's 'commit wait' use TrueTime to preserve external consistency?",
-      "back": "The coordinator waits until TT.after(s) is true \u2014 until the commit timestamp s is guaranteed to be in the past \u2014 before making the write visible \u2014 After choosing commit timestamp s from TT.now().latest, the coordinator waits out the uncertainty until TT.after(s) holds. This guarantees s is in the absolute past, so later transactions get\u2026"
+      "back": "The coordinator waits until TT.after(s) is true \u2014 until the commit timestamp s is guaranteed to be in the past \u2014 before making the write visible \u2014 After choosing commit timestamp s from TT.now().latest, the coordinator waits out the uncertainty until TT.after(s) holds. This guarantees s is in the absolute past, so later transactions get strictly larger timestamps. Expected wait is about 2*epsilon."
     },
     {
       "id": "FC-B9-006",
@@ -1490,7 +1490,7 @@
       ],
       "source": "Spanner OSDI 2012 paper \u2014 Section 2.2 directories",
       "front": "In Spanner, what is a 'directory' (bucket)?",
-      "back": "A set of contiguous keys sharing a common prefix \u2014 the unit of data placement and movement between Paxos groups \u2014 A directory is a bucket of contiguous keys with a shared prefix. It is the smallest unit whose placement and geographic replication can be specified, and Movedir relocates data directory-by-directory\u2026"
+      "back": "A set of contiguous keys sharing a common prefix \u2014 the unit of data placement and movement between Paxos groups \u2014 A directory is a bucket of contiguous keys with a shared prefix. It is the smallest unit whose placement and geographic replication can be specified, and Movedir relocates data directory-by-directory (actually by fragment) between Paxos groups."
     },
     {
       "id": "FC-C1-001",
@@ -2329,7 +2329,7 @@
       ],
       "source": "SRE Book ch 3",
       "front": "The SRE book argues that pursuing 100% availability for most user-facing services is economically irrational because:",
-      "back": "The marginal cost of each additional nine of reliability grows superlinearly while user-perceived benefit flattens \u2014 Chapter 3 frames reliability as a risk-management problem: each nine costs disproportionately more in redundancy, testing, and operational overhead, while users rarely notice differences beyond a\u2026"
+      "back": "The marginal cost of each additional nine of reliability grows superlinearly while user-perceived benefit flattens \u2014 Chapter 3 frames reliability as a risk-management problem: each nine costs disproportionately more in redundancy, testing, and operational overhead, while users rarely notice differences beyond a well-chosen SLO. SRE explicitly embraces a\u2026"
     },
     {
       "id": "FC-SR-002",
@@ -2341,7 +2341,7 @@
       ],
       "source": "SRE Book ch 3",
       "front": "A product team proposes raising an API's availability SLO from 99.9% to 99.99% without additional engineering investment. From an SRE risk perspective, the strongest objection is:",
-      "back": "Tighter SLOs shrink the error budget, reducing permissible launch risk and requiring costly reliability work to remain achievable \u2014 Embracing risk means choosing an SLO that balances user benefit and engineering cost. Tightening the target without investment makes the error budget vanish, forcing either missed SLOs or frozen\u2026"
+      "back": "Tighter SLOs shrink the error budget, reducing permissible launch risk and requiring costly reliability work to remain achievable \u2014 Embracing risk means choosing an SLO that balances user benefit and engineering cost. Tightening the target without investment makes the error budget vanish, forcing either missed SLOs or frozen velocity \u2014 undermining the negotiated dev/SRE model described in chapters 3 and 4."
     },
     {
       "id": "FC-SR-003",
@@ -2353,7 +2353,7 @@
       ],
       "source": "SRE Book ch 3",
       "front": "A service targets 99.95% monthly availability. Approximately how much downtime budget does that allow per 30-day month?",
-      "back": "About 22 minutes \u2014 99.95% permits 0.05% unavailability: 0.0005 \u00d7 30 \u00d7 24 \u00d7 60 \u2248 21.6 minutes per month. SRE candidates should fluently translate nines into error budgets \u2014 the quantitative foundation for launch and\u2026"
+      "back": "About 22 minutes \u2014 99.95% permits 0.05% unavailability: 0.0005 \u00d7 30 \u00d7 24 \u00d7 60 \u2248 21.6 minutes per month. SRE candidates should fluently translate nines into error budgets \u2014 the quantitative foundation for launch and incident decisions in chapter 4."
     },
     {
       "id": "FC-SR-004",
@@ -2365,7 +2365,7 @@
       ],
       "source": "SRE Book ch 4",
       "front": "When defining an availability SLI as 'successful responses / valid requests,' which request class should typically be excluded from the denominator?",
-      "back": "Requests that fail due to client-side errors such as malformed input the service correctly rejects with 4xx \u2014 Chapter 4 stresses SLIs that reflect user-perceived reliability. Client-caused 4xx errors are often excluded because they do not indicate service failure. The exact policy must be documented, but\u2026"
+      "back": "Requests that fail due to client-side errors such as malformed input the service correctly rejects with 4xx \u2014 Chapter 4 stresses SLIs that reflect user-perceived reliability. Client-caused 4xx errors are often excluded because they do not indicate service failure. The exact policy must be documented, but counting user mistakes as downtime distorts SLOs and error budgets."
     },
     {
       "id": "FC-SR-005",
@@ -2377,7 +2377,7 @@
       ],
       "source": "SRE Book ch 4",
       "front": "For a latency SLI on a search API, which formulation best aligns with SRE practice?",
-      "back": "Proportion of queries completing within 500 ms at the 95th percentile over a rolling 28-day window \u2014 Chapter 4 recommends distribution-aware SLIs \u2014 typically tail percentiles over meaningful windows \u2014 because averages hide outliers that degrade user experience. Rolling windows smooth noise while\u2026"
+      "back": "Proportion of queries completing within 500 ms at the 95th percentile over a rolling 28-day window \u2014 Chapter 4 recommends distribution-aware SLIs \u2014 typically tail percentiles over meaningful windows \u2014 because averages hide outliers that degrade user experience. Rolling windows smooth noise while preserving long-term accountability."
     },
     {
       "id": "FC-SR-006",
@@ -2389,7 +2389,7 @@
       ],
       "source": "SRE Book ch 4",
       "front": "An error budget policy states that when 75% of the quarterly budget is consumed with six weeks remaining, the team should:",
-      "back": "Treat this as an early warning: increase reliability focus, review recent changes, and tighten launch criteria before budget exhaustion \u2014 Error budgets are leading indicators, not binary switches. Chapter 4 describes tiered responses as burn rate accelerates \u2014 early intervention preserves remaining budget and avoids emergency freezes.\u2026"
+      "back": "Treat this as an early warning: increase reliability focus, review recent changes, and tighten launch criteria before budget exhaustion \u2014 Error budgets are leading indicators, not binary switches. Chapter 4 describes tiered responses as burn rate accelerates \u2014 early intervention preserves remaining budget and avoids emergency freezes. Secretly moving SLO targets destroys trust in the model."
     },
     {
       "id": "FC-SR-007",
@@ -2401,7 +2401,7 @@
       ],
       "source": "SRE Book ch 4",
       "front": "A composite service depends on three backends each with independent 99.9% SLOs. Without redundancy, what is the approximate theoretical ceiling on end-to-end availability?",
-      "back": "Roughly 99.7% (product of individual availabilities) \u2014 Serial dependency availability multiplies: 0.999\u00b3 \u2248 0.997. Chapter 4's SLI/SLO material implies composite services need stricter component targets or redundancy to meet user-facing goals \u2014 a common\u2026"
+      "back": "Roughly 99.7% (product of individual availabilities) \u2014 Serial dependency availability multiplies: 0.999\u00b3 \u2248 0.997. Chapter 4's SLI/SLO material implies composite services need stricter component targets or redundancy to meet user-facing goals \u2014 a common system-design interview insight."
     },
     {
       "id": "FC-SR-008",
@@ -2413,7 +2413,7 @@
       ],
       "source": "SRE Book ch 4",
       "front": "Why do SRE teams typically set internal SLOs slightly stricter than external SLAs?",
-      "back": "To consume the SLA margin as an error budget buffer, reducing contractual breach risk while preserving a measurable internal target \u2014 Chapter 4 explains the SLO-as-buffer pattern: internal targets tighter than customer-facing SLAs give teams measurable budget to spend on velocity while maintaining contractual headroom. Breaching an\u2026"
+      "back": "To consume the SLA margin as an error budget buffer, reducing contractual breach risk while preserving a measurable internal target \u2014 Chapter 4 explains the SLO-as-buffer pattern: internal targets tighter than customer-facing SLAs give teams measurable budget to spend on velocity while maintaining contractual headroom. Breaching an SLA triggers external consequences; exhausting an SLO triggers internal policy."
     },
     {
       "id": "FC-SR-009",
@@ -2425,7 +2425,7 @@
       ],
       "source": "SRE Book ch 5",
       "front": "Which characteristic is NOT part of the SRE book's definition of toil?",
-      "back": "Work that permanently improves the system's architecture on first execution \u2014 Chapter 5 defines toil as manual, repetitive, automatable operational work that scales with service size \u2014 not engineering that durably improves the system. One-time architectural improvements are\u2026"
+      "back": "Work that permanently improves the system's architecture on first execution \u2014 Chapter 5 defines toil as manual, repetitive, automatable operational work that scales with service size \u2014 not engineering that durably improves the system. One-time architectural improvements are valuable SRE work, not toil."
     },
     {
       "id": "FC-SR-010",
@@ -2437,7 +2437,7 @@
       ],
       "source": "SRE Book ch 5",
       "front": "An SRE team tracks toil as 45% of time. Leadership asks why not automate the remaining ticket queue immediately. The principled response is:",
-      "back": "Automation itself requires engineering capacity; prioritize highest-volume toil with best ROI while preserving time for SLO work, launches, and on-call \u2014 Chapter 5 recommends capping toil (commonly ~50%) and investing remaining capacity in automation \u2014 but automation is not free. Prioritization by impact, balancing on-call and project work, reflects\u2026"
+      "back": "Automation itself requires engineering capacity; prioritize highest-volume toil with best ROI while preserving time for SLO work, launches, and on-call \u2014 Chapter 5 recommends capping toil (commonly ~50%) and investing remaining capacity in automation \u2014 but automation is not free. Prioritization by impact, balancing on-call and project work, reflects realistic SRE capacity management."
     },
     {
       "id": "FC-SR-011",
@@ -2848,150 +2848,6 @@
       "back": "Restricting which script sources may execute, limiting damage when an injection point exists \u2014 Chapter 12 positions CSP as layered defense: even if encoding fails, a strict CSP can block inline script execution. It complements \u2014 not replaces \u2014 secure coding practices."
     },
     {
-      "id": "FC-CR-001",
-      "deck": "core",
-      "tags": [
-        "code-review",
-        "bug-finding",
-        "off-by-one"
-      ],
-      "source": "Google eng-practices; IGotAnOffer code review guide",
-      "front": "Review this loop:\n```python\nfor i in range(len(items) + 1):\n    process(items[i])\n```\nWhat is the most critical bug?",
-      "back": "IndexError on the final iteration \u2014 range goes one past the last valid index \u2014 range(len(items) + 1) produces indices 0..len(items), but valid indices are 0..len(items)-1. The last iteration accesses items[len(items)] and raises IndexError. Use range(len(items)) or iterate items directly."
-    },
-    {
-      "id": "FC-CR-002",
-      "deck": "core",
-      "tags": [
-        "code-review",
-        "bug-finding",
-        "null-check"
-      ],
-      "source": "Google eng-practices looking-for.md",
-      "front": "Review:\n```python\ndef label(user):\n    return user.profile.display_name.upper()\n```\nWhich review comment addresses the highest-severity issue first?",
-      "back": "Guard against None \u2014 if user, profile, or display_name is missing, this raises AttributeError at runtime \u2014 Google code review prioritizes correctness. Chained attribute access without None guards crashes in production when data is partial. Style and naming matter after functional defects are addressed."
-    },
-    {
-      "id": "FC-CR-003",
-      "deck": "core",
-      "tags": [
-        "code-review",
-        "bug-finding",
-        "logic"
-      ],
-      "source": "Exponent L6 EM code review experience",
-      "front": "Review interval-merge logic:\n```python\ndef overlaps(a, b):\n    return a.start <= b.end and b.start <= a.end\n\ndef merge(intervals):\n    merged = []\n    for iv in intervals:\n        if not merged or not overlaps(merged[-1], iv):\n            merged.append(iv)\n        else:\n     \u2026",
-      "back": "Non-adjacent overlapping intervals may not merge \u2014 algorithm assumes sorted input but does not sort \u2014 Classic code-review trap: merge logic often assumes sorted intervals. Unsorted input like [3,6], [1,4] leaves two entries instead of one. Either sort first or document/enforce preconditions."
-    },
-    {
-      "id": "FC-CR-004",
-      "deck": "core",
-      "tags": [
-        "code-review",
-        "bug-finding",
-        "comparison"
-      ],
-      "source": "Google eng-practices",
-      "front": "Review:\n```python\nif user.role = \"admin\":\n    grant_access()\n```\nWhat is wrong?",
-      "back": "Single = is assignment, not comparison \u2014 use == for equality test \u2014 In Python, = assigns; == compares. This snippet raises SyntaxError (in if) or would assign incorrectly in languages that allow it. Basic syntax/convention bugs are fair game in Google Doc reviews."
-    },
-    {
-      "id": "FC-CR-005",
-      "deck": "core",
-      "tags": [
-        "code-review",
-        "complexity",
-        "design"
-      ],
-      "source": "IGotAnOffer code review guide",
-      "front": "Review: A 200-line function `handle_request()` parses HTTP, queries DB, formats JSON, and sends email alerts. What design review comment is most appropriate?",
-      "back": "Split into focused functions/modules \u2014 single function violates separation of concerns and hinders testing \u2014 Large monolithic functions are a design smell. Google reviewers evaluate whether code is 'more complex than it needs to be' and suggest decomposition for readability and testability."
-    },
-    {
-      "id": "FC-CR-006",
-      "deck": "core",
-      "tags": [
-        "code-review",
-        "complexity",
-        "premature-abstraction"
-      ],
-      "source": "Google eng-practices looking-for.md",
-      "front": "Review adds a generic `AbstractFactoryProviderManager` for a feature used in one place with no planned second implementation. Which eng-practices principle applies?",
-      "back": "Developer may be over-engineering for hypothetical future needs \u2014 simplify until a second use case exists \u2014 eng-practices: don't implement things you might need in the future but don't need now. Reviewers push back on unnecessary abstraction that increases complexity without current benefit."
-    },
-    {
-      "id": "FC-CR-007",
-      "deck": "core",
-      "tags": [
-        "code-review",
-        "readability",
-        "naming"
-      ],
-      "source": "Google eng-practices looking-for.md",
-      "front": "Review variable names: `int d; int t; int x;` in a payment reconciliation module. Best feedback?",
-      "back": "Use descriptive names (e.g., days_since_settlement, total_cents) \u2014 names should reveal intent \u2014 eng-practices includes clarity and maintainability. Good names reduce need for comments and help future readers \u2014 especially in shared Google Doc review snippets."
-    },
-    {
-      "id": "FC-CR-008",
-      "deck": "core",
-      "tags": [
-        "code-review",
-        "maintainability",
-        "consistency"
-      ],
-      "source": "Google eng-practices looking-for.md",
-      "front": "A CL mixes camelCase and snake_case in the same Python module, diverging from the repo's existing snake_case convention. What should the reviewer prioritize?",
-      "back": "Flag style inconsistency \u2014 CLs should follow established project conventions for consistency \u2014 eng-practices: consistency with existing code style in the file/repo. Style nits come after correctness but still improve code health when they reduce cognitive load."
-    },
-    {
-      "id": "FC-CR-009",
-      "deck": "core",
-      "tags": [
-        "code-review",
-        "process",
-        "prioritization"
-      ],
-      "source": "IGotAnOffer; Exponent L6 EM experience",
-      "front": "You have 45 minutes to review a 180-line Google Doc snippet with a known logic bug, several style nits, and a missing null check. What should you tackle first?",
-      "back": "Trace core logic and fix correctness bugs (logic + null safety) before style suggestions \u2014 EM/SRE code review interviews reward triage: correctness and functional defects first, then complexity/design, then style. Exponent reports failing when spending too long understanding logic without\u2026"
-    },
-    {
-      "id": "FC-CR-010",
-      "deck": "core",
-      "tags": [
-        "code-review",
-        "process",
-        "format"
-      ],
-      "source": "IGotAnOffer code review guide",
-      "front": "Google's code review interview typically uses which format?",
-      "back": "A code snippet in Google Docs \u2014 no IDE, no compiler; manual trace and suggested fixes \u2014 Official EM prep and candidate reports describe a shared Google Doc with problematic code, ~45 minutes, manual debugging \u2014 the alternative to a live coding round for manager tracks."
-    },
-    {
-      "id": "FC-CR-011",
-      "deck": "core",
-      "tags": [
-        "code-review",
-        "process",
-        "scope"
-      ],
-      "source": "Google eng-practices standard of code review",
-      "front": "During review, you notice the CL fixes a bug but also refactors three unrelated modules. Best process feedback?",
-      "back": "Ask to split \u2014 bug fix and unrelated refactors should be separate CLs for easier review and rollback \u2014 Google's standard of code review: each CL should be a self-contained incremental improvement. Mixed concerns make review harder and increase rollback risk \u2014 valid process signal in interviews."
-    },
-    {
-      "id": "FC-CR-012",
-      "deck": "core",
-      "tags": [
-        "code-review",
-        "process",
-        "communication"
-      ],
-      "source": "Google eng-practices; Google code review interview prep",
-      "front": "After identifying a subtle bug, what demonstrates strong code review communication in the interview?",
-      "back": "Walk through a concrete failing input, explain impact, and propose a specific fix with trade-offs \u2014 Interviewers score communication and judgment, not just bug count. Strong candidates use manual test cases, explain user/system impact, and collaborate on fixes \u2014 mirroring real CL review culture."
-    },
-    {
       "id": "FC-SA-001",
       "deck": "core",
       "tags": [
@@ -3035,7 +2891,7 @@
       ],
       "source": "Gg318hR5JY0",
       "front": "For quantitative estimates and architecture diagrams in the Systems Architecture interview, Google expects you to use:",
-      "back": "A whiteboard (or paper) rather than relying on an IDE \u2014 The SA-V0 segment describes using the whiteboard for estimates and diagrams. The round is not an IDE coding session, and visual communication on the whiteboard is expected\u2014not prohibited or replaced\u2026"
+      "back": "A whiteboard (or paper) rather than relying on an IDE \u2014 The SA-V0 segment describes using the whiteboard for estimates and diagrams. The round is not an IDE coding session, and visual communication on the whiteboard is expected\u2014not prohibited or replaced by memorized posters."
     },
     {
       "id": "FC-SA-005",
@@ -3126,6 +2982,573 @@
       "source": "Gg318hR5JY0",
       "front": "At scale, Google expects your design to address both reliability and efficient use of resources. Which approach best satisfies both goals?",
       "back": "Eliminate single points of failure while right-sizing components and avoiding over-provisioning without redundancy \u2014 The video pairs reliability with efficient resource use\u2014redundancy and fault tolerance without wasteful over-engineering. Extreme redundancy without cost awareness or eliminating redundancy/monitoring fail both goals."
+    },
+    {
+      "id": "FC-CR-001",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "bug-finding",
+        "off-by-one"
+      ],
+      "source": "Google eng-practices; IGotAnOffer code review guide",
+      "front": "Review this loop:\n```python\nfor i in range(len(items) + 1):\n    process(items[i])\n```\nWhat is the most critical bug?",
+      "back": "IndexError on the final iteration \u2014 range goes one past the last valid index \u2014 range(len(items) + 1) produces indices 0..len(items), but valid indices are 0..len(items)-1. The last iteration accesses items[len(items)] and raises IndexError. Use range(len(items)) or iterate items directly."
+    },
+    {
+      "id": "FC-CR-002",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "bug-finding",
+        "null-check"
+      ],
+      "source": "Google eng-practices looking-for.md",
+      "front": "Review:\n```python\ndef label(user):\n    return user.profile.display_name.upper()\n```\nWhich review comment addresses the highest-severity issue first?",
+      "back": "Guard against None \u2014 if user, profile, or display_name is missing, this raises AttributeError at runtime \u2014 Google code review prioritizes correctness. Chained attribute access without None guards crashes in production when data is partial. Style and naming matter after functional defects are addressed."
+    },
+    {
+      "id": "FC-CR-003",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "bug-finding",
+        "logic"
+      ],
+      "source": "Exponent L6 EM code review experience",
+      "front": "Review interval-merge logic:\n```python\ndef overlaps(a, b):\n    return a.start <= b.end and b.start <= a.end\n\ndef merge(intervals):\n    merged = []\n    for iv in intervals:\n        if not merged or not overlaps(merged[-1], iv):\n            merged.append(iv)\n        else:\n            merged[-1].end = max(merged[-1].end, iv.end)\n    return merged\n```\nIf input is unsorted, what breaks?",
+      "back": "Non-adjacent overlapping intervals may not merge \u2014 algorithm assumes sorted input but does not sort \u2014 Classic code-review trap: merge logic often assumes sorted intervals. Unsorted input like [3,6], [1,4] leaves two entries instead of one. Either sort first or document/enforce preconditions."
+    },
+    {
+      "id": "FC-CR-004",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "bug-finding",
+        "comparison"
+      ],
+      "source": "Google eng-practices",
+      "front": "Review:\n```python\nif user.role = \"admin\":\n    grant_access()\n```\nWhat is wrong?",
+      "back": "Single = is assignment, not comparison \u2014 use == for equality test \u2014 In Python, = assigns; == compares. This snippet raises SyntaxError (in if) or would assign incorrectly in languages that allow it. Basic syntax/convention bugs are fair game in Google Doc reviews."
+    },
+    {
+      "id": "FC-CR-005",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "bug-finding",
+        "concurrency"
+      ],
+      "source": "Google eng-practices looking-for.md",
+      "front": "Review:\n```python\ncount = 0\n\ndef increment():\n    global count\n    count += 1\n\ndef get_count():\n    return count\n```\nCalled from many HTTP worker threads. What bug exists?",
+      "back": "Race condition \u2014 count += 1 is not atomic; lost updates under concurrent increment() \u2014 eng-practices explicitly calls out parallel programming safety. Non-atomic read-modify-write on shared mutable state loses counts under concurrency. Fix: threading.Lock, a single-writer pattern, or atomic metrics from the framework."
+    },
+    {
+      "id": "FC-CR-006",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "bug-finding",
+        "resource-leak"
+      ],
+      "source": "Google eng-practices",
+      "front": "Review:\n```python\ndef read_config(path):\n    f = open(path)\n    data = f.read()\n    return json.loads(data)\n```\nWhat is the primary issue?",
+      "back": "File handle leak \u2014 f is never closed if json.loads raises or on success \u2014 Resource leaks are production bugs. Use try/finally, context manager (with open(...)), or ensure close on all paths. Reviewers flag durability and error-path behavior, not just happy path."
+    },
+    {
+      "id": "FC-CR-007",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "bug-finding",
+        "integer-overflow"
+      ],
+      "source": "IGotAnOffer code review guide",
+      "front": "Review:\n```python\ndef mid(low, high):\n    return (low + high) // 2\n```\nFor large 32-bit integers, what edge case fails?",
+      "back": "low + high can overflow before division \u2014 use low + (high - low) // 2 \u2014 Classic binary-search bug: summing two large signed ints overflows. Code review interviews test whether you catch subtle correctness issues, not just obvious typos."
+    },
+    {
+      "id": "FC-CR-008",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "bug-finding",
+        "mutable-default"
+      ],
+      "source": "Google eng-practices",
+      "front": "Review:\n```python\ndef append_item(item, bucket=[]):\n    bucket.append(item)\n    return bucket\n```\nWhat is the bug?",
+      "back": "Mutable default argument \u2014 all callers share the same list object across calls \u2014 Python binds default [] once at function definition. Subsequent calls mutate shared state. Idiom: def append_item(item, bucket=None): bucket = bucket if bucket is not None else []."
+    },
+    {
+      "id": "FC-CR-009",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "complexity",
+        "algorithm"
+      ],
+      "source": "Google eng-practices looking-for.md",
+      "front": "Review:\n```python\ndef has_duplicate(nums):\n    for i in range(len(nums)):\n        for j in range(len(nums)):\n            if i != j and nums[i] == nums[j]:\n                return True\n    return False\n```\nBest complexity improvement?",
+      "back": "Use a set \u2014 O(n) time and O(n) space instead of O(n\u00b2) nested loops \u2014 Code review assesses algorithmic efficiency. A hash set tracks seen values in one pass. eng-practices: 'Does this CL improve code health?' includes avoiding unnecessary quadratic work."
+    },
+    {
+      "id": "FC-CR-010",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "complexity",
+        "data-structure"
+      ],
+      "source": "Google eng-practices",
+      "front": "Review:\n```python\ndef lookup_user(user_id, users):\n    for u in users:\n        if u.id == user_id:\n            return u\n    return None\n```\nIf `lookup_user` is called thousands of times per second on a 50K-user list, best fix?",
+      "back": "Build a dict mapping id \u2192 user once, then O(1) lookups \u2014 Reviewers connect code to scale context. Repeated linear scans on large collections are a performance design issue; indexing by id is the standard fix."
+    },
+    {
+      "id": "FC-CR-011",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "complexity",
+        "string-building"
+      ],
+      "source": "Google eng-practices",
+      "front": "Review:\n```python\nresult = \"\"\nfor line in lines:\n    result += line + \"\\n\"\n```\nFor millions of lines, what issue should you flag?",
+      "back": "Repeated string concatenation in a loop is O(n\u00b2) \u2014 use list append + join or io.StringIO \u2014 Immutability of strings makes += in tight loops quadratic. Code review catches scalability issues in 'small' snippets that fail at production data volumes."
+    },
+    {
+      "id": "FC-CR-012",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "error-handling",
+        "edge-cases"
+      ],
+      "source": "Google eng-practices",
+      "front": "Review:\n```python\ndef divide(a, b):\n    return a / b\n```\nWhat edge case must be handled for production use?",
+      "back": "Division by zero \u2014 raises ZeroDivisionError; validate b or return explicit error \u2014 Error handling and edge cases are core review targets. Empty input, zero divisors, null/None, and boundary values should be discussed even in trivial-looking functions."
+    },
+    {
+      "id": "FC-CR-013",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "error-handling",
+        "exceptions"
+      ],
+      "source": "IGotAnOffer code review guide",
+      "front": "Review:\n```python\ntry:\n    process_all()\nexcept Exception:\n    pass\n```\nWhat is the best review feedback?",
+      "back": "Bare except swallows all failures silently \u2014 catch specific exceptions, log, and handle or re-raise \u2014 Silent catch-all except blocks hide outages and complicate debugging. Reviewers expect deliberate error handling: specific types, logging context, and fail-safe behavior."
+    },
+    {
+      "id": "FC-CR-014",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "edge-cases",
+        "input-validation"
+      ],
+      "source": "Google eng-practices",
+      "front": "Review API handler:\n```python\ndef get_page(request):\n    page = int(request.args['page'])\n    return fetch_page(page)\n```\nWhich edge cases should the review require handling?",
+      "back": "Missing 'page' key, non-numeric values, and negative page numbers \u2014 Input validation at boundaries prevents 500s and security issues. Reviewers ask: what happens on malformed client input? KeyError, ValueError, and invalid ranges must be addressed."
+    },
+    {
+      "id": "FC-CR-015",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "edge-cases",
+        "empty-input"
+      ],
+      "source": "Google eng-practices",
+      "front": "Review:\n```python\ndef average(values):\n    return sum(values) / len(values)\n```\nWhat input causes failure?",
+      "back": "Empty list \u2014 len(values) is 0, causing ZeroDivisionError \u2014 Empty collection edge cases are interview staples. Review should flag division by zero and suggest explicit behavior (return 0, raise ValueError, or document precondition)."
+    },
+    {
+      "id": "FC-CR-016",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "readability",
+        "comments"
+      ],
+      "source": "Google eng-practices",
+      "front": "Review comment on code:\n```python\n# increment i by 1\ni += 1\n```\nAppropriate reviewer response?",
+      "back": "Remove redundant comment \u2014 code is self-explanatory; comments should explain why, not what \u2014 Google style: comments explain non-obvious rationale, invariants, or trade-offs \u2014 not restate the obvious. Noise comments reduce signal in reviews."
+    },
+    {
+      "id": "FC-CR-017",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "maintainability",
+        "magic-numbers"
+      ],
+      "source": "Google eng-practices",
+      "front": "Review:\n```python\nif latency_ms > 86400000:\n    alert()\n```\nBest improvement?",
+      "back": "Replace 86400000 with a named constant (e.g., MS_PER_DAY) documenting the threshold \u2014 Magic numbers harm readability. Named constants communicate intent and make review/debugging easier \u2014 standard maintainability feedback."
+    },
+    {
+      "id": "FC-CR-018",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "reddit:wc4ryg",
+        "filesystem"
+      ],
+      "source": "reddit:wc4ryg Linux internals (context for review)",
+      "front": "Review:\n```python\ndef write_pid(path, pid):\n    open(path, 'w').write(str(pid))\n```\nwc4ryg/Linux prep context: production bug risk?",
+      "back": "No atomic replace \u2014 crash mid-write leaves corrupt pid file; use temp file + rename \u2014 Reddit Linux threads emphasize real-world FS behavior. Code review may embed ops patterns \u2014 atomic writes are classic SRE review findings."
+    },
+    {
+      "id": "FC-CR-019",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "oom",
+        "memory"
+      ],
+      "source": "SRE code review pattern; production log processing",
+      "front": "Review this transaction log processor:\n```python\ndef process_transaction_log(file_path):\n    with open(file_path, 'r') as file:\n        lines = file.readlines()\n    transactions = []\n    for line in lines:\n        if \"SUCCESS\" in line:\n            parts = line.split(\",\")\n            transactions.append({\"id\": parts[0], \"amount\": float(parts[1])})\n    return transactions\n```\nWhat is the highest-severity production risk?",
+      "back": "readlines() loads the entire file into RAM \u2014 a multi-GB log can trigger the OOM killer and crash the container \u2014 Under heavy load, log files can reach tens of gigabytes. Loading them entirely into memory is O(file size) and can kill the process. Stream line-by-line with `for line in file:` to keep memory O(1)."
+    },
+    {
+      "id": "FC-CR-020",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "retry-storm",
+        "thundering-herd"
+      ],
+      "source": "SRE cascading failure patterns; Reddit cascade threads",
+      "front": "Review this config fetcher when the metadata service is degraded:\n```python\nimport time\nimport requests\n\ndef fetch_config_with_retry():\n    url = \"http://internal-metadata/config\"\n    for i in range(5):\n        try:\n            response = requests.get(url, timeout=5)\n            if response.status_code == 200:\n                return response.json()\n        except requests.RequestException:\n            pass\n        time.sleep(1)\n    raise RuntimeError(\"Failed to fetch config\")\n```\nWhat is the highest-severity production risk?",
+      "back": "Fixed 1-second retries synchronize across clients and can thundering-herd the recovering service \u2014 Static retry intervals align thousands of tasks to retry at the same moment, amplifying load when the dependency is weakest. Use exponential backoff with jitter and an overall deadline context."
+    },
+    {
+      "id": "FC-CR-021",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "observability",
+        "silent-failure"
+      ],
+      "source": "SRE telemetry blindspot pattern; reddit:1346wln",
+      "front": "Review this payment handler:\n```python\ndef process_payment(payment_gateway, request):\n    try:\n        payment_gateway.charge(request['user_id'], request['amount'])\n        print(f\"Payment processed for user: {request['user_id']}\")\n    except Exception as e:\n        print(f\"Error processing payment: {e}\")\n```\nWhat is the highest-severity production risk?",
+      "back": "Exceptions are swallowed and only printed \u2014 no structured logs or failure metrics, so on-call stays blind \u2014 print() is unstructured and invisible to alerting pipelines. Swallowing exceptions lets the caller think work succeeded. Use structured logging, re-raise or return errors, and increment a failure counter for dashboards."
+    },
+    {
+      "id": "FC-CR-022",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "concurrency",
+        "thread-leak"
+      ],
+      "source": "SRE resource exhaustion; reddit:da4h29 concurrency",
+      "front": "Review this audit helper on a high-traffic API:\n```python\nimport threading\n\ndef audit_handler(request, database_client):\n    def run_audit():\n        try:\n            database_client.save_to_audit_database(\n                request.get('user_id'), request.get('action')\n            )\n        except Exception as e:\n            print(f\"Failed to write audit: {e}\")\n\n    thread = threading.Thread(target=run_audit)\n    thread.start()\n    return {\"status\": \"Action logged\", \"code\": 200}\n```\nWhat is the highest-severity production risk?",
+      "back": "A new OS thread per request is unbounded \u2014 under traffic spikes this exhausts threads or file descriptors \u2014 Fire-and-forget threads do not scale with request rate. Use a bounded ThreadPoolExecutor, a queue with fixed workers, or an external task system so concurrency has a hard ceiling."
+    },
+    {
+      "id": "FC-CR-023",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "cache",
+        "memory-leak"
+      ],
+      "source": "SRE in-memory cache anti-pattern",
+      "front": "Review this profile cache:\n```python\nGLOBAL_USER_CACHE = {}\n\ndef get_user_profile(user_id, database_client):\n    if user_id in GLOBAL_USER_CACHE:\n        return GLOBAL_USER_CACHE[user_id]\n    profile = database_client.fetch_user_by_id(user_id)\n    GLOBAL_USER_CACHE[user_id] = profile\n    return profile\n```\nWhat is the highest-severity production risk?",
+      "back": "The dict grows without bound \u2014 millions of unique users cause a slow memory leak leading to OOM \u2014 An unbounded process-local cache never evicts entries. Over days it consumes all RAM. Use functools.lru_cache(maxsize=...) or a cache with TTL and size limits."
+    },
+    {
+      "id": "FC-CR-024",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "timeout",
+        "availability"
+      ],
+      "source": "reddit:1klu37j practical production code",
+      "front": "Review:\n```python\ndef fetch_health_status(endpoint):\n    response = requests.get(endpoint)\n    return response.json()\n```\nCalled from every incoming API request. What should you flag first?",
+      "back": "No timeout \u2014 a hung dependency blocks workers and can cause pile-up across the fleet \u2014 Calls without connect/read timeouts can hang indefinitely, tying up threads or async workers. Always set timeouts and propagate failure quickly."
+    },
+    {
+      "id": "FC-CR-025",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "retry",
+        "idempotency"
+      ],
+      "source": "Glassdoor payment/retry review patterns",
+      "front": "Review:\n```python\ndef charge_with_retry(client, user_id, amount):\n    for attempt in range(3):\n        try:\n            return client.charge(user_id, amount)\n        except Exception:\n            time.sleep(2 ** attempt)\n    raise RuntimeError(\"charge failed\")\n```\nWhat is the highest-severity issue?",
+      "back": "Retrying a non-idempotent charge can double-bill customers if the first attempt succeeded but the response was lost \u2014 Retries are safe only with idempotency keys or deduplication. Blind retries on financial writes are a correctness incident waiting to happen."
+    },
+    {
+      "id": "FC-CR-026",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "circuit-breaker",
+        "cascade"
+      ],
+      "source": "SRE Book cascading failure; B7 failures module",
+      "front": "Review dependency client:\n```python\ndef get_recommendations(user_id):\n    while True:\n        try:\n            return recommendations_service.fetch(user_id)\n        except ServiceUnavailable:\n            time.sleep(0.1)\n```\nWhat is the highest-severity production risk?",
+      "back": "Infinite retry loop on failure prevents recovery and burns CPU \u2014 needs backoff, limits, and circuit breaking \u2014 Tight infinite retries keep pressure on a failing dependency and stall callers. Fail fast after bounded attempts and open a circuit so the system can heal."
+    },
+    {
+      "id": "FC-CR-027",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "concurrency",
+        "race"
+      ],
+      "source": "Glassdoor check-then-act pattern",
+      "front": "Review cache populate logic:\n```python\ncache = {}\n\ndef get_or_load(key, loader):\n    if key not in cache:\n        cache[key] = loader()\n    return cache[key]\n```\nUnder concurrent requests for the same missing key, what breaks?",
+      "back": "Check-then-act race \u2014 multiple threads can call loader() and overwrite, wasting work or returning inconsistent state \u2014 Without synchronization, duplicate expensive loads happen under contention. Use a lock per key, functools.lru_cache, or a single-flight pattern."
+    },
+    {
+      "id": "FC-CR-028",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "async",
+        "blocking"
+      ],
+      "source": "Modern async service review pattern",
+      "front": "Review:\n```python\nimport asyncio\nimport time\n\nasync def handle_request():\n    time.sleep(5)\n    return {\"ok\": True}\n```\nWhat is the bug?",
+      "back": "time.sleep blocks the event loop \u2014 use await asyncio.sleep() or run blocking work in an executor \u2014 Blocking calls inside async handlers stall all concurrent requests on that loop. Offload blocking I/O to a thread pool or use async-native APIs."
+    },
+    {
+      "id": "FC-CR-029",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "security",
+        "sql-injection"
+      ],
+      "source": "Glassdoor security review common pattern",
+      "front": "Review:\n```python\ndef find_user(db, username):\n    query = f\"SELECT * FROM users WHERE name = '{username}'\"\n    return db.execute(query)\n```\nWhat is the highest-severity issue?",
+      "back": "SQL injection \u2014 user input is interpolated into the query string \u2014 Never build SQL with string formatting from untrusted input. Use parameterized queries / bound parameters."
+    },
+    {
+      "id": "FC-CR-030",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "security",
+        "subprocess"
+      ],
+      "source": "Linux prep; shell injection pattern",
+      "front": "Review:\n```python\nimport subprocess\n\ndef ping_host(hostname):\n    subprocess.run(f\"ping -c 1 {hostname}\", shell=True, check=True)\n```\nWhat is the highest-severity issue?",
+      "back": "shell=True with interpolated input enables command injection \u2014 Pass arguments as a list without shell=True: subprocess.run(['ping', '-c', '1', hostname]). Shell interpolation is a classic injection vector."
+    },
+    {
+      "id": "FC-CR-031",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "observability",
+        "metrics"
+      ],
+      "source": "SRE Book monitoring cardinality",
+      "front": "Review metrics instrumentation:\n```python\ndef record_latency(user_id, latency_ms):\n    metrics.histogram('request_latency', latency_ms, labels={'user_id': user_id})\n```\nWhat is the highest-severity production risk?",
+      "back": "user_id as a metric label creates unbounded cardinality and can crash the metrics backend \u2014 High-cardinality labels (per-user IDs) explode time-series storage. Use bounded labels like route, status, or shard \u2014 never raw user identifiers."
+    },
+    {
+      "id": "FC-CR-032",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "error-handling",
+        "http"
+      ],
+      "source": "Glassdoor API review pattern",
+      "front": "Review:\n```python\ndef update_settings(handler, body):\n    try:\n        save_settings(body)\n    except Exception as e:\n        log_error(e)\n    return 200, {\"status\": \"ok\"}\n```\nWhat is wrong?",
+      "back": "Always returning 200 hides failures from callers and load balancers \u2014 propagate 5xx or 4xx on error \u2014 Returning success on failure breaks monitoring, retries, and client behavior. Map errors to appropriate HTTP status codes."
+    },
+    {
+      "id": "FC-CR-033",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "backpressure",
+        "queue"
+      ],
+      "source": "SRE cascading failure / queue growth",
+      "front": "Review:\n```python\nfrom queue import Queue\n\ntask_queue = Queue()\n\ndef enqueue_job(job):\n    task_queue.put(job)\n    return True\n```\nUnder sustained overload, what fails?",
+      "back": "Unbounded queue grows until memory is exhausted \u2014 need maxsize and backpressure or drop policy \u2014 Accepting all work without bounds queues unbounded memory. Use maxsize, block with timeout, or shed load when saturated."
+    },
+    {
+      "id": "FC-CR-034",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "cpu",
+        "busy-wait"
+      ],
+      "source": "Gregg CPU checklist; production spin loops",
+      "front": "Review:\n```python\ndef wait_until_ready(flag):\n    while not flag.is_set():\n        pass\n```\nWhat is the production impact?",
+      "back": "Busy-wait spins a CPU core at 100% \u2014 use threading.Event.wait() or similar blocking primitive \u2014 Spin loops waste CPU and can starve other work on the host. Block efficiently with event.wait(timeout=...) or polling with sleep."
+    },
+    {
+      "id": "FC-CR-035",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "security",
+        "deserialization"
+      ],
+      "source": "Python-specific security baseline",
+      "front": "Review:\n```python\nimport pickle\n\ndef load_session(blob):\n    return pickle.loads(blob)\n```\n`blob` comes from client cookies. What is the highest-severity issue?",
+      "back": "pickle.loads on untrusted data allows arbitrary code execution \u2014 Pickle is not a safe interchange format for untrusted input. Use signed tokens (JWT), JSON with schema validation, or another safe serialization."
+    },
+    {
+      "id": "FC-CR-036",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "security",
+        "secrets"
+      ],
+      "source": "Blind/Glassdoor credential leak pattern",
+      "front": "Review:\n```python\nAPI_KEY = \"sk-live-8f3a2b1c9d0e\"\n\ndef call_vendor(payload):\n    return requests.post(\n        \"https://api.vendor.com/v1/charge\",\n        headers={\"Authorization\": f\"Bearer {API_KEY}\"},\n        json=payload,\n    )\n```\nWhat is the highest-severity issue?",
+      "back": "Hardcoded live API key in source \u2014 credential leak via repo, logs, or binaries \u2014 Secrets belong in a secret manager or environment injected at deploy time, never committed in code. Rotate any exposed key immediately."
+    },
+    {
+      "id": "FC-CR-037",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "database",
+        "n-plus-one"
+      ],
+      "source": "Glassdoor performance review pattern",
+      "front": "Review:\n```python\ndef list_order_summaries(order_ids, db):\n    summaries = []\n    for oid in order_ids:\n        order = db.fetch_order(oid)\n        user = db.fetch_user(order.user_id)\n        summaries.append({\"order\": order, \"user\": user})\n    return summaries\n```\nFor 10,000 order IDs, what is the primary scalability issue?",
+      "back": "N+1 (and N+1 on users) database round-trips \u2014 batch or join queries instead \u2014 Per-row queries in a hot path do not scale. Batch fetches, IN clauses, or a single joined query reduce latency and DB load."
+    },
+    {
+      "id": "FC-CR-038",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "observability",
+        "logging"
+      ],
+      "source": "eng-practices; structured logging",
+      "front": "Review:\n```python\ndef handle_request(request):\n    logger.info(\"request received\")\n    result = process(request.body)\n    logger.info(\"request done\")\n    return result\n```\nWhat observability gap should you flag?",
+      "back": "Logs lack request/correlation IDs \u2014 cannot trace a single request across services during an incident \u2014 Structured logs need correlation IDs, route, latency, and status to debug distributed failures. Generic bookend messages are useless at scale."
+    },
+    {
+      "id": "FC-CR-039",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "retry",
+        "http-status"
+      ],
+      "source": "eng-practices; Glassdoor retry review",
+      "front": "Review:\n```python\ndef fetch_with_retry(url):\n    for _ in range(5):\n        response = requests.get(url, timeout=3)\n        if response.status_code != 200:\n            time.sleep(1)\n            continue\n        return response.text\n    raise RuntimeError(\"failed\")\n```\nWhat retry bug should you flag?",
+      "back": "Retries on 4xx client errors (e.g. 404) waste resources and will never succeed \u2014 retry only transient 5xx/timeouts \u2014 Not all HTTP failures are retriable. 4xx usually indicates a permanent client/request problem; blind retries amplify load without fixing the outcome."
+    },
+    {
+      "id": "FC-CR-040",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "rate-limit",
+        "retry-budget"
+      ],
+      "source": "NALSD cascade themes; SRE retry budgets",
+      "front": "Review fleet-wide client:\n```python\nclass MetadataClient:\n    def __init__(self):\n        self.calls = 0\n\n    def get(self, key):\n        self.calls += 1\n        return requests.get(f\"http://metadata/{key}\", timeout=2).json()\n```\nThousands of processes each run this unmodified. What breaks at scale?",
+      "back": "No shared retry budget or client-side rate limit \u2014 a blip causes uncoordinated retry storms across the fleet \u2014 Per-process counters do not coordinate fleet behavior. Clients need backoff, jitter, and budgets so the collective retry rate stays within what the dependency can absorb."
+    },
+    {
+      "id": "FC-CR-041",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "deadlock",
+        "locking"
+      ],
+      "source": "reddit:da4h29 mutex prep",
+      "front": "Review:\n```python\nlock_a = threading.Lock()\nlock_b = threading.Lock()\n\ndef transfer(from_acct, to_acct, amount):\n    with lock_a:\n        with lock_b:\n            from_acct.balance -= amount\n            to_acct.balance += amount\n```\nTwo threads transfer A\u2192B and B\u2192A concurrently. What fails?",
+      "back": "Lock ordering deadlock \u2014 one thread holds lock_a waiting for lock_b while the other holds lock_b waiting for lock_a \u2014 Always acquire locks in a consistent global order (e.g. by account id) or use a single lock per transfer domain to prevent circular wait."
+    },
+    {
+      "id": "FC-CR-042",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "locking",
+        "resource-leak"
+      ],
+      "source": "CR-T19; production lock patterns",
+      "front": "Review:\n```python\ndef update_index(path, lock):\n    lock.acquire()\n    data = read_file(path)\n    if data is corrupted():\n        return None\n    write_file(path, fix(data))\n    lock.release()\n```\nWhat is the bug?",
+      "back": "lock.release() is skipped when data is corrupted \u2014 use try/finally or a context manager \u2014 Early return after acquire() without release() deadlocks all other callers. threading.Lock as context manager guarantees release on every exit path."
+    },
+    {
+      "id": "FC-CR-043",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "concurrency",
+        "race"
+      ],
+      "source": "Python GIL misconception; Glassdoor",
+      "front": "Review metrics collector:\n```python\nREQUEST_TIMES = []\n\ndef record(latency_ms):\n    REQUEST_TIMES.append(latency_ms)\n```\nCalled from many WSGI worker threads. What is the risk?",
+      "back": "list.append from many threads can corrupt internal list state or lose updates despite the GIL \u2014 use a thread-safe structure or lock \u2014 The GIL does not make all compound operations safe. For shared mutable collections under concurrency, use locks, queues, or thread-local aggregation."
+    },
+    {
+      "id": "FC-CR-044",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "data-structure",
+        "complexity"
+      ],
+      "source": "reddit:1klu37j complexity awareness",
+      "front": "Review hot-path membership check:\n```python\ndef is_banned(user_id, banned_users):\n    return user_id in banned_users  # banned_users is a list of 2M IDs\n```\nCalled on every login. What should you suggest?",
+      "back": "Use a set or bloom filter for O(1) membership \u2014 linear scan on a 2M-element list per login is too slow \u2014 Algorithm choice matters at scale. list membership is O(n); set lookup is O(1) average \u2014 a classic code-review performance fix."
+    },
+    {
+      "id": "FC-CR-045",
+      "deck": "core",
+      "tags": [
+        "code-review",
+        "sre-production",
+        "database",
+        "memory"
+      ],
+      "source": "Glassdoor scale review",
+      "front": "Review nightly report job:\n```python\ndef build_report(db):\n    rows = db.execute(\"SELECT * FROM events\").fetchall()\n    return summarize(rows)\n```\nThe events table has 500M rows. What is the primary risk?",
+      "back": "fetchall() loads the entire table into process memory \u2014 stream with a cursor or aggregate in the database \u2014 Same class of bug as readlines() OOM: unbounded reads into RAM. Push aggregation to SQL or paginate/stream results."
     }
   ]
 }

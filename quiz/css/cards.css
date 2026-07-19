@@ -84,7 +84,7 @@ body.cards-page .meta {
 .flash-card {
   display: block;
   width: 100%;
-  min-height: 260px;
+  min-height: 320px;
   padding: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -105,7 +105,7 @@ body.cards-page .meta {
 .flash-card-inner {
   position: relative;
   width: 100%;
-  min-height: 260px;
+  min-height: 320px;
   transform-style: preserve-3d;
   transition: transform 0.45s ease;
 }
@@ -149,7 +149,16 @@ body.cards-page .meta {
 }
 
 .face-text .question-prose {
-  margin: 0;
+  margin: 0 0 0.5rem;
+}
+
+.face-text .code-block {
+  margin: 0.5rem 0 0.65rem;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  max-height: 11rem;
+  overflow: auto;
 }
 
 .face-source {

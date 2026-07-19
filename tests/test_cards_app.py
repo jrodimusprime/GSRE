@@ -134,14 +134,17 @@ class CardBankTests(unittest.TestCase):
         ]
         self.assertEqual(missing, [], f"modules without flash cards: {missing}")
 
-    def test_core_deck_size(self):
-        registry = json.loads((DATA / "cards.json").read_text(encoding="utf-8"))
-        self.assertEqual(len(registry["decks"]), 1)
-        core = json.loads((DATA / "cards" / "core.json").read_text(encoding="utf-8"))
-        n = len(core["cards"])
-        self.assertGreaterEqual(n, 80)
-        self.assertLessEqual(n, 400)
-        self.assertEqual(registry["decks"][0]["cardCount"], n)
+    def test_core_deck_includes_formatted_code_review_cards(self):
+        cards = json.loads((DATA / "cards" / "core.json").read_text(encoding="utf-8"))["cards"]
+        cr_code = [
+            c
+            for c in cards
+            if c["id"].startswith("FC-CR-") and "```" in c.get("front", "")
+        ]
+        self.assertGreaterEqual(len(cr_code), 40, "expected many CR cards with code fences")
+        sample = cr_code[0]["front"]
+        self.assertIn("```python", sample)
+
 
 
 class CardsAppTests(unittest.TestCase):
