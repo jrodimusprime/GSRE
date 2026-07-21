@@ -1,5 +1,7 @@
 # Local prep notes — not part of the published quiz app
 *-PLAN.md
+*.plan.md
+.cursor/
 todo.txt
 prep-materials/
 scripts/

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SRE Architecture → AWS Cheat Sheet</title>
+  <style>
+    @page { size: A4 portrait; margin: 8mm; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 7pt;
+      line-height: 1.2;
+      color: #1a1a1a;
+      background: #fff;
+    }
+    h1 { font-size: 12pt; font-weight: 700; margin-bottom: 1mm; }
+    .subtitle { font-size: 7pt; color: #444; margin-bottom: 2mm; }
+    .loop-bar {
+      display: flex; gap: 1.5mm; margin-bottom: 2mm;
+      font-size: 6.5pt; font-weight: 600;
+    }
+    .loop-step {
+      flex: 1; background: #e8f0fe; border: 0.3pt solid #1a73e8;
+      border-radius: 1mm; padding: 1mm 1.2mm; text-align: center;
+    }
+    .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.8mm; }
+    section {
+      border: 0.3pt solid #ccc; border-radius: 1mm;
+      padding: 1.5mm; break-inside: avoid;
+    }
+    h2 {
+      font-size: 7.5pt; font-weight: 700; color: #1a73e8;
+      border-bottom: 0.4pt solid #1a73e8;
+      padding-bottom: 0.4mm; margin-bottom: 1mm;
+    }
+    h3 { font-size: 6.5pt; font-weight: 700; color: #333; margin: 0.8mm 0 0.3mm; }
+    ul { padding-left: 2.8mm; margin-bottom: 0.6mm; }
+    li { margin-bottom: 0.25mm; }
+    .mono { font-family: "Menlo", "Consolas", monospace; font-size: 6pt; }
+    .tag { font-size: 5.5pt; color: #666; font-weight: 400; }
+    .warn { color: #c5221f; font-weight: 600; }
+    .ok { color: #137333; font-weight: 600; }
+    table {
+      width: 100%; border-collapse: collapse;
+      font-size: 6pt; margin: 0.4mm 0;
+    }
+    td, th {
+      border: 0.25pt solid #ddd;
+      padding: 0.4mm 0.6mm; vertical-align: top;
+    }
+    th { background: #f5f5f5; font-weight: 600; text-align: left; }
+    .full { grid-column: 1 / -1; }
+    .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5mm; }
+    .cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5mm; }
+    .flow {
+      font-family: "Menlo", "Consolas", monospace;
+      font-size: 5.8pt; background: #f8f9fa;
+      padding: 1mm; border-radius: 0.5mm; margin: 0.5mm 0;
+      white-space: pre-wrap; line-height: 1.3;
+    }
+    .footer {
+      margin-top: 1.5mm; font-size: 5.8pt;
+      color: #888; text-align: center;
+    }
+    .footer a { color: #1a73e8; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<h1>SRE Architecture → AWS / Databricks Cheat Sheet</h1>
+<p class="subtitle">NALSD 45–60 min sessions · SRE Classroom workshops · mapped for AWS/Databricks engineers</p>
+
+<div class="loop-bar">
+  <div class="loop-step">① CLARIFY<br><span class="tag">QPS · SLOs · retention · consistency</span></div>
+  <div class="loop-step">② POSSIBLE → FEASIBLE<br><span class="tag">napkin math · BOM</span></div>
+  <div class="loop-step">③ RESILIENT<br><span class="tag">failure modes · incremental fixes</span></div>
+  <div class="loop-step">④ <span class="warn">NOT greenfield</span><br><span class="tag">shed · bound queues · 503</span></div>
+</div>
+
+<div class="grid">
+
+  <section class="full">
+    <h2>Canonical NALSD architectures (official Google exercises)</h2>
+    <div class="cols3">
+      <div>
+        <h3>AdWords CTR (Workbook Ch.12)</h3>
+        <div class="flow">query log ─┬→ QueryStore (by query_id)
+click log ─┴→ LogJoiner → ClickMap ─┐
+query log ───→ QueryMap ────────────┴→ CTR dashboard</div>
+        <ul>
+          <li><strong>500K</strong> queries/s · <strong>10K</strong> clicks/s · <strong>~2 KB</strong>/query</li>
+          <li><strong>~100 TB/day</strong> query logs · <strong>&lt;5 min</strong> freshness SLO</li>
+          <li>Shard LogJoiner by <span class="mono">query_id</span>; QueryMap/ClickMap by <span class="mono">ad_id</span></li>
+          <li>MapReduce rejected: tiny batches break join correctness</li>
+          <li>Multi-DC: Paxos replicas; ~25 ms/op → parallelize writes</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Distributed ImageServer (SRE Classroom)</h3>
+        <div class="flow">Client → HTTP LB → Upload/Download/Search svc
+              ↓              ↓
+        Metadata/Index svc → Blob storage (S3-like)
+        Search → thumbnails from storage + CDN</div>
+        <ul>
+          <li><strong>1M</strong> users · <strong>50</strong> img/day · <strong>8 KB</strong> metadata/img</li>
+          <li><strong>~0.5 TB/day</strong> metadata · <strong>30-day</strong> retention ≈ 15 TB</li>
+          <li>Split read/write paths (uploads hold connections longer)</li>
+          <li>Search index: global consistency caps write QPS (~6 at 150 ms RTT)</li>
+          <li>SLOs: upload &lt;250 ms · download &lt;200 ms · search &lt;250 ms (p99.9)</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Distributed PubSub (SRE Classroom)</h3>
+        <div class="flow">push(topic,msg) → router → sharded message store
+                              ↓ (local + cross-DC replicas)
+pop(topic) ← subscriber ← any DC within 1s</div>
+        <ul>
+          <li><strong>5K</strong> topics · <strong>10K</strong> msg/day/topic · <strong>50M</strong> msg/day</li>
+          <li><strong>100-day</strong> retention · <strong>~25 TB</strong> total store</li>
+          <li>At-least-once · lose ≤<strong>0.01%</strong>/yr (~5K msg/day budget)</li>
+          <li>Shard into buckets; replicate locally + cross-DC</li>
+          <li>Sync vs async replication: durability vs ~10 ms push latency</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Component map — data &amp; messaging</h2>
+    <table>
+      <tr><th>Google / NALSD</th><th>Use</th><th>AWS</th><th>Databricks</th></tr>
+      <tr>
+        <td>QueryStore</td>
+        <td>Keyed lookup of full query log by <span class="mono">query_id</span></td>
+        <td>DynamoDB, ElastiCache</td>
+        <td>Delta + Z-order on key</td>
+      </tr>
+      <tr>
+        <td>LogJoiner</td>
+        <td>Stream join clicks → queries in real time</td>
+        <td>Kinesis Analytics, MSF Flink, Materialized views</td>
+        <td>Structured Streaming join on Delta</td>
+      </tr>
+      <tr>
+        <td>ClickMap / QueryMap</td>
+        <td>Sharded indexes by <span class="mono">ad_id</span> for dashboard</td>
+        <td>DynamoDB GSI, ElastiCache cluster, OpenSearch</td>
+        <td>Delta liquid clustering</td>
+      </tr>
+      <tr>
+        <td>Log sharder</td>
+        <td>Route logs to correct shard by hash</td>
+        <td>Kinesis partition key, MSK key</td>
+        <td>Spark partitionBy</td>
+      </tr>
+      <tr>
+        <td>MapReduce (batch)</td>
+        <td>Offline aggregation of complete batches</td>
+        <td>EMR, Glue, Athena on S3</td>
+        <td>Spark batch jobs</td>
+      </tr>
+      <tr>
+        <td>PubSub message store</td>
+        <td>Durable topic log, retention, fan-out</td>
+        <td>MSK, Kinesis, SNS+SQS</td>
+        <td>DLT, Auto Loader sinks</td>
+      </tr>
+      <tr>
+        <td>Bigtable</td>
+        <td>Wide-column, high write throughput</td>
+        <td>DynamoDB</td>
+        <td>Delta (not drop-in; different consistency)</td>
+      </tr>
+      <tr>
+        <td>Spanner</td>
+        <td>Global SQL + external consistency</td>
+        <td>Aurora Global DB (weaker)</td>
+        <td>— (use Aurora + app patterns)</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Component map — serving &amp; infra</h2>
+    <table>
+      <tr><th>Google</th><th>Use</th><th>AWS</th><th>Trade-off</th></tr>
+      <tr>
+        <td>Maglev</td>
+        <td>L4 LB, connection tracking, ECMP scale-out</td>
+        <td>NLB + GWLB</td>
+        <td>Stateful TCP affinity; N+1 not active/passive</td>
+      </tr>
+      <tr>
+        <td>GFE</td>
+        <td>L7 proxy, SSL terminate, buffer, health check</td>
+        <td>ALB, CloudFront Functions</td>
+        <td>Buffers slow clients; lame-duck drain before kill</td>
+      </tr>
+      <tr>
+        <td>GSLB</td>
+        <td>Global capacity-aware routing</td>
+        <td>GA + Route 53 + ALB</td>
+        <td>DNS alone too slow to drain failed region</td>
+      </tr>
+      <tr>
+        <td>Anycast VIP</td>
+        <td>Nearest edge entry, single DNS name</td>
+        <td>GA anycast IPs, CloudFront</td>
+        <td>BGP flap resets TCP — need connection cohering</td>
+      </tr>
+      <tr>
+        <td>Borg / GKE</td>
+        <td>Container orchestration, bin-packing</td>
+        <td>EKS, ECS</td>
+        <td>DBRX: managed Spark clusters on K8s</td>
+      </tr>
+      <tr>
+        <td>Stubby / gRPC</td>
+        <td>Internal RPC everywhere</td>
+        <td>App Mesh, VPC Lattice, plain gRPC</td>
+        <td>Enables refactor local→remote without API change</td>
+      </tr>
+      <tr>
+        <td>GFS / Colossus</td>
+        <td>Distributed blob + WAL backing store</td>
+        <td>S3 + EBS</td>
+        <td>DBRX Volumes / external locations on S3</td>
+      </tr>
+      <tr>
+        <td>CDN / edge cache</td>
+        <td>Low-latency reads near users</td>
+        <td>CloudFront</td>
+        <td>Invalidate/TTL strategy; not for dynamic writes</td>
+      </tr>
+      <tr>
+        <td>BNS</td>
+        <td>Service naming, capacity hints</td>
+        <td>Cloud Map, Route 53 SRV</td>
+        <td>Health-aware discovery beats static lists</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>ImageServer components → AWS</h2>
+    <table>
+      <tr><th>Component</th><th>AWS</th><th>Trade-off</th></tr>
+      <tr><td>HTTP LB</td><td>ALB</td><td>Split upload vs download target groups</td></tr>
+      <tr><td>Metadata / Index</td><td>DynamoDB + OpenSearch</td><td>Index writes bounded by consensus RTT cross-region</td></tr>
+      <tr><td>Blob storage</td><td>S3</td><td>~100–200 ms read dominates latency budget</td></tr>
+      <tr><td>Thumbnails</td><td>S3 + Lambda or async worker</td><td>Decouple from upload critical path</td></tr>
+      <tr><td>Search</td><td>OpenSearch / CloudSearch</td><td>Prefix/tag queries need inverted index, not SQL scan</td></tr>
+      <tr><td>Multi-region</td><td>S3 CRR + Global Tables / Aurora Global</td><td>Eventual blob consistency OK; metadata needs design</td></tr>
+      <tr><td>CDN</td><td>CloudFront</td><td>Cache thumbnails; origin shield for hot objects</td></tr>
+    </table>
+    <h3>Latency budget (ImageServer)</h3>
+    <ul>
+      <li>Metadata RAM/SSD: <strong>~2 ms</strong> · Blob HDD: <strong>~100–200 ms</strong> · Network: <strong>~5 ms</strong></li>
+      <li>Upload bottleneck = storage write, not metadata</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>PubSub components → AWS</h2>
+    <table>
+      <tr><th>Pattern</th><th>AWS</th><th>Trade-off</th></tr>
+      <tr><td>Topic log + retention</td><td>MSK (Kafka), Kinesis</td><td>MSK: replay + ordering per partition; ops cost</td></tr>
+      <tr><td>Simple fan-out</td><td>SNS → SQS</td><td>Easy; no long retention without extra store</td></tr>
+      <tr><td>Shard / bucket store</td><td>S3 + DynamoDB index, or MSK partitions</td><td>25 TB needs sharding — one machine fails</td></tr>
+      <tr><td>Cross-DC replicate</td><td>MSK MirrorMaker 2, S3 CRR, Global Tables</td><td>Sync = latency; async = loss window within budget</td></tr>
+      <tr><td>At-least-once</td><td>SQS visibility timeout + idempotent consumers</td><td>Duplicates expected — dedupe keys required</td></tr>
+      <tr><td>Pop from any DC &lt;1s</td><td>Replicate to all regions; local consumer</td><td>Storage × regions = cost; worth it for latency SLO</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>CTR pipeline → AWS / Databricks</h2>
+    <table>
+      <tr><th>Stage</th><th>AWS</th><th>Databricks</th></tr>
+      <tr><td>Ingest logs</td><td>Kinesis Firehose → S3</td><td>Auto Loader from S3 / Kinesis</td></tr>
+      <tr><td>QueryStore</td><td>DynamoDB (query_id PK)</td><td>Delta table, Z-order query_id</td></tr>
+      <tr><td>Stream join</td><td>Flink on MSF, Kinesis Analytics</td><td>Structured Streaming: clicks ⋈ queries</td></tr>
+      <tr><td>ClickMap / QueryMap</td><td>DynamoDB (ad_id PK) + GSI</td><td>Delta aggregate tables, liquid cluster ad_id</td></tr>
+      <tr><td>Dashboard</td><td>API Gateway + Lambda + DDB</td><td>SQL warehouse on pre-aggregated Delta</td></tr>
+      <tr><td>Batch backfill</td><td>Glue / EMR on S3 archives</td><td>Spark batch reprocess within error budget</td></tr>
+    </table>
+    <h3>Why not MapReduce alone?</h3>
+    <ul>
+      <li>Small non-overlapping batches: query in batch 1, click in batch 2 → <span class="warn">never joined</span></li>
+      <li>5-min freshness SLO forces streaming or micro-batch with overlap</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Overload &amp; resilience patterns</h2>
+    <table>
+      <tr><th>Pattern</th><th>When</th><th>AWS knob</th></tr>
+      <tr><td>Admission control</td><td>Reject before queue fills</td><td>API GW throttle, ALB conn limit, WAF rate limit</td></tr>
+      <tr><td>Load shedding</td><td>Shed low-priority work under saturation</td><td>Custom 503, SQS drop DLQ policy, priority queues</td></tr>
+      <tr><td>Bounded queues</td><td>RAM = depth × payload — size it</td><td>SQS max inflight, Kinesis retention cap</td></tr>
+      <tr><td>Backpressure</td><td>Slow consumer must slow producer</td><td>Kinesis enhanced fan-out lag alerts, autoscale on lag</td></tr>
+      <tr><td>Duplicate shard</td><td>LogJoiner crash loses in-flight work</td><td>Dual Kinesis consumers, idempotent writes</td></tr>
+      <tr><td>Paxos / quorum</td><td>Cross-DC consistent writes</td><td>2f+1 replicas; Aurora Global, DDB global tables</td></tr>
+      <tr><td>Lame duck</td><td>Graceful drain before deploy</td><td>ALB deregistration delay, ECS deployment circuit</td></tr>
+      <tr><td>Thundering herd</td><td>Sync client retries spike load</td><td>Jittered backoff; rate limit at edge (Pokémon GO lesson)</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Napkin math &amp; latency hierarchy</h2>
+    <table>
+      <tr><th>Calc</th><th>Formula / value</th></tr>
+      <tr><td>Storage/day</td><td>QPS × bytes × 86400 × retention × repl</td></tr>
+      <tr><td>Required cores</td><td>QPS × latency(s)</td></tr>
+      <tr><td>Queue RAM</td><td>depth × payload size</td></tr>
+      <tr><td>HDD IOPS limit</td><td>~200 IOPS/disk → 500K writes/s needs thousands of disks</td></tr>
+      <tr><td>Cross-DC Paxos</td><td>~25 ms/op → ~40 sequential ops/s per process</td></tr>
+      <tr><td>Transfer trap</td><td>5 PB @ 10 Gbps ≈ <strong>weeks</strong> — say impossible if RTO is hours</td></tr>
+    </table>
+    <h3>Latency order (fast → slow)</h3>
+    <ul>
+      <li>CPU cache / RAM → SSD → HDD → cross-region RTT</li>
+      <li>Dashboard in &lt;1s: data in RAM/index, not WAN per row</li>
+      <li><span class="ok">Wrong shard key = hot partition</span> — same math, different bottleneck</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Sharding &amp; consistency cheat lines</h2>
+    <table>
+      <tr><th>Topic</th><th>Cheat line</th></tr>
+      <tr><td>Shard key choice</td><td>Must be known before read/write — <span class="mono">ad_id</span> for dashboard, <span class="mono">query_id</span> for joins</td></tr>
+      <tr><td>Consistent hash</td><td>Add/remove node → remap fraction of keys, not all</td></tr>
+      <tr><td>Leader-follower</td><td>Writes to leader; reads scale on followers; failover = RTO question</td></tr>
+      <tr><td>CAP at scale</td><td>Partitions happen — pick C or A while split</td></tr>
+      <tr><td>At-least-once</td><td>Idempotent consumers + dedupe keys — duplicates are normal</td></tr>
+      <tr><td>Strong global index</td><td>Consensus per write caps QPS — async index if SLO allows</td></tr>
+      <tr><td>Read/write split</td><td>Long uploads exhaust conn pool — separate services (AOSA image hosting)</td></tr>
+      <tr><td>CDN</td><td>Geographic proximity; origin still needs capacity for misses</td></tr>
+    </table>
+  </section>
+
+  <section class="full">
+    <h2>Google prod stack → AWS quick reference</h2>
+    <div class="cols2">
+      <table>
+        <tr><th>Google</th><th>AWS</th><th>Notes</th></tr>
+        <tr><td>Maglev + GFE + GSLB</td><td>CloudFront + GA + ALB/NLB + Route 53</td><td>Layered LB; don't rely on DNS TTL alone for failover</td></tr>
+        <tr><td>Borg</td><td>EKS / ECS</td><td>Bin-pack workloads; every server exposes HTTP diagnostics</td></tr>
+        <tr><td>Stubby / gRPC</td><td>gRPC on EKS, App Mesh</td><td>RPC even for local calls — eases future service split</td></tr>
+        <tr><td>Bigtable</td><td>DynamoDB</td><td>Justify by access pattern + IOPS math, not brand</td></tr>
+        <tr><td>Spanner / TrueTime</td><td>Aurora Global, DDB global tables</td><td>External consistency harder on AWS — commit-wait analog is app-level</td></tr>
+        <tr><td>Colossus / GFS</td><td>S3</td><td>11 nines durability; latency still dominates interactive paths</td></tr>
+        <tr><td>Cloud Pub/Sub</td><td>SNS+SQS, MSK, Kinesis</td><td>Pick by ordering, retention, replay needs</td></tr>
+      </table>
+      <table>
+        <tr><th>Interview anti-patterns</th><th>Do instead</th></tr>
+        <tr><td>"Use Bigtable because Google does"</td><td>Name access pattern, QPS, consistency, size math first</td></tr>
+        <tr><td>Greenfield re-architect under load</td><td>Admission control, shed, bound queues — incremental ops fixes</td></tr>
+        <tr><td>Skip clarifiers (~20 min)</td><td>QPS, read/write ratio, latency, retention, failure tolerance</td></tr>
+        <tr><td>"We'll shard" without numbers</td><td>Machine count, disk IOPS, bandwidth, RAM per shard</td></tr>
+        <tr><td>Optimize average latency only</td><td>Fix <span class="warn">p99 tail</span> — queues, retries, herd</td></tr>
+        <tr><td>MapReduce for 5-min freshness</td><td>Streaming join (LogJoiner) or overlapping micro-batches</td></tr>
+        <tr><td>Ignore replication in storage math</td><td>Multiply ingest × retention × replica factor</td></tr>
+        <tr><td>Single DC for planet scale</td><td>Multi-AZ minimum; multi-region for DR + latency</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="full">
+    <h2>B8 interview patterns → AWS (from quiz bank)</h2>
+    <table>
+      <tr><th>Pattern</th><th>v1 architecture</th><th>AWS stack</th><th>Scale trigger</th></tr>
+      <tr><td>URL shortener (100:1 read)</td><td>Cache + DB</td><td>ElastiCache + DynamoDB</td><td>Shard by hash of short code</td></tr>
+      <tr><td>Rate limiter</td><td>Token bucket per key</td><td>ElastiCache / DDB TTL counters</td><td>Distributed: central store or sticky routing</td></tr>
+      <tr><td>Metrics pipeline (500K/s)</td><td>Async ingest + partitioned consumers</td><td>Kinesis → Lambda/Flink → Timestream/OpenSearch</td><td>Sync DB write per event fails</td></tr>
+      <tr><td>Distributed cache</td><td>Cache-aside + invalidation</td><td>ElastiCache Redis</td><td>Consistent hash on cache ring</td></tr>
+      <tr><td>Web crawler</td><td>Frontier queue + bloom dedup</td><td>SQS + DynamoDB seen-set</td><td>Politeness per domain</td></tr>
+      <tr><td>Notifications</td><td>API → queue → channel workers</td><td>API GW → SQS → Lambda (email/SMS/push)</td><td>Decouple channels; async non-critical path</td></tr>
+      <tr><td>Metadata + blob</td><td>Small metadata DB + large object store</td><td>DynamoDB + S3</td><td>Never put blobs in SQL rows</td></tr>
+    </table>
+  </section>
+
+</div>
+
+<p class="footer">
+  GSRE · Sources:
+  <a href="https://sre.google/workbook/non-abstract-design/">NALSD Workbook</a> ·
+  <a href="https://sre.google/classroom/imageserver/">ImageServer</a> ·
+  <a href="https://sre.google/classroom/distributed-pubsub/">PubSub</a> ·
+  <a href="https://sre.google/workbook/managing-load/">Managing Load</a> ·
+  <a href="cheat-sheet.html">General cheat sheet</a> ·
+  <a href="https://jrodimusprime.github.io/GSRE/">Quiz</a>
+</p>
+
+</body>
+</html>
